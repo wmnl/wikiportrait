@@ -3,7 +3,7 @@
     {
         echo "\t\t\t\t<p>$text";
         if (!empty($exp)) echo " <a href=\"#\" class=\"tooltip\"><img src=\"./images/question.png\"><span>$exp</span></a></p>";
-        echo "\n\t\t\t\t<a class=\"question\" href=\"upload.php?question=$yes\">Ja</a> <a class=\"question\" href=\"upload.php?question=$no\">Nee</a>";
+        echo "\n\t\t\t\t<a class=\"question\" href=\"wizard.php?question=$yes\">Ja</a> <a class=\"question\" href=\"wizard.php?question=$no\">Nee</a>";
     }
     
     function result($result)
@@ -22,7 +22,7 @@
             echo "<h3>Het advies van de uploadwizard is:</h3>";
             echo "<div id=\"good\">";
             echo "<p>Upload de afbeelding onder de CC-BY-SA licentie</p>";
-            echo "<p><a class=\"uploadbutton\" href=\"uploadform.php\">Uploaden</a></p>";
+            echo "<p><a class=\"uploadbutton\" href=\"upload.php\">Uploaden</a></p>";
             echo "</div>";               }
     }
 ?>

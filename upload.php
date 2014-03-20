@@ -1,12 +1,50 @@
-<?php 
-    session_start(); 
-    if (!isset($_GET['question']))
-        $question = "first";
-    else
-        $question = $_GET['question'];
+<?php
+    include "connect.php";
     
-    include 'question.php';
+    if (isset($_POST['postback']))
+    {
+        $errors = array();
+        
+        if (empty($_POST['file']))
+        {
+            array_push($errors, "Er is geen bestand geselecteerd");
+        }
+        
+        if (empty($_POST['depicted'])) 
+        {
+            array_push($errors, "Er is niet ingevuld wie er op de foto staat");
+        }
+        
+        if (empty($_POST['copyrightholder']))
+        {
+            array_push($errors, "Er is niet ingevuld wie de auteursrechthebbende is");
+        }
+        
+        if (empty($_POST['name']))
+        {
+            array_push($errors, "Er is geen naam ingevuld");
+        }
+        
+        if (empty($_POST['email']))
+        {
+            array_push($errors, "Er is geen e-mailadres ingevuld");
+        }
+        elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
+        {
+            array_push($errors, "Er is geen geldig e-mailadres ingevuld");
+        }
+        
+        if (empty($errors))
+        {
+            $file = $_POST['filename'] . " (" . rand(0,10000) . ")";
+            $depicted = $_POST['depicted'];
+            $copyrightholder = $_POST['copyrightholder'];
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+        }
+    }
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,6 +52,7 @@
         <link rel="stylesheet" type="text/css" href="style/style.css" />
         <title>Wikiportret - Stel uw foto's ter beschikking</title>
     </head>
+    
     <body>
         <div id="all">
             <div id="header">
@@ -25,48 +64,84 @@
             </div>
             
             <div id="content">
-                <h2>Uploadwizard</h2>
+                <h2>Uploadformulier</h2>
+                
                 <?php
-                    switch($question)
+                    if (!empty($errors))
                     {
-                        case "noupload":
-                            result("noupload");
-                            break;
-                
-                        case "upload":
-                            result("upload");
-                            break;
-                
-                        case "upload":
-                            include "uploadform.php";
-                            break;
-
-                        default:
-                        case "first":
-                            echo "<p>Om het uploaden snel te laten verlopen, volgt er nu een korte wizard.</p>\n";
-                            showquestion("Is het hoofdonderwerp van de foto mogelijk auteursrechtelijk beschermd? (Bijvoorbeeld: hoes van CD of DVD, logo, reclamebord)", "noupload", "ownwork", "Als u een foto maakt, heeft u zelf de auteursrechten van die foto. Als u echter een foto maakt van iets anders, waarop ook auteursrechten rusten, dan mag u uw foto toch niet vrij verspreiden. Dat kan bijvoorbeeld zo zijn bij foto's van een CD-hoes, DVD-hoes, logo, reclamebord of (film)poster. Het uploaden van uw foto betekent dan dat u de auteursrechten schendt op die CD-hoes enz.");
-                            break;
-
-                        case "ownwork":
-                            showquestion("Heeft u de foto zelf gemaakt?", "employment", "noupload");
-                            break;
-
-                        case "employment":
-                            showquestion("Heeft u de foto gemaakt in opdracht van een ander?", "employpermission", "ownpermission", "Als een ander u opdracht heeft gegeven om foto('s) te maken, dan heeft die ander (ook) auteursrechten op de foto. Dat kan bijvoorbeeld uw werkgever zijn, of de organisatie of persoon waar u (freelance) een opdracht doet. Als u een foto maakt in opdracht van uw werkgever, dan heeft uw werkgever (bijna) altijd auteursrechten op de foto. Als u de foto heeft gemaakt voor een andere opdrachtgever, dan ligt het eraan wat u afgesproken heeft over de auteursrechten. Als de auteursrechten (deels) bij uw werkgever/opdrachtgever liggen, mag u de foto niet zomaar uploaden, ook al heeft u de foto zelf gemaakt.");
-                        break;
-
-                        case "employpermission":
-                            showquestion("Geeft de opdrachtgever toestemming voor onbeperkte verspreiding, bewerking en commercieel gebruik van de foto?", "upload", "noupload", "Als u de foto in opdracht van een ander hebt gemaakt, heeft u toestemming van die ander nodig om de foto te uploaden. Dit kunt u van tevoren hebben afgesproken (u heeft dan met de opdrachtgever afgesproken dat de auteursrechten volledig bij u liggen, en niet bij de opdrachtgever), maar u kunt ook achteraf toestemming vragen. 'Onbeperkt' betekent dat anderen zonder toestemming van de opdrachtgever uw foto mogen gebruiken, zonder dat zij aan u of de opdrachtgever hoeven te melden dat ze de foto gebruiken. Wel moet de ander u en/of de opdrachtgever als auteur noemen (tenzij u en de opdrachtgever aangegeven hebben dat dat niet nodig is). 'Onbeperkt' betekent dus ook dat de foto voor een commercieel doel gebruikt kan worden, bijvoorbeeld in een tijdschrift, website of reclamefolder.");
-                            break;
-
-                        case "ownpermission":
-                            showquestion("Geeft u toestemming voor onbeperkte verspreiding, bewerking en commercieel gebruik van de foto?", "upload", "noupload", "'Onbeperkt' betekent dat anderen zonder uw toestemming uw foto mogen gebruiken, zonder dat zij aan u hoeven te melden dat ze de foto gebruiken. Wel moet de ander u als auteur noemen (tenzij u zelf aangegeven hebt dat dat niet nodig is). 'Onbeperkt' betekent dus ook dat uw foto voor een commercieel doel gebruikt kan worden, bijvoorbeeld in een tijdschrift, website of reclamefolder.");
-                            break;
-
+                        echo "<ul>";
                         
+                        foreach ($errors as $error)
+                        {
+                            echo "<li>" . $error . "</li>";
+                        }
+                        
+                        echo "</ul>";
                     }
                 ?>
+                
+                <form method="post" enctype="multipart/form-data">
+                    <p>
+                        <label for="file">Bestand dat u wilt uploaden</label>
+                        <input type="file" name="file" id="file" required="required" value="<?php echo $_POST['file']; ?>" />
+                    </p>
                     
+                    <p>
+                        <label for="depicted">Wie staat er op de foto?</label>
+                        <input type="text" name="depicted" id="depicted" required="required" value="<?php echo $_POST['depicted']; ?>" />
+                    </p>
+                    
+                    <p>
+                        <label for="copyrightholder">Wie is de auteursrechthebbende en/of auteur van de foto?</label>
+                        <input type="text" name="copyrightholder" id="copyrightholder" required="required" value="<?php echo $_POST['copyrightholder']; ?>" />
+                    </p>
+                    
+                    <p>
+                        <label for="name">Uw naam</label>
+                        <input type="text" name="name" id="name" required="required" value="<?php echo $_POST['name']; ?>" />
+                    </p>
+                    
+                    <p>
+                        <label for="email">Uw e-mailadres</label>
+                        <input type="email" id="email" name="email" value="<?php echo $_POST['email']; ?>" />
+                    </p>
+                    
+                    <p>
+                        <label for="date">Datum van de foto (optioneel)</label>
+                        <input type="date" name="date" id="date" placeholder="YYYY-MM-DD" value="<?php echo $_POST['date']; ?>" />
+                    </p>
+                    
+                    <p>
+                        <label for="description">Omschrijving (optioneel)</label>
+                        <textarea name="description" id="description"><?php echo $_POST['description']; ?></textarea>
+                    </p>
+                    
+                    <p>
+                        <label for="license">Licentie</label>
+                        <select id="license" name="license">
+                            <optgroup label="Aanbeloven licentie">
+                                <option value="cc-by-sa-3.0">Creative Commons Naamsvermelding-Gelijk delen 3.0</option>
+                            </optgroup>
+                            
+                            <optgroup label="Overige licenties">
+                                <option value="cc-0">Creative Commons CC0 1.0 Universele Public Domain Dedication</option>
+                                <option>Hier nog een</option>
+                                <option>En nog een</option>
+                            </optgroup>
+                        </select>
+                    </p>
+                    
+                    <p>
+                        <label>Licentievoorwaarden</label>
+                        <textarea readonly="readonly">Door het uploaden van dit materiaal en het klikken op de knop 'Upload foto' verklaart u dat u de rechthebbende eigenaar bent van het materiaal. Door dit materiaal te uploaden geeft u toestemming voor het gebruik van het materiaal onder de condities van de door u geselecteerde licentie(s), deze condities variëren per licentie maar houden in ieder geval in dat het materiaal verspreid, bewerkt en commercieel gebruikt mag worden door eenieder. Voor de specifieke extra condities per licentie verwijzen u naar de bijbehorende licentieteksten. U kunt op het vrijgeven van deze rechten na het akkoord gaan met deze voorwaarden niet meer terugkomen. De Wikimedia Foundation en haar chapters (waaronder de Vereniging Wikimedia Nederland) zijn op geen enkele wijze aansprakelijk voor misbruik van het materiaal of aanspraak op het materiaal door derden. De eventuele geportretteerden hebben geen bezwaar tegen publicatie onder genoemde licenties. Ook uw eventuele opdrachtgever geeft toestemming.</textarea>
+                    </p>
+                    
+                    <p>
+                        <label>&nbsp;</label>
+                        <input type="submit" name="postback" value="Versturen" />
+                    </p>
+                    
+                </form>
             </div>
         </div>
     </body>
