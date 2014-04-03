@@ -4,43 +4,62 @@
     if (isset($_POST['postback']))
     {
         $errors = array();
+        $allowedext = array("image/png", "image/gif", "image/jpeg");
+
+        $file = $_FILES['file'];
+        $title = $_POST['title'];
+        $source = $_POST['source'];
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $ip = $_SERVER["REMOTE_ADDR"]; 
+        $date = $_POST['date'];
+        $desc = $_POST['description'];
         
-        if (empty($_POST['file']))
+        if (!isset($file))
         {
             array_push($errors, "Er is geen bestand geselecteerd");
         }
+        elseif (!in_array($file['type'], $allowedext))
+        {
+            array_push($errors, "Het bestand dat geüpload is, is geen afbeelding");
+        }
         
-        if (empty($_POST['depicted'])) 
+        if (empty($title)) 
         {
             array_push($errors, "Er is niet ingevuld wie er op de foto staat");
         }
         
-        if (empty($_POST['copyrightholder']))
+        if (empty($source))
         {
             array_push($errors, "Er is niet ingevuld wie de auteursrechthebbende is");
         }
         
-        if (empty($_POST['name']))
+        if (empty($name))
         {
             array_push($errors, "Er is geen naam ingevuld");
         }
         
-        if (empty($_POST['email']))
+        if (empty($email))
         {
             array_push($errors, "Er is geen e-mailadres ingevuld");
         }
-        elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
+        elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             array_push($errors, "Er is geen geldig e-mailadres ingevuld");
         }
         
-        if (empty($errors))
+        if (count($errors) == 0)
         {
-            $file = $_POST['filename'] . " (" . rand(0,10000) . ")";
-            $depicted = $_POST['depicted'];
-            $copyrightholder = $_POST['copyrightholder'];
-            $name = $_POST['name'];
-            $email = $_POST['email'];
+            $time = new DateTime();
+            $filename = strtolower(str_replace(" ", "_", $title)) . "-" . date_timestamp_get($time) . "." . pathinfo($file['name'], PATHINFO_EXTENSION);                
+            
+            if (move_uploaded_file($file['tmp_name'], "uploads/" . $filename))
+            {
+                $query = "INSERT INTO images(filename, title, source, name, email, ip, date, description, timestamp)"
+                        . "VALUES('$filename', '$title', '$source', '$name', '$email', '$ip', '$date', '$desc', " . date_timestamp_get($time) . ");";
+                mysql_query($query);
+                echo $query;
+            }
         }
     }
 ?>
@@ -83,37 +102,37 @@
                 <form method="post" enctype="multipart/form-data">
                     <p>
                         <label for="file">Bestand dat u wilt uploaden</label>
-                        <input type="file" name="file" id="file" required="required" value="<?php echo $_POST['file']; ?>" />
+                        <input type="file" name="file" id="file" required="required" />
                     </p>
                     
                     <p>
-                        <label for="depicted">Wie staat er op de foto?</label>
-                        <input type="text" name="depicted" id="depicted" required="required" value="<?php echo $_POST['depicted']; ?>" />
+                        <label for="title">Wie staat er op de foto?</label>
+                        <input type="text" name="title" id="title" required="required" value="<?php if (!empty($title)) echo $title; ?>" />
                     </p>
                     
                     <p>
-                        <label for="copyrightholder">Wie is de auteursrechthebbende en/of auteur van de foto?</label>
-                        <input type="text" name="copyrightholder" id="copyrightholder" required="required" value="<?php echo $_POST['copyrightholder']; ?>" />
+                        <label for="source">Wie is de auteursrechthebbende en/of auteur van de foto?</label>
+                        <input type="text" name="source" id="source" required="required" value="<?php if (!empty($_POST['source'])) echo $_POST['source']; ?>" />
                     </p>
                     
                     <p>
                         <label for="name">Uw naam</label>
-                        <input type="text" name="name" id="name" required="required" value="<?php echo $_POST['name']; ?>" />
+                        <input type="text" name="name" id="name" required="required" value="<?php if (!empty($_POST['name'])) echo $_POST['name']; ?>" />
                     </p>
                     
                     <p>
                         <label for="email">Uw e-mailadres</label>
-                        <input type="email" id="email" name="email" value="<?php echo $_POST['email']; ?>" />
+                        <input type="email" id="email" name="email" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>" />
                     </p>
                     
                     <p>
                         <label for="date">Datum van de foto (optioneel)</label>
-                        <input type="date" name="date" id="date" placeholder="YYYY-MM-DD" value="<?php echo $_POST['date']; ?>" />
+                        <input type="date" name="date" id="date" placeholder="YYYY-MM-DD" value="<?php if (!empty($_POST['date'])) echo $_POST['date']; ?>" />
                     </p>
                     
                     <p>
                         <label for="description">Omschrijving (optioneel)</label>
-                        <textarea name="description" id="description"><?php echo $_POST['description']; ?></textarea>
+                        <textarea name="description" id="description"><?php if (!empty($_POST['description'])) echo $_POST['description']; ?></textarea>
                     </p>
                     
                     <p>
