@@ -36,9 +36,9 @@
                         case "upload":
                             result("upload");
                             break;
-                
-                        case "upload":
-                            include "uploadform.php";
+                        
+                        case "success":
+                            result("success");
                             break;
 
                         default:

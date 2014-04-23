@@ -16,7 +16,15 @@
             echo "<p><a class=\"backbutton\" href=\"index.php\">Terug naar de startpagina</a></p>";
             echo "</div>";           
         }
-        
+        elseif ($result == "success")
+        {
+            echo "<h3>Uploaden voltooid</h3>";
+            echo "<div id=\"good\">";
+            echo "<p>De afbeelding is met succes geüpload.</p>";
+            echo "<p>Een vrijwilliger zal de afbeelding zo snel mogelijk beoordelen en contact met u opnemen.</p>";
+            echo "<p><a class=\"uploadbutton\" href=\"upload.php\">Nog een afbeelding uploaden</a></p>";
+            echo "</div>";
+        }
         else
         {
             echo "<h3>Het advies van de uploadwizard is:</h3>";

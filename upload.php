@@ -59,6 +59,35 @@
                         . "VALUES('$filename', '$title', '$source', '$name', '$email', '$ip', '$date', '$desc', " . date_timestamp_get($time) . ");";
                 mysql_query($query);
                 echo $query;
+                
+                require 'PHPMailer/PHPMailerAutoload.php';
+                
+                $mail = new PHPMailer;
+                
+                $mail->CharSet = 'UTF-8';
+                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->Host = 'smtp.upcmail.nl';                      // Specify main and backup server
+                $mail->SMTPAuth = false;                              // Enable SMTP authentication
+
+                $mail->From = $email;
+                $mail->FromName = $name;
+                $mail->addAddress('otrs-test@wikimedia.org', 'Wikiportret');  // Add a recipient
+                $mail->addReplyTo($email, $name);
+
+                $mail->WordWrap = 50;                                 // Set word wrap to 50 characters
+                $mail->isHTML(true);                                  // Set email format to HTML
+
+                $mail->Subject = $title . " is geüpload op Wikiportret";
+                $mail->Body    = 'Lorem ipsum dolar cit amet';
+                $mail->AltBody = 'Lorem ipsum dolar cit amet zonder HTML';
+
+                if(!$mail->send()) {
+                   echo 'Message could not be sent.';
+                   echo 'Mailer Error: ' . $mail->ErrorInfo;
+                   exit;
+                }
+                
+                header("Location:wizard.php?question=success");
             }
         }
     }
