@@ -1,9 +1,10 @@
 <?php
     function showquestion($text, $yes, $no, $exp=null)
     {
-        echo "\t\t\t\t<p>$text";
-        if (!empty($exp)) echo " <a href=\"#\" class=\"tooltip\"><img src=\"./images/question.png\"><span>$exp</span></a></p>";
-        echo "\n\t\t\t\t<a class=\"question\" href=\"wizard.php?question=$yes\">Ja</a> <a class=\"question\" href=\"wizard.php?question=$no\">Nee</a>";
+        echo "<p>$text";
+        if (!empty($exp)) echo " <a href=\"#\" class=\"tooltip\"><img src=\"./images/question.png\"><span>$exp</span></a>";
+        echo "</p>";
+        echo "\n\t\t\t\t<p><a class=\"question\" href=\"wizard.php?question=$yes\">Ja</a> <a class=\"question\" href=\"wizard.php?question=$no\">Nee</a></p>";
     }
     
     function result($result)

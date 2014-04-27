@@ -5,7 +5,7 @@
     else
         $question = $_GET['question'];
     
-    include 'question.php';
+    require 'question.php';
 ?>
 <!DOCTYPE html>
 <html>
