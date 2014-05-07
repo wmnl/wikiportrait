@@ -218,3 +218,12 @@
  .tooltip img{
      width: 20px;
  }
+ 
+ /* detailpagina */
+ .detail{
+     float: left;
+     margin: 25px;
+     
+     max-size: 15%;
+     max-width: 15%;
+ }
