@@ -1,44 +1,43 @@
 /* allez */
 *{
-    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* de hele site*/
 #all{
-    width: 80%;
-    /*min-width: 800px;*/
-    margin: auto;
+	width:80%;
+	/*min-width: 800px;*/
+	margin:auto;
 }
 
 /*menu*/
 #menu ul li{
-    display: inline;
-    padding-right: 10px;
+	display:inline;
+	padding-right:10px;
 }
 
 /*melding niet uploaden*/
 #bad{
-    background-color: #FF3300;
-    height: 75px;
-    width: 100%;
+	background-color:#FF3300;
+	height:75px;
+	width:100%;
 }
 
 #bad p{
-    font-size: 22pt;
+	font-size:22pt;
 }
 
 /*melding wel uploaden*/
 
 #good{
-    background-color: #00FF00;
-    height: 75px;
-    width: 100%;
+	background-color:#00FF00;
+	height:75px;
+	width:100%;
 }
 
 #good p{
-    font-size: 22pt;
+	font-size:22pt;
 }
-
 
 /*vraagknop*/
 .question{
@@ -49,23 +48,11 @@
 	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
 	background-color:#ededed;
-	-webkit-border-top-left-radius:3px;
-	-moz-border-radius-topleft:3px;
-	border-top-left-radius:3px;
-	-webkit-border-top-right-radius:3px;
-	-moz-border-radius-topright:3px;
-	border-top-right-radius:3px;
-	-webkit-border-bottom-right-radius:3px;
-	-moz-border-radius-bottomright:3px;
-	border-bottom-right-radius:3px;
-	-webkit-border-bottom-left-radius:3px;
-	-moz-border-radius-bottomleft:3px;
-	border-bottom-left-radius:3px;
+	border-radius:3px;
 	text-indent:0px;
 	border:1px solid #dcdcdc;
 	display:inline-block;
 	color:#777777;
-	font-family: helvetica, arial, sans-serif;
 	font-size:15px;
 	font-weight:bold;
 	font-style:normal;
@@ -75,7 +62,7 @@
 	text-decoration:none;
 	text-align:center;
 	text-shadow:1px 1px 0px #ffffff;
-        margin-right: 35px;
+	margin-right:35px;
 }
 
 .question:hover{
@@ -99,23 +86,11 @@
 	background:-moz-linear-gradient( center top, #fe1a00 5%, #ce0100 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100');
 	background-color:#fe1a00;
-	-webkit-border-top-left-radius:3px;
-	-moz-border-radius-topleft:3px;
-	border-top-left-radius:3px;
-	-webkit-border-top-right-radius:3px;
-	-moz-border-radius-topright:3px;
-	border-top-right-radius:3px;
-	-webkit-border-bottom-right-radius:3px;
-	-moz-border-radius-bottomright:3px;
-	border-bottom-right-radius:3px;
-	-webkit-border-bottom-left-radius:3px;
-	-moz-border-radius-bottomleft:3px;
-	border-bottom-left-radius:3px;
+	border-radius:3px;
 	text-indent:0px;
 	border:1px solid #d83526;
 	display:inline-block;
 	color:#ffffff;
-	font-family: helvetica, arial, sans-serif;
 	font-size:15px;
 	font-weight:bold;
 	font-style:normal;
@@ -125,7 +100,7 @@
 	text-decoration:none;
 	text-align:center;
 	text-shadow:1px 1px 0px #b23e35;
-        margin-top: 30px;
+	margin-top:30px;
 }
 
 .backbutton:hover{
@@ -149,23 +124,11 @@
 	background:-moz-linear-gradient( center top, #a3c94a 5%, #6c9415 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a3c94a', endColorstr='#6c9415');
 	background-color:#a3c94a;
-	-webkit-border-top-left-radius:3px;
-	-moz-border-radius-topleft:3px;
-	border-top-left-radius:3px;
-	-webkit-border-top-right-radius:3px;
-	-moz-border-radius-topright:3px;
-	border-top-right-radius:3px;
-	-webkit-border-bottom-right-radius:3px;
-	-moz-border-radius-bottomright:3px;
-	border-bottom-right-radius:3px;
-	-webkit-border-bottom-left-radius:3px;
-	-moz-border-radius-bottomleft:3px;
-	border-bottom-left-radius:3px;
+	border-radius:3px;
 	text-indent:0;
 	border:1px solid #83c41a;
 	display:inline-block;
 	color:#ffffff;
-	font-family:Arial;
 	font-size:15px;
 	font-weight:bold;
 	font-style:normal;
@@ -181,49 +144,48 @@
 	background:-moz-linear-gradient( center top, #6c9415 5%, #a3c94a 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c9415', endColorstr='#a3c94a');
 	background-color:#6c9415;
-}.uploadbutton:active {
+}
+.uploadbutton:active {
 	position:relative;
 	top:1px;
 }
 
 /* tekstveld uitleg */
 .tooltip{
-    position: relative; 
-    z-index: 20;
+	position:relative; 
+	z-index:20;
 }
 
 .tooltip span{
-    display: none;
+	display:none;
 }
 
 .tooltip:hover{
-    z-index:21;
+	z-index:21;
 }
 
 .tooltip:hover span{
-    display: block;
-    width: 400px;
-    text-align: left;
-    padding: 5px;
-    color: #fff;
-    background-color: #535663;
-    font-size: 13px;
-    text-decoration: none;
-    position: absolute;
-    border-radius: 6px;
-    top: 20px;
-    left: -10px;
- }
- 
- .tooltip img{
-     width: 20px;
- }
- 
- /* detailpagina */
- .detail{
-     float: left;
-     margin: 25px;
-     
-     max-size: 15%;
-     max-width: 15%;
- }
+	display:block;
+	width:400px;
+	text-align:left;
+	padding:5px;
+	color:#fff;
+	background-color:#535663;
+	font-size:13px;
+	text-decoration:none;
+	position:absolute;
+	border-radius:6px;
+	top:20px;
+	left:-10px;
+}
+
+.tooltip img{
+	width:20px;
+}
+
+/* detailpagina */
+.detail{
+	float:left;
+	margin:25px;
+	max-width:15%;
+}
