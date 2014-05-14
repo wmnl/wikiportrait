@@ -84,8 +84,7 @@
                         <input type="password" name="password" id="password" />
                     </p>
                     
-                    <p>
-                        <label>&nbsp;</label>
+                    <p class="bottom">
                         <input type="submit" name="postback" />
                     </p>
                 </form>
