@@ -135,7 +135,7 @@
                 <form method="post" enctype="multipart/form-data">
                     <p>
                         <label for="file">Bestand dat u wilt uploaden</label>
-                        <input type="file" name="file" id="file" required="required" />
+                        <div class="file-container">Een bestand uploaden<input type="file" name="file" id="file" required="required" /></div>
                     </p>
                     
                     <p>
