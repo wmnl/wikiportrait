@@ -1,5 +1,5 @@
 <?php 
-    include "connect.php";
+    require "connect.php";
     session_start();
     
     if (!isset($_SESSION['user']))
@@ -75,7 +75,8 @@
                     
                     $total_pages = ceil($total_records / 20);
                     
-                    for ($i=1; $i<=$total_pages; $i++) { 
+                    for ($i=1; $i<=$total_pages; $i++) 
+                    { 
                         echo "<a href='images.php?page=".$i."'>".$i."</a> "; 
                     }; 
                 ?>

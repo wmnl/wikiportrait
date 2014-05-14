@@ -2,8 +2,8 @@
     $basispad = "/wikiportret";
 ?>
 <ul>
-    <li><a href="/wikiportret/index.php">Home</a></li>
-    <li><a href="/wikiportret/wizard.php">Insturen</a></li>
+    <li><a href="<?php echo $basispad; ?>/index.php">Home</a></li>
+    <li><a href="<?php echo $basispad; ?>/wizard.php">Insturen</a></li>
     <?php
         if(isset($_SESSION['user']))
         {

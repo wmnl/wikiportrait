@@ -1,5 +1,5 @@
 <?php 
-    include "connect.php";
+    require  "connect.php";
     session_start();
     if (!isset($_SESSION['user']))
         header("Location:login.php");
@@ -52,6 +52,22 @@
                     <li>IP uploader: <?php echo $row['ip']; ?></li>
                     <li>Geüpload op: <?php echo gmdate("d F Y H:i:s", $row['timestamp']) ?></li>
                     <li>Beschrijving: <?php echo $row['description'];?></li>
+                </ul>
+                
+                <p>Wat doen we ermee?</p>
+                <ul>
+                    <li><a href="https://commons.wikimedia.org/wiki/Special:Upload?&uploadformstyle=basicwp&wpUploadDescription={{Information%0A|Description={{nl|1=<?php echo $row['title'] ?>}}%0A|Source=wikiportret.nl%0A|Permission=CC-BY-SA 3.0%0A|Date=<?php echo $row['date']; ?>%0A|Author=<?php echo $row['source']; ?>%0A}}%0A{{wikiportrait|}}" target="_blank">Uploaden naar Commons!</a></li>
+                    <?php
+                        $query = "SELECT * FROM messages";
+                        $result = mysql_query($query);
+                        
+                        while($row = mysql_fetch_assoc($result))
+                        {
+                    ?>
+                    <li><a href="message.php?id=<?php echo $row['id']; ?>"><?php echo $row['title']; ?></a></li>
+                    <?php
+                        }
+                    ?>
                 </ul>
                 
                 <?php

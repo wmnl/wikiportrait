@@ -1,5 +1,5 @@
 <?php 
-    include "connect.php";
+    require "connect.php";
     session_start();
     if (!isset($_SESSION['user']))
         header("Location:login.php");

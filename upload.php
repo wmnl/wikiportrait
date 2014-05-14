@@ -1,5 +1,5 @@
 <?php
-    include "connect.php";
+    require "connect.php";
     
     if (isset($_POST['postback']))
     {
@@ -21,7 +21,7 @@
         }
         elseif (!in_array($file['type'], $allowedext))
         {
-            array_push($errors, "Het bestand dat geüpload is, is geen afbeelding");
+            array_push($errors, "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund");
         }
         
         if (empty($title)) 
@@ -60,30 +60,31 @@
                 mysql_query($query);
                 echo $query;
                 
-                require 'PHPMailer/PHPMailerAutoload.php';
+                require "PHPMailer/PHPMailerAutoload.php";
                 
                 $mail = new PHPMailer;
                 
-                $mail->CharSet = 'UTF-8';
+                $mail->CharSet = "UTF-8";
                 $mail->isSMTP();                                      // Set mailer to use SMTP
-                $mail->Host = 'smtp.upcmail.nl';                      // Specify main and backup server
+                $mail->Host = "smtp.upcmail.nl";                      // Specify main and backup server
                 $mail->SMTPAuth = false;                              // Enable SMTP authentication
 
                 $mail->From = $email;
                 $mail->FromName = $name;
-                $mail->addAddress('otrs-test@wikimedia.org', 'Wikiportret');  // Add a recipient
+                $mail->addCustomHeader("X-OTRS-Queue:info-nl::wikiportret");  // add extra header for spamfilter exeption
+                $mail->addAddress("otrs-test@wikimedia.org", "Wikiportret");  // Add a recipient
                 $mail->addReplyTo($email, $name);
 
                 $mail->WordWrap = 50;                                 // Set word wrap to 50 characters
                 $mail->isHTML(true);                                  // Set email format to HTML
 
                 $mail->Subject = $title . " is geüpload op Wikiportret";
-                $mail->Body    = 'Lorem ipsum dolar cit amet';
-                $mail->AltBody = 'Lorem ipsum dolar cit amet zonder HTML';
+                $mail->Body    = "Lorem ipsum dolar cit amet";
+                $mail->AltBody = "Lorem ipsum dolar cit amet zonder HTML";
 
                 if(!$mail->send()) {
-                   echo 'Message could not be sent.';
-                   echo 'Mailer Error: ' . $mail->ErrorInfo;
+                   echo "Message could not be sent.";
+                   echo "Mailer Error: " . $mail->ErrorInfo;
                    exit;
                 }
                 

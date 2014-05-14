@@ -31,39 +31,33 @@
             </div>
             
             <div id="content">
-                <h2>Gebruikersbeheer</h2>
+                <h2>Berichtenbeheer</h2>
                 <ul>
-                    <li><a href="adduser.php">Gebruiker toevoegen</a></li>
+                    <li><a href="adduser.php">Bericht  toevoegen</a></li>
                 </ul>
                 
                 <table width="95%" border="1px solid black">
                     <tr>
-                        <th>Gebruikersnaam</th>
-                        <th>OTRS-naam</th>
-                        <th>E-mailadres</th>
-                        <th>Admin</th>
+                        <th width="15%">Titel</th>
+                        <th width="85%">Bericht</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     </tr>
                     
                     <?php
-                        $query = "SELECT * FROM users";
+                        $query = "SELECT * FROM messages";
                         $result = mysql_query($query);
                         while ($row = mysql_fetch_assoc($result))
                         {
                             $id = $row['id'];
-                            $username = $row['username'];
-                            $otrsname = $row['otrsname'];
-                            $email = $row['email'];
-                            $sysop = $row['isSysop'];
+                            $title = $row['title'];
+                            $message = $row['message'];
                             
                             echo "<tr>";
-                                echo "<td>$username</td>";
-                                echo "<td>$otrsname</td>";
-                                echo "<td>$email</td>";
-                                if ($sysop) echo "<td><img src=\"../images/accept.png\" width=\"20px\" />"; else echo "<td><img src=\"../images/delete.png\" width=\"20px\" />";
-                                echo "<td><a href=\"edituser.php?id=$id\"><img src=\"../images/modify.png\" title=\"Bewerken\" width=\"20px\" /></a></td>";
-                                echo "<td><a href=\"deleteuser.php?id=$id\"><img src=\"../images/delete.png\" title=\"Verwijderen\" width=\"20px\" /></a></td>";
+                                echo "<td>$title</td>";
+                                echo "<td>" . str_replace("\n", "<br />", $message) . "</td>";
+                                echo "<td><a href=\"editmessage.php?id=$id\"><img src=\"../images/modify.png\" title=\"Bewerken\" width=\"20px\" /></a></td>";
+                                echo "<td><a href=\"deletemessage.php?id=$id\"><img src=\"../images/delete.png\" title=\"Verwijderen\" width=\"20px\" /></a></td>";
                             echo "</tr>";
                         }
                     ?>

@@ -29,7 +29,7 @@
             <div id="content">
                 <ul>
                     <li><a href="users.php">Beheer gebruikers</a></li>
-                    <li><a href="#">Beheer standaardmails</a></li>
+                    <li><a href="messages.php">Beheer standaardmails</a></li>
                 </ul>
                
             </div>

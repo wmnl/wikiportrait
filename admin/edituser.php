@@ -9,67 +9,7 @@
     }
     elseif (isset($_SESSION['user']) && $_SESSION['isSysop'] == true)
     {
-        if (isset($_POST['postback']))
-        {
-            $errors = array();
-
-            $username = $_POST['username'];
-            $otrsname = $_POST['otrsname'];
-            $password = $_POST['password'];
-            $password2 = $_POST['password'];
-            $email = $_POST['email'];
-            if (isset($_POST['admin']))
-            {
-                $admin = 1;
-            }
-            else
-            {
-                $admin = 0;
-            }
-
-            if (empty($username))
-            {
-                array_push($errors, "Er is geen gebruikersnaam ingevuld");
-            }
-            else
-            {
-                $query = "SELECT * FROM users WHERE username = '$username'";
-                if (mysql_num_rows(mysql_query($query)))
-                    array_push($errors, "Deze gebruikersnaam bestaat al oetlul");
-            }
-
-            if (empty($otrsname))
-            {
-                array_push($errors, "Er is geen OTRS-naam ingevuld");
-            }
-
-            if (empty($password))
-            {
-                array_push($errors, "Er is geen wachtwoord ingevuld");
-            }
-            elseif($password != $password2)
-            {
-                array_push($errors, "De twee ingevulde wachtwoorden komen niet met elkaar overeen");
-            }
-
-            if (empty($email))
-            {
-                array_push($errors, "Er is geen e-mailadres ingevuld");
-            }
-            elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
-            {
-                array_push($errors, "Er is geen geldig e-mailadres ingevuld");
-            }
-            
-            if (count($errors) == 0)
-            {
-                $query = "INSERT INTO users(username, password, otrsname, email, isSysop)
-                          VALUES('$username', '" . sha1($password) . "', '$otrsname', '$email', $admin)";
-                
-                mysql_query($query);
-                header("Location:users.php");
-            }
-        }
+        
 ?>
 
 <!DOCTYPE html>
@@ -108,7 +48,7 @@
                 <form method="post">
                     <p>
                         <label for="username">Gebruikersnaam:</label>
-                        <input type="text" name="username" id="username" value="<?php if (isset($_POST['username'])) echo $_POST['username'] ?>"/>
+                        <input type="text" name="username" id="username" />
                     </p>
                     
                     <p>
@@ -138,7 +78,7 @@
                     
                     <p>
                         <label>&nbsp;</label>
-                        <input type="submit" value="Opslaan"  name="postback"/>
+                        <input type="submit" value="Opslaan" />
                     </p>
                     
                 </form>
