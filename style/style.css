@@ -164,6 +164,53 @@
 	width:20px;
 }
 
+/* Uploadformulier */
+label{
+	margin:0px;
+	padding:0px;
+	vertical-align:top;
+	width:50%;
+	padding:10px;
+	margin-bottom:10px;
+	float:left;
+	text-align:right;
+	background:#eee;
+	border:1px solid #bbb;
+	border-right:0px;
+	display:block;
+	font-size:0.9em;
+}
+
+input, textarea, select{
+	margin:0px;
+	padding:0px;
+	-webkit-appearance:none;
+	border-radius:0px;
+	padding:10px;
+	margin-bottom:10px;
+	width:50%;
+	border:1px solid #bbb;
+	color:#333;
+	font-size:0.9em;
+}
+
+textarea {
+	height:200px;
+	resize:none;
+}
+
+input:focus, textarea:focus{
+	-webkit-box-shadow:0 0 1px 1px #bbb;
+	-moz-box-shadow:0 0 1px 1px #bbb;
+	box-shadow:0 0 1px 1px #bbb;
+}
+
+input[type="submit"] {
+	padding:11px;
+	width:auto;
+	float:right;
+}
+
 /* detailpagina */
 .detail{
 	float:left;
