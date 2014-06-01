@@ -1,134 +1,90 @@
 /* allez */
-*{
+* {
+	font-size:1em;
 	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+	outline:0px;
+	margin:0px;
+	padding:0px;
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 	box-sizing:border-box;
-	outline:0px;
+}
+
+/* Tekstopmaak */
+h1, h2, h3 {
+	margin-bottom:10px;
+}
+
+h1 {
+	font-size:1.5em;
+}
+
+h2 {
+	font-size:1.3em;
+}
+
+h3 {
+	font-size:1.1em;
+}
+
+p {
+	line-height:125%;
+	margin-bottom:10px;
 }
 
 /* de hele site*/
 #all{
-	width:80%;
-	/*min-width: 800px;*/
-	margin:auto;
+	width:1000px;
+	margin:10px auto;
+}
+
+#header {
+	margin-bottom:10px;
 }
 
 /*menu*/
-#menu ul li{
-	display:inline;
+#menu ul {
+	background:#347bff;
+	padding:10px;
+	border-radius:3px;
+	margin-bottom:10px;
+}
+
+#menu ul li {
+	display:inline-block;
 	padding-right:10px;
 }
 
-/*melding niet uploaden*/
-#bad{
-	background-color:#FF3300;
-	height:75px;
-	width:100%;
-}
-
-#bad p{
-	font-size:22pt;
-}
-
-/*melding wel uploaden*/
-
-#good{
-	background-color:#00FF00;
-	height:75px;
-	width:100%;
-}
-
-#good p{
-	font-size:22pt;
-}
-
-/* Button */
-.button{
-	border-radius:3px;
-	text-indent:0px;
-	font-size:15px;
-	font-weight:bold;
-	font-style:normal;
+#menu a {
+	color:#fff;
 	text-decoration:none;
-	text-align:center;
-	height:37px;
-	line-height:37px;
-	display:inline-block;
 }
 
-.button:active{
-	position:relative;
-	top:1px;
+/* Uploadwizard */
+.button {
+	background:-webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+	padding:11px;
+	border:1px solid #bbb;
+	color:#333;
+	text-decoration:none;
+	border-radius:3px;
 }
 
-/*vraagknop*/
-.question{
-	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
-	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
-	background-color:#ededed;
-	border:1px solid #dcdcdc;
-	color:#777777;
-	width:75px;
-	text-shadow:1px 1px 0px #ffffff;
-	margin-right:35px;
+.error {
+	background:#00af89;
+	border-radius:3px;
+	color:#fff;
+	padding:11px;
+	margin-bottom:10px;
 }
 
-.question:hover{
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
-	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
-	background-color:#dfdfdf;
+.error li {
+	line-height:125%;
+	margin-left:20px;
 }
 
-/*backbutton in geval van fout antwoord*/ 
-.back {
-	-moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
-	box-shadow:inset 0px 1px 0px 0px #f29c93;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100) );
-	background:-moz-linear-gradient( center top, #fe1a00 5%, #ce0100 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100');
-	background-color:#fe1a00;
-	border:1px solid #d83526;
-	color:#ffffff;
-	width:200px;
-	text-shadow:1px 1px 0px #b23e35;
-	margin-top:30px;
-}
-
-.back:hover{
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
-	background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');
-	background-color:#ce0100;
-}
-
-/*uploadbutton*/ 
-.upload {
-	-moz-box-shadow:inset 0px 1px 0px 0px #d9fbbe;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #d9fbbe;
-	box-shadow:inset 0px 1px 0px 0px #d9fbbe;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a3c94a), color-stop(1, #6c9415) );
-	background:-moz-linear-gradient( center top, #a3c94a 5%, #6c9415 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a3c94a', endColorstr='#6c9415');
-	background-color:#a3c94a;
-	border:1px solid #83c41a;
-	color:#ffffff;
-	height:50px;
-	line-height:50px;
-	width:100px;
-	text-shadow:1px 1px 0px #86ae47;
-}
-.upload:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #6c9415), color-stop(1, #a3c94a) );
-	background:-moz-linear-gradient( center top, #6c9415 5%, #a3c94a 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c9415', endColorstr='#a3c94a');
-	background-color:#6c9415;
+.wizardfooter {
+	padding:10px 0px;
 }
 
 /* tekstveld uitleg */
@@ -165,65 +121,51 @@
 }
 
 /* Uploadformulier */
-label{
+form {
+	width:100%;
+}
+
+label {
 	margin:0px;
-	padding:0px;
 	vertical-align:top;
-	min-width:400px;
-	max-width:400px;
+	width:389px;
 	padding:10px;
 	margin-bottom:10px;
 	display:inline-block;
-	text-align:right;
 	background:#eee;
 	border:1px solid #bbb;
 	border-right:0px;
-	font-size:0.9em;
 	margin-right:-4px;
+	border-top-left-radius:3px;
+	border-bottom-left-radius:3px;
 }
 
-input, textarea, select, .file-container{
+input, textarea, select {
 	margin:0px;
-	padding:0px;
-	min-width:400px;
-	max-width:400px;
+	margin-bottom:10px;
+	width:610px;
 	-webkit-appearance:none;
 	border-radius:0px;
 	padding:10px;
 	border:1px solid #bbb;
 	color:#333;
-	font-size:0.9em;
 	display:inline-block;
+	border-top-right-radius:3px;
+	border-bottom-right-radius:3px;
 }
 
 textarea {
 	height:200px;
 	resize:none;
+	border-bottom-left-radius:3px;
 }
 
-#file {
-	height:38px;
+input[type="file"] {
+	width:400px;
+	border-radius:3px;
 }
 
-.file-container {
-    overflow:hidden;
-    position:relative;
-}
-
-.file-container [type=file] {
-    cursor:inherit;
-    filter:alpha(opacity=0);
-    min-height:100%;
-    min-width:100%;
-    opacity:0;
-    position:absolute;
-    right:0;
-    text-align:right;
-    top:0;
-    display:inline-block;
-}
-
-input:focus, textarea:focus{
+input:focus, textarea:focus {
 	-webkit-box-shadow:0 0 1px 1px #bbb;
 	-moz-box-shadow:0 0 1px 1px #bbb;
 	box-shadow:0 0 1px 1px #bbb;
@@ -234,10 +176,7 @@ input[type="submit"] {
 	width:auto;
 	float:right;
 	background:-webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-}
-
-input[type="submit"]:hover {
-	background:-webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+	border-radius:3px;
 }
 
 /* detailpagina */
