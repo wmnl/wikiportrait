@@ -44,7 +44,7 @@ p {
 
 /*menu*/
 #menu ul {
-	background:#347bff;
+	background:#006699;
 	padding:10px;
 	border-radius:3px;
 	margin-bottom:10px;
@@ -71,7 +71,7 @@ p {
 }
 
 .succes {
-	background:#00af89;
+	background:#339966;
 	border-radius:3px;
 	color:#fff;
 	padding:11px;
@@ -79,7 +79,7 @@ p {
 }
 
 .error {
-	background:#cf1c1f;
+	background:#990000;
 	border-radius:3px;
 	color:#fff;
 	padding:11px;
