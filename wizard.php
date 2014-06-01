@@ -66,7 +66,7 @@
                         
                     }
                 ?>
-                    
+                <br class="clear" />
             </div>
         </div>
     </body>

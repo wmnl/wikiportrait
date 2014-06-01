@@ -87,6 +87,8 @@
 					<div class="bottom">
 						<input type="submit" name="postback" />
 					</div>
+					
+					<br class="clear" />
 				</form>
 			</div>
 		</div>
