@@ -62,9 +62,11 @@ p {
 
 /* Uploadwizard */
 .button {
+	background:-moz-linear-gradient(top, #f9f9f9, #e3e3e3);
 	background:-webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+	background:linear-gradient(top, #f9f9f9, #e3e3e3);
 	padding:11px;
-	border:1px solid #bbb;
+	border:1px solid #e3e3e3;
 	color:#333;
 	text-decoration:none;
 	border-radius:3px;
@@ -140,8 +142,8 @@ label {
 	padding:10px;
 	margin-bottom:10px;
 	display:inline-block;
-	background:#eee;
-	border:1px solid #bbb;
+	background:#f5f5f5;
+	border:1px solid #e3e3e3;
 	border-right:0px;
 	margin-right:-4px;
 	border-top-left-radius:3px;
@@ -155,7 +157,7 @@ input, textarea, select {
 	-webkit-appearance:none;
 	border-radius:0px;
 	padding:10px;
-	border:1px solid #bbb;
+	border:1px solid #e3e3e3;
 	color:#333;
 	display:inline-block;
 	border-top-right-radius:3px;
@@ -174,16 +176,18 @@ input[type="file"] {
 }
 
 input:focus, textarea:focus {
-	-webkit-box-shadow:0 0 1px 1px #bbb;
-	-moz-box-shadow:0 0 1px 1px #bbb;
-	box-shadow:0 0 1px 1px #bbb;
+	-webkit-box-shadow:0 0 1px 1px #e3e3e3;
+	-moz-box-shadow:0 0 1px 1px #e3e3e3;
+	box-shadow:0 0 1px 1px #e3e3e3;
 }
 
 input[type="submit"] {
 	padding:11px;
 	width:auto;
 	float:right;
+	background:-moz-linear-gradient(top, #f9f9f9, #e3e3e3);
 	background:-webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+	background:linear-gradient(top, #f9f9f9, #e3e3e3);
 	border-radius:3px;
 }
 
