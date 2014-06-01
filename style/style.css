@@ -70,8 +70,16 @@ p {
 	border-radius:3px;
 }
 
-.error {
+.succes {
 	background:#00af89;
+	border-radius:3px;
+	color:#fff;
+	padding:11px;
+	margin-bottom:10px;
+}
+
+.error {
+	background:#cf1c1f;
 	border-radius:3px;
 	color:#fff;
 	padding:11px;
