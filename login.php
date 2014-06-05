@@ -1,42 +1,43 @@
 <?php
-	require "connect.php";   
-	session_start();
-	
-	if (isset($_POST['postback']))
-	{
-		$errors = array();
-		
-		if (empty ($_POST['username']))
-			array_push ($errors, "Je hebt geen gebruikersnaam ingevuld");
-		if (empty ($_POST['password']))
-			array_push ($errors, "Je hebt geen wachtwoord ingevuld");
-		
-		if (empty($errors))
-		{
-			
-			$query = "SELECT * FROM users WHERE username = '" . $_POST['username'] . "' AND password = '" . sha1($_POST['password']) . "'";
-			echo $query;
-			$result = mysql_query($query);
-			
-			if (mysql_num_rows($result) == 1)
-			{
-				$row = mysql_fetch_assoc($result);
-				if ($row['isSysop'] == 1) 
-					$isSysop = true;
-				else 
-					$isSysop = false;
-				
-				$_SESSION['user'] = $row['id'];
-				if ($isSysop)
-					$_SESSION['isSysop'] = true;
-				else
-					$_SESSION['isSysop'] = false;
-				
-				
-				header("Location:index.php");
-			}
-		}
-	}
+    ob_start();
+    require "connect.php";   
+    session_start();
+
+    if (isset($_POST['postback']))
+    {
+        $errors = array();
+
+        if (empty ($_POST['username']))
+                array_push ($errors, "Je hebt geen gebruikersnaam ingevuld");
+        if (empty ($_POST['password']))
+                array_push ($errors, "Je hebt geen wachtwoord ingevuld");
+
+        if (empty($errors))
+        {
+
+            $query = "SELECT * FROM users WHERE username = '" . $_POST['username'] . "' AND password = '" . sha1($_POST['password']) . "'";
+            echo $query;
+            $result = mysql_query($query);
+
+            if (mysql_num_rows($result) == 1)
+            {
+                $row = mysql_fetch_assoc($result);
+                if ($row['isSysop'] == 1) 
+                        $isSysop = true;
+                else 
+                        $isSysop = false;
+
+                $_SESSION['user'] = $row['id'];
+                if ($isSysop)
+                        $_SESSION['isSysop'] = true;
+                else
+                        $_SESSION['isSysop'] = false;
+
+
+                header("Location:index.php");
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html>

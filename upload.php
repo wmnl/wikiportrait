@@ -1,97 +1,98 @@
 <?php
-	require "connect.php";
-	
-	if (isset($_POST['postback']))
-	{
-		$errors = array();
-		$allowedext = array("image/png", "image/gif", "image/jpeg");
+    ob_start();
+    require "connect.php";
 
-		$file = $_FILES['file'];
-		$title = $_POST['title'];
-		$source = $_POST['source'];
-		$name = $_POST['name'];
-		$email = $_POST['email'];
-		$ip = $_SERVER["REMOTE_ADDR"]; 
-		$date = $_POST['date'];
-		$desc = $_POST['description'];
-		
-		if (!isset($file))
-		{
-			array_push($errors, "Er is geen bestand geselecteerd");
-		}
-		elseif (!in_array($file['type'], $allowedext))
-		{
-			array_push($errors, "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund");
-		}
-		
-		if (empty($title)) 
-		{
-			array_push($errors, "Er is niet ingevuld wie er op de foto staat");
-		}
-		
-		if (empty($source))
-		{
-			array_push($errors, "Er is niet ingevuld wie de auteursrechthebbende is");
-		}
-		
-		if (empty($name))
-		{
-			array_push($errors, "Er is geen naam ingevuld");
-		}
-		
-		if (empty($email))
-		{
-			array_push($errors, "Er is geen e-mailadres ingevuld");
-		}
-		elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
-		{
-			array_push($errors, "Er is geen geldig e-mailadres ingevuld");
-		}
-		
-		if (count($errors) == 0)
-		{
-			$time = new DateTime();
-			$filename = strtolower(str_replace(" ", "_", $title)) . "-" . date_timestamp_get($time) . "." . pathinfo($file['name'], PATHINFO_EXTENSION);				
-			
-			if (move_uploaded_file($file['tmp_name'], "uploads/" . $filename))
-			{
-				$query = "INSERT INTO images(filename, title, source, name, email, ip, date, description, timestamp)"
-						. "VALUES('$filename', '$title', '$source', '$name', '$email', '$ip', '$date', '$desc', " . date_timestamp_get($time) . ");";
-				mysql_query($query);
-				echo $query;
-				
-				require "PHPMailer/PHPMailerAutoload.php";
-				
-				$mail = new PHPMailer;
-				
-				$mail->CharSet = "UTF-8";
-				$mail->isSMTP();									  // Set mailer to use SMTP
-				$mail->Host = "smtp.upcmail.nl";					  // Specify main and backup server
-				$mail->SMTPAuth = false;							  // Enable SMTP authentication
+    if (isset($_POST['postback']))
+    {
+        $errors = array();
+        $allowedext = array("image/png", "image/gif", "image/jpeg");
 
-				$mail->From = $email;
-				$mail->FromName = $name;
-				$mail->addCustomHeader("X-OTRS-Queue:info-nl::wikiportret");  // add extra header for spamfilter exeption
-				$mail->addAddress("otrs-test@wikimedia.org", "Wikiportret");  // Add a recipient
-				$mail->addReplyTo($email, $name);
+        $file = $_FILES['file'];
+        $title = $_POST['title'];
+        $source = $_POST['source'];
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $ip = $_SERVER["REMOTE_ADDR"]; 
+        $date = $_POST['date'];
+        $desc = $_POST['description'];
 
-				$mail->WordWrap = 50;								 // Set word wrap to 50 characters
-				$mail->isHTML(true);								  // Set email format to HTML
+        if (!isset($file))
+        {
+            array_push($errors, "Er is geen bestand geselecteerd");
+        }
+        elseif (!in_array($file['type'], $allowedext))
+        {
+            array_push($errors, "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund");
+        }
 
-				$mail->Subject = $title . " is geüpload op Wikiportret";
-				$mail->Body	= "Lorem ipsum dolar cit amet";
-				$mail->AltBody = "Lorem ipsum dolar cit amet zonder HTML";
+        if (empty($title)) 
+        {
+            array_push($errors, "Er is niet ingevuld wie er op de foto staat");
+        }
 
-				if(!$mail->send()) {
-				   echo "Message could not be sent.";
-				   echo "Mailer Error: " . $mail->ErrorInfo;
-				   exit;
-				}
-				
-				header("Location:wizard.php?question=success");
-			}
-		}
-	}
+        if (empty($source))
+        {
+            array_push($errors, "Er is niet ingevuld wie de auteursrechthebbende is");
+        }
+
+        if (empty($name))
+        {
+            array_push($errors, "Er is geen naam ingevuld");
+        }
+
+        if (empty($email))
+        {
+            array_push($errors, "Er is geen e-mailadres ingevuld");
+        }
+        elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
+        {
+            array_push($errors, "Er is geen geldig e-mailadres ingevuld");
+        }
+
+        if (count($errors) == 0)
+        {
+            $time = new DateTime();
+            $filename = strtolower(str_replace(" ", "_", $title)) . "-" . date_timestamp_get($time) . "." . pathinfo($file['name'], PATHINFO_EXTENSION);				
+
+            if (move_uploaded_file($file['tmp_name'], "uploads/" . $filename))
+            {
+                $query = "INSERT INTO images(filename, title, source, name, email, ip, date, description, timestamp)"
+                                . "VALUES('$filename', '$title', '$source', '$name', '$email', '$ip', '$date', '$desc', " . date_timestamp_get($time) . ");";
+                mysql_query($query);
+                echo $query;
+
+                require "PHPMailer/PHPMailerAutoload.php";
+
+                $mail = new PHPMailer;
+
+                $mail->CharSet = "UTF-8";
+                $mail->isSMTP();									  // Set mailer to use SMTP
+                $mail->Host = "smtp.upcmail.nl";					  // Specify main and backup server
+                $mail->SMTPAuth = false;							  // Enable SMTP authentication
+
+                $mail->From = $email;
+                $mail->FromName = $name;
+                $mail->addCustomHeader("X-OTRS-Queue:info-nl::wikiportret");  // add extra header for spamfilter exeption
+                $mail->addAddress("otrs-test@wikimedia.org", "Wikiportret");  // Add a recipient
+                $mail->addReplyTo($email, $name);
+
+                $mail->WordWrap = 50;								 // Set word wrap to 50 characters
+                $mail->isHTML(true);								  // Set email format to HTML
+
+                $mail->Subject = $title . " is geüpload op Wikiportret";
+                $mail->Body	= "Lorem ipsum dolar cit amet";
+                $mail->AltBody = "Lorem ipsum dolar cit amet zonder HTML";
+
+                if(!$mail->send()) {
+                   echo "Message could not be sent.";
+                   echo "Mailer Error: " . $mail->ErrorInfo;
+                   exit;
+                }
+
+                header("Location:wizard.php?question=success");
+            }
+        }
+    }
 ?>
 	
 <!DOCTYPE html>
@@ -117,17 +118,17 @@
 				<h2>Uploadformulier</h2>
 				
 				<?php
-					if (!empty($errors))
-					{
-						echo "<div class=\"error\"><ul>";
-						
-						foreach ($errors as $error)
-						{
-							echo "<li>" . $error . "</li>";
-						}
-						
-						echo "</ul></div>";
-					}
+                                    if (!empty($errors))
+                                    {
+                                        echo "<div class=\"error\"><ul>";
+
+                                        foreach ($errors as $error)
+                                        {
+                                                echo "<li>" . $error . "</li>";
+                                        }
+
+                                        echo "</ul></div>";
+                                    }
 				?>
 				
 				<form method="post" enctype="multipart/form-data">

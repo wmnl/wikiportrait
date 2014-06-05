@@ -1,4 +1,5 @@
 <?php
+    ob_start();
     session_start();
     require "../connect.php";   
     if (!isset($_SESSION['user']))

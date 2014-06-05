@@ -1,5 +1,6 @@
 <?php
     session_start();
+    ob_start();
     require "../connect.php";   
     if (!isset($_SESSION['user']))
         header("Location:../login.php");
