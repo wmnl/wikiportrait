@@ -24,7 +24,7 @@
 		{
 			echo "<h3>Het advies van de uploadwizard is:</h3>";
 			echo "<div class=\"succes\">Upload de afbeelding onder de CC-BY-SA licentie</div>";
-			echo "<a class=\"button upload\" href=\"upload.php\">Uploaden</a>";
+			echo "<a class=\"button upload\" href=\"upload.php\"><i class=\"fa fa-cloud-upload fa-lg fa-fw\"></i>Uploaden</a>";
 		}
 	}
 ?>

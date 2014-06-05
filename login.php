@@ -50,7 +50,7 @@
 	<body>
 		<div id="all">
 			<div id="header">
-				<h1>Wikiportret - Inloggen</h1>
+				<h1>Wikiportret</h1>
 			</div>
 			
 			<div id="menu">
@@ -58,6 +58,7 @@
 			</div>
 			
 			<div id="content">
+				<h2>Inloggen</h2>
 				<p>Hier kunnen medewerkers van Wikiportret inloggen in het beheergedeelte.</p>
 				
 				<?php
@@ -86,7 +87,7 @@
 					</div>
 					
 					<div class="input-container bottom">
-						<input type="submit" name="postback" />
+						<input type="submit" name="postback" value="Inloggen &rarr;" />
 					</div>
 				</form>
 			</div>
