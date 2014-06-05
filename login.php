@@ -44,6 +44,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="style/style.css" />
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<title>Wikiportret - Inloggen</title>
 	</head>
 	<body>
@@ -74,21 +75,19 @@
 				?>
 				
 				<form method="post">
-					<div>
-						<label for="username">Gebruikersnaam: </label>
+					<div class="input-container">
+						<label for="username"><i class="fa fa-user fa-lg fa-fw"></i>Gebruikersnaam: </label>
 						<input type="text" name="username" id="username" />
 					</div>
 					
-					<div>
-						<label for="password">Wachtwoord: </label>
+					<div class="input-container">
+						<label for="password"><i class="fa fa-key fa-lg fa-fw"></i>Wachtwoord: </label>
 						<input type="password" name="password" id="password" />
 					</div>
 					
-					<div class="bottom">
+					<div class="input-container bottom">
 						<input type="submit" name="postback" />
 					</div>
-					
-					<br class="clear" />
 				</form>
 			</div>
 		</div>

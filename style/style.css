@@ -2,6 +2,7 @@
 * {
 	font-size:1em;
 	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight:200;
 	outline:0px;
 	margin:0px;
 	padding:0px;
@@ -12,6 +13,8 @@
 
 html {
 	background:#e3e3e3;
+	color:#444;
+	font-size:110%;
 }
 
 /* Tekstopmaak */
@@ -31,9 +34,17 @@ h3 {
 	font-size:1.1em;
 }
 
+a {
+	color:#006699;
+}
+
 p {
 	line-height:125%;
 	margin-bottom:10px;
+}
+
+p:last-child {
+	margin-bottom:0px;
 }
 
 .clear {
@@ -41,25 +52,36 @@ p {
 }
 
 /* de hele site*/
-#all{
-	width:1000px;
-	margin:10px auto;
-	background:#fff;
-	padding:10px;
-	border-radius:3px;
+#all {
+	width:70%;
+	margin:20px auto;
 }
 
 #header {
 	padding:10px;
-	margin-bottom:-10px;
+	background:#fff;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
+
+#header h1 {
+	margin:0px;
+	font-size:1.7em;
+}
+
+#content {
+	padding:10px;
+	background:#fff;
+	border-radius:5px;
+	margin-top:10px;
 }
 
 /*menu*/
 #menu ul {
 	background:#006699;
 	padding:10px;
-	border-radius:3px;
-	margin-bottom:10px;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
 }
 
 #menu ul li {
@@ -73,19 +95,9 @@ p {
 }
 
 /* Uploadwizard */
-.button {
-	background:-moz-linear-gradient(top, #f9f9f9, #e3e3e3);
-	background:-webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-	background:linear-gradient(top, #f9f9f9, #e3e3e3);
-	padding:11px;
-	color:#333;
-	text-decoration:none;
-	border-radius:3px;
-}
-
 .succes {
 	background:#339966;
-	border-radius:3px;
+	border-radius:5px;
 	color:#fff;
 	padding:11px;
 	margin-bottom:10px;
@@ -93,7 +105,7 @@ p {
 
 .error {
 	background:#990000;
-	border-radius:3px;
+	border-radius:5px;
 	color:#fff;
 	padding:11px;
 	margin-bottom:10px;
@@ -101,11 +113,7 @@ p {
 
 .error li {
 	line-height:125%;
-	margin-left:20px;
-}
-
-.wizardfooter {
-	padding:10px 0px;
+	margin-left:10px;
 }
 
 /* tekstveld uitleg */
@@ -133,12 +141,12 @@ p {
 	text-decoration:none;
 	position:absolute;
 	border-radius:6px;
-	top:20px;
+	top:10px;
 	left:-10px;
 }
 
 .tooltip img{
-	width:20px;
+	width:10px;
 }
 
 /* Uploadformulier */
@@ -146,61 +154,79 @@ form {
 	width:100%;
 }
 
-label {
-	margin:0px;
-	vertical-align:top;
-	width:369px;
-	padding:10px;
+.input-container {
+	position:relative;
+	display:table;
+	border-collapse:separate;
+	width:100%;
 	margin-bottom:10px;
-	display:inline-block;
-	background:#f5f5f5;
-	border:1px solid #e3e3e3;
-	border-right:0px;
-	margin-right:-4px;
-	border-top-left-radius:3px;
-	border-bottom-left-radius:3px;
+}
+
+.input-container:last-child {
+	margin-bottom:0px;
+}
+
+label {
+	display:table-cell;
+	white-space:nowrap;
+	vertical-align:middle;
+	width:35%;
+	padding-left:10px;
+	background-color:#fff;
+	background:#ddd;
+	border-top-left-radius:5px;
+	border-bottom-left-radius:5px;
+}
+
+.fa {
+	margin-right:5px;
 }
 
 input, textarea, select {
+	display:table-cell;
 	margin:0px;
-	margin-bottom:10px;
-	width:610px;
+	width:100%;
 	-webkit-appearance:none;
 	border-radius:0px;
 	padding:10px;
-	border:1px solid #e3e3e3;
-	color:#333;
-	display:inline-block;
-	border-top-right-radius:3px;
-	border-bottom-right-radius:3px;
+	border:1px solid #ddd;
+	position:relative;
+	z-index:2;
+	float:left;
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+	color:#444;
 }
 
 textarea {
 	height:200px;
 	resize:none;
-	border-bottom-left-radius:3px;
-}
-
-input[type="file"] {
-	width:400px;
-	border-radius:3px;
 }
 
 input:focus, textarea:focus {
-	-webkit-box-shadow:0 0 1px 1px #e3e3e3;
-	-moz-box-shadow:0 0 1px 1px #e3e3e3;
-	box-shadow:0 0 1px 1px #e3e3e3;
+	-webkit-box-shadow:inset 0 0 1px 1px #e3e3e3;
+	-moz-box-shadow:inset 0 0 1px 1px #e3e3e3;
+	box-shadow:inset 0 0 1px 1px #e3e3e3;
 }
 
-input[type="submit"] {
+.bottom input[type="submit"] {
+	float:right;
+}
+
+input[type="submit"], .button {
 	padding:11px;
 	width:auto;
-	float:right;
-	background:-moz-linear-gradient(top, #f9f9f9, #e3e3e3);
-	background:-webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-	background:linear-gradient(top, #f9f9f9, #e3e3e3);
-	border-radius:3px;
+	background:#ddd;
+	border-radius:5px;
 	border:0px;
+	text-decoration:none;
+	color:#444;
+	display:inline-block;
+}
+
+input[type="submit"]:hover, .button:hover {
+	background:#ccc;
+	cursor:pointer;
 }
 
 /* detailpagina */

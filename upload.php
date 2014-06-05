@@ -99,10 +99,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="style/style.css" />
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<title>Wikiportret - Stel uw foto's ter beschikking</title>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
-		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 	</head>
 	
 	<body>
@@ -134,44 +132,45 @@
 				
 				<form method="post" enctype="multipart/form-data">
 				
-					<div>
+					<div class="input-container">
+						<label for="file"><i class="fa fa-file-image-o"></i>Bestand</label>
 						<input type="file" name="file" id="file" required="required" />
 					</div>
 					
 					<h2>Informatie</h2>
 					
-					<div>
-						<label for="title">Wie staat er op de foto?</label>
+					<div class="input-container">
+						<label for="title"><i class="fa fa-eye fa-lg fa-fw"></i>Afgebeeld persoon</label>
 						<input type="text" name="title" id="title" required="required" value="<?php if (!empty($title)) echo $title; ?>" />
 					</div>
 					
-					<div>
-						<label for="source">Wie is de auteursrechthebbende van de foto?</label>
+					<div class="input-container">
+						<label for="source"><i class="fa fa-camera fa-lg fa-fw"></i>Auteursrechthebbende</label>
 						<input type="text" name="source" id="source" required="required" value="<?php if (!empty($_POST['source'])) echo $_POST['source']; ?>" />
 					</div>
 					
-					<div>
-						<label for="name">Uw naam</label>
+					<div class="input-container">
+						<label for="name"><i class="fa fa-user fa-lg fa-fw"></i>Uw naam</label>
 						<input type="text" name="name" id="name" required="required" value="<?php if (!empty($_POST['name'])) echo $_POST['name']; ?>" />
 					</div>
 					
-					<div>
-						<label for="email">Uw e-mailadres</label>
+					<div class="input-container">
+						<label for="email"><i class="fa fa-envelope fa-lg fa-fw"></i>Uw e-mailadres</label>
 						<input type="email" id="email" name="email" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>" />
 					</div>
 					
-					<div>
-						<label for="date">Datum van de foto (optioneel)</label>
+					<div class="input-container">
+						<label for="date"><i class="fa fa-calendar fa-lg fa-fw"></i>Datum van de foto (optioneel)</label>
 						<input type="date" name="date" id="date" placeholder="YYYY-MM-DD" value="<?php if (!empty($_POST['date'])) echo $_POST['date']; ?>" />
 					</div>
 					
-					<div>
-						<label for="description">Omschrijving (optioneel)</label>
+					<div class="input-container">
+						<label for="description"><i class="fa fa-comment fa-lg fa-fw"></i>Omschrijving (optioneel)</label>
 						<textarea name="description" id="description"><?php if (!empty($_POST['description'])) echo $_POST['description']; ?></textarea>
 					</div>
 					
-					<div>
-						<label for="license">Licentie</label>
+					<div class="input-container">
+						<label for="license"><i class="fa fa-share-alt fa-lg fa-fw"></i>Licentie</label>
 						<select id="license" name="license">
 							<optgroup label="Aanbeloven licentie">
 								<option value="cc-by-sa-3.0">Creative Commons Naamsvermelding-Gelijk delen 3.0</option>
@@ -185,16 +184,14 @@
 						</select>
 					</div>
 					
-					<div>
-						<label>Licentievoorwaarden</label>
+					<div class="input-container">
+						<label><i class="fa fa-bars fa-lg fa-fw"></i> Licentievoorwaarden</label>
 						<textarea readonly="readonly">Door het uploaden van dit materiaal en het klikken op de knop 'Upload foto' verklaart u dat u de rechthebbende eigenaar bent van het materiaal. Door dit materiaal te uploaden geeft u toestemming voor het gebruik van het materiaal onder de condities van de door u geselecteerde licentie(s), deze condities variëren per licentie maar houden in ieder geval in dat het materiaal verspreid, bewerkt en commercieel gebruikt mag worden door eenieder. Voor de specifieke extra condities per licentie verwijzen u naar de bijbehorende licentieteksten. U kunt op het vrijgeven van deze rechten na het akkoord gaan met deze voorwaarden niet meer terugkomen. De Wikimedia Foundation en haar chapters (waaronder de Vereniging Wikimedia Nederland) zijn op geen enkele wijze aansprakelijk voor misbruik van het materiaal of aanspraak op het materiaal door derden. De eventuele geportretteerden hebben geen bezwaar tegen publicatie onder genoemde licenties. Ook uw eventuele opdrachtgever geeft toestemming.</textarea>
 					</div>
 					
-					<div class="bottom">
+					<div class="input-container bottom">
 						<input type="submit" name="postback" value="Versturen" />
 					</div>
-					
-					<br class="clear" />
 					
 				</form>
 			</div>
