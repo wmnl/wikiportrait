@@ -1,9 +1,8 @@
 <?php
 	function showquestion($text, $yes, $no, $exp=null)
 	{
-		echo "<p>$text";
-		if (!empty($exp)) echo " <a href=\"#\" class=\"tooltip\"><img src=\"./images/question.png\"><span>$exp</span></a>";
-		echo "</p>";
+		echo "<p>$text</p>";
+		if (!empty($exp)) echo "<div class=\"succes\" style=\"display:block;\">$exp</div>";
 		echo "\n\t\t\t\t<a class=\"button question\" href=\"wizard.php?question=$yes\"><i class=\"fa fa-thumbs-up fa-lg fa-fw\"></i>Ja</a> <a class=\"button question\" href=\"wizard.php?question=$no\"><i class=\"fa fa-thumbs-down fa-lg fa-fw\"></i>Nee</a>";
 	}
 	

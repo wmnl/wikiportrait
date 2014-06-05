@@ -113,40 +113,7 @@ p:last-child {
 
 .error li {
 	line-height:125%;
-	margin-left:10px;
-}
-
-/* tekstveld uitleg */
-.tooltip{
-	position:relative; 
-	z-index:20;
-}
-
-.tooltip span{
-	display:none;
-}
-
-.tooltip:hover{
-	z-index:21;
-}
-
-.tooltip:hover span{
-	display:block;
-	width:400px;
-	text-align:left;
-	padding:5px;
-	color:#fff;
-	background-color:#535663;
-	font-size:13px;
-	text-decoration:none;
-	position:absolute;
-	border-radius:6px;
-	top:10px;
-	left:-10px;
-}
-
-.tooltip img{
-	width:10px;
+	margin-left:20px;
 }
 
 /* Uploadformulier */

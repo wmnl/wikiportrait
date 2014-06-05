@@ -44,7 +44,6 @@
 
                         default:
                         case "first":
-                            echo "<p>Om het uploaden snel te laten verlopen, volgt er nu een korte wizard.</p>\n";
                             showquestion("Is het hoofdonderwerp van de foto mogelijk auteursrechtelijk beschermd? (Bijvoorbeeld: hoes van CD of DVD, logo, reclamebord)", "noupload", "ownwork", "Als u een foto maakt, heeft u zelf de auteursrechten van die foto. Als u echter een foto maakt van iets anders, waarop ook auteursrechten rusten, dan mag u uw foto toch niet vrij verspreiden. Dat kan bijvoorbeeld zo zijn bij foto's van een CD-hoes, DVD-hoes, logo, reclamebord of (film)poster. Het uploaden van uw foto betekent dan dat u de auteursrechten schendt op die CD-hoes enz.");
                             break;
 
