@@ -13,7 +13,7 @@
         if (!isset($_SESSION['user']))
             header("Location:$basispad/login.php");
         elseif (isset($_SESSION['user']) && $_SESSION['isSysop'] == false)
-            hedaer("Location:" . $basispad);
+            header("Location:" . $basispad);
 
     }
 ?>
@@ -33,5 +33,5 @@
             </div>
             
             <div id="menu">
-               <?php include $basispad . '/menu.php'; ?>
+               <?php include 'menu.php'; ?>
             </div>
