@@ -359,6 +359,11 @@ input::-moz-focus-inner{
 	#menu span {
 		display:none;
 	}
+	
+	.float-right {
+		float:none;
+		margin-left:0px;
+	}
 }
 
 @media only screen and (min-width:1824px) {
