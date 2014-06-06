@@ -192,7 +192,7 @@
 					</div>
 					
 					<div class="input-container bottom">
-						<input type="submit" name="postback" value="Versturen &rarr;" />
+						<input type="submit" class="float-right" name="postback" value="Versturen &rarr;" />
 					</div>
 					
 				</form>

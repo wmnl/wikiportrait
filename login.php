@@ -79,17 +79,17 @@
 				
 				<form method="post">
 					<div class="input-container">
-						<label for="username"><i class="fa fa-user fa-lg fa-fw"></i>Gebruikersnaam: </label>
+						<label for="username"><i class="fa fa-user fa-lg fa-fw"></i>Gebruikersnaam</label>
 						<input type="text" name="username" id="username" />
 					</div>
 					
 					<div class="input-container">
-						<label for="password"><i class="fa fa-key fa-lg fa-fw"></i>Wachtwoord: </label>
+						<label for="password"><i class="fa fa-key fa-lg fa-fw"></i>Wachtwoord</label>
 						<input type="password" name="password" id="password" />
 					</div>
 					
 					<div class="input-container bottom">
-						<input type="submit" name="postback" value="Inloggen &rarr;" />
+						<input type="submit" class="float-right" name="postback" value="Inloggen &rarr;" />
 					</div>
 				</form>
 			</div>

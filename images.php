@@ -35,9 +35,9 @@
 					<thead>
 						<tr>
 							<th>Foto</th>
-							<th class="no-mobile">Titel</th>
-							<th class="no-mobile">Uploader</th>
-							<th class="no-mobile">Datum</th>
+							<th>Titel</th>
+							<th>Uploader</th>
+							<th>Datum</th>
 							<th>Acties</th>
 						</tr>
 					</thead>
@@ -61,18 +61,18 @@
 					
 					<tr>
 						<td><a href="image.php?id=<?php echo $id ?>"><img src="uploads/<?php echo $filename?>" style="width:100%;" /></a></td>
-						<td class="no-mobile"><?php echo $title ?></td>
-						<td class="no-mobile"><?php echo $name ?></td>
-						<td class="no-mobile"><?php echo gmdate("d F Y - H:i:s", $timestamp) ?></td>
+						<td><?php echo $title ?></td>
+						<td><?php echo $name ?></td>
+						<td><?php echo gmdate("d F Y - H:i:s", $timestamp) ?></td>
 						<td><a href="image.php?id=<?php echo $id ?>">Bekijk alle details</a></td>
 					</tr>
 					
 					<?php
 						}
 					?>
-					<tr>
-						<th colspan="2">
-							Ga naar pagina:
+					<tr class="navigation">
+						<th colspan="5">
+							<div class="float-right">Ga naar pagina:
 								<?php
 									$query = "SELECT COUNT(*) FROM images WHERE archived = 0";
 									$result = mysql_query($query);
@@ -86,6 +86,7 @@
 										echo "<a href=\"images.php?page=".$i."\" class=\"page\">".$i."</a>"; 
 									}; 
 								?>
+							</div>
 						</th>
 					</tr>
 					</tbody>

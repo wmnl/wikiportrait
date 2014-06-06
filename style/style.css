@@ -40,6 +40,10 @@ a {
 	border:0px;
 }
 
+a:hover, a:focus {
+	color:#000;
+}
+
 img {
 	display:block;
 }
@@ -61,10 +65,15 @@ p:last-child {
 	clear:both;
 }
 
+.float-left {
+	float:left;
+	margin-right:10px;
+	display:block;
+}
+
 .float-right {
 	float:right;
 	margin-left:10px;
-	margin-bottom:10px;
 	display:block;
 }
 
@@ -119,7 +128,7 @@ p:last-child {
 	display:none;
 }
 
-/* Uploadwizard */
+/* Boxes */
 .succes {
 	background:#339966;
 	border-radius:5px;
@@ -172,11 +181,15 @@ label {
 	border-bottom-left-radius:5px;
 }
 
+.checkbox label {
+	background:none;
+}
+
 .fa {
 	margin-right:5px;
 }
 
-input, textarea, select {
+input, textarea, select, .checkbox {
 	display:table-cell;
 	margin:0px;
 	width:100%;
@@ -192,12 +205,8 @@ input, textarea, select {
 	color:#444;
 }
 
-input[type="file"] {
-	line-height:10px;
-}
-
 textarea {
-	height:200px;
+	height:300px;
 	resize:none;
 }
 
@@ -207,11 +216,20 @@ input:focus, textarea:focus {
 	box-shadow:inset 0 0 1px 1px #e3e3e3;
 }
 
-.bottom input[type="submit"] {
-	float:right;
+textarea[readonly="readonly"]:focus {
+	-webkit-box-shadow:0px;
+	-moz-box-shadow:0px;
+	box-shadow:0px;	
 }
 
-input[type="submit"], .button {
+input[type="checkbox"] {
+	-webkit-appearance:checkbox;
+	height:25px;
+	width:25px;
+	margin-right:-5px;
+}
+
+input[type="button"], input[type="submit"], .button {
 	padding:11px;
 	width:auto;
 	background:#ddd;
@@ -219,6 +237,7 @@ input[type="submit"], .button {
 	border:0px;
 	color:#444;
 	display:inline-block;
+	line-height:middle;
 }
 
 input[type="file"] {
@@ -234,7 +253,7 @@ input[type="file"]::-webkit-file-upload-button {
 	-webkit-appearance:none;
 }
 
-input[type="submit"]:hover, .button:hover {
+input[type="button"]:hover, input[type="submit"]:hover, .button:hover {
 	background:#ccc;
 	cursor:pointer;
 }
@@ -345,10 +364,6 @@ input::-moz-focus-inner{
 		color:#fff;
 		width:100%;
 		display:block;
-	}
-	
-	.no-mobile {
-		display:none;
 	}
 	
 	#menu .fa {
