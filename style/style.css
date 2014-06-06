@@ -14,7 +14,7 @@
 html {
 	background:#e3e3e3;
 	color:#444;
-	font-size:110%;
+	font-size:120%;
 }
 
 /* Tekstopmaak */
@@ -53,7 +53,7 @@ p:last-child {
 
 /* de hele site*/
 #all {
-	width:70%;
+	width:90%;
 	margin:20px auto;
 }
 
@@ -79,17 +79,17 @@ p:last-child {
 /*menu*/
 #menu ul {
 	background:#006699;
-	padding:10px;
 	border-bottom-left-radius:5px;
 	border-bottom-right-radius:5px;
 }
 
-#menu ul li {
+#menu li {
 	display:inline-block;
-	padding-right:10px;
 }
 
 #menu a {
+	padding:10px;
+	display:block;
 	color:#fff;
 	text-decoration:none;
 }
@@ -165,6 +165,10 @@ input, textarea, select {
 	color:#444;
 }
 
+input[type="file"] {
+	line-height:10px;
+}
+
 textarea {
 	height:200px;
 	resize:none;
@@ -191,9 +195,27 @@ input[type="submit"], .button {
 	display:inline-block;
 }
 
+input[type="file"] {
+	font-size:0.75em;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+	padding:6px;
+	cursor:pointer;
+	background:#ddd;
+	border-radius:5px;
+	border:0px;
+	-webkit-appearance:none;
+}
+
 input[type="submit"]:hover, .button:hover {
 	background:#ccc;
 	cursor:pointer;
+}
+
+.optional {
+	color:#888;
+	font-size:0.9em;
 }
 
 /* detailpagina */
@@ -206,4 +228,66 @@ input[type="submit"]:hover, .button:hover {
 /* Firefox die soms doet te kutten */
 input::-moz-focus-inner{ 
 	border:0px; 
+}
+
+/* Placeholders */
+::-webkit-input-placeholder { /* WebKit browsers */
+	color:#aaa;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color:#aaa;
+	opacity:1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color:#aaa;
+	opacity:1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+	color:#aaa;
+}
+
+/* Responsive */
+@media only screen and (max-width:1024px) {
+	body {
+		font-size:95%;
+		-webkit-text-size-adjust:100%;
+	}
+	
+	label {
+		width:100%;
+		border-bottom-left-radius:0px;
+		border-top-right-radius:5px;
+		display:block;
+		padding:10px;
+	}
+	
+	input, select, textarea {
+		border-bottom-left-radius:5px;
+		border-top-right-radius:0px;
+	}
+	
+	#menu ul {
+		display:table;
+		table-layout:fixed;
+		border-collapse:collapse;
+		width:100%;
+	}
+
+	#menu li {
+		display:table-cell;
+	}
+
+	#menu a {
+		padding:10px 0px;
+		display:block;
+		color:#fff;
+		text-decoration:none;
+		text-align:center;
+	}
+}
+
+@media only screen and (min-width:1824px) {
+	#all {
+		width:50%;
+	}
 }

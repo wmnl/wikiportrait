@@ -99,6 +99,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="style/style.css" />
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<title>Wikiportret - Stel uw foto's ter beschikking</title>
@@ -161,12 +162,12 @@
 					</div>
 					
 					<div class="input-container">
-						<label for="date"><i class="fa fa-calendar fa-lg fa-fw"></i>Datum van de foto (optioneel)</label>
+						<label for="date"><i class="fa fa-calendar fa-lg fa-fw"></i>Datum van de foto <span class="optional">(optioneel)</span></label>
 						<input type="date" name="date" id="date" placeholder="YYYY-MM-DD" value="<?php if (!empty($_POST['date'])) echo $_POST['date']; ?>" />
 					</div>
 					
 					<div class="input-container">
-						<label for="description"><i class="fa fa-comment fa-lg fa-fw"></i>Omschrijving (optioneel)</label>
+						<label for="description"><i class="fa fa-comment fa-lg fa-fw"></i>Omschrijving <span class="optional">(optioneel)</span></label>
 						<textarea name="description" id="description"><?php if (!empty($_POST['description'])) echo $_POST['description']; ?></textarea>
 					</div>
 					
