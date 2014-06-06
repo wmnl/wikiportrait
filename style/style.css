@@ -375,6 +375,22 @@ input::-moz-focus-inner{
 		display:none;
 	}
 	
+	.bottom {
+		display:table;
+		table-layout:fixed;
+		width:100%;
+	}
+	
+	.bottom .button, .divider, input[type="button"], input[type="submit"] {
+		display:table-cell;
+		text-align:center;
+		width:100%;
+	}
+	
+	.divider {
+		width:10px;
+	}
+	
 	.float-right {
 		float:none;
 		margin-left:0px;
