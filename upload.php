@@ -163,7 +163,7 @@
 					
 					<div class="input-container">
 						<label for="date"><i class="fa fa-calendar fa-lg fa-fw"></i>Datum van de foto <span class="optional">(optioneel)</span></label>
-						<input type="date" name="date" id="date" placeholder="YYYY-MM-DD" value="<?php if (!empty($_POST['date'])) echo $_POST['date']; ?>" />
+						<input type="date" name="date" id="date" value="<?php if (!empty($_POST['date'])) echo $_POST['date']; ?>" />
 					</div>
 					
 					<div class="input-container">
