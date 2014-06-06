@@ -311,6 +311,10 @@ input::-moz-focus-inner{
 		-webkit-text-size-adjust:100%;
 	}
 	
+	#all {
+		width:95%;
+	}
+	
 	label {
 		width:100%;
 		border-bottom-left-radius:0px;
