@@ -29,7 +29,7 @@
 			<div id="content">
 				<h2>Ingestuurde foto's</h2>
 				
-				<a href="archived.php" class="button float-right">Archief</a>
+				<a href="archived.php" class="button float-right"><i class="fa fa-archive fa-lg fa-fw"></i>Archief</a>
 				
 				<table>
 					<thead>
