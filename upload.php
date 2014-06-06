@@ -1,6 +1,7 @@
 <?php
     ob_start();
-    require "connect.php";
+    require 'connect.php';
+    include 'header.php';
 
     if (isset($_POST['postback']))
     {
@@ -93,110 +94,89 @@
             }
         }
     }
+?>	
+<div id="content">
+        <?php
+            if (!empty($errors))
+            {
+                echo "<div class=\"error\"><ul>";
+
+                foreach ($errors as $error)
+                {
+                        echo "<li>" . $error . "</li>";
+                }
+
+                echo "</ul></div>";
+            }
+        ?>	
+
+        <h2>Uploadformulier</h2>
+
+        <form method="post" enctype="multipart/form-data">
+
+                <div class="input-container">
+                        <label for="file"><i class="fa fa-file-image-o"></i>Bestand</label>
+                        <input type="file" name="file" id="file" required="required" />
+                </div>
+
+                <h2>Informatie</h2>
+
+                <div class="input-container">
+                        <label for="title"><i class="fa fa-eye fa-lg fa-fw"></i>Afgebeeld persoon</label>
+                        <input type="text" name="title" id="title" required="required" value="<?php if (!empty($title)) echo $title; ?>" />
+                </div>
+
+                <div class="input-container">
+                        <label for="source"><i class="fa fa-camera fa-lg fa-fw"></i>Auteursrechthebbende</label>
+                        <input type="text" name="source" id="source" required="required" value="<?php if (!empty($_POST['source'])) echo $_POST['source']; ?>" />
+                </div>
+
+                <div class="input-container">
+                        <label for="name"><i class="fa fa-user fa-lg fa-fw"></i>Uw naam</label>
+                        <input type="text" name="name" id="name" required="required" value="<?php if (!empty($_POST['name'])) echo $_POST['name']; ?>" />
+                </div>
+
+                <div class="input-container">
+                        <label for="email"><i class="fa fa-envelope fa-lg fa-fw"></i>Uw e-mailadres</label>
+                        <input type="email" id="email" name="email" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>" />
+                </div>
+
+                <div class="input-container">
+                        <label for="date"><i class="fa fa-calendar fa-lg fa-fw"></i>Datum van de foto <span class="optional">(optioneel)</span></label>
+                        <input type="date" name="date" id="date" value="<?php if (!empty($_POST['date'])) echo $_POST['date']; ?>" />
+                </div>
+
+                <div class="input-container">
+                        <label for="description"><i class="fa fa-comment fa-lg fa-fw"></i>Omschrijving <span class="optional">(optioneel)</span></label>
+                        <textarea name="description" id="description"><?php if (!empty($_POST['description'])) echo $_POST['description']; ?></textarea>
+                </div>
+
+                <div class="input-container">
+                        <label for="license"><i class="fa fa-share-alt fa-lg fa-fw"></i>Licentie</label>
+                        <select id="license" name="license">
+                                <optgroup label="Aanbeloven licentie">
+                                        <option value="cc-by-sa-3.0">Creative Commons Naamsvermelding-Gelijk delen 3.0</option>
+                                </optgroup>
+
+                                <optgroup label="Overige licenties">
+                                        <option value="cc-0">Creative Commons CC0 1.0 Universele Public Domain Dedication</option>
+                                        <option>Hier nog een</option>
+                                        <option>En nog een</option>
+                                </optgroup>
+                        </select>
+                </div>
+
+                <div class="input-container">
+                        <label><i class="fa fa-bars fa-lg fa-fw"></i> Licentievoorwaarden</label>
+                        <textarea readonly="readonly">Door het uploaden van dit materiaal en het klikken op de knop 'Upload foto' verklaart u dat u de rechthebbende eigenaar bent van het materiaal. Door dit materiaal te uploaden geeft u toestemming voor het gebruik van het materiaal onder de condities van de door u geselecteerde licentie(s), deze condities variëren per licentie maar houden in ieder geval in dat het materiaal verspreid, bewerkt en commercieel gebruikt mag worden door eenieder. Voor de specifieke extra condities per licentie verwijzen u naar de bijbehorende licentieteksten. U kunt op het vrijgeven van deze rechten na het akkoord gaan met deze voorwaarden niet meer terugkomen. De Wikimedia Foundation en haar chapters (waaronder de Vereniging Wikimedia Nederland) zijn op geen enkele wijze aansprakelijk voor misbruik van het materiaal of aanspraak op het materiaal door derden. De eventuele geportretteerden hebben geen bezwaar tegen publicatie onder genoemde licenties. Ook uw eventuele opdrachtgever geeft toestemming.</textarea>
+                </div>
+
+                <div class="input-container bottom">
+                        <input type="submit" class="float-right" name="postback" value="Versturen &rarr;" />
+                </div>
+
+        </form>
+</div>
+<?php
+    include 'footer.php';
 ?>
-	
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-		<link rel="stylesheet" type="text/css" href="style/style.css" />
-		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-		<title>Wikiportret - Stel uw foto's ter beschikking</title>
-	</head>
-	
-	<body>
-		<div id="all">
-			<div id="header">
-				<h1>Wikiportret</h1>
-			</div>
-			
-			<div id="menu">
-			   <?php include 'menu.php'; ?>
-			</div>
-			
-			<div id="content">
-				<?php
-                                    if (!empty($errors))
-                                    {
-                                        echo "<div class=\"error\"><ul>";
-
-                                        foreach ($errors as $error)
-                                        {
-                                                echo "<li>" . $error . "</li>";
-                                        }
-
-                                        echo "</ul></div>";
-                                    }
-				?>	
-			
-				<h2>Uploadformulier</h2>
-				
-				<form method="post" enctype="multipart/form-data">
-				
-					<div class="input-container">
-						<label for="file"><i class="fa fa-file-image-o"></i>Bestand</label>
-						<input type="file" name="file" id="file" required="required" />
-					</div>
-					
-					<h2>Informatie</h2>
-					
-					<div class="input-container">
-						<label for="title"><i class="fa fa-eye fa-lg fa-fw"></i>Afgebeeld persoon</label>
-						<input type="text" name="title" id="title" required="required" value="<?php if (!empty($title)) echo $title; ?>" />
-					</div>
-					
-					<div class="input-container">
-						<label for="source"><i class="fa fa-camera fa-lg fa-fw"></i>Auteursrechthebbende</label>
-						<input type="text" name="source" id="source" required="required" value="<?php if (!empty($_POST['source'])) echo $_POST['source']; ?>" />
-					</div>
-					
-					<div class="input-container">
-						<label for="name"><i class="fa fa-user fa-lg fa-fw"></i>Uw naam</label>
-						<input type="text" name="name" id="name" required="required" value="<?php if (!empty($_POST['name'])) echo $_POST['name']; ?>" />
-					</div>
-					
-					<div class="input-container">
-						<label for="email"><i class="fa fa-envelope fa-lg fa-fw"></i>Uw e-mailadres</label>
-						<input type="email" id="email" name="email" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>" />
-					</div>
-					
-					<div class="input-container">
-						<label for="date"><i class="fa fa-calendar fa-lg fa-fw"></i>Datum van de foto <span class="optional">(optioneel)</span></label>
-						<input type="date" name="date" id="date" value="<?php if (!empty($_POST['date'])) echo $_POST['date']; ?>" />
-					</div>
-					
-					<div class="input-container">
-						<label for="description"><i class="fa fa-comment fa-lg fa-fw"></i>Omschrijving <span class="optional">(optioneel)</span></label>
-						<textarea name="description" id="description"><?php if (!empty($_POST['description'])) echo $_POST['description']; ?></textarea>
-					</div>
-					
-					<div class="input-container">
-						<label for="license"><i class="fa fa-share-alt fa-lg fa-fw"></i>Licentie</label>
-						<select id="license" name="license">
-							<optgroup label="Aanbeloven licentie">
-								<option value="cc-by-sa-3.0">Creative Commons Naamsvermelding-Gelijk delen 3.0</option>
-							</optgroup>
-							
-							<optgroup label="Overige licenties">
-								<option value="cc-0">Creative Commons CC0 1.0 Universele Public Domain Dedication</option>
-								<option>Hier nog een</option>
-								<option>En nog een</option>
-							</optgroup>
-						</select>
-					</div>
-					
-					<div class="input-container">
-						<label><i class="fa fa-bars fa-lg fa-fw"></i> Licentievoorwaarden</label>
-						<textarea readonly="readonly">Door het uploaden van dit materiaal en het klikken op de knop 'Upload foto' verklaart u dat u de rechthebbende eigenaar bent van het materiaal. Door dit materiaal te uploaden geeft u toestemming voor het gebruik van het materiaal onder de condities van de door u geselecteerde licentie(s), deze condities variëren per licentie maar houden in ieder geval in dat het materiaal verspreid, bewerkt en commercieel gebruikt mag worden door eenieder. Voor de specifieke extra condities per licentie verwijzen u naar de bijbehorende licentieteksten. U kunt op het vrijgeven van deze rechten na het akkoord gaan met deze voorwaarden niet meer terugkomen. De Wikimedia Foundation en haar chapters (waaronder de Vereniging Wikimedia Nederland) zijn op geen enkele wijze aansprakelijk voor misbruik van het materiaal of aanspraak op het materiaal door derden. De eventuele geportretteerden hebben geen bezwaar tegen publicatie onder genoemde licenties. Ook uw eventuele opdrachtgever geeft toestemming.</textarea>
-					</div>
-					
-					<div class="input-container bottom">
-						<input type="submit" class="float-right" name="postback" value="Versturen &rarr;" />
-					</div>
-					
-				</form>
-			</div>
-		</div>
-	</body>
-</html>
