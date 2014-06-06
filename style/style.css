@@ -36,6 +36,12 @@ h3 {
 
 a {
 	color:#006699;
+	text-decoration:none;
+	border:0px;
+}
+
+img {
+	display:block;
 }
 
 p {
@@ -47,14 +53,29 @@ p:last-child {
 	margin-bottom:0px;
 }
 
+#content li {
+	margin-left:20px;
+}
+
 .clear {
 	clear:both;
+}
+
+.float-right {
+	float:right;
+	margin-left:10px;
+	margin-bottom:10px;
+	display:block;
+}
+
+.page {
+	margin-right:5px;
 }
 
 /* de hele site*/
 #all {
 	width:90%;
-	margin:20px auto;
+	margin:10px auto;
 }
 
 #header {
@@ -89,9 +110,13 @@ p:last-child {
 
 #menu a {
 	padding:10px;
-	display:block;
+	display:inline-block;
 	color:#fff;
-	text-decoration:none;
+}
+
+#menu .fa {
+	color:#fff;
+	display:none;
 }
 
 /* Uploadwizard */
@@ -101,6 +126,7 @@ p:last-child {
 	color:#fff;
 	padding:11px;
 	margin-bottom:10px;
+	overflow:hidden;
 }
 
 .error {
@@ -109,6 +135,7 @@ p:last-child {
 	color:#fff;
 	padding:11px;
 	margin-bottom:10px;
+	overflow:hidden;
 }
 
 .error li {
@@ -190,7 +217,6 @@ input[type="submit"], .button {
 	background:#ddd;
 	border-radius:5px;
 	border:0px;
-	text-decoration:none;
 	color:#444;
 	display:inline-block;
 }
@@ -216,6 +242,38 @@ input[type="submit"]:hover, .button:hover {
 .optional {
 	color:#888;
 	font-size:0.9em;
+}
+
+/* Tables */
+table {
+	width:100%;
+	border-collapse:separate;
+	border-spacing:1px;
+	border-radius:5px;
+	text-align:left;
+	background:#ddd;
+	border:0px;
+	table-layout:fixed;
+}
+
+thead th {
+	font-weight:400;
+}
+
+td {
+	background:#fff;
+}
+
+td, th {
+	padding:10px;
+}
+
+thead:first-child tr:first-child th:first-child, tbody:first-child tr:first-child td:first-child {
+	border-radius:5px 0 0 0;
+}
+
+thead:last-child tr:last-child th:first-child, tbody:last-child tr:last-child td:first-child {
+	border-radius:0 0 0 5px;
 }
 
 /* detailpagina */
@@ -268,6 +326,7 @@ input::-moz-focus-inner{
 	
 	#menu ul {
 		display:table;
+		padding:10px 0px;
 		table-layout:fixed;
 		border-collapse:collapse;
 		width:100%;
@@ -275,14 +334,26 @@ input::-moz-focus-inner{
 
 	#menu li {
 		display:table-cell;
+		text-align:center;
 	}
 
 	#menu a {
-		padding:10px 0px;
-		display:block;
 		color:#fff;
-		text-decoration:none;
-		text-align:center;
+		width:100%;
+		display:block;
+	}
+	
+	.no-mobile {
+		display:none;
+	}
+	
+	#menu .fa {
+		display:inline-block;
+		margin-right:0px;
+	}
+	
+	#menu span {
+		display:none;
 	}
 }
 

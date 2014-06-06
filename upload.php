@@ -116,8 +116,6 @@
 			</div>
 			
 			<div id="content">
-				<h2>Uploadformulier</h2>
-				
 				<?php
                                     if (!empty($errors))
                                     {
@@ -130,7 +128,9 @@
 
                                         echo "</ul></div>";
                                     }
-				?>
+				?>	
+			
+				<h2>Uploadformulier</h2>
 				
 				<form method="post" enctype="multipart/form-data">
 				
