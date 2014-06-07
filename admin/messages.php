@@ -5,7 +5,7 @@
     <div id="content">
         <h2>Berichtenbeheer</h2>
         <ul>
-            <li><a href="adduser.php">Bericht  toevoegen</a></li>
+            <li><a href="adduser.php">Bericht toevoegen</a></li>
         </ul>
 
         <table width="95%" border="1px solid black">

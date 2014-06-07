@@ -12,8 +12,7 @@
 
         if (empty($errors))
         {
-            $query = "SELECT * FROM users WHERE username = '" . $_POST['username'] . "' AND password = '" . sha1($_POST['password']) . "'";
-            echo $query;
+            $query = "SELECT * FROM users WHERE username = '" . $_POST['username'] . "' AND password = '" . sha1($_POST['password']) . "' AND active = 1";
             $result = mysql_query($query);
 
             if (mysql_num_rows($result) == 1)
@@ -51,6 +50,18 @@
                 }
 
                 echo "</ul></div>";
+            }
+            else
+            {
+                if (isset($_POST['postback']))
+                {
+                    if (mysql_num_rows($result) == 0)
+                    {
+                        echo "<div class=\"error\"><ul>";
+                        echo "<li>Gebruikersnaam en/of wachtwoord incorrect</li>";
+                        echo "</ul></div>";
+                    }
+                }
             }
         ?>
 

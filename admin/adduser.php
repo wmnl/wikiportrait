@@ -55,8 +55,8 @@
 
         if (count($errors) == 0)
         {
-            $query = "INSERT INTO users(username, password, otrsname, email, isSysop)
-                         VALUES('$username', '" . sha1($password) . "', '$otrsname', '$email', $admin)";
+            $query = "INSERT INTO users(username, password, otrsname, email, isSysop, active)
+                         VALUES('$username', '" . sha1($password) . "', '$otrsname', '$email', $admin, 1)";
 
             mysql_query($query);
             header("Location:users.php");

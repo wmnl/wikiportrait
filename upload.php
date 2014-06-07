@@ -56,8 +56,8 @@
 
             if (move_uploaded_file($file['tmp_name'], "uploads/" . $filename))
             {
-                $query = "INSERT INTO images(filename, title, source, name, email, ip, date, description, timestamp)"
-                                . "VALUES('$filename', '$title', '$source', '$name', '$email', '$ip', '$date', '$desc', " . date_timestamp_get($time) . ");";
+                $query = "INSERT INTO images(filename, title, source, name, email, license, ip, date, description, timestamp)"
+                                . "VALUES('$filename', '$title', '$source', '$name', '$email', 'CC-BY-SA 3.0', '$ip', '$date', '$desc', " . date_timestamp_get($time) . ");";
                 mysql_query($query);
                 echo $query;
 
@@ -102,7 +102,7 @@
 
                 foreach ($errors as $error)
                 {
-                        echo "<li>" . $error . "</li>";
+                    echo "<li>" . $error . "</li>";
                 }
 
                 echo "</ul></div>";
@@ -114,55 +114,40 @@
         <form method="post" enctype="multipart/form-data">
 
                 <div class="input-container">
-                        <label for="file"><i class="fa fa-file-image-o"></i>Bestand</label>
-                        <input type="file" name="file" id="file" required="required" />
+                    <label for="file"><i class="fa fa-file-image-o"></i>Bestand</label>
+                    <input type="file" name="file" id="file" required="required" />
                 </div>
 
                 <h2>Informatie</h2>
 
                 <div class="input-container">
-                        <label for="title"><i class="fa fa-eye fa-lg fa-fw"></i>Afgebeeld persoon</label>
-                        <input type="text" name="title" id="title" required="required" value="<?php if (!empty($title)) echo $title; ?>" />
+                    <label for="title"><i class="fa fa-eye fa-lg fa-fw"></i>Afgebeeld persoon</label>
+                    <input type="text" name="title" id="title" required="required" value="<?php if (!empty($title)) echo $title; ?>" />
                 </div>
 
                 <div class="input-container">
-                        <label for="source"><i class="fa fa-camera fa-lg fa-fw"></i>Auteursrechthebbende</label>
-                        <input type="text" name="source" id="source" required="required" value="<?php if (!empty($_POST['source'])) echo $_POST['source']; ?>" />
+                    <label for="source"><i class="fa fa-camera fa-lg fa-fw"></i>Auteursrechthebbende</label>
+                    <input type="text" name="source" id="source" required="required" value="<?php if (!empty($_POST['source'])) echo $_POST['source']; ?>" />
                 </div>
 
                 <div class="input-container">
-                        <label for="name"><i class="fa fa-user fa-lg fa-fw"></i>Uw naam</label>
-                        <input type="text" name="name" id="name" required="required" value="<?php if (!empty($_POST['name'])) echo $_POST['name']; ?>" />
+                    <label for="name"><i class="fa fa-user fa-lg fa-fw"></i>Uw naam</label>
+                    <input type="text" name="name" id="name" required="required" value="<?php if (!empty($_POST['name'])) echo $_POST['name']; ?>" />
                 </div>
 
                 <div class="input-container">
-                        <label for="email"><i class="fa fa-envelope fa-lg fa-fw"></i>Uw e-mailadres</label>
-                        <input type="email" id="email" name="email" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>" />
+                    <label for="email"><i class="fa fa-envelope fa-lg fa-fw"></i>Uw e-mailadres</label>
+                    <input type="email" id="email" name="email" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>" />
                 </div>
 
                 <div class="input-container">
-                        <label for="date"><i class="fa fa-calendar fa-lg fa-fw"></i>Datum van de foto <span class="optional">(optioneel)</span></label>
-                        <input type="date" name="date" id="date" value="<?php if (!empty($_POST['date'])) echo $_POST['date']; ?>" />
+                    <label for="date"><i class="fa fa-calendar fa-lg fa-fw"></i>Datum van de foto <span class="optional">(optioneel)</span></label>
+                    <input type="date" name="date" id="date" value="<?php if (!empty($_POST['date'])) echo $_POST['date']; ?>" />
                 </div>
 
                 <div class="input-container">
-                        <label for="description"><i class="fa fa-comment fa-lg fa-fw"></i>Omschrijving <span class="optional">(optioneel)</span></label>
-                        <textarea name="description" id="description"><?php if (!empty($_POST['description'])) echo $_POST['description']; ?></textarea>
-                </div>
-
-                <div class="input-container">
-                        <label for="license"><i class="fa fa-share-alt fa-lg fa-fw"></i>Licentie</label>
-                        <select id="license" name="license">
-                                <optgroup label="Aanbeloven licentie">
-                                        <option value="cc-by-sa-3.0">Creative Commons Naamsvermelding-Gelijk delen 3.0</option>
-                                </optgroup>
-
-                                <optgroup label="Overige licenties">
-                                        <option value="cc-0">Creative Commons CC0 1.0 Universele Public Domain Dedication</option>
-                                        <option>Hier nog een</option>
-                                        <option>En nog een</option>
-                                </optgroup>
-                        </select>
+                    <label for="description"><i class="fa fa-comment fa-lg fa-fw"></i>Omschrijving <span class="optional">(optioneel)</span></label>
+                    <textarea name="description" id="description"><?php if (!empty($_POST['description'])) echo $_POST['description']; ?></textarea>
                 </div>
 
                 <div class="input-container">
@@ -171,7 +156,7 @@
                 </div>
 
                 <div class="input-container bottom">
-                        <input type="submit" class="float-right" name="postback" value="Versturen &rarr;" />
+                        <input type="submit" class="float-right" name="postback" value="Upload foto &rarr;" />
                 </div>
 
         </form>

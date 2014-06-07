@@ -32,14 +32,17 @@
                     $sysop = $row['isSysop'];
 
                     echo "<tr>";
-                            echo "<td>$username</td>";
-                            echo "<td>$otrsname</td>";
-                            echo "<td>$email</td>";
-                            if ($sysop) echo "<td><i class=\"fa fa-check-square-o fa-lg\"></i></td>"; else echo "<td><i class=\"fa fa-minus-square-o fa-lg\"></i></td>";
-                            echo "<td><a href=\"edituser.php?id=$id\"><i class=\"fa fa-wrench fa-lg\"></i></a><a href=\"deleteuser.php?id=$id\"><i class=\"fa fa-trash-o fa-lg\"></i></a></td>";
+                        echo "<td>$username</td>";
+                        echo "<td>$otrsname</td>";
+                        echo "<td>$email</td>";
+                        if ($sysop) echo "<td><i class=\"fa fa-check-square-o fa-lg\"></i></td>"; else echo "<td><i class=\"fa fa-minus-square-o fa-lg\"></i></td>";
+                        echo "<td><a href=\"edituser.php?id=$id\"><i class=\"fa fa-wrench fa-lg\"></i></a><a href=\"deleteuser.php?id=$id\"><i class=\"fa fa-trash-o fa-lg\"></i></a></td>";
                     echo "</tr>";
             }
         ?>
+            <tr>
+                <th colspan="5">&nbsp;</th>
+            </tr>
         </tbody>
     </table>
 </div>
