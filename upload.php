@@ -1,5 +1,4 @@
 <?php
-    ob_start();
     require 'connect.php';
     include 'header.php';
 
