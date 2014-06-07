@@ -65,6 +65,10 @@ p:last-child {
 	clear:both;
 }
 
+.divider {
+	display:inline;
+}
+
 .float-left {
 	float:left;
 	margin-right:10px;
