@@ -133,6 +133,14 @@ p:last-child {
 }
 
 /* Boxes */
+.info {
+	background:#EDEDED;
+	border-radius:5px;
+	padding:11px;
+	margin-bottom:10px;
+	overflow:hidden;
+}
+
 .succes {
 	background:#339966;
 	border-radius:5px;
@@ -267,6 +275,27 @@ input[type="button"]:hover, input[type="submit"]:hover, .button:hover {
 	font-size:0.9em;
 }
 
+.yes {
+	background:#339966;
+	border-radius:5px;
+	color:#fff;
+}
+
+.yes:hover, .yes:focus {
+	background:#2D8659;
+	color:#fff;
+}
+
+.no {
+	background:#990000;
+	color:#fff;
+}
+
+.no:hover, .no:focus {
+	background:#800000;
+	color:#fff;
+}
+
 /* Tables */
 table {
 	width:100%;
@@ -377,6 +406,11 @@ input::-moz-focus-inner{
 	
 	#menu span {
 		display:none;
+	}
+	
+	#menu .float-right {
+		float:none;
+		margin:0px;
 	}
 	
 	.bottom {

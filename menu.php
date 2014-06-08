@@ -8,11 +8,11 @@
     <?php
         if(isset($_SESSION['user']))
             {
-                echo "<li><a href=\"$basispad/images.php\"><i class=\"fa fa-folder-open fa-lg\"></i><span>Inzendingen</span></a></li>";
+                echo "<li class=\"float-right\"><a href=\"$basispad/images.php\"><i class=\"fa fa-folder-open fa-lg\"></i><span>Inzendingen</span></a></li>";
 
                 if($_SESSION['isSysop'] == true)
-                    echo "\n\t<li><a href=\"$basispad/admin\"><i class=\"fa fa-wrench fa-lg\"></i><span>Beheer</span></a></li>";
+                    echo "\n\t<li class=\"float-right\"><a href=\"$basispad/admin\"><i class=\"fa fa-wrench fa-lg\"></i><span>Beheer</span></a></li>";
             }
     ?>  
-    <li><?php if (isset($_SESSION['user'])) echo "<a href=\"$basispad/logout.php\"><i class=\"fa fa-sign-out fa-lg\"></i><span>Uitloggen</span></a>"; else echo "<a href=\"$basispad/login.php\"><i class=\"fa fa-sign-in fa-lg\"></i><span>Inloggen</span></a>"; ?></li>
+    <li class="float-right"><?php if (isset($_SESSION['user'])) echo "<a href=\"$basispad/logout.php\"><i class=\"fa fa-sign-out fa-lg\"></i><span>Uitloggen</span></a>"; else echo "<a href=\"$basispad/login.php\"><i class=\"fa fa-sign-in fa-lg\"></i><span>Inloggen</span></a>"; ?></li>
 </ul>   

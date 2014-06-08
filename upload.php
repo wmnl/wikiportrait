@@ -114,7 +114,7 @@
         <form method="post" enctype="multipart/form-data">
 
                 <div class="input-container">
-                    <label for="file"><i class="fa fa-file-image-o"></i>Bestand</label>
+                    <label for="file"><i class="fa fa-file-image-o"></i>Kies een bestand</label>
                     <input type="file" name="file" id="file" required="required" />
                 </div>
 
