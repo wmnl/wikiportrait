@@ -359,7 +359,7 @@ input::-moz-focus-inner{
 /* Responsive */
 @media only screen and (max-width:1024px) {
 	body {
-		font-size:95%;
+		font-size:90%;
 		-webkit-text-size-adjust:100%;
 	}
 	
@@ -404,7 +404,11 @@ input::-moz-focus-inner{
 		margin-right:0px;
 	}
 	
-	#menu span {
+	#menu div {
+		display:table-row;
+	}
+	
+	#menu a span {
 		display:none;
 	}
 	
