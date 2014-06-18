@@ -28,6 +28,7 @@
                 {
                     $query = sprintf("UPDATE images SET owner = %s WHERE id = %s", mysql_real_escape_string($_POST['owner']), mysql_real_escape_string($_GET['id']));
                     mysql_query($query);
+                    header("Refresh:0");
                 }
                 $row = mysql_fetch_assoc($result);
     ?>
