@@ -300,36 +300,53 @@ input[type="button"]:hover, input[type="submit"]:hover, .button:hover {
 table {
 	width:100%;
 	border-collapse:separate;
-	border-spacing:1px;
 	border-radius:5px;
-	text-align:left;
+	border-spacing:1px;
+	text-align:center;
 	background:#ddd;
-	border:0px;
 	table-layout:fixed;
 }
 
 thead th {
 	font-weight:400;
+	padding:10px;
+	overflow:hidden;
+	word-wrap:break-word;
+	font-size:100%;
+	height:auto;
 }
 
 td {
 	background:#fff;
-}
-
-td, th {
+	overflow:hidden;
 	padding:10px;
+	overflow:hidden;
+	word-wrap:break-word;
 }
 
-thead:first-child tr:first-child th:first-child, tbody:first-child tr:first-child td:first-child {
-	border-radius:5px 0 0 0;
+th {
+	font-size:0%;
+	height:5px;
 }
 
-thead:last-child tr:last-child th:first-child, tbody:last-child tr:last-child td:first-child {
-	border-radius:0 0 0 5px;
+thead:first-child tr:first-child th:first-child {
+	border-radius:5px 0px 0px 0px;
+}
+
+thead:first-child tr:first-child th:last-child {
+	border-radius:0px 5px 0px 0px;
+}
+
+tbody tr:last-child td:first-child {
+	border-radius:0px 0px 0px 5px;
+}
+
+tbody tr:last-child td:last-child {
+	border-radius:0px 0px 5px 0px;
 }
 
 /* detailpagina */
-.detail{
+.detail {
 	float:left;
 	margin:25px;
 	max-width:15%;
@@ -436,6 +453,7 @@ input::-moz-focus-inner{
 	.float-right {
 		float:none;
 		margin-left:0px;
+		margin-bottom:10px;
 	}
 }
 
