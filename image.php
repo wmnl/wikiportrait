@@ -2,6 +2,12 @@
     include 'header.php';
     checkLogin();
 ?>            
+
+<script>
+    function change(){
+        document.getElementById('owner').submit();
+    }
+</script>
 <div id="content">
     <h2>Ingestuurde foto's</h2>
     <?php
@@ -9,7 +15,7 @@
             echo "Er is geen ID opgegeven!";
         else
         {
-            $query = "SELECT * FROM images WHERE id = " . $_GET['id'];
+            $query = sprintf("SELECT * FROM images WHERE id = %s", mysql_real_escape_string($_GET['id']));
             $result = mysql_query($query);
 
             if (mysql_num_rows($result) == 0)
@@ -18,10 +24,29 @@
             }
             else
             {
+                if (isset($_POST['owner']))
+                {
+                    $query = sprintf("UPDATE images SET owner = %s WHERE id = %s", mysql_real_escape_string($_POST['owner']), mysql_real_escape_string($_GET['id']));
+                    mysql_query($query);
+                }
                 $row = mysql_fetch_assoc($result);
     ?>
     <h3><?php echo $row['title']; ?></h3>
 
+    <form method="post" id="owner" name="owner">
+        <select name="owner" onchange="change()">
+            <option value="0">----</option>
+            <?php
+                $query = "SELECT id, otrsname FROM users";
+                $result = mysql_query($query);
+                while ($rij = mysql_fetch_assoc($result))
+                {
+                    echo '<option value="' . $rij['id'] . '" ' . (($row['owner'] == $rij['id']) ? 'selected="selected"':"") . '>' . $rij['otrsname'] . '</option>';
+                }
+            ?>
+        </select>
+    </form>
+    
     <a href="uploads/<?php echo $row['filename']; ?>" target="_blank" ><img class="detail" src="uploads/<?php echo $row['filename'] ;?>"/></a>
 
     <ul>
