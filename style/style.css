@@ -127,6 +127,18 @@ p:last-child {
 	color:#fff;
 }
 
+#menu a:hover, #menu a:focus {
+	background:#005580;
+}
+
+#menu a:first-child {
+	border-bottom-left-radius:5px;
+}
+
+#menu a:last-child {
+	border-bottom-right-radius:5px;
+}
+
 #menu .fa {
 	color:#fff;
 	display:none;
@@ -265,7 +277,7 @@ input[type="file"]::-webkit-file-upload-button {
 	-webkit-appearance:none;
 }
 
-input[type="button"]:hover, input[type="submit"]:hover, .button:hover {
+input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus, .button:hover, .button:focus {
 	background:#ccc;
 	cursor:pointer;
 }
