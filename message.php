@@ -18,10 +18,10 @@
     
     $query = sprintf("SELECT * FROM messages
               LEFT JOIN users
-              ON users.id = '%s'
+              ON users.id = '%d'
               LEFT JOIN images
-              ON images.id = '%s'
-              WHERE messages.id = '%s'", mysql_real_escape_string($_SESSION['user']), mysql_real_escape_string($_GET['image']), mysql_real_escape_string($_GET['message']));
+              ON images.id = '%d'
+              WHERE messages.id = '%d'", mysql_real_escape_string($_SESSION['user']), mysql_real_escape_string($_GET['image']), mysql_real_escape_string($_GET['message']));
     $result = mysql_query($query);
     $row = mysql_fetch_assoc($result);
     

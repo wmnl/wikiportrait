@@ -55,8 +55,8 @@
 
         if (count($errors) == 0)
         {
-            $query = "INSERT INTO users(username, password, otrsname, email, isSysop, active)
-                         VALUES('$username', '" . sha1($password) . "', '$otrsname', '$email', $admin, 1)";
+            $query = sprintf("INSERT INTO users(username, password, otrsname, email, isSysop, active)
+                         VALUES('%s', '%s', '%s', '%s', %d, %d)", mysql_real_escape_string($username), mysql_real_escape_string(sha1($password)), mysql_real_escape_string($otrsname), mysql_real_escape_string($email), $admin, 1);
 
             mysql_query($query);
             header("Location:users.php");

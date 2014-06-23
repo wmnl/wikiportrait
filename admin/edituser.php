@@ -14,7 +14,7 @@
 <div id="content">
     <h2>Gebruiker bewerken</h2>
     <?php					
-            $query = "SELECT * FROM users WHERE id = $id";
+            $query = sprintf("SELECT * FROM users WHERE id = %d", mysql_real_escape_string($id)); 
             $result = mysql_query($query);
             if (mysql_num_rows($result) == 0)
             {
@@ -80,11 +80,11 @@
                     {
                         if (empty($_POST['password']))
                         {
-                            $query = "UPDATE users SET username = '$username', otrsname = '$otrsname', email = '$email', isSysop = $admin, active = $active WHERE id = $id";
+                            $query = sprintf("UPDATE users SET username = '%s', otrsname = '%s', email = '%s', isSysop = %d, active = %d WHERE id = %d", mysql_real_escape_string($username), mysql_real_escape_string($otrsname), mysql_real_escape_string($email), $admin, $active, $id);
                         }
                         else
                         {
-                            $query = "UPDATE users SET username = '$username', password =  '$password', otrsname = '$otrsname', email = '$email', isSysop = $admin, active = $active WHERE id = $id";
+                            $query = sprintf("UPDATE users SET username = '%s', password =  '%s', otrsname = '%s', email = '%s', isSysop = %d, active = %d WHERE id = %d", mysql_real_escape_string($username), mysql_real_escape_string($password), mysql_real_escape_string($otrsname), mysql_real_escape_string($email), $admin, $active, $id);
                         }
                         mysql_query($query);
                         header("Location: users.php");

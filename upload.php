@@ -56,8 +56,8 @@
 
             if (move_uploaded_file($file['tmp_name'], "uploads/" . $filename))
             {
-                $query = "INSERT INTO images(filename, title, source, name, email, license, ip, date, description, timestamp)"
-                                . "VALUES('$filename', '$title', '$source', '$name', '$email', 'CC-BY-SA 3.0', '$ip', '$date', '$desc', " . date_timestamp_get($time) . ");";
+                $query = sprintf("INSERT INTO images(filename, title, source, name, email, license, ip, date, description, timestamp)"
+                                . "VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d);", mysql_real_escape_string($filename), mysql_real_escape_string($title), mysql_real_escape_string($source), mysql_real_escape_string($name), mysql_real_escape_string($email), 'CC-BY-SA 3.0', mysql_real_escape_string($ip), mysql_real_escape_string($date), mysql_real_escape_string($desc), mysql_real_escape_string(date_timestamp_get($time)));
                 mysql_query($query);
                 echo $query;
 
@@ -72,8 +72,8 @@
 
                 $mail->From = $email;
                 $mail->FromName = $name;
-                $mail->addCustomHeader("X-OTRS-Queue:info-nl::wikiportret");  // add extra header for spamfilter exeption
-                $mail->addAddress("otrs-test@wikimedia.org", "Wikiportret");  // Add a recipient
+                //$mail->addCustomHeader("X-OTRS-Queue:info-nl::wikiportret");  // add extra header for spamfilter exeption
+                $mail->addAddress("jurgen@hotmail.lv", "Wikiportret");  // Add a recipient
                 $mail->addReplyTo($email, $name);
 
                 $mail->WordWrap = 50;								 // Set word wrap to 50 characters

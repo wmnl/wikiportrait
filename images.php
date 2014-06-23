@@ -22,7 +22,7 @@
 				setlocale(LC_ALL, 'nl_NL');
 				if (isset($_GET['page'])) { $page  = $_GET['page']; } else { $page = 1; }; 
 				$start_from = ($page-1) * 20;
-				$query = "SELECT * FROM images WHERE archived = 0 LIMIT $start_from, 20";
+				$query = sprintf("SELECT * FROM images WHERE archived = 0 LIMIT %d, 20", mysql_real_escape_string($start_from));
 				echo "<div class=\"succes\">" . $query . "</div>";
 				$result = mysql_query($query);
 

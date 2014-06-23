@@ -15,7 +15,7 @@
             echo "Er is geen ID opgegeven!";
         else
         {
-            $query = sprintf("SELECT * FROM images WHERE id = %s", mysql_real_escape_string($_GET['id']));
+            $query = sprintf("SELECT * FROM images WHERE id = %d", mysql_real_escape_string($_GET['id']));
             $result = mysql_query($query);
 
             if (mysql_num_rows($result) == 0)
@@ -26,7 +26,7 @@
             {
                 if (isset($_POST['owner']))
                 {
-                    $query = sprintf("UPDATE images SET owner = %s WHERE id = %s", mysql_real_escape_string($_POST['owner']), mysql_real_escape_string($_GET['id']));
+                    $query = sprintf("UPDATE images SET owner = %d WHERE id = %d", mysql_real_escape_string($_POST['owner']), mysql_real_escape_string($_GET['id']));
                     mysql_query($query);
                     header("Refresh:0");
                 }
@@ -69,7 +69,7 @@
             while($row = mysql_fetch_assoc($result))
             {
         ?>
-        <li><a href="message.php?id=<?php echo $row['id']; ?>"><?php echo $row['title']; ?></a></li>
+        <li><a href="message.php?message=<?php echo $row['id']; ?>&image=<?php echo mysql_real_escape_string($_GET['id']) ?>"><?php echo $row['title']; ?></a></li>
         <?php
             }
         ?>
