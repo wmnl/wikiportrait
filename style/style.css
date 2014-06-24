@@ -127,7 +127,7 @@ p:last-child {
 	color:#fff;
 }
 
-#menu a:hover, #menu a:focus {
+#menu a:hover, #menu a:focus, #menu .active {
 	background:#005580;
 }
 
@@ -151,7 +151,7 @@ p:last-child {
 
 .tabs li {
 	float:left;
-	margin-right:5px;
+	margin-right:10px;
 	margin-bottom:-1px;
 	list-style:none;
 }
