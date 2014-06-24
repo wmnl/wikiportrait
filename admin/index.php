@@ -4,7 +4,7 @@
 	checkAdmin();
 ?>
 
-			<div id="content" style="border-top-left-radius:0px;">
+			<div id="content">
 			
 				<h2>Beheer</h2>
 				

@@ -81,6 +81,10 @@ p:last-child {
 	display:block;
 }
 
+.center {
+	text-align:center;
+}
+
 .page {
 	margin-right:5px;
 }
@@ -148,6 +152,7 @@ p:last-child {
 /* Tabs */
 .tabs {
 	margin-top:20px;
+	margin-left:10px;
 }
 
 .tabs li {
@@ -155,10 +160,6 @@ p:last-child {
 	margin-right:10px;
 	margin-bottom:-1px;
 	list-style:none;
-}
-
-.tabs li:last-child {
-	margin-right:0px;
 }
 
 .tabs li a {
@@ -339,7 +340,7 @@ table {
 	border-collapse:separate;
 	border-radius:5px;
 	border-spacing:1px;
-	text-align:center;
+	text-align:left;
 	background:#ddd;
 	table-layout:fixed;
 }

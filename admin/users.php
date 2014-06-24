@@ -3,7 +3,7 @@
     include 'tabs.php';
     checkAdmin();
 ?>
-<div id="content" style="border-top-left-radius:0px;">
+<div id="content">
 
     <h2>Gebruikersbeheer</h2>
 
@@ -13,12 +13,12 @@
     <table>
         <thead>
             <tr>
-            	<th style="width:3em;">ID</th>
+            	<th class="center" style="width:3em;">ID</th>
                 <th>Gebruikersnaam</th>
                 <th>OTRS-naam</th>
                 <th>E-mailadres</th>
-                <th style="width:6em;">Beheerder</th>
-                <th style="width:6em;">Acties</th>
+                <th class="center" style="width:6em;">Beheerder</th>
+                <th class="center" style="width:6em;" colspan="2">Acties</th>
             </tr>
         </thead>
         <tbody>
@@ -34,12 +34,13 @@
                     $sysop = $row['isSysop'];
 
                     echo "<tr>";
-                    	echo "<td>$id</td>";
+                    	echo "<td class=\"center\">$id</td>";
                         echo "<td>$username</td>";
                         echo "<td>$otrsname</td>";
                         echo "<td>$email</td>";
-                        if ($sysop) echo "<td><i class=\"fa fa-check-square fa-lg\" style=\"color:#339966;\"></i></td>"; else echo "<td><i class=\"fa fa-minus-square fa-lg\" style=\"color:#990000;\"></i></td>";
-                        echo "<td><a href=\"edituser.php?id=$id\"><i class=\"fa fa-wrench fa-lg\"></i></a><a href=\"deleteuser.php?id=$id\"><i class=\"fa fa-trash-o fa-lg\"></i></a></td>";
+                        if ($sysop) echo "<td class=\"center\"><i class=\"fa fa-check-square fa-lg\" style=\"color:#339966;\"></i></td>"; else echo "<td class=\"center\"><i class=\"fa fa-minus-square fa-lg\" style=\"color:#990000;\"></i></td>";
+                        echo "<td class=\"center\"><a href=\"edituser.php?id=$id\"><i class=\"fa fa-wrench fa-lg\"></i></a></td>";
+                        echo "<td class=\"center\"><a href=\"deleteuser.php?id=$id\"><i class=\"fa fa-trash-o fa-lg\"></i></a></td>";
                     echo "</tr>";
             }
         ?>

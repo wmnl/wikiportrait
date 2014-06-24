@@ -3,7 +3,7 @@
 	include 'tabs.php';
 	checkAdmin();
 ?>			
-	<div id="content" style="border-top-left-radius:0px;">
+	<div id="content">
 		<h2>Berichtenbeheer</h2>
 		
 		<a href="adduser.php" class="button float-right"><i class="fa fa-plus-square fa-lg"></i>Bericht toevoegen</a>
@@ -14,7 +14,7 @@
 				<tr>
 					<th>Titel</th>
 					<th>Bericht</th>
-					<th style="width:6em;">Acties</th>
+					<th class="center" style="width:6em;" colspan="2">Acties</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -30,7 +30,8 @@
 					echo "<tr>";
 						echo "<td>$title</td>";
 						echo "<td style=\"padding:0px;\"><div style=\"height:200px; padding:10px; overflow:scroll;\">" . str_replace("\n", "<br />", $message) . "</div></td>";
-						echo "<td><a href=\"editmessage.php?id=$id\"><i class=\"fa fa-wrench fa-lg\"></i></a> <a href=\"deletemessage.php?id=$id\"><i class=\"fa fa-trash-o fa-lg\"></i></a></td>";
+						echo "<td class=\"center\"><a href=\"editmessage.php?id=$id\"><i class=\"fa fa-wrench fa-lg\"></i></a></td>";
+						echo "<td class=\"center\"><a href=\"deletemessage.php?id=$id\"><i class=\"fa fa-trash-o fa-lg\"></i></a></td>";
 					echo "</tr>";
 				}
 			?>
