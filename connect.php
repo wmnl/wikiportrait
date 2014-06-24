@@ -1,5 +1,5 @@
 <?php
-    mysql_connect('localhost', 'root');
-    mysql_select_db("wikiportret");
+    mysql_connect('$DBserver', '$DBuser', '$DBpassword');
+    mysql_select_db('$DBname');
     include 'config.php';
 ?>
