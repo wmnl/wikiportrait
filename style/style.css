@@ -115,17 +115,16 @@ p:last-child {
 	background:#006699;
 	border-bottom-left-radius:5px;
 	border-bottom-right-radius:5px;
-	margin-left:6px;
 }
 
 #menu li {
-	display:inline-block;
-	margin-left:-6px;
+	float:left;
+	list-style:none;
 }
 
 #menu a {
 	padding:10px;
-	display:inline-block;
+	display:block;
 	color:#fff;
 }
 
@@ -437,39 +436,26 @@ input::-moz-focus-inner{
 	
 	#menu ul {
 		display:table;
-		padding:10px 0px;
-		table-layout:fixed;
-		border-collapse:collapse;
 		width:100%;
 	}
 
 	#menu li {
 		display:table-cell;
+		float:none;
 		text-align:center;
-	}
-
-	#menu a {
-		color:#fff;
-		width:100%;
-		display:block;
 	}
 	
 	#menu .fa {
-		display:inline-block;
+		display:block;
 		margin-right:0px;
 	}
 	
-	#menu div {
-		display:table-row;
+	#menu a:hover, #menu a:focus, #menu .active a {
+		background:transparent;
 	}
 	
 	#menu a span {
 		display:none;
-	}
-	
-	#menu .float-right {
-		float:none;
-		margin:0px;
 	}
 	
 	.bottom {
