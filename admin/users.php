@@ -1,5 +1,6 @@
 <?php
     include '../header.php';
+    include 'tabs.php';
     checkAdmin();
 ?>
 <div id="content">

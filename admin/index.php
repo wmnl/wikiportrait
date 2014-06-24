@@ -1,14 +1,15 @@
 <?php
 	include '../header.php';
+	include 'tabs.php';
 	checkAdmin();
 ?>
 
-<ul class="tabs">
-	<li><a href="users.php">Beheer gebruikers</a></li>
-	<li><a href="messages.php">Beheer standaardmails</a></li>
-</ul>
-
-			<div id="content">
+			<div id="content" style="border-top-left-radius:0px;">
+			
+				<h2>Beheer</h2>
+				
+				<p>Kies boven een optie.</p>
+				
 			</div>
 <?php
 	include '../footer.php';

@@ -144,6 +144,25 @@ p:last-child {
 	display:none;
 }
 
+/* Tabs */
+.tabs {
+	margin:20px 0px -6px 0px;
+	padding:0px;
+}
+
+.tabs li {
+	display:inline-block;
+}
+
+.tabs li a {
+	font-size:0.9em;
+	background:white;
+	padding:10px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	margin-right:5px;
+}
+
 /* Boxes */
 .info {
 	background:#EDEDED;
