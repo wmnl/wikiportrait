@@ -74,7 +74,6 @@
                     $total_records = $row[0];
 
                     $total_pages = ceil($total_records / 20);
-                    $total_pages = 251;
                     
                     if ($total_pages > 10)
                     {
