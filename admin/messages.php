@@ -3,7 +3,7 @@
 	include 'tabs.php';
 	checkAdmin();
 ?>			
-	<div id="content">
+	<div id="content" style="border-top-left-radius:0px;">
 		<h2>Berichtenbeheer</h2>
 		
 		<a href="adduser.php" class="button float-right"><i class="fa fa-plus-square fa-lg"></i>Bericht toevoegen</a>

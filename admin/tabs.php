@@ -1,4 +1,5 @@
 <ul class="tabs">
-	<li><a href="users.php">Beheer gebruikers</a></li>
-	<li><a href="messages.php">Beheer standaardmails</a></li>
+	<li><a href="users.php">Gebruikersbeheer</a></li>
+	<li><a href="messages.php">Berichtenbeheer</a></li>
 </ul>
+<div class="clear"></div>

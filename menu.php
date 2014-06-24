@@ -15,4 +15,4 @@
     ?>  
     <li<?php if ($page == 'index') echo ' class="active"'?>><?php if (isset($_SESSION['user'])) echo "<a href=\"$basispad/logout.php\"><i class=\"fa fa-sign-out fa-lg\"></i><span>Uitloggen</span></a>"; else echo "<a href=\"$basispad/login.php\"><i class=\"fa fa-sign-in fa-lg\"></i><span>Inloggen</span></a>"; ?></li>
     </div>
-</ul>   
+</ul>

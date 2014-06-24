@@ -146,12 +146,18 @@ p:last-child {
 
 /* Tabs */
 .tabs {
-	margin:20px 0px -6px 0px;
-	padding:0px;
+	margin-top:20px;
 }
 
 .tabs li {
-	display:inline-block;
+	float:left;
+	margin-right:5px;
+	margin-bottom:-1px;
+	list-style:none;
+}
+
+.tabs li:last-child {
+	margin-right:0px;
 }
 
 .tabs li a {
@@ -160,7 +166,6 @@ p:last-child {
 	padding:10px;
 	border-top-left-radius:5px;
 	border-top-right-radius:5px;
-	margin-right:5px;
 }
 
 /* Boxes */
