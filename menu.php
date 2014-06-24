@@ -1,6 +1,3 @@
-<?php
-    $basispad = "/wikiportret";
-?>
 <ul>
     <li><a href="<?php echo $basispad; ?>/index.php"><i class="fa fa-home fa-lg"></i><span>Home</span></a></li>
     <li><a href="<?php echo $basispad; ?>/wizard.php"><i class="fa fa-cloud-upload fa-lg"></i><span>Insturen</span></a></li>
