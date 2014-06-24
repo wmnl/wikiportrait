@@ -1,8 +1,8 @@
 <?php $page = pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_FILENAME); ?>
 <ul>
-       <li<?php if ($page == 'index') echo ' class="active"'?>><a href="<?php echo $basispad; ?>/index.php"><i class="fa fa-home fa-lg"></i><span>Home</span></a></li><!--
-	--><li<?php if ($page == 'wizard') echo ' class="active"'?>><a href="<?php echo $basispad; ?>/wizard.php"><i class="fa fa-cloud-upload fa-lg"></i><span>Insturen</span></a></li><!--
-    --><li<?php if ($page == 'upload') echo ' class="active"'?>><a href="<?php echo $basispad; ?>/upload.php"><i class="fa fa-upload fa-lg"></i><span>Uploaden</span></a></li>
+    <li<?php if ($page == 'index') echo ' class="active"'?>><a href="<?php echo $basispad; ?>/index.php"><i class="fa fa-home fa-lg"></i><span>Home</span></a></li>
+    <li<?php if ($page == 'wizard') echo ' class="active"'?>><a href="<?php echo $basispad; ?>/wizard.php"><i class="fa fa-cloud-upload fa-lg"></i><span>Insturen</span></a></li>
+    <li<?php if ($page == 'upload') echo ' class="active"'?>><a href="<?php echo $basispad; ?>/upload.php"><i class="fa fa-upload fa-lg"></i><span>Uploaden</span></a></li>
     <div class="float-right">
     <?php
         if(isset($_SESSION['user']))

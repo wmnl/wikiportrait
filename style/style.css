@@ -115,10 +115,12 @@ p:last-child {
 	background:#006699;
 	border-bottom-left-radius:5px;
 	border-bottom-right-radius:5px;
+	margin-left:6px;
 }
 
 #menu li {
 	display:inline-block;
+	margin-left:-6px;
 }
 
 #menu a {
