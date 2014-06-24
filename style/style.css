@@ -127,7 +127,7 @@ p:last-child {
 	color:#fff;
 }
 
-#menu a:hover, #menu a:focus, #menu .active {
+#menu a:hover, #menu a:focus, #menu .active a {
 	background:#005580;
 }
 
