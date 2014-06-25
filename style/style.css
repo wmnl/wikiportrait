@@ -40,7 +40,7 @@ a {
 	border:0px;
 }
 
-a:hover, a:focus {
+a:hover, a:focus, .tabs .active a {
 	color:#000;
 }
 
@@ -114,6 +114,13 @@ p:last-child {
 	margin-top:10px;
 }
 
+.footer {
+	margin-top:10px;
+	text-align:center;
+	font-size:0.9em;
+	color:#aaa;
+}
+
 /*menu*/
 #menu ul {
 	background:#006699;
@@ -142,11 +149,6 @@ p:last-child {
 
 #menu a:last-child {
 	border-bottom-right-radius:5px;
-}
-
-#menu .fa {
-	color:#fff;
-	display:none;
 }
 
 /* Tabs */
@@ -236,7 +238,7 @@ label {
 }
 
 .fa {
-	margin-right:5px;
+	margin-right:10px;
 }
 
 input, textarea, select, .checkbox {
@@ -455,10 +457,22 @@ input::-moz-focus-inner{
 		background:transparent;
 	}
 	
-	#menu a span {
+	#menu a span, .tabs a span {
 		display:none;
 	}
 	
+	.tabs {
+		margin-top:10px;
+	}
+	
+	.tabs a {
+		display:block;
+	}
+	
+	.tabs li {
+		margin-bottom:-10px;
+	}
+		
 	.bottom {
 		display:table;
 		table-layout:fixed;
