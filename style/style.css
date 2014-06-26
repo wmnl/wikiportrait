@@ -15,6 +15,7 @@ html {
 	background:#e3e3e3;
 	color:#444;
 	font-size:120%;
+	overflow-y:scroll;
 }
 
 /* Tekstopmaak */
@@ -143,11 +144,11 @@ p:last-child {
 	background:#005580;
 }
 
-#menu a:first-child {
+#menu li a:first-child {
 	border-bottom-left-radius:5px;
 }
 
-#menu a:last-child {
+#menu li a:last-child {
 	border-bottom-right-radius:5px;
 }
 
@@ -258,8 +259,9 @@ input, textarea, select, .checkbox {
 }
 
 textarea {
-	height:300px;
+	height:200px;
 	resize:none;
+	-webkit-overflow-scrolling:touch;
 }
 
 input:focus, textarea:focus {
@@ -453,10 +455,6 @@ input::-moz-focus-inner{
 		margin-right:0px;
 	}
 	
-	#menu a:hover, #menu a:focus, #menu .active a {
-		background:transparent;
-	}
-	
 	#menu a span, .tabs a span {
 		display:none;
 	}
@@ -472,7 +470,7 @@ input::-moz-focus-inner{
 	.tabs li {
 		margin-bottom:-10px;
 	}
-		
+	
 	.bottom {
 		display:table;
 		table-layout:fixed;
