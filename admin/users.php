@@ -39,7 +39,7 @@
                         echo "<td>$otrsname</td>";
                         echo "<td>$email</td>";
                         if ($sysop) echo "<td class=\"center\"><i class=\"fa fa-check-square fa-lg\" style=\"color:#339966;\"></i></td>"; else echo "<td class=\"center\"><i class=\"fa fa-minus-square fa-lg\" style=\"color:#990000;\"></i></td>";
-                        echo "<td class=\"center\"><a href=\"edituser.php?id=$id\"><i class=\"fa fa-wrench fa-lg\"></i></a></td>";
+                        echo "<td class=\"center\"><a href=\"edituser.php?id=$id\"><i class=\"fa fa-pencil fa-lg\"></i></a></td>";
                         echo "<td class=\"center\"><a href=\"deleteuser.php?id=$id\"><i class=\"fa fa-trash-o fa-lg\"></i></a></td>";
                     echo "</tr>";
             }

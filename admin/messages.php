@@ -30,7 +30,7 @@
 					echo "<tr>";
 						echo "<td>$title</td>";
 						echo "<td><div style=\"height:200px; overflow-y:scroll; -webkit-overflow-scrolling:touch;\">" . str_replace("\n", "<br />", $message) . "</div></td>";
-						echo "<td class=\"center\"><a href=\"editmessage.php?id=$id\"><i class=\"fa fa-wrench fa-lg\"></i></a></td>";
+						echo "<td class=\"center\"><a href=\"editmessage.php?id=$id\"><i class=\"fa fa-pencil fa-lg\"></i></a></td>";
 						echo "<td class=\"center\"><a href=\"deletemessage.php?id=$id\"><i class=\"fa fa-trash-o fa-lg\"></i></a></td>";
 					echo "</tr>";
 				}
