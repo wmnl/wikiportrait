@@ -144,11 +144,11 @@ p:last-child {
 	background:#005580;
 }
 
-#menu li a:first-child {
+#menu a:first-of-type {
 	border-bottom-left-radius:5px;
 }
 
-#menu li a:last-child {
+#menu a:last-of-type {
 	border-bottom-right-radius:5px;
 }
 
@@ -246,6 +246,7 @@ input, textarea, select, .checkbox {
 	display:table-cell;
 	margin:0px;
 	width:100%;
+	-moz-appearance:none;
 	-webkit-appearance:none;
 	border-radius:0px;
 	padding:10px;
@@ -455,8 +456,9 @@ input::-moz-focus-inner{
 		margin-right:0px;
 	}
 	
-	#menu a span, .tabs a span {
+	#menu a span, .tabs a span, #menu .clear {
 		display:none;
+		clear:none;
 	}
 	
 	.tabs {
@@ -496,6 +498,6 @@ input::-moz-focus-inner{
 
 @media only screen and (min-width:1824px) {
 	#all {
-		width:50%;
+		width:60%;
 	}
 }
