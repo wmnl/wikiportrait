@@ -98,7 +98,7 @@
         <?php
             if (!empty($errors))
             {
-                echo "<div class=\"error\"><ul>";
+                echo "<div class=\"box red\"><ul>";
 
                 foreach ($errors as $error)
                 {
@@ -117,8 +117,6 @@
                     <label for="file"><i class="fa fa-file-image-o"></i>Kies een bestand</label>
                     <input type="file" name="file" id="file" required="required" accept="image/*" />
                 </div>
-
-                <h2>Informatie</h2>
 
                 <div class="input-container">
                     <label for="title"><i class="fa fa-eye fa-lg fa-fw"></i>Afgebeeld persoon</label>

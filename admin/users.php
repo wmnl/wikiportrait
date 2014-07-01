@@ -8,7 +8,7 @@
     <h2>Gebruikersbeheer</h2>
 
     <a href="adduser.php" class="button float-right"><i class="fa fa-plus-square fa-lg"></i>Nieuwe gebruiker</a>
-    <div class="succes">Welkom bij het gebruikersbeheer. Kies een gebruiker of maak een nieuwe gebruiker aan.</div>
+    <div class="box grey">Welkom bij het gebruikersbeheer. Kies een gebruiker of maak een nieuwe gebruiker aan.</div>
 
     <table>
         <thead>

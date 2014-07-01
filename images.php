@@ -40,7 +40,7 @@
                     if (isset($_GET['page'])) { $page  = $_GET['page']; } else { $page = 1; }; 
                     $start_from = ($page-1) * 20;
                     $query = sprintf("SELECT * FROM images WHERE archived = $archived ORDER BY id DESC LIMIT %d, 20", mysql_real_escape_string($start_from));
-                    echo "<div class=\"succes\">" . $query . "</div>";
+                    echo "<div class=\"box grey\">" . $query . "</div>";
                     $result = mysql_query($query);
 
                     while ($row = mysql_fetch_assoc($result))

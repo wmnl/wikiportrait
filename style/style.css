@@ -45,10 +45,6 @@ a:hover, a:focus, .tabs .active a {
 	color:#000;
 }
 
-img {
-	display:block;
-}
-
 p {
 	line-height:125%;
 	margin-bottom:10px;
@@ -58,7 +54,7 @@ p:last-child {
 	margin-bottom:0px;
 }
 
-#content li {
+#content ul {
 	margin-left:20px;
 }
 
@@ -71,15 +67,15 @@ p:last-child {
 }
 
 .float-left {
+	display:block;
 	float:left;
 	margin-right:10px;
-	display:block;
 }
 
 .float-right {
+	display:block;
 	float:right;
 	margin-left:10px;
-	display:block;
 }
 
 .center {
@@ -173,38 +169,6 @@ p:last-child {
 	border-top-right-radius:5px;
 }
 
-/* Boxes */
-.info {
-	background:#EDEDED;
-	border-radius:5px;
-	padding:11px;
-	margin-bottom:10px;
-	overflow:hidden;
-}
-
-.succes {
-	background:#339966;
-	border-radius:5px;
-	color:#fff;
-	padding:11px;
-	margin-bottom:10px;
-	overflow:hidden;
-}
-
-.error {
-	background:#990000;
-	border-radius:5px;
-	color:#fff;
-	padding:11px;
-	margin-bottom:10px;
-	overflow:hidden;
-}
-
-.error li {
-	line-height:125%;
-	margin-left:20px;
-}
-
 /* Uploadformulier */
 form {
 	width:100%;
@@ -271,12 +235,6 @@ input:focus, textarea:focus {
 	box-shadow:inset 0 0 1px 1px #e3e3e3;
 }
 
-textarea[readonly="readonly"]:focus {
-	-webkit-box-shadow:0px;
-	-moz-box-shadow:0px;
-	box-shadow:0px;	
-}
-
 input[type="checkbox"] {
 	-webkit-appearance:checkbox;
 	height:25px;
@@ -284,15 +242,21 @@ input[type="checkbox"] {
 	margin-right:-5px;
 }
 
-input[type="button"], input[type="submit"], .button {
+input[type="button"], input[type="submit"], button, .button {
 	padding:11px;
 	width:auto;
-	background:#ddd;
+	background:#006699;
 	border-radius:5px;
 	border:0px;
-	color:#444;
+	color:#fff;
 	display:inline-block;
 	line-height:middle;
+}
+
+input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus, .button:hover, .button:focus {
+	background:#005580;
+	cursor:pointer;
+	color:#fff;
 }
 
 input[type="file"] {
@@ -308,35 +272,9 @@ input[type="file"]::-webkit-file-upload-button {
 	-webkit-appearance:none;
 }
 
-input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus, .button:hover, .button:focus {
-	background:#ccc;
-	cursor:pointer;
-}
-
 .optional {
 	color:#888;
 	font-size:0.9em;
-}
-
-.yes {
-	background:#339966;
-	border-radius:5px;
-	color:#fff;
-}
-
-.yes:hover, .yes:focus {
-	background:#2D8659;
-	color:#fff;
-}
-
-.no {
-	background:#990000;
-	color:#fff;
-}
-
-.no:hover, .no:focus {
-	background:#800000;
-	color:#fff;
 }
 
 /* Tables */
@@ -388,116 +326,63 @@ tbody tr:last-child td:last-child {
 	border-radius:0px 0px 5px 0px;
 }
 
-/* detailpagina */
-.detail {
-	float:left;
-	margin:25px;
-	max-width:15%;
+/* Boxes */
+.box {
+	border-radius:5px;
+	padding:11px;
+	margin-bottom:10px;
+	overflow:hidden;
 }
 
-/* Firefox die soms doet te kutten */
+.grey {
+	background:#EDEDED;
+}
+
+.green {
+	background:#339966;
+	color:#fff;
+}
+
+a.green:hover, a.green:focus, a.green:hover, a.green:focus {
+	background:#2D8659;
+	color:#fff;
+}
+
+.red {
+	background:#990000;
+	color:#fff;
+}
+
+a.red:hover, a.red:focus {
+	background:#800000;
+	color:#fff;
+}
+
+.box li {
+	line-height:125%;
+	margin-left:20px;
+}
+
+/* Firefox-fixes */
 input::-moz-focus-inner{ 
 	border:0px; 
 }
 
-/* Placeholders */
-::-webkit-input-placeholder { /* WebKit browsers */
+/* Gelijke opmaak voor placeholders */
+::-webkit-input-placeholder {
 	color:#aaa;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+
+:-moz-placeholder {
 	color:#aaa;
 	opacity:1;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
+
+::-moz-placeholder {
 	color:#aaa;
 	opacity:1;
 }
-:-ms-input-placeholder { /* Internet Explorer 10+ */
+
+:-ms-input-placeholder {
 	color:#aaa;
-}
-
-/* Responsive */
-@media only screen and (max-width:1024px) {
-	body {
-		font-size:90%;
-		-webkit-text-size-adjust:100%;
-	}
-	
-	#all {
-		width:95%;
-	}
-	
-	label {
-		width:100%;
-		border-bottom-left-radius:0px;
-		border-top-right-radius:5px;
-		display:block;
-		padding:10px;
-	}
-	
-	input, select, textarea {
-		border-bottom-left-radius:5px;
-		border-top-right-radius:0px;
-	}
-	
-	#menu ul {
-		display:table;
-		width:100%;
-	}
-
-	#menu li {
-		display:table-cell;
-		float:none;
-		text-align:center;
-	}
-	
-	#menu .fa {
-		display:block;
-		margin-right:0px;
-	}
-	
-	#menu a span, .tabs a span, #menu .clear {
-		display:none;
-		clear:none;
-	}
-	
-	.tabs {
-		margin-top:10px;
-	}
-	
-	.tabs a {
-		display:block;
-	}
-	
-	.tabs li {
-		margin-bottom:-10px;
-	}
-	
-	.bottom {
-		display:table;
-		table-layout:fixed;
-		width:100%;
-	}
-	
-	.bottom .button, .divider, input[type="button"], input[type="submit"] {
-		display:table-cell;
-		text-align:center;
-		width:100%;
-	}
-	
-	.divider {
-		width:10px;
-	}
-	
-	.float-right {
-		float:none;
-		margin-left:0px;
-		margin-bottom:10px;
-	}
-}
-
-@media only screen and (min-width:1824px) {
-	#all {
-		width:60%;
-	}
 }

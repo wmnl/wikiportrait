@@ -25,6 +25,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="initial-scale=1.0" />
 		<link rel="stylesheet" type="text/css" href="<?php echo $basispad ?>/style/style.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo $basispad ?>/style/responsive.css" />
 	   	<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<title>Wikiportret - Stel uw foto's ter beschikking</title>
 	</head>

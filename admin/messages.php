@@ -6,8 +6,8 @@
 	<div id="content">
 		<h2>Berichtenbeheer</h2>
 		
-		<a href="addmessage.php" class="button float-right"><i class="fa fa-plus-square fa-lg"></i>Bericht toevoegen</a>
-		<div class="succes">Welkom bij het berichtenbeheer. Kies een bericht of voeg een nieuw bericht toe.</div>
+		<a href="addmessage.php" class="button blue float-right"><i class="fa fa-plus-square fa-lg"></i>Bericht toevoegen</a>
+		<div class="box grey">Welkom bij het berichtenbeheer. Kies een bericht of voeg een nieuw bericht toe.</div>
 		
 		<table>
 			<thead>

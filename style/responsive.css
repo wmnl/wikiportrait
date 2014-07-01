@@ -1,0 +1,84 @@
+@media only screen and (max-width:1024px) {
+	body {
+		font-size:90%;
+		-webkit-text-size-adjust:100%;
+	}
+	
+	#all {
+		width:95%;
+	}
+	
+	label {
+		width:100%;
+		border-bottom-left-radius:0px;
+		border-top-right-radius:5px;
+		display:block;
+		padding:10px;
+	}
+	
+	input, select, textarea {
+		border-bottom-left-radius:5px;
+		border-top-right-radius:0px;
+	}
+	
+	#menu ul {
+		display:table;
+		width:100%;
+	}
+
+	#menu li {
+		display:table-cell;
+		float:none;
+		text-align:center;
+	}
+	
+	#menu .fa {
+		display:block;
+		margin-right:0px;
+	}
+	
+	#menu a span, .tabs a span, #menu .clear {
+		display:none;
+		clear:none;
+	}
+	
+	.tabs {
+		margin-top:10px;
+	}
+	
+	.tabs a {
+		display:block;
+	}
+	
+	.tabs li {
+		margin-bottom:-10px;
+	}
+	
+	.bottom {
+		display:table;
+		table-layout:fixed;
+		width:100%;
+	}
+	
+	.bottom .button, .divider, input[type="button"], input[type="submit"] {
+		display:table-cell;
+		text-align:center;
+		width:100%;
+	}
+	
+	.divider {
+		width:10px;
+	}
+	
+	.float-right {
+		float:none;
+		margin-left:0px;
+		margin-bottom:10px;
+	}
+}
+
+@media only screen and (min-width:1824px) {
+	#all {
+		width:60%;
+	}
+}
