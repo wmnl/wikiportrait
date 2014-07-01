@@ -11,7 +11,12 @@
         else
         {
             $query = sprintf("SELECT * FROM images WHERE id = %d", mysql_real_escape_string($_GET['image']));
-            $row = mysql_fetch_assoc(mysql_query($query));
+            $result = mysql_query($query);
+            $row = mysql_fetch_assoc($result);
+            if (mysql_num_rows($result) == 0)
+            {
+                echo "<div class=\"error\">Geen afbeelding gevonden!</div>";
+            }
             
             
     ?>
