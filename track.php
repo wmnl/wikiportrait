@@ -1,8 +1,20 @@
 <?php
     include 'header.php';
-    ?>
+?>
 <div id="content">
     <h2>Inzending volgen</h2>
+    <?php
+        if (!isset($_GET['image']) || !isset($_GET['key']))
+        {
+            echo "<div class=\"error\">Geen afbeelding gevonden!</div>";
+        }
+        else
+        {
+            $query = sprintf("SELECT * FROM images WHERE id = %d", mysql_real_escape_string($_GET['image']));
+            $row = mysql_fetch_assoc(mysql_query($query));
+            
+            
+    ?>
         <h3>Kriesant</h3>
         <div class="error">
             Status:
@@ -20,6 +32,9 @@
     </ul>
     
     <br clear="all" />
+    <?php
+        }
+    ?>
 </div>
 <?php
     include 'footer.php';
