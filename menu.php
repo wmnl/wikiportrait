@@ -9,7 +9,7 @@
                 echo "<li" .(($page == 'images')?' class="active"':""). " ><a href=\"$basispad/images.php\"><i class=\"fa fa-folder-open\"></i><span>Inzendingen</span></a></li>";
 
                 if($_SESSION['isSysop'] == true)
-                    echo "\n\t<li" .(($page == 'admin')?' class="active"':""). "><a href=\"$basispad/admin\"><i class=\"fa fa-wrench\"></i><span>Beheer</span></a></li>";
+                    echo "\n\t<li" .(($page == 'users')?' class="active"':""). "><a href=\"$basispad/admin/users.php\"><i class=\"fa fa-wrench\"></i><span>Beheer</span></a></li>";
             }
     ?>  
     <li<?php if ($page == 'login') echo ' class="active"'?>><?php if (isset($_SESSION['user'])) echo "<a href=\"$basispad/logout.php\"><i class=\"fa fa-sign-out\"></i><span>Uitloggen</span></a>"; else echo "<a href=\"$basispad/login.php\"><i class=\"fa fa-sign-in\"></i><span>Inloggen</span></a>"; ?></li>
