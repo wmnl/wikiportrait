@@ -1,5 +1,5 @@
 <?php
-	require '../connect.php';   
+	require '../config/connect.php';   
         include '../header.php';
 	checkAdmin();
         if (isset($_GET['id']))
