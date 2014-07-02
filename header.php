@@ -32,7 +32,7 @@
 	<body>
 		<div id="all">
 			<div id="header">
-				<h1>Wikiportret</h1>
+				<h1><a href="<?php echo $basispad; ?>/index.php">Wikiportret</a></h1>
 			</div>
 			
 			<div id="menu">

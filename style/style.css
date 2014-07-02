@@ -45,7 +45,7 @@ a {
 	text-decoration:none;
 }
 
-a:hover, a:focus, .tabs .active a {
+a:hover, a:focus, .tabs .active a, #header a {
 	color:#000;
 }
 
