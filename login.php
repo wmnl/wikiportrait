@@ -77,7 +77,7 @@
         <form method="post">
             <div class="input-container">
                 <label for="username"><i class="fa fa-user fa-lg fa-fw"></i>Gebruikersnaam</label>
-                <input type="text" name="username" id="username" />
+                <input type="text" name="username" id="username" autocorrect="off"/>
             </div>
 
             <div class="input-container">
