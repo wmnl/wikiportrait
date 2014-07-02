@@ -347,7 +347,7 @@ tbody tr:last-child td:last-child {
 	color:#fff;
 }
 
-a.green:hover, a.green:focus, a.green:hover, a.green:focus {
+a.green:hover, a.green:focus, button.green:hover, button.green:focus {
 	background:#2D8659;
 	color:#fff;
 }

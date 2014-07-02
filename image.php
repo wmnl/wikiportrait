@@ -35,27 +35,6 @@
 
 	<a href="uploads/<?php echo $row['filename']; ?>" target="_blank" class="float-right"><img src="uploads/<?php echo $row['filename'] ;?>" style="max-width:15em;" /></a>
 
-	<form method="post" id="owner" name="owner" style="width:50%; margin-bottom:10px;">
-		<div class="input-container">
-		
-		<label for="owner"><i class="fa fa-user-md fa-lg fa-fw"></i>Eigenaar</label>
-		
-		<select name="owner" id="setowner" onchange="change()">
-			<option value="0">----</option>
-			<?php
-				$query = "SELECT id, otrsname FROM users";
-				$result = mysql_query($query);
-				while ($rij = mysql_fetch_assoc($result))
-				{
-					echo '<option value="' . $rij['id'] . '" ' . (($row['owner'] == $rij['id']) ? 'selected="selected"':"") . '>' . $rij['otrsname'] . '</option>';
-				}
-			?>
-		</select>
-                <div class="button green" onclick="document.getElementById('setowner').value = <?php echo $_SESSION['user'] ?>; change()">Aan mij toewijzen</div>
-
-		</div>
-	</form>
-
 	<h3>Informatie</h3>
 
 	<p>
@@ -87,6 +66,29 @@
 			?>
 		</ul>
 	</p>
+
+	<h3>Opties</h3>
+	
+	<form method="post" id="owner" name="owner">
+		<div class="input-container bottom">
+		
+		<label for="owner"><i class="fa fa-user-md fa-lg fa-fw"></i>Eigenaar</label>
+		
+		<select name="owner" id="setowner" onchange="change()" style="width:75%; border-right:0px; border-top-right-radius:0px; border-bottom-right-radius:0px;">
+			<option value="0">----</option>
+			<?php
+				$query = "SELECT id, otrsname FROM users";
+				$result = mysql_query($query);
+				while ($rij = mysql_fetch_assoc($result))
+				{
+					echo '<option value="' . $rij['id'] . '" ' . (($row['owner'] == $rij['id']) ? 'selected="selected"':"") . '>' . $rij['otrsname'] . '</option>';
+				}
+			?>
+		</select>
+		<button class="button green" onclick="document.getElementById('setowner').value = <?php echo $_SESSION['user'] ?>; change()" style="width:25%; display:table-cell; border-top-left-radius:0px; border-bottom-left-radius:0px;">Aan mij toewijzen</button>
+
+		</div>
+	</form>
 
 	<?php
 			}
