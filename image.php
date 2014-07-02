@@ -10,6 +10,7 @@
 </script>
 <div id="content">
 	<?php
+		setlocale(LC_ALL, 'nl_NL');
 		if (!isset($_GET['id']))
 			echo "Er is geen ID opgegeven!";
 		else
@@ -43,7 +44,7 @@
 			<li>Auteur: <?php echo $row['source']; ?></li>
 			<li>Naam uploader: <?php echo $row['name']; ?></li>
 			<li>IP uploader: <?php echo $row['ip']; ?></li>
-			<li>Geüpload op: <?php echo gmdate("d F Y H:i:s", $row['timestamp']) ?></li>
+			<li>Geüpload op: <?php echo strftime("%e %B %Y om %H:%I:%S", $row['timestamp']) ?></li>
 			<li>Beschrijving: <?php echo $row['description'];?></li>
 		</ul>
 	</p>
@@ -70,22 +71,30 @@
 	<h3>Opties</h3>
 	
 	<form method="post" id="owner" name="owner">
+	
+		<div class="input-container">
+			<label for="done"><i class="fa fa-check fa-lg fa-fw"></i>Afgehandeld</label>
+			<div class="checkbox">
+					<input type="checkbox" name="done" id="done" /><label for="admin">Ja</label>
+			</div>
+		</div>
+	
 		<div class="input-container bottom">
 		
-		<label for="owner"><i class="fa fa-user-md fa-lg fa-fw"></i>Eigenaar</label>
-		
-		<select name="owner" id="setowner" onchange="change()" style="width:75%; border-right:0px; border-top-right-radius:0px; border-bottom-right-radius:0px;">
-			<option value="0">----</option>
-			<?php
-				$query = "SELECT id, otrsname FROM users";
-				$result = mysql_query($query);
-				while ($rij = mysql_fetch_assoc($result))
-				{
-					echo '<option value="' . $rij['id'] . '" ' . (($row['owner'] == $rij['id']) ? 'selected="selected"':"") . '>' . $rij['otrsname'] . '</option>';
-				}
-			?>
-		</select>
-		<button class="button green" onclick="document.getElementById('setowner').value = <?php echo $_SESSION['user'] ?>; change()" style="width:25%; display:table-cell; border-top-left-radius:0px; border-bottom-left-radius:0px;">Aan mij toewijzen</button>
+			<label for="owner"><i class="fa fa-user-md fa-lg fa-fw"></i>Eigenaar</label>
+			
+			<select name="owner" id="setowner" onchange="change()" style="width:70%; border-right:0px; border-top-right-radius:0px; border-bottom-right-radius:0px;">
+				<option value="0">----</option>
+				<?php
+					$query = "SELECT id, otrsname FROM users";
+					$result = mysql_query($query);
+					while ($rij = mysql_fetch_assoc($result))
+					{
+						echo '<option value="' . $rij['id'] . '" ' . (($row['owner'] == $rij['id']) ? 'selected="selected"':"") . '>' . $rij['otrsname'] . '</option>';
+					}
+				?>
+			</select>
+			<button name="claim" class="button green" onclick="document.getElementById('setowner').value = <?php echo $_SESSION['user'] ?>; change()" style="width:30%; display:table-cell; border-top-left-radius:0px; border-bottom-left-radius:0px;"><i class="fa fa-bolt fa-lg"></i><span>Aan mij toewijzen</span></button>
 
 		</div>
 	</form>

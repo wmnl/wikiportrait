@@ -45,10 +45,11 @@
 		margin-right:0px;
 	}
 	
-	#menu a span, .tabs a span, #menu .clear {
+	#menu a span, .tabs a span, #menu .clear, button span {
 		display:none;
 		clear:none;
 	}
+	
 	
 	.tabs {
 		margin-top:10px;
@@ -72,6 +73,10 @@
 		display:table-cell;
 		text-align:center;
 		width:100%;
+	}
+	
+	button[name="claim"] {
+		border-top-right-radius:0px;
 	}
 	
 	.divider {
