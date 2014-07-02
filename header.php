@@ -1,7 +1,7 @@
 <?php 
 	ob_start();
 	session_start();
-	require 'connect.php';
+	require 'config/connect.php';
 	$basispad = "/wikiportret";
 	
 	function checkLogin(){
