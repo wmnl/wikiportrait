@@ -40,7 +40,7 @@
 		
 		<label for="owner"><i class="fa fa-user-md fa-lg fa-fw"></i>Eigenaar</label>
 		
-		<select name="owner" onchange="change()">
+		<select name="owner" id="setowner" onchange="change()">
 			<option value="0">----</option>
 			<?php
 				$query = "SELECT id, otrsname FROM users";
@@ -51,6 +51,7 @@
 				}
 			?>
 		</select>
+                <div class="button green" onclick="document.getElementById('setowner').value = <?php echo $_SESSION['user'] ?>; change()">Aan mij toewijzen</div>
 
 		</div>
 	</form>
