@@ -241,9 +241,9 @@ input:focus, textarea:focus {
 
 input[type="checkbox"] {
 	-webkit-appearance:checkbox;
+	width:auto;
 	height:25px;
-	width:25px;
-	margin-right:-5px;
+	border-radius:0px;
 }
 
 input[type="button"], input[type="submit"], button, .button {

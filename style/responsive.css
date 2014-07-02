@@ -21,6 +21,14 @@
 		border-top-right-radius:0px;
 	}
 	
+	input[type="checkbox"] {
+		margin-right:10px;
+	}
+	
+	.checkbox label {
+		padding:0px;
+	}
+	
 	#menu ul {
 		display:table;
 		width:100%;
