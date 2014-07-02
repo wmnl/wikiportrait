@@ -9,7 +9,7 @@
         <?php
             if (!empty($errors))
             {
-                echo "<div class=\"error\"><ul>";
+                echo "<div class=\"box red\"><ul>";
 
                 foreach ($errors as $error)
                 {
@@ -65,7 +65,7 @@
                         }
                         else
                         {
-                            echo "<div class=\"error\"><ul>";
+                            echo "<div class=\"box red\"><ul>";
                             echo "<li>Gebruikersnaam en/of wachtwoord incorrect</li>";
                             echo "</ul></div>";
                         }  
