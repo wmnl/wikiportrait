@@ -1,5 +1,6 @@
 <?php
     require 'config/connect.php';
+    require 'config/config.php';
     include 'header.php';
 
     if (isset($_POST['postback']))
@@ -67,13 +68,13 @@
 
                 $mail->CharSet = "UTF-8";
                 $mail->isSMTP();									  // Set mailer to use SMTP
-                $mail->Host = "smtp.upcmail.nl";					  // Specify main and backup server
+                $mail->Host = $MailSTMPhost;					  // Specify main and backup server
                 $mail->SMTPAuth = false;							  // Enable SMTP authentication
 
                 $mail->From = $email;
                 $mail->FromName = $name;
                 //$mail->addCustomHeader("X-OTRS-Queue:info-nl::wikiportret");  // add extra header for spamfilter exeption
-                $mail->addAddress("jurgen@hotmail.lv", "Wikiportret");  // Add a recipient
+                $mail->addAddress($MailRecipient, $MailRecipientName);  // Add a recipient
                 $mail->addReplyTo($email, $name);
 
                 $mail->WordWrap = 50;								 // Set word wrap to 50 characters
