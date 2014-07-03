@@ -1,5 +1,5 @@
 <?php
-    require 'connect.php';
+    require 'config/connect.php';
     include 'header.php';
 
     if (isset($_POST['postback']))
