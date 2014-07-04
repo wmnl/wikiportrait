@@ -28,7 +28,7 @@
 	$templates = array("%%name%%", "%%title%%", "%%otrsname%%");
 	$replace = array($row['name'], $row['title'], $row['otrsname']);
 	?>
-	<textarea><?php echo str_replace($templates, $replace, $row['message']); ?></textarea>
+	<textarea onclick="this.focus();this.select()"><?php echo str_replace($templates, $replace, $row['message']); ?></textarea>
 	<?php
 		}
 	?>
