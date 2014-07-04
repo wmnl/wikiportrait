@@ -144,14 +144,6 @@ p:last-child {
 	background:#005580;
 }
 
-#menu a:first-of-type {
-	border-bottom-left-radius:5px;
-}
-
-#menu a:last-of-type {
-	border-bottom-right-radius:5px;
-}
-
 /* Tabs */
 .tabs {
 	margin-top:20px;
