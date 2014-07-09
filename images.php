@@ -43,8 +43,7 @@
                     echo "<div class=\"box grey\">" . $query . "</div>";
                     $result = mysql_query($query);
 
-                    while ($row = mysql_fetch_assoc($result))
-                    {
+                    while ($row = mysql_fetch_assoc($result)):
                         $id = $row['id'];
                         $filename = $row['filename'];
                         $title = $row['title'];
@@ -60,7 +59,7 @@
                 </tr>
 
                 <?php
-                    }
+		    endwhile;
                 ?>
             </tbody>
 	</table>

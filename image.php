@@ -3,11 +3,6 @@
 	checkLogin();
 ?>			
 
-<script>
-	function change(){
-		document.getElementById('owner').submit();
-	}
-</script>
 <div id="content">
 	<?php
 		setlocale(LC_ALL, 'nl_NL');
@@ -24,11 +19,10 @@
 			}
 			else
 			{
-				if (isset($_POST['owner']))
+				if (isset($_POST['postback']))
 				{
 					$query = sprintf("UPDATE images SET owner = %d WHERE id = %d", mysql_real_escape_string($_POST['owner']), mysql_real_escape_string($_GET['id']));
 					mysql_query($query);
-					header("Refresh:0");
 				}
 				$row = mysql_fetch_assoc($result);
 	?>
@@ -79,11 +73,11 @@
 			</div>
 		</div>
 	
-		<div class="input-container bottom">
+		<div class="input-container">
 		
 			<label for="owner"><i class="fa fa-user-md fa-lg fa-fw"></i>Eigenaar</label>
 			
-			<select name="owner" id="setowner" onchange="change()" style="width:70%; border-right:0px; border-top-right-radius:0px; border-bottom-right-radius:0px;">
+			<select name="owner" id="setowner" style="width:70%; border-right:0px; border-top-right-radius:0px; border-bottom-right-radius:0px;">
 				<option value="0">----</option>
 				<?php
 					$query = "SELECT id, otrsname FROM users";
@@ -94,9 +88,12 @@
 					}
 				?>
 			</select>
-			<button name="claim" class="button green" onclick="document.getElementById('setowner').value = <?php echo $_SESSION['user'] ?>; change()" style="width:30%; display:table-cell; border-top-left-radius:0px; border-bottom-left-radius:0px;"><i class="fa fa-bolt fa-lg"></i><span>Aan mij toewijzen</span></button>
-
+			<button name="claim" class="button green" onclick="document.getElementById('setowner').value = <?php echo $_SESSION['user'] ?>" style="width:30%; display:table-cell; border-top-left-radius:0px; border-bottom-left-radius:0px;"><i class="fa fa-bolt fa-lg"></i><span>Aan mij toewijzen</span></button>
 		</div>
+	    
+	    <div class="input-container bottom">
+		<input class="button grey float-right" type="submit" name="postback" value="Opslaan" />
+	    </div>
 	</form>
 
 	<?php
