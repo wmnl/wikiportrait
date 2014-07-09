@@ -21,25 +21,31 @@
 			{
 				if (isset($_POST['postback']))
 				{
-					$query = sprintf("UPDATE images SET owner = %d WHERE id = %d", mysql_real_escape_string($_POST['owner']), mysql_real_escape_string($_GET['id']));
-					mysql_query($query);
+				    if (isset($_POST['done']))
+					$done = 1;
+				    else
+					$done = 0;
+				    
+				    $query = sprintf("UPDATE images SET owner = %d, archived = %d WHERE id = %d", mysql_real_escape_string($_POST['owner']), $done , mysql_real_escape_string($_GET['id']));
+				    mysql_query($query);
+				    echo $query;
 				}
 				$row = mysql_fetch_assoc($result);
 	?>
-	<h2>Ingestuurde foto: <?php echo $row['title']; ?></h2>
+	<h2>Ingestuurde foto: <?= $row['title']; ?></h2>
 
-	<a href="uploads/<?php echo $row['filename']; ?>" target="_blank" class="float-right"><img src="uploads/<?php echo $row['filename'] ;?>" style="max-width:15em;" /></a>
+	<a href="uploads/<?= $row['filename']; ?>" target="_blank" class="float-right"><img src="uploads/<?= $row['filename'] ;?>" style="max-width:15em;" /></a>
 
 	<h3>Informatie</h3>
 
 	<p>
 		<ul>
-			<li>Titel: <?php echo $row['title']; ?></li>
-			<li>Auteur: <?php echo $row['source']; ?></li>
-			<li>Naam uploader: <?php echo $row['name']; ?></li>
-			<li>IP uploader: <?php echo $row['ip']; ?></li>
-			<li>Geüpload op: <?php echo strftime("%e %B %Y om %H:%I:%S", $row['timestamp']) ?></li>
-			<li>Beschrijving: <?php echo $row['description'];?></li>
+			<li>Titel: <?= $row['title']; ?></li>
+			<li>Auteur: <?= $row['source']; ?></li>
+			<li>Naam uploader: <?= $row['name']; ?></li>
+			<li>IP uploader: <?= $row['ip']; ?></li>
+			<li>Geüpload op: <?= strftime("%e %B %Y om %H:%I:%S", $row['timestamp']) ?></li>
+			<li>Beschrijving: <?= $row['description'];?></li>
 		</ul>
 	</p>
 
@@ -47,7 +53,7 @@
 	
 	<p>
 		<ul>
-			<li><a href="https://commons.wikimedia.org/wiki/Special:Upload?&uploadformstyle=basicwp&wpUploadDescription={{Information%0A|Description={{nl|1=<?php echo $row['title'] ?>}}%0A|Source=wikiportret.nl%0A|Permission=CC-BY-SA 3.0%0A|Date=<?php echo $row['date']; ?>%0A|Author=<?php echo $row['source']; ?>%0A}}%0A{{wikiportrait|}}" target="_blank">Uploaden naar Commons!</a></li>
+			<li><a href="https://commons.wikimedia.org/wiki/Special:Upload?&uploadformstyle=basicwp&wpUploadDescription={{Information%0A|Description={{nl|1=<?= $row['title'] ?>}}%0A|Source=wikiportret.nl%0A|Permission=CC-BY-SA 3.0%0A|Date=<?= $row['date']; ?>%0A|Author=<?= $row['source']; ?>%0A}}%0A{{wikiportrait|}}" target="_blank">Uploaden naar Commons!</a></li>
 			<?php
 				$query = "SELECT * FROM messages";
 				$result = mysql_query($query);
@@ -55,7 +61,7 @@
 				while($row = mysql_fetch_assoc($result))
 				{
 			?>
-			<li><a href="message.php?message=<?php echo $row['id']; ?>&image=<?php echo mysql_real_escape_string($_GET['id']) ?>"><?php echo $row['title']; ?></a></li>
+			<li><a href="message.php?message=<?= $row['id']; ?>&image=<?= mysql_real_escape_string($_GET['id']) ?>"><?= $row['title'] ?></a></li>
 			<?php
 				}
 			?>
@@ -80,15 +86,19 @@
 			<select name="owner" id="setowner" style="width:70%; border-right:0px; border-top-right-radius:0px; border-bottom-right-radius:0px;">
 				<option value="0">----</option>
 				<?php
-					$query = "SELECT id, otrsname FROM users";
-					$result = mysql_query($query);
-					while ($rij = mysql_fetch_assoc($result))
+					$query2 = "SELECT id, otrsname FROM users";
+					$result2 = mysql_query($query2);
+					while ($rij = mysql_fetch_assoc($result2))
 					{
-						echo '<option value="' . $rij['id'] . '" ' . (($row['owner'] == $rij['id']) ? 'selected="selected"':"") . '>' . $rij['otrsname'] . '</option>';
+					    $selected = "";
+					    if ($row['owner'] == $rij['id'])
+						$selected = "selected=\"selected\"";
+					    
+					    echo "<option value='" . $rij['id'] . "' $selected>" . $rij['otrsname'] . "</option>";
 					}
 				?>
 			</select>
-			<button name="claim" class="button green" onclick="document.getElementById('setowner').value = <?php echo $_SESSION['user'] ?>" style="width:30%; display:table-cell; border-top-left-radius:0px; border-bottom-left-radius:0px;"><i class="fa fa-bolt fa-lg"></i><span>Aan mij toewijzen</span></button>
+			<button type="button" name="claim" class="button green" onclick="document.getElementById('setowner').value = <?= $_SESSION['user'] ?>" style="width:30%; display:table-cell; border-top-left-radius:0px; border-bottom-left-radius:0px;"><i class="fa fa-bolt fa-lg"></i><span>Aan mij toewijzen</span></button>
 		</div>
 	    
 	    <div class="input-container bottom">
