@@ -6,7 +6,7 @@
     if (isset($_POST['postback']))
     {
         $errors = array();
-        $allowedext = array("image/png", "image/gif", "image/jpeg");
+        $allowedext = array("image/png", "image/gif", "image/jpeg", "image/bmp", "image/pjpeg");
 
         $file = $_FILES['file'];
         $title = $_POST['title'];
@@ -24,7 +24,7 @@
         elseif (!in_array($file['type'], $allowedext))
         {
             array_push($errors, "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund");
-        }
+        } 
 
         if (empty($title)) 
         {
@@ -67,14 +67,17 @@
                 $mail = new PHPMailer;
 
                 $mail->CharSet = "UTF-8";
-                $mail->isSMTP();									  // Set mailer to use SMTP
-                $mail->Host = $MailSTMPhost;					  // Specify main and backup server
-                $mail->SMTPAuth = false;							  // Enable SMTP authentication
+                $mail->isSMTP();								  // Set mailer to use SMTP
 
-                $mail->From = $email;
-                $mail->FromName = $name;
-                //$mail->addCustomHeader("X-OTRS-Queue:info-nl::wikiportret");  // add extra header for spamfilter exeption
-                $mail->addAddress($MailRecipient, $MailRecipientName);  // Add a recipient
+		$mail->SMTPAuth   = true;                  // enable SMTP authentication
+		$mail->Host       = "mail.wikidate.nl";    // sets the SMTP server
+		$mail->Port       = 587;                   // set the SMTP port for the GMAIL server
+		$mail->Username   = "info@wikidate.nl";    // SMTP account username
+		$mail->Password   = "henk";                // SMTP account password
+
+                $mail->From = 'wikidate@axc.nl';
+                $mail->FromName = 'Wikiportret';
+                $mail->addAddress('otrs-test@wikimedia.org', 'otrs-test');			  // Add a recipient
                 $mail->addReplyTo($email, $name);
 
                 $mail->WordWrap = 50;								 // Set word wrap to 50 characters
@@ -90,7 +93,7 @@
                    exit;
                 }
 
-                header("Location:wizard.php?question=success");
+                header("Location:wizard.php?question=success&id=" . mysql_insert_id());
             }
         }
     }
