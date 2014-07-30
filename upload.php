@@ -83,9 +83,20 @@
                 $mail->WordWrap = 50;								 // Set word wrap to 50 characters
                 $mail->isHTML(true);								  // Set email format to HTML
 
-                $mail->Subject = $title . " is geüpload op Wikiportret";
-                $mail->Body	= "Lorem ipsum dolar cit amet";
-                $mail->AltBody = "Lorem ipsum dolar cit amet zonder HTML";
+                $mail->Subject = "[Wikiportret] " . $title . " is geüpload op Wikiportret";
+                $mail->Body	= "Beste OTRS-vrijwillger, <br />
+zojuist is er op http://www.wikiportret.nl een nieuwe foto geupload. <br />
+Deze foto heeft als titel '$title', gemaakt door '$source' onder de licentie 'CC-BY-SA 3.0' met als omschrijving '$desc'<br />
+De uploader heeft het volgende IP-adres: '$ip'<br />
+<br />
+Je kunt de foto bekijken op Wikiportret en de foto daar afwijzen, of een tekst genereren die je kan copy-pasten om een e-mail te schrijven.<br />
+<br />
+Klik op deze link:<br />
+http://www.wikidate.nl/wikiportret/image.php?id=" . mysql_insert_id() . "<br />
+<br />
+Als je vragen hebt over de uploadwizard kun je terecht bij JurgenNL via http://nl.wikipedia.org/wiki/Gebruiker:JurgenNL of eventueel via jurgennl.wp@gmail.com.<br />
+<br />
+Al vast heel erg bedankt voor je medewerking!<br />";
 
                 if(!$mail->send()) {
                    echo "Message could not be sent.";
