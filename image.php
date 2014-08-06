@@ -34,7 +34,7 @@
 	?>
 	<h2>Ingestuurde foto: <?= $row['title']; ?></h2>
 
-	<a href="uploads/<?= $row['filename']; ?>" target="_blank" class="float-right"><img src="uploads/<?= $row['filename'] ;?>" style="max-width:15em;" /></a>
+	<a href="uploads/<?= $row['filename']; ?>" target="_blank" class="float-right"><img src="uploads/<?= $row['filename'] ;?>" style="max-width:10em;" /></a>
 
 	<h3>Informatie</h3>
 
