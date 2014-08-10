@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `title` varchar(255) NOT NULL,
   `message` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
