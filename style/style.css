@@ -249,7 +249,7 @@ input[type="button"], input[type="submit"], button, .button {
 	line-height:middle;
 }
 
-input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus, .button:hover, .button:focus {
+input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus, .button:hover, .button:focus, button:hover, button:focus {
 	background:#005580;
 	cursor:pointer;
 	color:#fff;
@@ -341,7 +341,6 @@ tbody tr:last-child td:last-child {
 
 a.green:hover, a.green:focus, button.green:hover, button.green:focus {
 	background:#2D8659;
-	color:#fff;
 }
 
 .red {
@@ -349,9 +348,8 @@ a.green:hover, a.green:focus, button.green:hover, button.green:focus {
 	color:#fff;
 }
 
-a.red:hover, a.red:focus {
-	background:#800000;
-	color:#fff;
+a.red:hover, a.red:focus, button.red:hover, button.red:focus {
+	background:#800000!important;
 }
 
 .box li {

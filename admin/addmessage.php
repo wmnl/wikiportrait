@@ -55,8 +55,7 @@
         </div>
 
         <div class="input-container">
-                <input type="submit" class="float-right" name="postback" value="Opslaan &rarr;" />
-                <a href="messages.php" class="button float-right">&larr; Terug</a>
+                <button class="float-right" name="postback">Toevoegen</button>
         </div>
     </form>
 </div>

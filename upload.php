@@ -169,7 +169,7 @@ Al vast heel erg bedankt voor je medewerking!<br />";
                 </div>
 
                 <div class="input-container bottom">
-                        <input type="submit" class="float-right" name="postback" value="Upload foto &rarr;" />
+                        <button type="submit" class="float-right" name="postback">Upload foto</button>
                 </div>
 
         </form>
