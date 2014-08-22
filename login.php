@@ -86,7 +86,7 @@
             </div>
 
             <div class="input-container bottom">
-                <input type="submit" class="float-right" name="postback" value="Inloggen &rarr;" />
+                <button class="float-right" name="postback">Inloggen</button>
             </div>
         </form>
 </div>

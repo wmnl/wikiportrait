@@ -69,7 +69,7 @@
 		width:100%;
 	}
 	
-	.bottom .button, .divider, input[type="button"], input[type="submit"] {
+	.bottom .button, .divider, input[type="button"], input[type="submit"], button {
 		display:table-cell;
 		text-align:center;
 		width:100%;
