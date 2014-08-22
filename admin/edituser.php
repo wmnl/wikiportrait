@@ -92,7 +92,7 @@
 
                     if (!empty($errors))
                     {
-                        echo "<div class=\"error\"><ul>";
+                        echo "<div class=\"box red\"><ul>";
 
                         foreach ($errors as $error)
                         {
