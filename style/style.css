@@ -58,6 +58,11 @@ p:last-child {
 	margin-bottom:0px;
 }
 
+.list {
+	margin-left:20px;
+	margin-bottom:10px;
+}
+
 .clear {
 	clear:both;
 }

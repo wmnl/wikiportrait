@@ -21,14 +21,14 @@
 			{
 				if (isset($_POST['postback']))
 				{
-				    if (isset($_POST['done']))
+					if (isset($_POST['done']))
 					$done = 1;
-				    else
+					else
 					$done = 0;
-				    
-				    $query = sprintf("UPDATE images SET owner = %d, archived = %d WHERE id = %d", mysql_real_escape_string($_POST['owner']), $done , mysql_real_escape_string($_GET['id']));
-				    mysql_query($query);
-				    echo $query;
+					
+					$query = sprintf("UPDATE images SET owner = %d, archived = %d WHERE id = %d", mysql_real_escape_string($_POST['owner']), $done , mysql_real_escape_string($_GET['id']));
+					mysql_query($query);
+					echo $query;
 				}
 				$row = mysql_fetch_assoc($result);
 	?>
@@ -37,9 +37,8 @@
 	<a href="uploads/<?= $row['filename']; ?>" target="_blank" class="float-right"><img src="uploads/<?= $row['filename'] ;?>" style="max-width:10em;" /></a>
 
 	<h3>Informatie</h3>
-
-	<p>
-		<ul>
+	
+		<ul class="list">
 			<li>Titel: <?= $row['title']; ?></li>
 			<li>Auteur: <?= $row['source']; ?></li>
 			<li>Naam uploader: <?= $row['name']; ?></li>
@@ -47,26 +46,23 @@
 			<li>Geüpload op: <?= strftime("%e %B %Y om %H:%I:%S", $row['timestamp']) ?></li>
 			<li>Beschrijving: <?= $row['description'];?></li>
 		</ul>
-	</p>
 
 	<h3>Wat doen we ermee?</h3>
 	
-	<p>
-		<ul>
+		<ul class="list">
 			<li><a href="https://commons.wikimedia.org/wiki/Special:Upload?&uploadformstyle=basicwp&wpUploadDescription={{Information%0A|Description={{nl|1=<?= $row['title'] ?>}}%0A|Source=wikiportret.nl%0A|Permission=CC-BY-SA 3.0%0A|Date=<?= $row['date']; ?>%0A|Author=<?= $row['source']; ?>%0A}}%0A{{wikiportrait|}}" target="_blank">Uploaden naar Commons!</a></li>
 			<?php
 				$query = "SELECT * FROM messages";
 				$result = mysql_query($query);
-	
+				
 				while($row = mysql_fetch_assoc($result))
 				{
 			?>
 			<li><a href="message.php?message=<?= $row['id']; ?>&image=<?= mysql_real_escape_string($_GET['id']) ?>"><?= $row['title'] ?></a></li>
 			<?php
-				}
+			}
 			?>
 		</ul>
-	</p>
 
 	<h3>Opties</h3>
 	
@@ -90,20 +86,20 @@
 					$result2 = mysql_query($query2);
 					while ($rij = mysql_fetch_assoc($result2))
 					{
-					    $selected = "";
-					    if ($row['owner'] == $rij['id'])
+						 $selected = "";
+						 if ($row['owner'] == $rij['id'])
 						$selected = "selected=\"selected\"";
-					    
-					    echo "<option value='" . $rij['id'] . "' $selected>" . $rij['otrsname'] . "</option>";
+						 
+						 echo "<option value='" . $rij['id'] . "' $selected>" . $rij['otrsname'] . "</option>";
 					}
 				?>
 			</select>
 			<button type="button" name="claim" class="button green" onclick="document.getElementById('setowner').value = <?= $_SESSION['user'] ?>" style="width:30%; display:table-cell; border-top-left-radius:0px; border-bottom-left-radius:0px;"><i class="fa fa-bolt fa-lg"></i><span>Aan mij toewijzen</span></button>
 		</div>
-	    
-	    <div class="input-container bottom">
+		 
+		 <div class="input-container">
 		<input class="button grey float-right" type="submit" name="postback" value="Opslaan" />
-	    </div>
+		 </div>
 	</form>
 
 	<?php
