@@ -350,7 +350,7 @@ a.green:hover, a.green:focus, button.green:hover, button.green:focus {
 }
 
 a.red:hover, a.red:focus, button.red:hover, button.red:focus {
-	background:#800000!important;
+	background:#800000
 }
 
 .box li {
