@@ -87,7 +87,7 @@
 
         <div class="input-container">
             <label for="otrsname"><i class="fa fa-briefcase fa-lg fa-fw"></i>OTRS-naam</label>
-            <input type="text" name="otrsname" id="otrsname" />
+            <input type="text" name="otrsname" id="otrsname" <?php if (isset($_POST['otrsname'])) echo $_POST['otrsname'] ?> />
         </div>
 
         <div class="input-container">
@@ -102,7 +102,7 @@
 
         <div class="input-container">
             <label for="email"><i class="fa fa-envelope fa-lg fa-fw"></i>E-mailadres</label>
-            <input type="email" name="email" id="email" />
+            <input type="email" name="email" id="email" <?php if (isset($_POST['email'])) echo $_POST['email'] ?> />
         </div>
 
         <div class="input-container">
