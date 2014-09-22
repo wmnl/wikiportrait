@@ -64,37 +64,55 @@
             </tbody>
 	</table>
 	<div class="float-right" style="margin-top:10px;">Ga naar pagina:
-		<?php
-                    $query = "SELECT COUNT(*) FROM images WHERE archived = $archived";
-                    $result = mysql_query($query);
-                    $row = mysql_fetch_row($result);
-                    $total_records = $row[0];
+	    <form method="post">
+		<select name="page" onchange="loadPage()" id="page">
+		    <?php
+			$query = "SELECT COUNT(*) FROM images WHERE archived = $archived";
+			$result = mysql_query($query);
+			$row = mysql_fetch_row($result);
+			$total_records = $row[0];
 
-                    $total_pages = ceil($total_records / 20);
-
-                    if ($total_pages > 10)
-                    {
-                            for ($i=1; $i<=5; $i++) 
-                            {
-                                    echo "<a href=\"images.php?page=$i&archived=$archived\" class=\"button\" style=\"margin-left:5px;\">".$i."</a>"; 
-                            }
-                            echo "<i class=\"button\" style=\"margin-left:5px;\">...</i>"; 
-                            for ($i=$total_pages - 4; $i <= $total_pages; $i++) 
-                            {
-                                    echo "<a href=\"images.php?page=$i&archived=$archived\" class=\"button\" style=\"margin-left:5px;\">".$i."</a>"; 
-                            }
-                    }
-                    else
-                    {
-                            for ($i=1; $i<=$total_pages; $i++) 
-                            { 
-                                    echo "<a href=\"images.php?page=$i&archived=$archived\" class=\"button\" style=\"margin-left:5px;\">".$i."</a>"; 
-                            }
-                    }
-                ?>
+			$total_pages = ceil($total_records / 20);
+			for ($i=1; $i<=$total_pages; $i++) :
+		    ?>
+				<option value='<?= $i ?>' <? if ($_GET['page'] == $i) echo 'selected' ?>><?= $i ?></option>";
+		    <?
+			endfor;
+		    ?>
+		</select>
+	    </form>
 	</div>
 	<div class="clear"></div>
 </div>
+<script>
+    function getUrlParameter(sParam) {
+	var sPageURL = window.location.search.substring(1);
+	var sURLVariables = sPageURL.split('&');
+	for (var i = 0; i < sURLVariables.length; i++) 
+	{
+	    var sParameterName = sURLVariables[i].split('=');
+	    if (sParameterName[0] == sParam) 
+	    {
+		return sParameterName[1];
+	    }
+	}
+    }     
+    
+    var page = getUrlParameter('page');
+    var archived = getUrlParameter('archived');
+    
+    if (page == undefined) {
+	page = 1;
+    }
+    
+    if (archived == undefined) {
+	archived = 0;
+    }
+	
+    function loadPage() {
+	window.location.href = 'images.php?page=' + document.getElementById('page').value + '&archived=' + archived;
+    }
+</script>
 <?php
     include 'footer.php';
 ?>
