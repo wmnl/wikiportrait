@@ -20,19 +20,19 @@
 	<tbody>
 	<?php
 	    $query = "SELECT * FROM messages";
-	    $result = mysql_query($query);
-	    while ($row = mysql_fetch_assoc($result))
+	    $result = mysqli_query($connection, $query);
+	    while ($row = mysqli_fetch_assoc($result))
 	    {
-		    $id = $row['id'];
-		    $title = $row['title'];
-		    $message = $row['message'];
+		$id = $row['id'];
+		$title = $row['title'];
+		$message = $row['message'];
 
-		    echo "<tr>";
-			    echo "<td>$title</td>";
-			    echo "<td><div style=\"height:200px; overflow-y:scroll; -webkit-overflow-scrolling:touch;\">" . str_replace("\n", "<br />", $message) . "</div></td>";
-			    echo "<td class=\"center\"><a href=\"editmessage.php?id=$id\"><i class=\"fa fa-pencil fa-lg\"></i></a></td>";
-			    echo "<td class=\"center\"><a href=\"deletemessage.php?nojs=1&id=$id\" onclick=\"return confirmDelete('$id')\"><i class=\"fa fa-trash-o fa-lg\"></i></a></td>";
-		    echo "</tr>";
+		echo "<tr>";
+		    echo "<td>$title</td>";
+		    echo "<td><div style=\"height:200px; overflow-y:scroll; -webkit-overflow-scrolling:touch;\">" . str_replace("\n", "<br />", $message) . "</div></td>";
+		    echo "<td class=\"center\"><a href=\"editmessage.php?id=$id\"><i class=\"fa fa-pencil fa-lg\"></i></a></td>";
+		    echo "<td class=\"center\"><a href=\"deletemessage.php?nojs=1&id=$id\" onclick=\"return confirmDelete('$id')\"><i class=\"fa fa-trash-o fa-lg\"></i></a></td>";
+		echo "</tr>";
 	    }
 	?>
 	</tbody>

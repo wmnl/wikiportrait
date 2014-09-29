@@ -14,15 +14,15 @@
 	<h2>Ingestuurde foto's</h2>
 
 	<?php
-                if ($archived == 0)
-                {
-                    echo "<a href=\"images.php?archived=1\" class=\"button float-right\"><i class=\"fa fa-archive fa-lg fa-fw\"></i>Archief</a>";
-                }
-                else
-                {
-                    echo "<a href=\"images.php?archived=0\" class=\"button float-right\"><i class=\"fa fa-archive fa-lg fa-fw\"></i>Archief</a>";
-                }
-		?>
+	    if ($archived == 0)
+	    {
+		echo "<a href=\"images.php?archived=1\" class=\"button float-right\"><i class=\"fa fa-archive fa-lg fa-fw\"></i>Archief</a>";
+	    }
+	    else
+	    {
+		echo "<a href=\"images.php?archived=0\" class=\"button float-right\"><i class=\"fa fa-archive fa-lg fa-fw\"></i>Archief</a>";
+	    }
+	?>
 
 	<table>
             <thead>
@@ -39,11 +39,11 @@
                     date_default_timezone_set('Europe/Amsterdam');
                     if (isset($_GET['page'])) { $page  = $_GET['page']; } else { $page = 1; }; 
                     $start_from = ($page-1) * 20;
-                    $query = sprintf("SELECT * FROM images WHERE archived = $archived ORDER BY id DESC LIMIT %d, 20", mysql_real_escape_string($start_from));
+                    $query = sprintf("SELECT * FROM images WHERE archived = $archived ORDER BY id DESC LIMIT %d, 20", mysqli_real_escape_string($connection, $start_from));
                     echo "<div class=\"box grey\">" . $query . "</div>";
-                    $result = mysql_query($query);
+                    $result = mysqli_query($connection, $query);
 
-                    while ($row = mysql_fetch_assoc($result)):
+                    while ($row = mysqli_fetch_assoc($result)):
                         $id = $row['id'];
                         $filename = $row['filename'];
                         $title = $row['title'];
@@ -68,14 +68,14 @@
 		<select name="page" onchange="loadPage()" id="page">
 		    <?php
 			$query = "SELECT COUNT(*) FROM images WHERE archived = $archived";
-			$result = mysql_query($query);
-			$row = mysql_fetch_row($result);
+			$result = mysqli_query($connection, $query);
+			$row = mysqli_fetch_row($result);
 			$total_records = $row[0];
 
 			$total_pages = ceil($total_records / 20);
 			for ($i=1; $i<=$total_pages; $i++) :
 		    ?>
-				<option value='<?= $i ?>' <? if ($_GET['page'] == $i) echo 'selected' ?>><?= $i ?></option>";
+			<option value='<?= $i ?>' <? if ($_GET['page'] == $i) echo 'selected' ?>><?= $i ?></option>";
 		    <?
 			endfor;
 		    ?>

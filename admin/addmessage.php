@@ -19,10 +19,10 @@
         
         if (count($errors) == 0)
         {
-            $query = sprintf("INSERT INTO messages (title, message) VALUES ('%s', '%s')", mysql_real_escape_string($title), mysql_real_escape_string($message));
+            $query = sprintf("INSERT INTO messages (title, message) VALUES ('%s', '%s')", mysqli_real_escape_string($connection, $title), mysqli_real_escape_string($connection, $message));
 
-            mysql_query($query);
-            //echo $query;
+            mysqli_query($connection, $query);
+            echo $query;
             header("Location:messages.php");
         }
     }
@@ -36,7 +36,7 @@
 
             foreach ($errors as $error)
             {
-                    echo "<li>" . $error . "</li>";
+		echo "<li>" . $error . "</li>";
             }
 
             echo "</ul></div>";

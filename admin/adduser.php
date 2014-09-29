@@ -26,8 +26,8 @@
         else
         {
             $query = "SELECT * FROM users WHERE username = '$username'";
-            if (mysql_num_rows(mysql_query($query)))
-                array_push($errors, "Deze gebruikersnaam bestaat al oetlul");
+            if (mysqli_num_rows(mysqli_query($connection, $query)))
+                array_push($errors, "Deze gebruikersnaam bestaat al");
         }
 
         if (empty($otrsname))
@@ -56,9 +56,9 @@
         if (count($errors) == 0)
         {
             $query = sprintf("INSERT INTO users(username, password, otrsname, email, isSysop, active)
-                         VALUES('%s', '%s', '%s', '%s', %d, %d)", mysql_real_escape_string($username), mysql_real_escape_string(sha1($password)), mysql_real_escape_string($otrsname), mysql_real_escape_string($email), $admin, 1);
+                         VALUES('%s', '%s', '%s', '%s', %d, %d)", mysqli_real_escape_string($connection, $username), mysqli_real_escape_string($connection, sha1($password)), mysqli_real_escape_string($connection, $otrsname), mysqli_real_escape_string($connection, $email), $admin, 1);
 
-            mysql_query($query);
+            mysqli_query($connection, $query);
             header("Location:users.php");
         }
     }
@@ -72,7 +72,7 @@
 
             foreach ($errors as $error)
             {
-                    echo "<li>" . $error . "</li>";
+		echo "<li>" . $error . "</li>";
             }
 
             echo "</ul></div>";

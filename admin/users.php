@@ -24,8 +24,8 @@
         <tbody>
         <?php
             $query = "SELECT * FROM users";
-            $result = mysql_query($query);
-            while ($row = mysql_fetch_assoc($result))
+            $result = mysqli_query($connection, $query);
+            while ($row = mysqli_fetch_assoc($result))
             {
                     $id = $row['id'];
                     $username = $row['username'];

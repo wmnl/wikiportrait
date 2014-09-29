@@ -58,9 +58,8 @@
             if (move_uploaded_file($file['tmp_name'], "uploads/" . $filename))
             {
                 $query = sprintf("INSERT INTO images(filename, title, source, name, email, license, ip, date, description, timestamp)"
-                                . "VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d);", mysql_real_escape_string($filename), mysql_real_escape_string($title), mysql_real_escape_string($source), mysql_real_escape_string($name), mysql_real_escape_string($email), 'CC-BY-SA 3.0', mysql_real_escape_string($ip), mysql_real_escape_string($date), mysql_real_escape_string($desc), mysql_real_escape_string(date_timestamp_get($time)));
-                mysql_query($query);
-                echo $query;
+                                . "VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d);", mysqli_real_escape_string($connection, $filename), mysqli_real_escape_string($connection, $title), mysqli_real_escape_string($connection, $source), mysqli_real_escape_string($connection, $name), mysqli_real_escape_string($connection, $email), 'CC-BY-SA 3.0', mysqli_real_escape_string($connection, $ip), mysqli_real_escape_string($connection, $date), mysqli_real_escape_string($connection, $desc), mysqli_real_escape_string($connection,  date_timestamp_get($time)));
+		mysqli_query($connection, $query);
 
                 require "PHPMailer/PHPMailerAutoload.php";
 
@@ -92,7 +91,7 @@ De uploader heeft het volgende IP-adres: '$ip'<br />
 Je kunt de foto bekijken op Wikiportret en de foto daar afwijzen, of een tekst genereren die je kan copy-pasten om een e-mail te schrijven.<br />
 <br />
 Klik op deze link:<br />
-http://www.wikidate.nl/wikiportret/image.php?id=" . mysql_insert_id() . "<br />
+http://www.wikidate.nl/wikiportret/image.php?id=" . mysqli_insert_id($connection) . "<br />
 <br />
 Als je vragen hebt over de uploadwizard kun je terecht bij JurgenNL via http://nl.wikipedia.org/wiki/Gebruiker:JurgenNL of eventueel via jurgennl.wp@gmail.com.<br />
 <br />
@@ -104,7 +103,7 @@ Al vast heel erg bedankt voor je medewerking!<br />";
                    exit;
                 }
 
-                header("Location:wizard.php?question=success&id=" . mysql_insert_id());
+                header("Location:wizard.php?question=success&id=" . mysqli_insert_id($connection));
             }
         }
     }

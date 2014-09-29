@@ -14,9 +14,9 @@
 <div id="content">
     <h2>Gebruiker bewerken</h2>
     <?php					
-            $query = sprintf("SELECT * FROM users WHERE id = %d", mysql_real_escape_string($id)); 
-            $result = mysql_query($query);
-            if (mysql_num_rows($result) == 0)
+            $query = sprintf("SELECT * FROM users WHERE id = %d", mysqli_real_escape_string($connection, $id)); 
+            $result = mysqli_query($connection, $query);
+            if (mysqli_num_rows($result) == 0)
             {
                 echo "Gebruiker niet gevonden!";
             }
@@ -80,13 +80,13 @@
                     {
                         if (empty($_POST['password']))
                         {
-                            $query = sprintf("UPDATE users SET username = '%s', otrsname = '%s', email = '%s', isSysop = %d, active = %d WHERE id = %d", mysql_real_escape_string($username), mysql_real_escape_string($otrsname), mysql_real_escape_string($email), $admin, $active, $id);
+                            $query = sprintf("UPDATE users SET username = '%s', otrsname = '%s', email = '%s', isSysop = %d, active = %d WHERE id = %d", mysqli_real_escape_string($connection, $username), mysqli_real_escape_string($connection, $otrsname), mysqli_real_escape_string($connection, $email), $admin, $active, $id);
                         }
                         else
                         {
-                            $query = sprintf("UPDATE users SET username = '%s', password =  '%s', otrsname = '%s', email = '%s', isSysop = %d, active = %d WHERE id = %d", mysql_real_escape_string($username), mysql_real_escape_string($password), mysql_real_escape_string($otrsname), mysql_real_escape_string($email), $admin, $active, $id);
+                            $query = sprintf("UPDATE users SET username = '%s', password =  '%s', otrsname = '%s', email = '%s', isSysop = %d, active = %d WHERE id = %d", mysqli_real_escape_string($connection, $username), mysqli_real_escape_string($connection, $password), mysqli_real_escape_string($connection, $otrsname), mysqli_real_escape_string($connection, $email), $admin, $active, $id);
                         }
-                        mysql_query($query);
+                        mysqli_query($connection, $query);
                         header("Location: users.php");
                     }  
 
@@ -104,7 +104,7 @@
                 }
 
 
-                $row = mysql_fetch_assoc($result);
+                $row = mysqli_fetch_assoc($result);
     ?>
 
     <form method="post">

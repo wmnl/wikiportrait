@@ -1,5 +1,4 @@
 <?php
     include 'config.php';
-    mysql_connect($DBserver, $DBuser, $DBpassword);
-    mysql_select_db($DBname);
+    $connection = mysqli_connect($DBserver, $DBuser, $DBpassword, $DBname) or die("Some error occurred during connection " . mysqli_error($connection));
 ?>

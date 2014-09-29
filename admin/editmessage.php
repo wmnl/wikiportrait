@@ -14,11 +14,11 @@
 <div id="content">
     <h2>Bericht bewerken</h2>
     <?php
-	$query = sprintf("SELECT * FROM messages WHERE id = %d", mysql_real_escape_string($id)); 
-	$result = mysql_query($query);
-	$row = mysql_fetch_assoc($result);
+	$query = sprintf("SELECT * FROM messages WHERE id = %d", mysqli_real_escape_string($connection, $id)); 
+	$result = mysqli_query($connection, $query);
+	$row = mysqli_fetch_assoc($result);
 	
-	if (mysql_num_rows($result) == 0)
+	if (mysqli_num_rows($result) == 0)
 	{
 	    echo "<div class=\"box red\">Bericht niet gevonden!</div>";
 	}
@@ -42,9 +42,9 @@
 
 		if (count($errors) == 0)
 		{
-		    $query = sprintf("UPDATE messages SET title = '%s', message= '%s' WHERE id = $id", mysql_real_escape_string($title), mysql_real_escape_string($message));
+		    $query = sprintf("UPDATE messages SET title = '%s', message= '%s' WHERE id = $id", mysqli_real_escape_string($connection, $title), mysqli_real_escape_string($connection, $message));
 
-		    mysql_query($query);
+		    mysqli_query($connection, $query);
 		    header("Location:messages.php");
 		}
 	    }

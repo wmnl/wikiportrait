@@ -5,14 +5,14 @@
     
     if (isset($_GET['id']))
     {
-	$id = mysql_real_escape_string($_GET['id']);
+	$id = mysqli_real_escape_string($connection, $_GET['id']);
 	
 	$query = sprintf("SELECT * FROM messages WHERE id = %d", $id);
-	$result = mysql_query($query);
+	$result = mysqli_query($connection, $query);
 	
-	if (mysql_num_rows($result) == 1)
+	if (mysqli_num_rows($result) == 1)
 	{
-	    mysql_query(sprintf("DELETE FROM messages WHERE id = %d", mysql_real_escape_string($id)));
+	    mysqli_query($connection, sprintf("DELETE FROM messages WHERE id = %d", mysqli_real_escape_string($connection, $id)));
 	    header("Location: messages.php");
 	}
     }

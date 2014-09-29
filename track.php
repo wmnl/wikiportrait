@@ -9,10 +9,10 @@
         }
         else
         {
-            $query = sprintf("SELECT * FROM images WHERE id = %d", mysql_real_escape_string($_GET['image']));
-            $result = mysql_query($query);
-            $row = mysql_fetch_assoc($result);
-            if (mysql_num_rows($result) == 0 || sha1($row['id']) != $_GET['key'])
+            $query = sprintf("SELECT * FROM images WHERE id = %d", mysqli_real_escape_string($connection, $_GET['image']));
+            $result = mysqli_query($connection, $query);
+            $row = mysqli_fetch_assoc($result);
+            if (mysqli_num_rows($result) == 0 || sha1($row['id']) != $_GET['key'])
             {
                 echo "<div class=\"box red\">Geen afbeelding gevonden!</div>";
             }
@@ -46,12 +46,12 @@
 	<h3>Informatie</h3>
 
 	<p>
-		<ul>
-			<li>Titel: <?php echo $row['title']; ?></li>
-			<li>Auteur: <?php echo $row['source']; ?></li>
-			<li>Naam uploader: <?php echo $row['name']; ?></li>
-			<li>Beschrijving: <?php echo $row['description'];?></li>
-		</ul>
+	    <ul>
+		    <li>Titel: <?php echo $row['title']; ?></li>
+		    <li>Auteur: <?php echo $row['source']; ?></li>
+		    <li>Naam uploader: <?php echo $row['name']; ?></li>
+		    <li>Beschrijving: <?php echo $row['description'];?></li>
+	    </ul>
 	</p>
         
         <br clear="all" />

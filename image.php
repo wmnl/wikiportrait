@@ -10,27 +10,27 @@
 			echo "Er is geen ID opgegeven!";
 		else
 		{
-			$query = sprintf("SELECT * FROM images WHERE id = %d", mysql_real_escape_string($_GET['id']));
-			$result = mysql_query($query);
+			$query = sprintf("SELECT * FROM images WHERE id = %d", mysqli_real_escape_string($connection, $_GET['id']));
+			$result = mysqli_query($connection, $query);
 
-			if (mysql_num_rows($result) == 0)
+			if (mysqli_num_rows($result) == 0)
 			{
-				echo "Foto niet gevonden!";
+			    echo "Foto niet gevonden!";
 			}
 			else
 			{
-				if (isset($_POST['postback']))
-				{
-					if (isset($_POST['done']))
+			    if (isset($_POST['postback']))
+			    {
+				    if (isset($_POST['done']))
 					$done = 1;
-					else
+				    else
 					$done = 0;
-					
-					$query = sprintf("UPDATE images SET owner = %d, archived = %d WHERE id = %d", mysql_real_escape_string($_POST['owner']), $done , mysql_real_escape_string($_GET['id']));
-					mysql_query($query);
-					echo $query;
-				}
-				$row = mysql_fetch_assoc($result);
+
+				    $query = sprintf("UPDATE images SET owner = %d, archived = %d WHERE id = %d", mysqli_real_escape_string($connection, $_POST['owner']), $done , mysqli_real_escape_string($connection, $_GET['id']));
+				    mysqli_query($connection, $query);
+				    echo $query;
+			    }
+			    $row = mysqli_fetch_assoc($result);
 	?>
 	<h2>Ingestuurde foto: <?= $row['title']; ?></h2>
 
@@ -53,12 +53,12 @@
 			<li><a href="https://commons.wikimedia.org/wiki/Special:Upload?&uploadformstyle=basicwp&wpUploadDescription={{Information%0A|Description={{nl|1=<?= $row['title'] ?>}}%0A|Source=wikiportret.nl%0A|Permission=CC-BY-SA 3.0%0A|Date=<?= $row['date']; ?>%0A|Author=<?= $row['source']; ?>%0A}}%0A{{wikiportrait|}}" target="_blank">Uploaden naar Commons!</a></li>
 			<?php
 				$query = "SELECT * FROM messages";
-				$result = mysql_query($query);
+				$result = mysqli_query($connection, $query);
 				
-				while($row = mysql_fetch_assoc($result))
+				while($row = mysqli_fetch_assoc($result))
 				{
 			?>
-			<li><a href="message.php?message=<?= $row['id']; ?>&image=<?= mysql_real_escape_string($_GET['id']) ?>"><?= $row['title'] ?></a></li>
+			<li><a href="message.php?message=<?= $row['id']; ?>&image=<?= mysqli_real_escape_string($connection, $_GET['id']) ?>"><?= $row['title'] ?></a></li>
 			<?php
 			}
 			?>
@@ -82,16 +82,16 @@
 			<select name="owner" id="setowner" style="width:70%; border-right:0px; border-top-right-radius:0px; border-bottom-right-radius:0px;">
 				<option value="0">----</option>
 				<?php
-					$query2 = "SELECT id, otrsname FROM users";
-					$result2 = mysql_query($query2);
-					while ($rij = mysql_fetch_assoc($result2))
-					{
-						 $selected = "";
-						 if ($row['owner'] == $rij['id'])
-						$selected = "selected=\"selected\"";
-						 
-						 echo "<option value='" . $rij['id'] . "' $selected>" . $rij['otrsname'] . "</option>";
-					}
+				    $query2 = "SELECT id, otrsname FROM users";
+				    $result2 = mysqli_query($connection, $query2);
+				    while ($rij = mysqli_fetch_assoc($result2))
+				    {
+					$selected = "";
+					if ($row['owner'] == $rij['id'])
+					    $selected = "selected=\"selected\"";
+
+					 echo "<option value='" . $rij['id'] . "' $selected>" . $rij['otrsname'] . "</option>";
+				    }
 				?>
 			</select>
 			<button type="button" name="claim" class="button green" onclick="document.getElementById('setowner').value = <?= $_SESSION['user'] ?>" style="width:30%; display:table-cell; border-top-left-radius:0px; border-bottom-left-radius:0px;"><i class="fa fa-bolt fa-lg"></i><span>Aan mij toewijzen</span></button>
@@ -103,7 +103,7 @@
 	</form>
 
 	<?php
-			}
+		    }
 		}
 	?>
 	<div class="clear"></div>
