@@ -28,6 +28,7 @@
 		{
 		    array_push($errors, "Je hebt geen gebruikersnaam ingevuld");
 		}
+		
 		if (empty ($_POST['password'])) 
 		{
 		    array_push($errors, "Je hebt geen wachtwoord ingevuld");
@@ -68,6 +69,16 @@
 			echo "<li>Gebruikersnaam en/of wachtwoord incorrect</li>";
 			echo "</ul></div>";
 		    }  
+		}
+		else
+		{
+		    echo "<div class=\"box red\"><ul>";
+		    
+		    foreach ($errors as $error)
+		    {
+			echo "<li>$error</li>";
+		    }
+		    echo "</ul></div>";
 		}
 	    }
 	}
