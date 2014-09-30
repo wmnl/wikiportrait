@@ -123,29 +123,31 @@ p:last-child {
 	color:#aaa;
 }
 
-/*menu*/
-#menu ul {
+/* Menu */
+.menu {
 	background:#006699;
+	width:100%;
 	border-bottom-left-radius:5px;
 	border-bottom-right-radius:5px;
 	overflow:hidden;
-	display:table;
-	table-layout:fixed;
-	width:100%;
 }
 
-#menu li {
+.menu ul {
+	display:table;
+}
+
+.menu li {
 	display:table-cell;
 	text-align:center;
 }
 
-#menu a {
+.menu a {
 	padding:10px;
 	display:block;
 	color:#fff;
 }
 
-#menu a:hover, #menu a:focus, #menu .active a {
+.menu a:hover, .menu a:focus, .menu .active a {
 	background:#005580;
 }
 

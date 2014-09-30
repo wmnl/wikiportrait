@@ -29,12 +29,16 @@
 		padding:0px;
 	}
 	
-	#menu .fa {
+	.menu ul {
+		width:100%;
+	}
+	
+	.menu .fa {
 		display:block;
 		margin-right:0px;
 	}
 	
-	#menu a span, .tabs a span, #menu .clear, button span {
+	.menu a span, .tabs a span, button span {
 		display:none;
 		clear:none;
 	}

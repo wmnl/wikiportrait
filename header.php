@@ -35,7 +35,7 @@
 				<h1><a href="<?php echo $basispad; ?>/index.php">Wikiportret</a></h1>
 			</div>
 			
-			<div id="menu">
+			<div class="menu">
 			   <?php include 'menu.php'; ?>
 			</div>
 			<div class="clear"></div>
