@@ -1,4 +1,4 @@
-/* allez */
+/* Reset and start */
 * {
 	font-size:1em;
 	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -18,7 +18,7 @@ html {
 	overflow-y:scroll;
 }
 
-/* Tekstopmaak */
+/* Font styling */
 h1, h2, h3 {
 	margin-bottom:10px;
 }
@@ -91,7 +91,7 @@ p:last-child {
 	margin-right:5px;
 }
 
-/* de hele site*/
+/* Basic */
 #all {
 	width:90%;
 	margin:10px auto;
