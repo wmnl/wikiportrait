@@ -130,6 +130,7 @@ p:last-child {
 	border-bottom-right-radius:5px;
 	overflow:hidden;
 	display:table;
+	table-layout:fixed;
 	width:100%;
 }
 
