@@ -13,5 +13,4 @@
             }
     ?>  
     <li<?php if ($page == 'login') echo ' class="active"'?>><?php if (isset($_SESSION['user'])) echo "<a href=\"$basispad/logout.php\" title=\"Uitloggen\"><i class=\"fa fa-sign-out\"></i><span>Uitloggen</span></a>"; else echo "<a href=\"$basispad/login.php\" title=\"Inloggen\"><i class=\"fa fa-sign-in\"></i><span>Inloggen</span></a>"; ?></li>
-    <div class="clear"></div>
 </ul>

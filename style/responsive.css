@@ -29,17 +29,6 @@
 		padding:0px;
 	}
 	
-	#menu ul {
-		display:table;
-		width:100%;
-	}
-
-	#menu li {
-		display:table-cell;
-		float:none;
-		text-align:center;
-	}
-	
 	#menu .fa {
 		display:block;
 		margin-right:0px;
@@ -49,7 +38,6 @@
 		display:none;
 		clear:none;
 	}
-	
 	
 	.tabs {
 		margin-top:10px;
