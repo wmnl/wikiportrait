@@ -153,7 +153,7 @@ Al vast heel erg bedankt voor je medewerking!<br />";
                 </div>
 
                 <div class="input-container">
-                    <label for="date"><i class="fa fa-calendar fa-lg fa-fw"></i>Datum van de foto <span class="optional">(optioneel)</span></label>
+                    <label for="date"><i class="fa fa-calendar fa-lg fa-fw"></i>Opnamedatum <span class="optional">(optioneel)</span></label>
                     <input type="date" name="date" id="date" value="<?php if (!empty($_POST['date'])) echo $_POST['date']; ?>" />
                 </div>
 
