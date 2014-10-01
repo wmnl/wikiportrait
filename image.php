@@ -1,9 +1,10 @@
 <?php 
 	include 'header.php';
 	checkLogin();
-?>			
+?>
 
 <div id="content">
+	
 	<?php
 		setlocale(LC_ALL, 'nl_NL');
 		if (!isset($_GET['id']))
@@ -32,6 +33,7 @@
 				   }
 				   $row = mysqli_fetch_assoc($result);
 	?>
+	
 	<h2>Ingestuurde foto: <?= $row['title']; ?></h2>
 
 	<a href="uploads/<?= $row['filename']; ?>" target="_blank" class="float-right"><img src="uploads/<?= $row['filename'] ;?>" style="max-width:10em;" /></a>
@@ -39,12 +41,12 @@
 	<h3>Informatie</h3>
 	
 		<ul class="list">
-			<li>Titel: <?= $row['title']; ?></li>
-			<li>Auteur: <?= $row['source']; ?></li>
-			<li>Naam uploader: <?= $row['name']; ?></li>
-			<li>IP uploader: <?= $row['ip']; ?></li>
-			<li>Geüpload op: <?= strftime("%e %B %Y om %H:%I:%S", $row['timestamp']) ?></li>
-			<li>Beschrijving: <?= $row['description'];?></li>
+			<li><span class="fixed">Titel:</span> <?= $row['title']; ?></li>
+			<li><span class="fixed">Auteursrechthebbende:</span> <?= $row['source']; ?></li>
+			<li><span class="fixed">Naam van uploader:</span> <?= $row['name']; ?></li>
+			<li><span class="fixed">IP-adres van uploader:</span> <?= $row['ip']; ?></li>
+			<li><span class="fixed">Geüpload op:</span> <?= strftime("%e %B %Y om %H:%I:%S", $row['timestamp']) ?></li>
+			<li><span class="fixed">Beschrijving:</span> <?= $row['description'];?></li>
 		</ul>
 
 	<h3>Wat doen we ermee?</h3>
@@ -92,7 +94,7 @@
 		<div class="input-container">
 			<label for="done"><i class="fa fa-check fa-lg fa-fw"></i>Afgehandeld</label>
 			<div class="checkbox">
-					<input type="checkbox" name="done" id="done" /><label for="admin">Ja</label>
+					<input type="checkbox" name="done" id="done" /><label for="done">Ja</label>
 			</div>
 		</div>
 		 
@@ -103,10 +105,9 @@
 	</form>
 
 	<?php
-			  }
+				 }
 		}
 	?>
-	<div class="clear"></div>
 </div>
 
 <?php

@@ -62,6 +62,13 @@ p:last-child {
 .list {
 	margin-left:20px;
 	margin-bottom:10px;
+	line-height:125%;
+}
+
+.fixed {
+	font-weight:400;
+	min-width:11em;
+	display:inline-block;
 }
 
 .clear {

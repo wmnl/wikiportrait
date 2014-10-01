@@ -17,7 +17,7 @@
 	}
 	
 	input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], select, textarea, .checkbox, .simpleselect, .simpleselect .options {
-        border-bottom-left-radius:5px;
+		border-bottom-left-radius:5px;
 		border-top-right-radius:0px;
 	}
 	
@@ -46,14 +46,14 @@
 		display:none;
 		clear:none;
 	}
-    
-    .tabs ul {
-        width:100%;
-    }
-    
-    .tabs li {
-        text-align:center;
-    }
+	
+	.tabs ul {
+		width:100%;
+	}
+	
+	.tabs li {
+		text-align:center;
+	}
 	
 	.bottom {
 		display:table;
@@ -70,12 +70,16 @@
 	.divider {
 		width:10px;
 	}
-    
-    .float-right {
-        float:none;
-        margin-bottom:10px;
-        margin-left:0px;
-    }
+	
+	.fixed {
+		width:100%;
+	}
+	
+	.float-right {
+		float:none;
+		margin-bottom:10px;
+		margin-left:0px;
+	}
 }
 
 @media (max-width:1000px) {
