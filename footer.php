@@ -1,5 +1,5 @@
 		<div class="footer">
-			Hier moet nog een footer komen.
+			Wikiportret is een initiatief van Wikimedia Nederland
 		</div>
 		</div>
 		
