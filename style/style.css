@@ -311,7 +311,6 @@ input[type="file"]::-webkit-file-upload-button {
 
 .simpleselect .options {
 	width:100%;
-	margin-top:-1px;
 	background:#fff;
 	border:1px solid #bbb;
 	border-top-right-radius:5px;
@@ -333,6 +332,15 @@ input[type="file"]::-webkit-file-upload-button {
 
 .simpleselect .options .option.active {
 	background:#EDEDED;
+}
+
+.simpleselect .placeholder:after {
+	content:"\f0dc";
+	position:absolute;
+	font-family:FontAwesome;
+	font-size:120%;
+	right:10px;
+	color:#aaa;
 }
 
 /* Tables */
