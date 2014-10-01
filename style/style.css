@@ -204,6 +204,9 @@ label {
 	background:#ddd;
 	border-top-left-radius:5px;
 	border-bottom-left-radius:5px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
 }
 
 .checkbox label {
