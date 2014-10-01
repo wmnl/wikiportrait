@@ -216,7 +216,7 @@ label {
 	margin-right:10px;
 }
 
-input, textarea, select, .checkbox {
+input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], textarea, select, .checkbox {
 	display:table-cell;
 	margin:0px;
 	width:100%;
@@ -245,6 +245,7 @@ input:focus, textarea:focus {
 
 input[type="checkbox"] {
 	-webkit-appearance:checkbox;
+    -moz-appearance:checkbox;
     float:left;
 	width:20px;
 	height:20px;
