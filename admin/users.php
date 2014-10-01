@@ -17,8 +17,8 @@
                 <th>Gebruikersnaam</th>
                 <th>OTRS-naam</th>
                 <th>E-mailadres</th>
-                <th class="center" style="width:6em;">Beheerder</th>
-                <th class="center" style="width:6em;">Bewerken</th>
+                <th class="icon center">Beheerder</th>
+                <th class="icon center">Bewerken</th>
             </tr>
         </thead>
         <tbody>

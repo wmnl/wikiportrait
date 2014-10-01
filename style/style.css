@@ -47,6 +47,7 @@ a {
 
 a:hover, a:focus, .tabs .active a, #header a {
 	color:#000;
+    background-color:transparent;
 }
 
 p {
@@ -335,6 +336,10 @@ tbody tr:last-child td:first-child {
 
 tbody tr:last-child td:last-child {
 	border-radius:0px 0px 5px 0px;
+}
+
+thead .icon {
+    width:6em;
 }
 
 /* Boxes */

@@ -14,7 +14,7 @@
 	    <tr>
 		<th>Titel</th>
 		<th>Bericht</th>
-		<th class="center" style="width:6em;" colspan="2">Acties</th>
+		<th class="icon center" colspan="2">Acties</th>
 	    </tr>
 	</thead>
 	<tbody>
