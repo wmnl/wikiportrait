@@ -184,7 +184,6 @@ form {
 }
 
 .input-container {
-	position:relative;
 	display:table;
 	border-collapse:separate;
 	width:100%;
@@ -197,12 +196,11 @@ form {
 
 label {
 	display:table-cell;
-	white-space:nowrap;
-	vertical-align:middle;
 	width:35%;
 	padding-left:10px;
-	background-color:#fff;
 	background:#ddd;
+    white-space:nowrap;
+	vertical-align:middle;
 	border-top-left-radius:5px;
 	border-bottom-left-radius:5px;
     -webkit-user-select:none;
@@ -227,9 +225,7 @@ input, textarea, select, .checkbox {
 	border-radius:0px;
 	padding:10px;
 	border:1px solid #ddd;
-	position:relative;
-	z-index:2;
-	float:left;
+    background:#fff;
 	border-top-right-radius:5px;
 	border-bottom-right-radius:5px;
 	color:#444;
@@ -249,8 +245,9 @@ input:focus, textarea:focus {
 
 input[type="checkbox"] {
 	-webkit-appearance:checkbox;
-	width:auto;
-	height:25px;
+    float:left;
+	width:20px;
+	height:20px;
 	border-radius:0px;
 }
 
