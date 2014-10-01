@@ -1,6 +1,6 @@
 @media (max-width:725px) {
 	body {
-		font-size:105%;
+		font-size:95%;
 		-webkit-text-size-adjust:100%;
 	}
 	
@@ -21,16 +21,8 @@
 		border-top-right-radius:0px;
 	}
 	
-	input[type="checkbox"] {
-		margin-right:10px;
-	}
-	
 	.checkbox, input[type="date"], .simpleselect {
 		display:block;
-	}
-	
-	.checkbox label {
-		padding:0px;
 	}
 	
 	.menu ul {
