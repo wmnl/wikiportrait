@@ -16,13 +16,17 @@
 		padding:10px;
 	}
 	
-	input, select, textarea {
-		border-bottom-left-radius:5px;
+	input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], select, textarea, .checkbox {
+        border-bottom-left-radius:5px;
 		border-top-right-radius:0px;
 	}
 	
 	input[type="checkbox"] {
 		margin-right:10px;
+	}
+	
+	.checkbox {
+		display:block;
 	}
 	
 	.checkbox label {
