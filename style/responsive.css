@@ -46,6 +46,10 @@
     .tabs ul {
         width:100%;
     }
+    
+    .tabs li {
+        text-align:center;
+    }
 	
 	.bottom {
 		display:table;
@@ -53,7 +57,7 @@
 		width:100%;
 	}
 	
-	.bottom .button, .divider, input[type="button"], input[type="submit"], button {
+	.bottom .button, .divider, .bottom input[type="button"], .bottom input[type="submit"] {
 		display:table-cell;
 		text-align:center;
 	}
@@ -65,12 +69,13 @@
 	.divider {
 		width:10px;
 	}
-	
-	.float-right {
-		float:none;
-		margin-left:0px;
-		margin-bottom:10px;
-	}
+    
+    .float-right {
+        float:none;
+        margin-bottom:10px;
+        margin-left:0px;
+        width:100%;
+    }
 }
 
 @media (max-width:1000px) {
