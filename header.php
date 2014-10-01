@@ -27,6 +27,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo $basispad ?>/style/style.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo $basispad ?>/style/responsive.css" />
 	   	<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	   	<script src="<?php echo $basispad ?>/scripts/jquery-1.11.1.min.js"></script>
 		<title>Wikiportret - Stel uw foto's ter beschikking</title>
 	</head>
 	<body>

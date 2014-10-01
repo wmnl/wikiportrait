@@ -70,7 +70,7 @@
 		
 			<label for="page" style="width:70%;">Ga naar pagina</label>
 			
-			<select name="page" onchange="loadPage()" id="page">	
+			<select class="select" name="page" onchange="loadPage()" id="page">	
 				<?php
 					$query = "SELECT COUNT(*) FROM images WHERE archived = $archived";
 					$result = mysqli_query($connection, $query);

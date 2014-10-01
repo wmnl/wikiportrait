@@ -15,22 +15,22 @@
 
 			if (mysqli_num_rows($result) == 0)
 			{
-			    echo "Foto niet gevonden!";
+				   echo "Foto niet gevonden!";
 			}
 			else
 			{
-			    if (isset($_POST['postback']))
-			    {
-				    if (isset($_POST['done']))
+				   if (isset($_POST['postback']))
+				   {
+					if (isset($_POST['done']))
 					$done = 1;
-				    else
+					else
 					$done = 0;
 
-				    $query = sprintf("UPDATE images SET owner = %d, archived = %d WHERE id = %d", mysqli_real_escape_string($connection, $_POST['owner']), $done , mysqli_real_escape_string($connection, $_GET['id']));
-				    mysqli_query($connection, $query);
-				    echo $query;
-			    }
-			    $row = mysqli_fetch_assoc($result);
+					$query = sprintf("UPDATE images SET owner = %d, archived = %d WHERE id = %d", mysqli_real_escape_string($connection, $_POST['owner']), $done , mysqli_real_escape_string($connection, $_GET['id']));
+					mysqli_query($connection, $query);
+					echo $query;
+				   }
+				   $row = mysqli_fetch_assoc($result);
 	?>
 	<h2>Ingestuurde foto: <?= $row['title']; ?></h2>
 
@@ -69,41 +69,41 @@
 	<form method="post" id="owner" name="owner">
 	
 		<div class="input-container">
+		
+			<label for="owner"><i class="fa fa-user-md fa-lg fa-fw"></i>Eigenaar</label>
+			
+			<select class="select" name="owner" id="setowner">
+				<option value="0">----</option>
+				<?php
+					$query2 = "SELECT id, otrsname FROM users";
+					$result2 = mysqli_query($connection, $query2);
+					while ($rij = mysqli_fetch_assoc($result2))
+					{
+					$selected = "";
+					if ($row['owner'] == $rij['id'])
+						 $selected = "selected=\"selected\"";
+
+					 echo "<option value='" . $rij['id'] . "' $selected>" . $rij['otrsname'] . "</option>";
+					}
+				?>
+			</select>
+		</div>
+		
+		<div class="input-container">
 			<label for="done"><i class="fa fa-check fa-lg fa-fw"></i>Afgehandeld</label>
 			<div class="checkbox">
 					<input type="checkbox" name="done" id="done" /><label for="admin">Ja</label>
 			</div>
 		</div>
-	
-		<div class="input-container">
-		
-			<label for="owner"><i class="fa fa-user-md fa-lg fa-fw"></i>Eigenaar</label>
-			
-			<select name="owner" id="setowner" style="width:70%; border-right:0px; border-top-right-radius:0px; border-bottom-right-radius:0px;">
-				<option value="0">----</option>
-				<?php
-				    $query2 = "SELECT id, otrsname FROM users";
-				    $result2 = mysqli_query($connection, $query2);
-				    while ($rij = mysqli_fetch_assoc($result2))
-				    {
-					$selected = "";
-					if ($row['owner'] == $rij['id'])
-					    $selected = "selected=\"selected\"";
-
-					 echo "<option value='" . $rij['id'] . "' $selected>" . $rij['otrsname'] . "</option>";
-				    }
-				?>
-			</select>
-			<button type="button" name="claim" class="button green" onclick="document.getElementById('setowner').value = <?= $_SESSION['user'] ?>" style="width:30%; display:table-cell; border-top-left-radius:0px; border-bottom-left-radius:0px;"><i class="fa fa-bolt fa-lg"></i><span>Aan mij toewijzen</span></button>
-		</div>
 		 
-		 <div class="input-container">
-		<input class="button grey float-right" type="submit" name="postback" value="Opslaan" />
+		 <div class="bottom right">
+		 	<button type="button" name="claim" onclick="document.getElementById('setowner').value = <?= $_SESSION['user'] ?>"><i class="fa fa-bolt fa-lg"></i>Aan mij toewijzen</button><span class="divider">&nbsp;</span><button class="green" type="submit" name="postback"><i class="fa fa-floppy-o fa-lg"></i>Opslaan</button>
 		 </div>
+		 
 	</form>
 
 	<?php
-		    }
+			  }
 		}
 	?>
 	<div class="clear"></div>

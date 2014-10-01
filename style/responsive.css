@@ -16,7 +16,7 @@
 		padding:10px;
 	}
 	
-	input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], select, textarea, .checkbox {
+	input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], select, textarea, .checkbox, .simpleselect, .simpleselect .options {
         border-bottom-left-radius:5px;
 		border-top-right-radius:0px;
 	}
@@ -25,7 +25,7 @@
 		margin-right:10px;
 	}
 	
-	.checkbox {
+	.checkbox, input[type="date"], .simpleselect {
 		display:block;
 	}
 	
@@ -61,13 +61,10 @@
 		width:100%;
 	}
 	
-	.bottom .button, .divider, .bottom input[type="button"], .bottom input[type="submit"] {
+	.bottom .button, .bottom button, .divider, .bottom input[type="button"], .bottom input[type="submit"] {
 		display:table-cell;
 		text-align:center;
-	}
-	
-	button[name="claim"] {
-		border-top-right-radius:0px;
+		width:100%;
 	}
 	
 	.divider {
@@ -78,7 +75,6 @@
         float:none;
         margin-bottom:10px;
         margin-left:0px;
-        width:100%;
     }
 }
 

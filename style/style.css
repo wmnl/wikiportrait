@@ -84,6 +84,10 @@ p:last-child {
 	margin-left:10px;
 }
 
+.right {
+	text-align:right;
+}
+
 .center {
 	text-align:center;
 }
@@ -216,7 +220,7 @@ label {
 	margin-right:10px;
 }
 
-input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], textarea, select, .checkbox {
+input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], textarea, .checkbox {
 	display:table-cell;
 	margin:0px;
 	width:100%;
@@ -285,6 +289,43 @@ input[type="file"]::-webkit-file-upload-button {
 .optional {
 	color:#888;
 	font-size:0.9em;
+}
+
+.simpleselect {
+	display:table-cell;
+	border:1px solid #ddd;
+	background:#fff;
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+	color:#444;
+	margin:0px;
+	width:100%;
+}
+
+.simpleselect .options {
+	width:100%;
+	margin-top:-1px;
+	background:#fff;
+	border:1px solid #bbb;
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+	overflow:hidden;
+}
+
+.simpleselect .option {
+	border-bottom:1px solid #bbb;
+}
+
+.simpleselect .option:last-child {
+	border-bottom:0px;
+}
+
+.simpleselect .options .optgroup .option {
+	padding-left:10px;
+}
+
+.simpleselect .options .option.active {
+	background:#EDEDED;
 }
 
 /* Tables */
