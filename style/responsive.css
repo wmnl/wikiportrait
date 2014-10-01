@@ -56,7 +56,6 @@
 	.bottom .button, .divider, input[type="button"], input[type="submit"], button {
 		display:table-cell;
 		text-align:center;
-		width:100%;
 	}
 	
 	button[name="claim"] {
