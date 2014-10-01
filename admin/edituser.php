@@ -1,6 +1,7 @@
 <?php
 	require '../config/connect.php';   
-        include '../header.php';
+	include '../header.php';
+	include 'tabs.php';
 	checkAdmin();
         if (isset($_GET['id']))
         {
@@ -147,9 +148,9 @@
                 </div>
             </div>
 
-            <div class="input-container">
-                    <button class="float-right" name="postback">Opslaan</button>
-            </div>
+            <div class="bottom right">
+					<button class="green" name="postback"><i class="fa fa-floppy-o fa-lg"></i>Opslaan</button>
+			</div>
 
     </form>
     <?php

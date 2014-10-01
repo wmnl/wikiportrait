@@ -99,7 +99,7 @@
 		</div>
 		 
 		 <div class="bottom right">
-		 	<button type="button" name="claim" onclick="document.getElementById('setowner').value = <?= $_SESSION['user'] ?>"><i class="fa fa-bolt fa-lg"></i>Aan mij toewijzen</button><span class="divider">&nbsp;</span><button class="green" type="submit" name="postback"><i class="fa fa-floppy-o fa-lg"></i>Opslaan</button>
+		 	<button type="button" name="claim" onclick="document.getElementById('setowner').value = <?= $_SESSION['user'] ?>"><i class="fa fa-bolt fa-lg"></i>Ik neem hem</button><span class="divider">&nbsp;</span><button class="green" type="submit" name="postback"><i class="fa fa-floppy-o fa-lg"></i>Opslaan</button>
 		 </div>
 		 
 	</form>

@@ -1,31 +1,32 @@
 <?php
-    require '../config/connect.php';   
-    include '../header.php';
-    checkAdmin();
-    if (isset($_GET['id']))
-    {
+	require '../config/connect.php';   
+	include '../header.php';
+	include 'tabs.php';
+	checkAdmin();
+	if (isset($_GET['id']))
+	{
 	$id = $_GET['id'];
-    }
-    else 
-    {
+	}
+	else 
+	{
 	header("Location: users.php");
-    }
+	}
 ?>			
 <div id="content">
-    <h2>Bericht bewerken</h2>
-    <?php
+	<h2>Bericht bewerken</h2>
+	<?php
 	$query = sprintf("SELECT * FROM messages WHERE id = %d", mysqli_real_escape_string($connection, $id)); 
 	$result = mysqli_query($connection, $query);
 	$row = mysqli_fetch_assoc($result);
 	
 	if (mysqli_num_rows($result) == 0)
 	{
-	    echo "<div class=\"box red\">Bericht niet gevonden!</div>";
+		 echo "<div class=\"box red\">Bericht niet gevonden!</div>";
 	}
 	else
 	{
-	    if (isset($_POST['postback']))
-	    {
+		 if (isset($_POST['postback']))
+		 {
 		$errors = array();
 		
 		$title = $_POST['title'];
@@ -33,39 +34,39 @@
 
 		if (empty ($title))
 		{
-		    array_push($errors, "Er is geen titel ingevuld");
+			  array_push($errors, "Er is geen titel ingevuld");
 		}
 		if (empty($message))
 		{
-		    array_push($errors, "Er is geen bericht ingevuld");
+			  array_push($errors, "Er is geen bericht ingevuld");
 		}
 
 		if (count($errors) == 0)
 		{
-		    $query = sprintf("UPDATE messages SET title = '%s', message= '%s' WHERE id = $id", mysqli_real_escape_string($connection, $title), mysqli_real_escape_string($connection, $message));
+			  $query = sprintf("UPDATE messages SET title = '%s', message= '%s' WHERE id = $id", mysqli_real_escape_string($connection, $title), mysqli_real_escape_string($connection, $message));
 
-		    mysqli_query($connection, $query);
-		    header("Location:messages.php");
+			  mysqli_query($connection, $query);
+			  header("Location:messages.php");
 		}
-	    }
-    ?>
-    <form method="post">
-        <div class="input-container">
-            <label for="title"><i class="fa fa-user fa-lg fa-fw"></i>Titel</label>
-            <input type="text" name="title" id="title" value="<?php echo $row['title']; ?>"  required="required"/>
-        </div>
+		 }
+	?>
+	<form method="post">
+		<div class="input-container">
+			<label for="title"><i class="fa fa-tag fa-lg fa-fw"></i>Titel</label>
+			<input type="text" name="title" id="title" value="<?php echo $row['title']; ?>"	 required="required"/>
+		</div>
 
-        <div class="input-container">
-            <label for="message"><i class="fa fa-briefcase fa-lg fa-fw"></i>Bericht</label>
-            <textarea required="required" name="message" ><?php echo $row['message'] ?></textarea>
-        </div>
+		<div class="input-container">
+			<label for="message"><i class="fa fa-align-left fa-lg fa-fw"></i>Bericht</label>
+			<textarea required="required" name="message" ><?php echo $row['message'] ?></textarea>
+		</div>
 
-        <div class="input-container">
-                <button class="float-right" name="postback">Toevoegen</button>
-        </div>
-    </form>
+		<div class="bottom right">
+				<button class="green" name="postback"><i class="fa fa-floppy-o fa-lg"></i>Opslaan</button>
+		</div>
+	</form>
 </div>
 <?php
 	}
-    include '../footer.php';
+	include '../footer.php';
 ?>

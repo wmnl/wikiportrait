@@ -1,5 +1,6 @@
-<?php   
+<?php
     include '../header.php';
+	include 'tabs.php';
     checkAdmin();
     if (isset($_POST['postback']))
     {
@@ -112,8 +113,8 @@
             </div>
         </div>
 
-        <div class="input-container">
-                <button class="float-right" name="postback">Toevoegen</button>
+        <div class="bottom right">
+                <button class="green" name="postback"><i class="fa fa-plus-square fa-lg"></i>Toevoegen</button>
         </div>
     </form>
 </div>
