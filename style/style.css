@@ -153,23 +153,28 @@ p:last-child {
 
 /* Tabs */
 .tabs {
-	margin-top:20px;
-	margin-left:10px;
+    margin-bottom:-20px;
+    width:100%;
+}
+
+.tabs ul {
+    display:table;
+    margin:0;
+    border-collapse:separate;
+    border-spacing:10px;
 }
 
 .tabs li {
-	float:left;
-	margin-right:10px;
-	margin-bottom:-1px;
-	list-style:none;
+    display:table-cell;
+    background:white;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+    padding:10px;
 }
 
 .tabs li a {
 	font-size:0.9em;
-	background:white;
-	padding:10px;
-	border-top-left-radius:5px;
-	border-top-right-radius:5px;
+    display:block;
 }
 
 /* Uploadformulier */

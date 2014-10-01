@@ -42,18 +42,10 @@
 		display:none;
 		clear:none;
 	}
-	
-	.tabs {
-		margin-top:10px;
-	}
-	
-	.tabs a {
-		display:block;
-	}
-	
-	.tabs li {
-		margin-bottom:-10px;
-	}
+    
+    .tabs ul {
+        width:100%;
+    }
 	
 	.bottom {
 		display:table;
