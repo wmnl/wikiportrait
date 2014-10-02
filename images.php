@@ -19,17 +19,17 @@
 		<?php
 			 if ($archived == 0)
 			 {
-			echo "<a href=\"images.php?archived=1\" class=\"button float-right\" title=\"Archief\"><i class=\"fa fa-archive fa-lg fa-fw\"></i><span>Archief</span></a>";
+			echo "<a href=\"images.php?archived=1\" class=\"button\" title=\"Archief\"><i class=\"fa fa-archive fa-lg fa-fw\"></i><span>Archief</span></a>";
 			 }
 			 else
 			 {
-			echo "<a href=\"images.php?archived=0\" class=\"button float-right\" title=\"Archief\"><i class=\"fa fa-archive fa-lg fa-fw\"></i><span>Archief</span></a>";
+			echo "<a href=\"images.php?archived=0\" class=\"button\" title=\"Archief\"><i class=\"fa fa-archive fa-lg fa-fw\"></i><span>Archief</span></a>";
 			 }
 		?>
 	
 		<form class="navigation" method="post">
 				
-				<label for="page">Ga naar pagina</label>
+				<label for="page">Pagina</label>
 				
 				<select class="select" name="page" onchange="loadPage()" id="page">	
 					<?php

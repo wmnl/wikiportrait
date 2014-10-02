@@ -71,15 +71,6 @@ p:last-child {
 	display:inline-block;
 }
 
-.navigation {
-	width:auto;
-	float:right;
-}
-
-.navigation label, .navigation .simpleselect {
-	width:50%;
-}
-
 .clear {
 	clear:both;
 }
@@ -201,11 +192,33 @@ p:last-child {
 /* Combined header */
 .page-header {
 	margin-bottom:10px;
-	display:block;
+	display:table;
+	width:100%;
 }
 
 .page-header h2 {
-	display:inline;
+	display:table-cell;
+	vertical-align:middle;
+	width:100%;
+}
+
+.page-header .button {
+	display:table-cell;
+	white-space:nowrap;
+}
+
+.page-header .navigation {
+	display:table-cell;
+	border-left:10px solid #fff;
+}
+
+.navigation label, .navigation .simpleselect {
+	width:50%;
+}
+
+.navigation .simpleselect {
+	width:auto;
+	min-width:4em;
 }
 
 /* Uploadformulier */
@@ -370,7 +383,7 @@ input[type="file"]::-webkit-file-upload-button {
 	content:"\f0dc";
 	position:absolute;
 	font-family:FontAwesome;
-	font-size:120%;
+	font-size:1.2em;
 	right:10px;
 	color:#aaa;
 }

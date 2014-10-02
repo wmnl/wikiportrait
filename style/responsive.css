@@ -77,41 +77,20 @@
 		margin-left:0px;
 	}
 	
-	.page-header {
-		display:table;
-		width:100%;
-	}
-	
-	.page-header h2 {
-		display:table-cell;
-		width:100%;
-	}
-	
-	.page-header a.button.float-right {
-		display:table-cell;
+	.page-header .button {
 		text-align:center;
 	}
 	
-	.page-header a.button.float-right .fa {
+	.page-header .button .fa {
 		margin-right:0px;
 	}
 	
-	.page-header .navigation {
-		border-left:10px solid #fff;
-	}
-	
-	.page-header .navigation {
-		float:none;
-	}
-	
-	.page-header .navigation label {
+	.navigation label {
 		display:none;
 	}
 	
-	.page-header .navigation .simpleselect {
+	.navigation .simpleselect, .navigation .simpleselect .options {
 		border-radius:5px;
-		width:auto;
-		min-width:4em;
 	}
 }
 
