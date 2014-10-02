@@ -47,7 +47,7 @@
 		text-align:center;
 	}
 	
-	.bottom, .page-header {
+	.bottom {
 		display:table;
 		table-layout:fixed;
 		width:100%;
@@ -77,9 +77,14 @@
 		margin-left:0px;
 	}
 	
+	.page-header {
+		display:table;
+		width:100%;
+	}
+	
 	.page-header h2 {
 		display:table-cell;
-		width:65%;
+		width:100%;
 	}
 	
 	.page-header a.button.float-right {
@@ -106,6 +111,7 @@
 	.page-header .navigation .simpleselect {
 		border-radius:5px;
 		width:auto;
+		min-width:4em;
 	}
 }
 
