@@ -65,7 +65,17 @@
     }
 ?>			
 <div id="content">
-    <h2>Gebruiker toevoegen</h2>
+
+	<div class="page-header">
+
+    	<h2>Gebruiker toevoegen</h2>
+    	
+		<a href="users.php" class="button red float-right"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
+    
+		<div class="clear"></div>
+    
+	</div>
+    
     <?php
         if (!empty($errors))
         {

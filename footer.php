@@ -7,7 +7,7 @@
 		<script src="<?php echo $basispad ?>/scripts/jQuery.SimpleSelect/jquery.simpleselect.min.js"></script>
 		<script>
 		$(".select").simpleselect({
-			displayContainerInside: "document"
+			displayContainerInside: "window"
 		});
 		</script>
 	</body>

@@ -34,7 +34,7 @@
 		margin-right:0px;
 	}
 	
-	.menu a span, .tabs a span, button span {
+	a span {
 		display:none;
 		clear:none;
 	}
@@ -47,7 +47,7 @@
 		text-align:center;
 	}
 	
-	.bottom {
+	.bottom, .page-header {
 		display:table;
 		table-layout:fixed;
 		width:100%;
@@ -67,10 +67,45 @@
 		width:100%;
 	}
 	
+	thead .icon {
+		width:auto;
+	}
+	
 	.float-right {
 		float:none;
 		margin-bottom:10px;
 		margin-left:0px;
+	}
+	
+	.page-header h2 {
+		display:table-cell;
+		width:65%;
+	}
+	
+	.page-header a.button.float-right {
+		display:table-cell;
+		text-align:center;
+	}
+	
+	.page-header a.button.float-right .fa {
+		margin-right:0px;
+	}
+	
+	.page-header .navigation {
+		border-left:10px solid #fff;
+	}
+	
+	.page-header .navigation {
+		float:none;
+	}
+	
+	.page-header .navigation label {
+		display:none;
+	}
+	
+	.page-header .navigation .simpleselect {
+		border-radius:5px;
+		width:auto;
 	}
 }
 

@@ -47,7 +47,7 @@ a {
 
 a:hover, a:focus, .tabs .active a, #header a {
 	color:#000;
-    background-color:transparent;
+	background-color:transparent;
 }
 
 p {
@@ -69,6 +69,15 @@ p:last-child {
 	font-weight:400;
 	min-width:11em;
 	display:inline-block;
+}
+
+.navigation {
+	width:auto;
+	float:right;
+}
+
+.navigation label, .navigation .simpleselect {
+	width:50%;
 }
 
 .clear {
@@ -165,28 +174,38 @@ p:last-child {
 
 /* Tabs */
 .tabs {
-    margin-bottom:-20px;
-    width:100%;
+	margin-bottom:-20px;
+	width:100%;
 }
 
 .tabs ul {
-    display:table;
-    margin:0;
-    border-collapse:separate;
-    border-spacing:10px;
+	display:table;
+	margin:0;
+	border-collapse:separate;
+	border-spacing:10px;
 }
 
 .tabs li {
-    display:table-cell;
-    background:white;
+	display:table-cell;
+	background:white;
 	border-top-left-radius:5px;
 	border-top-right-radius:5px;
-    padding:10px;
+	padding:10px;
 }
 
 .tabs li a {
 	font-size:0.9em;
-    display:block;
+	display:block;
+}
+
+/* Combined header */
+.page-header {
+	margin-bottom:10px;
+	display:block;
+}
+
+.page-header h2 {
+	display:inline;
 }
 
 /* Uploadformulier */
@@ -208,15 +227,15 @@ form {
 label {
 	display:table-cell;
 	width:35%;
-	padding-left:10px;
+	padding:0px 10px;
 	background:#ddd;
-    white-space:nowrap;
+	white-space:nowrap;
 	vertical-align:middle;
 	border-top-left-radius:5px;
 	border-bottom-left-radius:5px;
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
 }
 
 .fa {
@@ -232,7 +251,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="dat
 	border-radius:0px;
 	padding:10px;
 	border:1px solid #ddd;
-    background:#fff;
+	background:#fff;
 	border-top-right-radius:5px;
 	border-bottom-right-radius:5px;
 	color:#444;
@@ -406,7 +425,15 @@ tbody tr:last-child td:last-child {
 }
 
 thead .icon {
-    width:6em;
+	width:6em;
+}
+
+td.image {
+	padding:0px;
+}
+
+.image img {
+	width:6em;
 }
 
 /* Boxes */

@@ -30,7 +30,15 @@
 ?>			
 <div id="content">
 
-	<h2>Bericht toevoegen</h2>
+	<div class="page-header">
+	
+		<h2>Bericht toevoegen</h2>
+		
+		<a href="messages.php" class="button red float-right"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
+		
+		<div class="clear"></div>
+		
+	</div>
 	
 	<?php
 		if (!empty($errors))

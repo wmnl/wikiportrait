@@ -11,23 +11,52 @@
 		}
 ?>		
 <div id="content">
-	<h2>Ingestuurde foto's</h2>
 
-	<?php
-		 if ($archived == 0)
-		 {
-		echo "<a href=\"images.php?archived=1\" class=\"button float-right\"><i class=\"fa fa-archive fa-lg fa-fw\"></i>Archief</a>";
-		 }
-		 else
-		 {
-		echo "<a href=\"images.php?archived=0\" class=\"button float-right\"><i class=\"fa fa-archive fa-lg fa-fw\"></i>Archief</a>";
-		 }
-	?>
+	<div class="page-header">
+
+		<h2>Ingestuurde foto's</h2>
+	
+		<?php
+			 if ($archived == 0)
+			 {
+			echo "<a href=\"images.php?archived=1\" class=\"button float-right\" title=\"Archief\"><i class=\"fa fa-archive fa-lg fa-fw\"></i><span>Archief</span></a>";
+			 }
+			 else
+			 {
+			echo "<a href=\"images.php?archived=0\" class=\"button float-right\" title=\"Archief\"><i class=\"fa fa-archive fa-lg fa-fw\"></i><span>Archief</span></a>";
+			 }
+		?>
+	
+		<form class="navigation" method="post">
+				
+				<label for="page">Ga naar pagina</label>
+				
+				<select class="select" name="page" onchange="loadPage()" id="page">	
+					<?php
+						$query = "SELECT COUNT(*) FROM images WHERE archived = $archived";
+						$result = mysqli_query($connection, $query);
+						$row = mysqli_fetch_row($result);
+						$total_records = $row[0];
+		
+					$total_pages = ceil($total_records / 15);
+					for ($i=1; $i<=$total_pages; $i++) :
+					  ?>
+					<option value='<?= $i ?>' <? if ($_GET['page'] == $i) echo 'selected' ?>><?= $i ?></option>";
+					  <?
+					endfor;
+					?>
+				</select>
+	
+		</form>
+		
+		<div class="clear"></div>
+	
+	</div>
 
 	<table>
 			<thead>
 				<tr>
-					<th class="center" style="width:10em;">Foto</th>
+					<th class="icon center">Foto</th>
 					<th>Titel</th>
 					<th>Uploader</th>
 					<th>Datum</th>
@@ -37,10 +66,9 @@
 				<?php
 					setlocale(LC_ALL, 'nl_NL');
 					date_default_timezone_set('Europe/Amsterdam');
-					if (isset($_GET['page'])) { $page  = $_GET['page']; } else { $page = 1; }; 
-					$start_from = ($page-1) * 20;
-					$query = sprintf("SELECT * FROM images WHERE archived = $archived ORDER BY id DESC LIMIT %d, 20", mysqli_real_escape_string($connection, $start_from));
-					echo "<div class=\"box grey\">" . $query . "</div>";
+					if (isset($_GET['page'])) { $page	= $_GET['page']; } else { $page = 1; }; 
+					$start_from = ($page-1) * 15;
+					$query = sprintf("SELECT * FROM images WHERE archived = $archived ORDER BY id DESC LIMIT %d, 15", mysqli_real_escape_string($connection, $start_from));
 					$result = mysqli_query($connection, $query);
 
 					while ($row = mysqli_fetch_assoc($result)):
@@ -52,45 +80,17 @@
 				?>
 
 				<tr>
-					<td><a href="image.php?id=<?php echo $id ?>"><img src="uploads/<?php echo $filename?>" style="width:7.5em; margin:auto;" /></a></td>
+					<td class="image"><a href="image.php?id=<?php echo $id ?>"><img src="uploads/<?php echo $filename?>" /></a></td>
 					<td><a href="image.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
 					<td><?php echo $name ?></td>
-					<td><?php echo strftime("%e %B %Y om %H:%I:%S", $timestamp) ?></td>
+					<td><?php echo strftime("%e %B %Y", $timestamp) ?></td>
 				</tr>
 
 				<?php
-			  endwhile;
+				 endwhile;
 				?>
 			</tbody>
 	</table>
-	
-	<form method="post" class="bottom float-right" style="margin-top:10px; width:20%;">
-		
-		<div class="input-container">
-		
-			<label for="page" style="width:70%;">Ga naar pagina</label>
-			
-			<select class="select" name="page" onchange="loadPage()" id="page">	
-				<?php
-					$query = "SELECT COUNT(*) FROM images WHERE archived = $archived";
-					$result = mysqli_query($connection, $query);
-					$row = mysqli_fetch_row($result);
-					$total_records = $row[0];
-	
-				$total_pages = ceil($total_records / 20);
-				for ($i=1; $i<=$total_pages; $i++) :
-				  ?>
-				<option value='<?= $i ?>' <? if ($_GET['page'] == $i) echo 'selected' ?>><?= $i ?></option>";
-				  <?
-				endfor;
-				?>
-			</select>
-			
-		</div>
-		
-	</form>
-	
-	<div class="clear"></div>
 	
 </div>
 <script>
@@ -105,7 +105,7 @@
 		return sParameterName[1];
 		 }
 	}
-	}	  
+	}		 
 	
 	var page = getUrlParameter('page');
 	var archived = getUrlParameter('archived');
