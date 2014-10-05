@@ -414,6 +414,7 @@ td {
 	padding:10px;
 	overflow:hidden;
 	word-wrap:break-word;
+	line-height:125%;
 }
 
 th {
@@ -445,6 +446,27 @@ thead .icon {
 	width:100%;
 	display:block;
 	border-radius:5px;
+}
+
+.actions-1 {
+	width:9em;
+}
+
+.actions-2 {
+	width:18em;
+}
+
+td .button {
+	margin-right:10px;
+	padding:7.5px;
+}
+
+td .button .fa {
+	margin-right:7.5px;
+}
+
+td .button:last-child {
+	margin-right:0px;
 }
 
 /* Boxes */

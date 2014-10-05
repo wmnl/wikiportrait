@@ -22,9 +22,9 @@
 		<table>
 		<thead>
 			<tr>
+				<th class="icon center">ID</th>
 				<th>Titel</th>
-				<th>Bericht</th>
-				<th class="icon center" colspan="2">Acties</th>
+				<th class="actions-2 center">Acties</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,13 +35,11 @@
 			{
 				$id = $row['id'];
 				$title = $row['title'];
-				$message = $row['message'];
 		
 				echo "<tr>";
-					  echo "<td data-title =\"Titel\">$title</td>";
-					  echo "<td data-title =\"Bericht\"><div style=\"height:200px; overflow-y:scroll; -webkit-overflow-scrolling:touch;\">" . str_replace("\n", "<br />", $message) . "</div></td>";
-					  echo "<td data-title =\"Bewerken\" class=\"center\"><a href=\"editmessage.php?id=$id\"><i class=\"fa fa-pencil fa-lg\"></i></a></td>";
-					  echo "<td data-title =\"Verwijderen\" class=\"center\"><a href=\"deletemessage.php?nojs=1&id=$id\" onclick=\"return confirmDelete('$id')\"><i class=\"fa fa-trash-o fa-lg\"></i></a></td>";
+					echo "<td data-title=\"ID\" class=\"center\">$id</td>";
+					echo "<td data-title=\"Titel\">$title</td>";
+					echo "<td data-title=\"Acties\" class=\"center\"><a class=\"button\" href=\"editmessage.php?id=$id\"><i class=\"fa fa-pencil\"></i>Bewerken</a><div class=\"divider\"></div><a class=\"button red\" href=\"deletemessage.php?nojs=1&id=$id\" onclick=\"return confirmDelete('$id')\"><i class=\"fa fa-trash-o\"></i>Verwijderen</a></td>";
 				echo "</tr>";
 			}
 		?>
