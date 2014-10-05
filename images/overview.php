@@ -55,10 +55,12 @@
 		<table>
 				<thead>
 					<tr>
-						<th class="center">Foto</th>
+						<th>Foto</th>
 						<th>Titel</th>
 						<th>Uploader</th>
 						<th>Datum</th>
+						<th>Eigenaar</th>
+						<th class="actions">Acties</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -79,10 +81,13 @@
 					?>
 	
 					<tr>
+						
 						<td data-title="Foto" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/<?php echo $filename?>" /></a></td>
 						<td data-title="Titel"><a href="single.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
 						<td data-title="Uploader"><?php echo $name ?></td>
 						<td data-title="Datum"><?php echo strftime("%e %B %Y", $timestamp) ?></td>
+						<td data-title="Eigenaar">Naamloos</td>
+						<td data-title="Acties" class="center"><a class="button" href="single.php?id=<?php echo $id ?>"><i class="fa fa-info"></i>Meer informatie</a></td>
 					</tr>
 	
 					<?php
@@ -120,7 +125,7 @@
 	}
 	
 	function loadPage() {
-	window.location.href = 'images.php?page=' + document.getElementById('page').value + '&archived=' + archived;
+	window.location.href = 'overview.php?page=' + document.getElementById('page').value + '&archived=' + archived;
 	}
 </script>
 <?php
