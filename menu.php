@@ -9,7 +9,7 @@ echo "<ul>\n";
 	if(isset($_SESSION['user']))
 	{
 		echo "\t\t\t\t\t<li" .(($page == 'upload')?' class="active"':""). "><a href=\"$basispad/upload.php\" title=\"Uploaden\"><i class=\"fa fa-upload\"></i><span>Uploaden</span></a></li>\n";
-		echo "\t\t\t\t\t<li" .(($page == 'images')?' class="active"':""). "><a href=\"$basispad/images/overview.php\" title=\"Inzendingen\"><i class=\"fa fa-folder-open\"></i><span>Inzendingen</span></a></li>\n";
+		echo "\t\t\t\t\t<li" .(($page == 'overview')?' class="active"':""). "><a href=\"$basispad/images/overview.php\" title=\"Inzendingen\"><i class=\"fa fa-folder-open\"></i><span>Inzendingen</span></a></li>\n";
 	}
 	
 	if($_SESSION['isSysop'] == true)
