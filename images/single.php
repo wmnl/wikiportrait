@@ -1,5 +1,5 @@
 <?php 
-	include 'header.php';
+	include '../header.php';
 	checkLogin();
 ?>
 
@@ -36,7 +36,7 @@
 	
 	<h2>Ingestuurde foto: <?= $row['title']; ?></h2>
 
-	<a href="uploads/<?= $row['filename']; ?>" target="_blank" class="float-right"><img src="uploads/<?= $row['filename'] ;?>" style="max-width:10em;" /></a>
+	<a href="../uploads/<?= $row['filename']; ?>" target="_blank" class="float-right"><img src="../uploads/<?= $row['filename'] ;?>" style="max-width:10em;" /></a>
 
 	<h3>Informatie</h3>
 	
@@ -52,7 +52,7 @@
 	<h3>Wat doen we ermee?</h3>
 	
 		<ul class="list">
-			<li><a href="https://commons.wikimedia.org/wiki/Special:Upload?&uploadformstyle=basicwp&wpUploadDescription={{Information%0A|Description={{nl|1=<?= $row['title'] ?>}}%0A|Source=wikiportret.nl%0A|Permission=CC-BY-SA 3.0%0A|Date=<?= $row['date']; ?>%0A|Author=<?= $row['source']; ?>%0A}}%0A{{wikiportrait|}}" target="_blank">Uploaden naar Commons!</a></li>
+			<li><a href="//commons.wikimedia.org/wiki/Special:Upload?&uploadformstyle=basicwp&wpUploadDescription={{Information%0A|Description={{nl|1=<?= $row['title'] ?>}}%0A|Source=wikiportret.nl%0A|Permission=CC-BY-SA 3.0%0A|Date=<?= $row['date']; ?>%0A|Author=<?= $row['source']; ?>%0A}}%0A{{wikiportrait|}}" target="_blank">Uploaden naar Commons!</a></li>
 			<?php
 				$query = "SELECT * FROM messages";
 				$result = mysqli_query($connection, $query);
@@ -111,5 +111,5 @@
 </div>
 
 <?php
-	include 'footer.php';
+	include '../footer.php';
 ?>

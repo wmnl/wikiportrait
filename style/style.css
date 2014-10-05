@@ -185,7 +185,7 @@ p:last-child {
 }
 
 .tabs li a {
-	font-size:0.9em;
+	font-size:0.90em;
 	display:block;
 }
 
@@ -218,7 +218,7 @@ p:last-child {
 
 .navigation .simpleselect {
 	width:auto;
-	min-width:4em;
+	min-width:3em;
 }
 
 /* Uploadformulier */
@@ -441,12 +441,10 @@ thead .icon {
 	width:6em;
 }
 
-td.image {
-	padding:0px;
-}
-
 .image img {
-	width:6em;
+	width:100%;
+	display:block;
+	border-radius:5px;
 }
 
 /* Boxes */

@@ -5,7 +5,7 @@
 	}
 	
 	#all {
-		width:95%;
+		width:100%;
 	}
 	
 	label {
@@ -29,7 +29,7 @@
 		width:100%;
 	}
 	
-	.menu .fa {
+	.menu .fa, .tabs-images .fa {
 		display:block;
 		margin-right:0px;
 	}
@@ -67,15 +67,73 @@
 		width:100%;
 	}
 	
-	thead .icon {
+	/* Tables */
+
+	.table-container table, 
+	.table-container thead, 
+	.table-container tbody, 
+	.table-container th, 
+	.table-container td, 
+	.table-container tr { 
+		display:block;
+	}
+	
+	.table-container table {
+		background:#fff;
+	}
+	
+	.table-container tr {
+		border:1px solid #ddd;
+		border-radius:5px;
+		overflow:hidden;
+		margin-bottom:10px;
+	}
+	
+	.table-container thead tr { 
+		position:absolute;
+		top:-9999px;
+		left:-9999px;
+	}
+ 
+	.table-container td { 
+		position:relative;
+		padding-left:40%;
+		padding-right:10px;
+		text-align:left;
+		border-bottom:1px solid #ddd;
+	}
+	
+	.table-container td:last-child {
+		border-bottom:0px;
+	}
+ 
+	.table-container td:before { 
+		position:absolute;
+		top:10px;
+		left:10px;
+		width:60%;
+		padding-right:10px;
+		text-align:left;
+		font-weight:bold;
+	}
+ 
+	.table-container td:before {
+		content:attr(data-title);
+	}
+	
+	thead .icon, td.image {
 		width:auto;
 	}
+	
+	/* Defloat */
 	
 	.float-right {
 		float:none;
 		margin-bottom:10px;
 		margin-left:0px;
 	}
+	
+	/* Page-header */
 	
 	.page-header .button {
 		text-align:center;
