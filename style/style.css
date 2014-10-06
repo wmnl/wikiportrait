@@ -356,6 +356,9 @@ input[type=checkbox]:checked + label:before {
 	color:#444;
 	margin:0px;
 	width:100%;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
 }
 
 .simpleselect .options {
