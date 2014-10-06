@@ -69,15 +69,23 @@
 						date_default_timezone_set('Europe/Amsterdam');
 						if (isset($_GET['page'])) { $page	= $_GET['page']; } else { $page = 1; }; 
 						$start_from = ($page-1) * 10;
-						$query = sprintf("SELECT * FROM images WHERE archived = $archived ORDER BY id DESC LIMIT %d, 10", mysqli_real_escape_string($connection, $start_from));
+						$query = sprintf("SELECT * FROM images LEFT JOIN users ON users.id = owner WHERE archived = $archived ORDER BY images.id DESC LIMIT %d, 10", mysqli_real_escape_string($connection, $start_from));
 						$result = mysqli_query($connection, $query);
 	
 						while ($row = mysqli_fetch_assoc($result)):
-							$id = $row['id'];
+							$id = $row['images.id'];
 							$filename = $row['filename'];
 							$title = $row['title'];
 							$name = $row['name'];
 							$timestamp = $row['timestamp'];
+							if (empty($row['otrsname']))
+							{
+							    $owner = "Aan niemand toegewezen";
+							}
+							else
+							{
+							    $owner = $row['otrsname'];
+							}
 					?>
 	
 					<tr>
@@ -86,7 +94,7 @@
 						<td data-title="Titel"><a href="single.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
 						<td data-title="Uploader"><?php echo $name ?></td>
 						<td data-title="Datum"><?php echo strftime("%e %B %Y", $timestamp) ?></td>
-						<td data-title="Eigenaar">Naamloos</td>
+						<td data-title="Eigenaar"><?= $owner ?></td>
 						<td data-title="Acties" class="center"><a class="button" href="single.php?id=<?php echo $id ?>"><i class="fa fa-info"></i>Meer informatie</a></td>
 					</tr>
 	
