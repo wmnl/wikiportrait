@@ -22,7 +22,7 @@
 			<tr>
 				<th class="id center">ID</th>
 				<th>Titel</th>
-				<th class="actions-2 center">Acties</th>
+				<th class="actions-2">Acties</th>
 			</tr>
 		</thead>
 		<tbody>

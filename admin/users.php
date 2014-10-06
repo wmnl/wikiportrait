@@ -25,7 +25,7 @@
 					<th>OTRS-naam</th>
 					<th>E-mailadres</th>
 					<th>Beheerder</th>
-					<th class="actions-1 center">Acties</th>
+					<th class="actions-1">Acties</th>
 				 </tr>
 			 </thead>
 			 <tbody>

@@ -17,13 +17,9 @@
 
 		<?php
 			if ($archived == 0)
-			{
 				echo "<h2>Inzendingen</h2>";
-			}
-			else
-			{
+			if ($archived == 1)
 				echo "<h2>Archief</h2>";
-			}
 		?>
 
 		<form class="navigation" method="post">
@@ -39,9 +35,9 @@
 
 					$total_pages = ceil($total_records / 10);
 					for ($i=1; $i<=$total_pages; $i++) :
-					  ?>
+					?>
 					<option value='<?= $i ?>' <? if ($_GET['page'] == $i) echo 'selected' ?>><?= $i ?></option>";
-					  <?
+					<?
 					endfor;
 					?>
 				</select>
@@ -88,9 +84,7 @@
 							    $owner = $row['otrsname'];
 							}
 					?>
-
 					<tr>
-
 						<td data-title="Foto" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/<?php echo $filename?>" /></a></td>
 						<td data-title="Titel"><a href="single.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
 						<td data-title="Uploader"><?php echo $name ?></td>
@@ -98,7 +92,6 @@
 						<td data-title="Eigenaar"><?= $owner ?></td>
 						<td data-title="Acties" class="center"><a class="button" href="single.php?id=<?php echo $id ?>"><i class="fa fa-info"></i>Details</a></td>
 					</tr>
-
 					<?php
 					 endwhile;
 					?>

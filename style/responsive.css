@@ -149,13 +149,19 @@
 	.page-header .button .fa {
 		margin-right:0px;
 	}
-
-	.navigation label {
-		display:none;
+	
+	.navigation {
+		display:table;
 	}
-
-	.navigation .simpleselect, .navigation .simpleselect .options {
-		border-radius:5px;
+	
+	.navigation label {
+		border-radius:0px;
+		border-top-left-radius:5px;
+		border-bottom-left-radius:5px;
+	}
+	
+	.navigation label, .navigation .simpleselect {
+		display:table-cell;
 	}
 }
 
