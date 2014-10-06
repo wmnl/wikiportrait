@@ -353,16 +353,25 @@ input[type="checkbox"] + label:hover {
 /* Select */
 .simpleselect {
 	display:table-cell;
-	border:1px solid #ddd;
-	background:#fff;
-	border-top-right-radius:5px;
-	border-bottom-right-radius:5px;
-	color:#444;
-	margin:0px;
 	width:100%;
 	-webkit-user-select:none;
 	-moz-user-select:none;
 	-ms-user-select:none;
+}
+
+.simpleselect .placeholder {
+	border:1px solid #ddd;
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+}
+
+.simpleselect .placeholder:after {
+	content:"\f0dc";
+	position:absolute;
+	font-family:FontAwesome;
+	font-size:1.2em;
+	right:10px;
+	color:#aaa;
 }
 
 .simpleselect .options {
@@ -388,15 +397,6 @@ input[type="checkbox"] + label:hover {
 
 .simpleselect .options .option.active {
 	background:#EDEDED;
-}
-
-.simpleselect .placeholder:after {
-	content:"\f0dc";
-	position:absolute;
-	font-family:FontAwesome;
-	font-size:1.2em;
-	right:10px;
-	color:#aaa;
 }
 
 /* Tables */
