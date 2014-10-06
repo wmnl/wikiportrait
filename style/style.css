@@ -346,6 +346,10 @@ input[type=checkbox]:checked + label:before {
 	letter-spacing:8px;
 }
 
+input[type="checkbox"] + label:hover {
+	cursor:pointer;
+}
+
 /* Select */
 .simpleselect {
 	display:table-cell;
