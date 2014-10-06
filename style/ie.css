@@ -1,0 +1,33 @@
+.menu li, .tabs li {
+	display:block;
+	list-style:none;
+	float:left;
+}
+
+.tabs li {
+	margin-right:10px;
+}
+
+.tabs {
+	margin:10px 0px;
+}
+
+.fa {
+	display:none;
+	margin:0px;
+}
+
+.page-header h2 {
+	float:left;
+	width:auto;
+}
+
+.page-header .button {
+	float:right;
+}
+
+.checkbox input {
+	display:block;
+	float:left;
+	margin-right:10px;
+}

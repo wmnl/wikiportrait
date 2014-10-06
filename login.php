@@ -1,11 +1,9 @@
-<?php
-	include 'header.php';
-?>
-			
+<?php include 'header.php'; ?>
+
 <div id="content">
-	
+
 	<h2>Inloggen</h2>
-	
+
 	<p>Hier kunnen medewerkers van Wikiportret inloggen in het beheergedeelte.</p>
 
 	<?php
@@ -17,7 +15,7 @@
 			{
 				echo "<li>$error</li>";
 			}
-		
+
 			echo "</ul></div>";
 		}
 		else
@@ -30,30 +28,30 @@
 			{
 				array_push($errors, "Je hebt geen gebruikersnaam ingevuld");
 			}
-		
-			if (empty ($_POST['password'])) 
+
+			if (empty ($_POST['password']))
 			{
 				array_push($errors, "Je hebt geen wachtwoord ingevuld");
 			}
 
-			if (empty($errors)) 
+			if (empty($errors))
 			{
 				$query = sprintf("SELECT * FROM users WHERE username = '%s' AND password = '%s' AND active = 1", mysqli_real_escape_string($connection, $_POST['username']), sha1($_POST['password']));
 				$result = mysqli_query($connection, $query);
 
-				if (mysqli_num_rows($result) == 1) 
+				if (mysqli_num_rows($result) == 1)
 				{
 					$row = mysqli_fetch_assoc($result);
-				
-					if ($row['isSysop'] == 1) 
+
+					if ($row['isSysop'] == 1)
 					{
 						$isSysop = true;
 					}
-					else 
+					else
 					{
 						$isSysop = false;
 					}
-		
+
 					$_SESSION['user'] = $row['id'];
 					if ($isSysop)
 					{
@@ -63,7 +61,7 @@
 					{
 						$_SESSION['isSysop'] = false;
 					}
-		
+
 					header("Location:index.php");
 				}
 				else
@@ -74,12 +72,12 @@
 			else
 			{
 			echo "<div class=\"box red\"><ul>";
-			
+
 			foreach ($errors as $error)
 			{
 				echo "<li>$error</li>";
 			}
-			
+
 			echo "</ul></div>";
 			}
 		}
@@ -87,7 +85,7 @@
 	?>
 
 	<form method="post">
-	
+
 		<div class="input-container">
 			<label for="username"><i class="fa fa-user fa-lg fa-fw"></i>Gebruikersnaam</label>
 			<input type="text" name="username" id="username" autocorrect="off"/>
@@ -99,13 +97,11 @@
 		</div>
 
 		<div class="bottom right">
-			<button class="green" name="postback"><i class="fa fa-sign-in fa-lg"></i>Inloggen</button>
+			<button class="green" type="submit" name="postback"><i class="fa fa-sign-in fa-lg"></i>Inloggen</button>
 		</div>
-		
+
 	</form>
-	
+
 </div>
 
-<?php
-	include 'footer.php';
-?>
+<?php include 'footer.php'; ?>
