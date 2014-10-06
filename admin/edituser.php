@@ -13,7 +13,15 @@
         }
 ?>			
 <div id="content">
-    <h2>Gebruiker bewerken</h2>
+
+	<div class="page-header">
+
+		<h2>Gebruiker bewerken</h2>
+
+		<a href="users.php" class="button red float-right"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
+
+	</div>
+	
     <?php					
             $query = sprintf("SELECT * FROM users WHERE id = %d", mysqli_real_escape_string($connection, $id)); 
             $result = mysqli_query($connection, $query);

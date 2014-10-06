@@ -13,7 +13,17 @@
 	}
 ?>			
 <div id="content">
-	<h2>Bericht bewerken</h2>
+
+	<div class="page-header">
+
+		<h2>Bericht bewerken</h2>
+
+		<a href="messages.php" class="button red float-right"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
+
+		<div class="clear"></div>
+
+	</div>
+	
 	<?php
 	$query = sprintf("SELECT * FROM messages WHERE id = %d", mysqli_real_escape_string($connection, $id)); 
 	$result = mysqli_query($connection, $query);

@@ -36,8 +36,6 @@
 
 		<a href="messages.php" class="button red float-right"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
 
-		<div class="clear"></div>
-
 	</div>
 
 	<?php

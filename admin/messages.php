@@ -11,8 +11,6 @@
 
 		 <a href="addmessage.php" class="button float-right"><i class="fa fa-plus-square fa-lg"></i><span>Nieuw bericht</span></a>
 
-		 <div class="clear"></div>
-
 	</div>
 
 	<div class="box grey">Welkom bij het berichtenbeheer. Kies een bericht of voeg een nieuw bericht toe.</div>
