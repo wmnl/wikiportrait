@@ -52,14 +52,17 @@
 		width:100%;
 	}
 
-	.bottom .button, .bottom button, .divider, .bottom input[type="button"], .bottom input[type="submit"] {
+	.bottom .button, .bottom button, .bottom input[type="button"], .bottom input[type="submit"], .divider {
 		display:table-cell;
 		text-align:center;
+	}
+	
+	.bottom button {
+		width:100%;
 	}
 
 	.divider {
 		width:10px;
-		display:table-cell;
 	}
 
 	.fixed {

@@ -381,6 +381,7 @@ input[type="checkbox"] + label:hover {
 	border-top-right-radius:5px;
 	border-bottom-right-radius:5px;
 	overflow:hidden;
+	margin-bottom:10px;
 }
 
 .simpleselect .option {
