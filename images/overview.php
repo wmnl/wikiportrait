@@ -69,11 +69,11 @@
 						date_default_timezone_set('Europe/Amsterdam');
 						if (isset($_GET['page'])) { $page	= $_GET['page']; } else { $page = 1; }; 
 						$start_from = ($page-1) * 10;
-						$query = sprintf("SELECT * FROM images LEFT JOIN users ON users.id = owner WHERE archived = $archived ORDER BY images.id DESC LIMIT %d, 10", mysqli_real_escape_string($connection, $start_from));
+						$query = sprintf("SELECT images.id as image_id, images.title as title, images.filename as filename, images.name as name, images.timestamp as timestamp, users.otrsname as otrsname FROM images LEFT JOIN users ON users.id = owner WHERE archived = $archived ORDER BY images.id DESC LIMIT %d, 10", mysqli_real_escape_string($connection, $start_from));
 						$result = mysqli_query($connection, $query);
 	
 						while ($row = mysqli_fetch_assoc($result)):
-							$id = $row['images.id'];
+							$id = $row['image_id'];
 							$filename = $row['filename'];
 							$title = $row['title'];
 							$name = $row['name'];
