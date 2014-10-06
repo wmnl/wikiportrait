@@ -70,7 +70,6 @@
 						if (isset($_GET['page'])) { $page	= $_GET['page']; } else { $page = 1; };
 						$start_from = ($page-1) * 10;
 						$query = sprintf("SELECT * FROM images LEFT JOIN users ON users.id = owner WHERE archived = $archived ORDER BY images.id DESC LIMIT %d, 10", mysqli_real_escape_string($connection, $start_from));
-						echo $query;
 						$result = mysqli_query($connection, $query);
 
 						while ($row = mysqli_fetch_assoc($result)):
