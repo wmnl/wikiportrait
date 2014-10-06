@@ -2,19 +2,19 @@
 	include '../header.php';
 	include 'tabs.php';
 	checkAdmin();
-?>			
+?>
 <div id="content">
 
 	<div class="page-header">
 
 		 <h2>Berichtenbeheer</h2>
-	
+
 		 <a href="addmessage.php" class="button float-right"><i class="fa fa-plus-square fa-lg"></i><span>Nieuw bericht</span></a>
-		 
+
 		 <div class="clear"></div>
-		 
+
 	</div>
-	
+
 	<div class="box grey">Welkom bij het berichtenbeheer. Kies een bericht of voeg een nieuw bericht toe.</div>
 
 	<div class="table-container">
@@ -22,7 +22,7 @@
 		<table>
 		<thead>
 			<tr>
-				<th class="icon center">ID</th>
+				<th class="id center">ID</th>
 				<th>Titel</th>
 				<th class="actions-2 center">Acties</th>
 			</tr>
@@ -35,7 +35,7 @@
 			{
 				$id = $row['id'];
 				$title = $row['title'];
-		
+
 				echo "<tr>";
 					echo "<td data-title=\"ID\" class=\"center\">$id</td>";
 					echo "<td data-title=\"Titel\">$title</td>";
@@ -46,7 +46,7 @@
 		</tbody>
 		</table>
 	</div>
-	
+
 </div>
 <?php
 	include '../footer.php';

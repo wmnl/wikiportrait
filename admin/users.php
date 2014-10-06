@@ -6,15 +6,15 @@
 <div id="content">
 
 	<div class="page-header">
-	
+
 		<h2>Gebruikersbeheer</h2>
 
 		<a href="adduser.php" class="button float-right"><i class="fa fa-plus-square fa-lg"></i><span>Nieuwe gebruiker</span></a>
-		
+
 		<div class="clear"></div>
-	
+
 	</div>
-	
+
 	<div class="box grey">Welkom bij het gebruikersbeheer. Kies een gebruiker of maak een nieuwe gebruiker aan.</div>
 
 	<div class="table-container">
@@ -22,7 +22,7 @@
 		 <table>
 			 <thead>
 				 <tr>
-				 	<th class="icon center">ID</th>
+				 	<th class="id center">ID</th>
 					<th>Gebruikersnaam</th>
 					<th>OTRS-naam</th>
 					<th>E-mailadres</th>
@@ -41,7 +41,7 @@
 						 $otrsname = $row['otrsname'];
 						 $email = $row['email'];
 						 $sysop = $row['isSysop'];
-	
+
 						 echo "<tr>";
 						 	echo "<td data-title =\"ID\" class=\"center\">$id</td>";
 							 echo "<td data-title =\"Gebruikersnaam\">$username</td>";
@@ -54,8 +54,8 @@
 			 ?>
 			 </tbody>
 		 </table>
-	</div> 
-	 
+	</div>
+
 </div>
 <?php
 	include '../footer.php';
