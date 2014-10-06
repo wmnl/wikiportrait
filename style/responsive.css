@@ -91,7 +91,7 @@
 
 	.table-container td {
 		position:relative;
-		padding-left:38%;
+		padding-left:50%;
 		padding-right:10px;
 		text-align:left;
 		border-bottom:1px solid #ddd;
@@ -105,7 +105,7 @@
 		position:absolute;
 		top:10px;
 		left:10px;
-		width:62%;
+		width:50%;
 		padding-right:10px;
 		text-align:left;
 		font-weight:bold;
