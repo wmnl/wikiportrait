@@ -16,6 +16,8 @@ html {
 	color:#444;
 	font-size:105%;
 	overflow-y:scroll;
+	-ms-touch-action:manipulation;
+	touch-action:manipulation;
 }
 
 /* Font styling */
@@ -514,6 +516,51 @@ a.red:hover, a.red:focus, button.red:hover, button.red:focus {
 .box li {
 	line-height:125%;
 	margin-left:20px;
+}
+
+/* Lightbox */
+#imagelightbox {
+	position:fixed;
+	z-index:9999;
+	-ms-touch-action:none;
+	touch-action:none;
+	background:#fff;
+	padding:10px;
+	border-radius:5px;
+	cursor:pointer;
+}
+
+#imagelightbox-loading {
+	color:#fff;
+	position:fixed;
+	z-index:10003;
+	-ms-touch-action:none;
+	touch-action:none;
+	border-radius:5px;
+	top:50%;
+	left:50%;
+}
+
+#imagelightbox-overlay {
+	background-color:#fff;
+	background-color:rgba(0,0,0,0.75);
+	position:fixed;
+	z-index:9998;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+}
+
+#imagelightbox-close {
+	position:fixed;
+	z-index:10002;
+	top:10px;
+	right:10px; 
+}
+
+#imagelightbox-loading .fa, #imagelightbox-close .fa {
+	margin-right:0px;
 }
 
 /* Firefox fixes */
