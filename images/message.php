@@ -1,5 +1,5 @@
 <?php 
-	include 'header.php';
+	include '../header.php';
 	checkLogin();
 ?>
 <div id="content">
@@ -35,5 +35,5 @@
 	<div class="clear"></div>
 </div>
 <?php
-	include 'footer.php';		 
+	include '../footer.php';		 
 ?>
