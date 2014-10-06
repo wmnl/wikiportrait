@@ -55,11 +55,11 @@
 	.bottom .button, .bottom button, .divider, .bottom input[type="button"], .bottom input[type="submit"] {
 		display:table-cell;
 		text-align:center;
-		width:100%;
 	}
 
 	.divider {
 		width:10px;
+		display:table-cell;
 	}
 
 	.fixed {
