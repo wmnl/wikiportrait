@@ -37,14 +37,13 @@
 				echo "<tr>";
 					echo "<td data-title=\"ID\" class=\"center\">$id</td>";
 					echo "<td data-title=\"Titel\">$title</td>";
-					echo "<td data-title=\"Acties\" class=\"center\"><a class=\"button\" href=\"editmessage.php?id=$id\"><i class=\"fa fa-pencil\"></i>Bewerken</a><div class=\"divider\"></div><a class=\"button red\" href=\"deletemessage.php?nojs=1&id=$id\" onclick=\"return confirmDelete('$id')\"><i class=\"fa fa-trash-o\"></i>Verwijderen</a></td>";
+					echo "<td data-title=\"Acties\" class=\"center\"><a class=\"button\" href=\"editmessage.php?id=$id\"><i class=\"fa fa-pencil\"></i>Bewerken</a><div class=\"divider\"></div><a class=\"button red\" href=\"#\" onclick=\"confirmDelete($id)\");\"><i class=\"fa fa-trash-o\"></i>Verwijderen</a></td>";
 				echo "</tr>";
 			}
 		?>
 		</tbody>
 		</table>
 	</div>
-
 </div>
 <?php
 	include '../footer.php';

@@ -48,6 +48,15 @@
 				onLoadEnd:	 	function() { activityIndicatorOff(); }
 			});
 		});
+		
+		function confirmDelete(id){
+		    if (confirm("Weet je zeker dat je dit bericht wilt verwijderen?")) {
+			location.href = "deletemessage.php?id=" + id;
+		    }
+		    else {
+			return;
+		    }
+		}
 		</script>
 	</body>
 </html>
