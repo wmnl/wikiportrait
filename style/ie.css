@@ -15,6 +15,7 @@
 .fa {
 	display:none;
 	margin:0px;
+	padding:0px;
 }
 
 .page-header h2 {
@@ -24,6 +25,39 @@
 
 .page-header .button {
 	float:right;
+}
+
+.page-header .navigation {
+	border-left:0px;
+}
+
+form {
+	overflow:hidden;
+}
+
+.input-container {
+	display:block;
+	width:100%;
+}
+
+label {
+	display:block;
+	width:100%!important;
+	margin:0px;
+	padding:11px;
+	overflow:visible;
+}
+
+.input-container input, .input-container textarea {
+	display:block;
+	width:100%!important;
+	margin:0px;
+	padding:10px;
+	overflow:visible;
+}
+
+button, .button {
+	overflow:visible;
 }
 
 .checkbox input {
