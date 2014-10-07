@@ -556,7 +556,7 @@ a.red:hover, a.red:focus, button.red:hover, button.red:focus {
 	position:fixed;
 	z-index:10002;
 	top:10px;
-	right:10px; 
+	right:10px;
 }
 
 #imagelightbox-loading .fa, #imagelightbox-close .fa {
@@ -564,7 +564,7 @@ a.red:hover, a.red:focus, button.red:hover, button.red:focus {
 }
 
 /* Firefox fixes */
-input::-moz-focus-inner {
+input::-moz-focus-inner, button::-moz-focus-inner {
 	border:0px;
 }
 

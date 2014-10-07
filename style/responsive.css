@@ -52,16 +52,16 @@
 		width:100%;
 	}
 
-	.bottom .button, .bottom button, .bottom input[type="button"], .bottom input[type="submit"], .divider {
+	.bottom .button, .bottom button, .bottom input[type="button"], .bottom input[type="submit"] {
 		display:table-cell;
 		text-align:center;
-	}
-	
-	.bottom button {
 		width:100%;
+		width:auto\9;
+		overflow:visible;
 	}
 
 	.divider {
+		display:table-cell;
 		width:10px;
 	}
 
@@ -149,17 +149,17 @@
 	.page-header .button .fa {
 		margin-right:0px;
 	}
-	
+
 	.navigation {
 		display:table;
 	}
-	
+
 	.navigation label {
 		border-radius:0px;
 		border-top-left-radius:5px;
 		border-bottom-left-radius:5px;
 	}
-	
+
 	.navigation label, .navigation .simpleselect {
 		display:table-cell;
 	}
