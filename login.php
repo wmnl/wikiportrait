@@ -7,6 +7,11 @@
 	<p>Hier kunnen medewerkers van Wikiportret inloggen in het beheergedeelte.</p>
 
 	<?php
+		if (isset($_SESSION['user']))
+		{
+		    header("Location:index.php");
+		}
+		
 		if (!empty($errors))
 		{
 			echo "<div class=\"box red\"><ul>";
