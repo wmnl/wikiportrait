@@ -35,30 +35,39 @@
 	}
 	else
 	{
-		 if (isset($_POST['postback']))
-		 {
-		$errors = array();
-		
-		$title = $_POST['title'];
-		$message = $_POST['message'];
-
-		if (empty ($title))
+		if (isset($_POST['postback']))
 		{
-			  array_push($errors, "Er is geen titel ingevuld");
-		}
-		if (empty($message))
-		{
-			  array_push($errors, "Er is geen bericht ingevuld");
-		}
+		    $errors = array();
 
-		if (count($errors) == 0)
-		{
-			  $query = sprintf("UPDATE messages SET title = '%s', message= '%s' WHERE id = $id", mysqli_real_escape_string($connection, $title), mysqli_real_escape_string($connection, $message));
+		    $title = $_POST['title'];
+		    $message = $_POST['message'];
 
-			  mysqli_query($connection, $query);
-			  header("Location:messages.php");
+		    if (empty ($title))
+		    {
+			      array_push($errors, "Er is geen titel ingevuld");
+		    }
+		    if (empty($message))
+		    {
+			      array_push($errors, "Er is geen bericht ingevuld");
+		    }
+
+		    if (count($errors) == 0)
+		    {
+			      $query = sprintf("UPDATE messages SET title = '%s', message= '%s' WHERE id = $id", mysqli_real_escape_string($connection, $title), mysqli_real_escape_string($connection, $message));
+
+			      mysqli_query($connection, $query);
+			      header("Location:messages.php");
+		    }
+		    else
+		    {
+			echo "<div class=\"box red\"><ul>";
+			foreach ($errors as $error)
+			{
+			    echo "<li>$error</li>";
+			}
+			echo "</div>";
+		    }
 		}
-		 }
 	?>
 	<form method="post">
 		<div class="input-container">
