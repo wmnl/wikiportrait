@@ -13,7 +13,7 @@
 		$source = $_POST['source'];
 		$name = $_POST['name'];
 		$email = $_POST['email'];
-		$ip = $_SERVER["REMOTE_ADDR"]; 
+		$ip = $_SERVER["REMOTE_ADDR"];
 		$date = $_POST['date'];
 		$desc = $_POST['description'];
 
@@ -24,9 +24,9 @@
 		elseif (!in_array($file['type'], $allowedext))
 		{
 			array_push($errors, "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund");
-		} 
+		}
 
-		if (empty($title)) 
+		if (empty($title))
 		{
 			array_push($errors, "Er is niet ingevuld wie er op de foto staat");
 		}
@@ -53,7 +53,7 @@
 		if (count($errors) == 0)
 		{
 			$time = new DateTime();
-			$filename = strtolower(str_replace(" ", "_", $title)) . "-" . date_timestamp_get($time) . "." . pathinfo($file['name'], PATHINFO_EXTENSION);				
+			$filename = strtolower(str_replace(" ", "_", $title)) . "-" . date_timestamp_get($time) . "." . pathinfo($file['name'], PATHINFO_EXTENSION);
 
 			if (move_uploaded_file($file['tmp_name'], "uploads/" . $filename))
 			{
@@ -107,7 +107,7 @@ Al vast heel erg bedankt voor je medewerking!<br />";
 			}
 		}
 	}
-?>	
+?>
 <div id="content">
 		<?php
 			if (!empty($errors))
@@ -121,7 +121,7 @@ Al vast heel erg bedankt voor je medewerking!<br />";
 
 				echo "</ul></div>";
 			}
-		?>	
+		?>
 
 		<h2>Uploadformulier</h2>
 
@@ -164,7 +164,7 @@ Al vast heel erg bedankt voor je medewerking!<br />";
 
 				<div class="input-container">
 						<label><i class="fa fa-bars fa-lg fa-fw"></i> Licentievoorwaarden</label>
-						<textarea readonly="readonly">Door het uploaden van dit materiaal en het klikken op de knop 'Upload foto' verklaart u dat u de rechthebbende eigenaar bent van het materiaal. Door dit materiaal te uploaden geeft u toestemming voor het gebruik van het materiaal onder de condities van de door u geselecteerde licentie(s), deze condities variëren per licentie maar houden in ieder geval in dat het materiaal verspreid, bewerkt en commercieel gebruikt mag worden door eenieder. Voor de specifieke extra condities per licentie verwijzen u naar de bijbehorende licentieteksten. U kunt op het vrijgeven van deze rechten na het akkoord gaan met deze voorwaarden niet meer terugkomen. De Wikimedia Foundation en haar chapters (waaronder de Vereniging Wikimedia Nederland) zijn op geen enkele wijze aansprakelijk voor misbruik van het materiaal of aanspraak op het materiaal door derden. De eventuele geportretteerden hebben geen bezwaar tegen publicatie onder genoemde licenties. Ook uw eventuele opdrachtgever geeft toestemming.</textarea>
+						<textarea disabled="disabled">Door het uploaden van dit materiaal en het klikken op de knop 'Upload foto' verklaart u dat u de rechthebbende eigenaar bent van het materiaal. Door dit materiaal te uploaden geeft u toestemming voor het gebruik van het materiaal onder de condities van de door u geselecteerde licentie(s), deze condities variëren per licentie maar houden in ieder geval in dat het materiaal verspreid, bewerkt en commercieel gebruikt mag worden door eenieder. Voor de specifieke extra condities per licentie verwijzen u naar de bijbehorende licentieteksten. U kunt op het vrijgeven van deze rechten na het akkoord gaan met deze voorwaarden niet meer terugkomen. De Wikimedia Foundation en haar chapters (waaronder de Vereniging Wikimedia Nederland) zijn op geen enkele wijze aansprakelijk voor misbruik van het materiaal of aanspraak op het materiaal door derden. De eventuele geportretteerden hebben geen bezwaar tegen publicatie onder genoemde licenties. Ook uw eventuele opdrachtgever geeft toestemming.</textarea>
 				</div>
 
 				<div class="bottom right">
