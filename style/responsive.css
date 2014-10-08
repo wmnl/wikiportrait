@@ -16,7 +16,7 @@
 		padding:10px;
 	}
 
-	input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], select, textarea, .checkbox, .simpleselect, .simpleselect .options {
+	input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], select, textarea, .checkbox, .simpleselect .placeholder, .simpleselect .options {
 		border-bottom-left-radius:5px;
 		border-top-right-radius:0px;
 	}
@@ -155,9 +155,13 @@
 	}
 
 	.navigation label {
-		border-radius:0px;
-		border-top-left-radius:5px;
+		border-top-right-radius:0px;
 		border-bottom-left-radius:5px;
+	}
+	
+	.navigation .simpleselect .placeholder, .navigation .simpleselect .options {
+		border-top-right-radius:5px;
+		border-bottom-left-radius:0px;
 	}
 
 	.navigation label, .navigation .simpleselect {
