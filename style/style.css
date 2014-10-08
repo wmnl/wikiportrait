@@ -258,7 +258,7 @@ label {
 	-ms-user-select:none;
 }
 
-input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], textarea, .checkbox {
+input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], textarea, select, .checkbox {
 	display:table-cell;
 	margin:0px;
 	width:100%;
