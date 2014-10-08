@@ -128,6 +128,10 @@ p:last-child {
 	font-size:1.7em;
 }
 
+#header h1 a:focus {
+	border-bottom:1px dotted #444;
+}
+
 #content {
 	padding:10px;
 	background:#fff;
@@ -166,8 +170,12 @@ p:last-child {
 	color:#fff;
 }
 
-.menu a:hover, .menu a:focus, .menu .active a {
+.menu a:hover, .menu .active a {
 	background:#005580;
+}
+
+.menu a:focus {
+	background:#004466;
 }
 
 /* Tabs */
