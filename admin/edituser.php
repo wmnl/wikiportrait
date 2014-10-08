@@ -18,7 +18,7 @@
 
 		<h2>Gebruiker bewerken</h2>
 
-		<a href="users.php" class="button red float-right"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
+		<a href="users.php" class="button red"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
 
 	</div>
 	
