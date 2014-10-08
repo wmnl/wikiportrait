@@ -53,7 +53,6 @@ a:hover, a:focus, .tabs .active a, #header a {
 }
 
 p {
-	line-height:125%;
 	margin-bottom:10px;
 }
 
@@ -64,13 +63,6 @@ p:last-child {
 .list {
 	margin-left:20px;
 	margin-bottom:10px;
-	line-height:125%;
-}
-
-.fixed {
-	font-weight:400;
-	min-width:11em;
-	display:inline-block;
 }
 
 .clear {
@@ -309,7 +301,6 @@ input[type="button"], input[type="submit"], button, .button {
 	border:0px;
 	color:#fff;
 	display:inline-block;
-	line-height:middle;
 }
 
 input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus, .button:hover, .button:focus, button:hover, button:focus {
@@ -410,10 +401,6 @@ input[type="checkbox"] + label:hover {
 	border-bottom:0px;
 }
 
-.simpleselect .options .optgroup .option {
-	padding-left:10px;
-}
-
 .simpleselect .options .option.active {
 	background:#EDEDED;
 }
@@ -444,7 +431,6 @@ td {
 	padding:10px;
 	overflow:hidden;
 	word-wrap:break-word;
-	line-height:125%;
 }
 
 th {
@@ -530,8 +516,55 @@ a.red:hover, a.red:focus, button.red:hover, button.red:focus {
 }
 
 .box li {
-	line-height:125%;
 	margin-left:20px;
+}
+
+/* Single */
+.single {
+	display:table;
+	table-layout:fixed;
+	width:100%;
+}
+
+.single-box {
+	display:table-cell;
+	vertical-align:top;
+	border-right:10px solid #fff;
+}
+
+.single-box:last-child {
+	border-right:0px;
+}
+
+.holder {
+	display:table;
+	width:100%;
+	margin-bottom:10px;
+}
+
+.holder div {
+	display:table-row;
+}
+
+.holder .title, .holder .content {
+	display:table-cell;
+	width:50%;
+	word-wrap:break-word;
+}
+
+.holder .title {
+	font-weight:400;
+	border-right:10px solid #fff;
+}
+
+.single .image {
+	width:17.5%;
+}
+
+.single-box img {
+	width:100%;
+	display:block;
+	border-radius:5px;
 }
 
 /* Lightbox */
