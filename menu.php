@@ -14,7 +14,7 @@ echo "<ul>\n";
 	
 	if($_SESSION['isSysop'] == true)
 	{
-		echo "\t\t\t\t\t<li" .(($page == 'users')?' class="active"':""). "><a href=\"$basispad/admin/users.php\" title=\"Beheer\"><i class=\"fa fa-wrench\"></i><span>Beheer</span></a></li>\n";
+		echo "\t\t\t\t\t<li" .(($page == 'users' || $page == 'messages')?' class="active"':""). "><a href=\"$basispad/admin/users.php\" title=\"Beheer\"><i class=\"fa fa-wrench\"></i><span>Beheer</span></a></li>\n";
 	}
 	
 	echo "\t\t\t\t\t<li" . (($page == 'login')?' class="active"':"") . ">";
