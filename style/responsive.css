@@ -157,9 +157,14 @@
 	}
 	
 	/* Single */
-	.single, .single .image {
+	.single {
 		display:block;
 		width:100%;
+	}
+	
+	.single .image {
+		width:50%;
+		margin:0 auto;
 	}
 	
 	.single-box img {
