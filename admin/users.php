@@ -9,7 +9,7 @@
 
 		<h2>Gebruikersbeheer</h2>
 
-		<a href="adduser.php" class="button float-right"><i class="fa fa-plus-square fa-lg"></i><span>Nieuwe gebruiker</span></a>
+		<a href="adduser.php" class="button"><i class="fa fa-plus-square fa-lg"></i><span>Nieuwe gebruiker</span></a>
 
 	</div>
 

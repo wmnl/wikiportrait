@@ -16,7 +16,7 @@
 		padding:10px;
 	}
 
-	input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], select, textarea, .checkbox, .simpleselect, .simpleselect .options {
+	input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], select, textarea, .checkbox, .simpleselect .placeholder, .simpleselect .options {
 		border-bottom-left-radius:5px;
 		border-top-right-radius:0px;
 	}
@@ -63,10 +63,6 @@
 	.divider {
 		display:table-cell;
 		width:10px;
-	}
-
-	.fixed {
-		width:100%;
 	}
 
 	/* Tables */
@@ -132,14 +128,6 @@
 		margin-bottom:0px;
 	}
 
-	/* Defloat */
-
-	.float-right {
-		float:none;
-		margin-bottom:10px;
-		margin-left:0px;
-	}
-
 	/* Page-header */
 
 	.page-header .button {
@@ -155,13 +143,32 @@
 	}
 
 	.navigation label {
-		border-radius:0px;
-		border-top-left-radius:5px;
+		border-top-right-radius:0px;
 		border-bottom-left-radius:5px;
+	}
+	
+	.navigation .simpleselect .placeholder, .navigation .simpleselect .options {
+		border-top-right-radius:5px;
+		border-bottom-left-radius:0px;
 	}
 
 	.navigation label, .navigation .simpleselect {
 		display:table-cell;
+	}
+	
+	/* Single */
+	.single, .single .image {
+		display:block;
+		width:100%;
+	}
+	
+	.single-box img {
+		margin-bottom:10px;
+	}
+	
+	.single-box {
+		display:block;
+		border-right:0px;
 	}
 }
 

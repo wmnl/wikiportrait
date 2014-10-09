@@ -18,9 +18,7 @@
 
 		<h2>Bericht bewerken</h2>
 
-		<a href="messages.php" class="button red float-right"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
-
-		<div class="clear"></div>
+		<a href="messages.php" class="button red"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
 
 	</div>
 	
