@@ -79,7 +79,7 @@
 		<div class="single-box options">
 
 			<h3>Opties</h3>
-		
+			
 			<form method="post" id="owner" name="owner">
 	
 			<div class="input-container">
@@ -89,16 +89,21 @@
 				<select class="select" name="owner" id="setowner">
 					<option value="0">----</option>
 					<?php
-						$query2 = "SELECT id, otrsname FROM users";
-						$result2 = mysqli_query($connection, $query2);
-						while ($rij = mysqli_fetch_assoc($result2))
-						{
+					    $query = sprintf("SELECT owner FROM images WHERE id = %d", mysqli_real_escape_string($connection, $_GET['id']));
+					    $result = mysqli_query($connection,$query);
+					    $owner = mysqli_fetch_assoc($result);
+					    $query2 = "SELECT otrsname, id FROM users";
+					    $result2 = mysqli_query($connection,$query2);
+					    
+					    while ($row = mysqli_fetch_assoc($result2)):
 						$selected = "";
-						if ($row['owner'] == $rij['id'])
-							 $selected = "selected=\"selected\"";
-	
-						 echo "<option value='" . $rij['id'] . "' $selected>" . $rij['otrsname'] . "</option>";
-						}
+					    
+					    if ($row['id'] == $owner['owner'])
+						$selected = "selected=\"selected\"";
+					?>
+					<option value="<?= $row['id'] ?>" <?= $selected ?>><?= $row['otrsname'] ?></option>
+					<?php
+					    endwhile;
 					?>
 				</select>
 			</div>
@@ -111,7 +116,7 @@
 			</div>
 			
 			<div class="bottom right">
-				<button type="button" name="claim" onclick="document.getElementById('setowner').value = <?= $_SESSION['user'] ?>"><i class="fa fa-bolt fa-lg"></i>Ik neem hem</button><span class="divider">&nbsp;</span><button class="green" type="submit" name="postback"><i class="fa fa-floppy-o fa-lg"></i>Opslaan</button>
+				<a href="get.php?id=<?= $_GET['id'] ?>" class="button" name="claim"><i class="fa fa-bolt fa-lg"></i>Ik neem hem</a><span class="divider">&nbsp;</span><button class="green" type="submit" name="postback"><i class="fa fa-floppy-o fa-lg"></i>Opslaan</button>
 			</div>
 		
 			</form>
