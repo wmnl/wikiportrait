@@ -52,7 +52,7 @@
 		width:100%;
 	}
 
-	.bottom .button, .bottom button, .bottom input[type="button"], .bottom input[type="submit"] {
+	.bottom a.button, .bottom button, .bottom input[type="button"], .bottom input[type="submit"] {
 		display:table-cell;
 		text-align:center;
 		width:100%;
@@ -172,7 +172,7 @@
 	}
 }
 
-@media (max-width:1000px) {
+@media (max-width:1300px) {
 	body {
 		-webkit-text-size-adjust:100%;
 		margin:10px;
