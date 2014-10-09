@@ -129,7 +129,9 @@ Al vast heel erg bedankt voor je medewerking!<br />";
 
 				<div class="input-container">
 					<label for="file"><i class="fa fa-file-image-o fa-lg fa-fw"></i>Kies een bestand</label>
-					<input type="file" name="file" id="file" required="required" accept="image/*" />
+					<div class="file">
+						<input type="file" name="file" id="file" required="required" accept="image/*" />
+					</div>
 				</div>
 
 				<div class="input-container">
