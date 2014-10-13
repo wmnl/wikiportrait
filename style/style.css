@@ -294,12 +294,15 @@ input:focus, textarea:focus, .simpleselect .options {
 }
 
 input[type="button"], input[type="submit"], button, .button {
+	display:inline-block;
 	padding:11px;
 	width:auto;
 	background:#006699;
 	border-radius:5px;
 	border:0px;
 	color:#fff;
+	-moz-appearance:none;
+	-webkit-appearance:none;
 }
 
 input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus, .button:hover, .button:focus, button:hover, button:focus {

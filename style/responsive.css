@@ -147,7 +147,7 @@
 		border-top-right-radius:0px;
 		border-bottom-left-radius:5px;
 	}
-	
+
 	.navigation .simpleselect .placeholder, .navigation .simpleselect .options {
 		border-top-right-radius:5px;
 		border-bottom-left-radius:0px;
@@ -156,22 +156,22 @@
 	.navigation label, .navigation .simpleselect {
 		display:table-cell;
 	}
-	
+
 	/* Single */
 	.single {
 		display:block;
 		width:100%;
 	}
-	
+
 	.single .image {
 		width:50%;
 		margin:0 auto;
 	}
-	
+
 	.single-box img {
 		margin-bottom:10px;
 	}
-	
+
 	.single-box {
 		display:block;
 		border-right:0px;
