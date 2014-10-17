@@ -41,7 +41,7 @@
 						 $sysop = $row['isSysop'];
 
 						 echo "<tr>";
-						 	echo "<td data-title =\"ID\" class=\"center\">$id</td>";
+				 	 	 	 echo "<td data-title =\"ID\" class=\"center\">$id</td>";
 							 echo "<td data-title =\"Gebruikersnaam\">$username</td>";
 							 echo "<td data-title =\"OTRS-naam\">$otrsname</td>";
 							 echo "<td data-title =\"E-mailadres\">$email</td>";
