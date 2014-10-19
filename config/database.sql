@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS `wikiportret`
+CREATE DATABASE IF NOT EXISTS `wikiportret`;
 USE `wikiportret`;
 
 CREATE TABLE IF NOT EXISTS `images` (
