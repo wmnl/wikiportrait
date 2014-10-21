@@ -32,7 +32,7 @@
 			while ($row = mysqli_fetch_assoc($result))
 			{
 				$id = $row['id'];
-				$title = $row['title'];
+				$title = htmlspecialchars($row['title']);
 
 				echo "<tr>";
 					echo "<td data-title=\"ID\" class=\"center\">$id</td>";

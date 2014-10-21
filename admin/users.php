@@ -35,8 +35,8 @@
 				 while ($row = mysqli_fetch_assoc($result))
 				 {
 						 $id = $row['id'];
-						 $username = $row['username'];
-						 $otrsname = $row['otrsname'];
+						 $username = htmlspecialchars($row['username']);
+						 $otrsname = htmlspecialchars($row['otrsname']);
 						 $email = $row['email'];
 						 $sysop = $row['isSysop'];
 
