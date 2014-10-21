@@ -119,12 +119,12 @@
     <form method="post">
             <div class="input-container">
                 <label for="username"><i class="fa fa-user fa-lg fa-fw"></i>Gebruikersnaam</label>
-                <input type="text" name="username" id="username" value="<?php echo $row['username']; ?>" />
+                <input type="text" name="username" id="username" value="<?php echo htmlspecialchars($row['username']); ?>" />
             </div>
 
             <div class="input-container">
                 <label for="otrsname"><i class="fa fa-briefcase fa-lg fa-fw"></i>OTRS-naam</label>
-                <input type="text" name="otrsname" id="otrsname" value="<?php echo $row['otrsname']; ?>" />
+                <input type="text" name="otrsname" id="otrsname" value="<?php echo htmlspecialchars($row['otrsname']); ?>" />
             </div>
 
             <div class="input-container">

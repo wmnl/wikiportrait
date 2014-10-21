@@ -68,7 +68,7 @@
 					while($row = mysqli_fetch_assoc($result))
 					{
 				?>
-				<li><a href="message.php?message=<?= $row['id']; ?>&image=<?= mysqli_real_escape_string($connection, $_GET['id']) ?>"><?= $row['title'] ?></a></li>
+				<li><a href="message.php?message=<?= $row['id']; ?>&image=<?= mysqli_real_escape_string($connection, $_GET['id']) ?>"><?= htmlspecialchars($row['title']); ?></a></li>
 				<?php
 				}
 				?>

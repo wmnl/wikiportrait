@@ -70,12 +70,12 @@
 	<form method="post">
 		<div class="input-container">
 			<label for="title"><i class="fa fa-tag fa-lg fa-fw"></i>Titel</label>
-			<input type="text" name="title" id="title" value="<?php echo $row['title']; ?>"	 required="required"/>
+			<input type="text" name="title" id="title" value="<?php echo htmlspecialchars($row['title']); ?>" required="required" />
 		</div>
 
 		<div class="input-container">
 			<label for="message"><i class="fa fa-align-left fa-lg fa-fw"></i>Bericht</label>
-			<textarea required="required" name="message" ><?php echo $row['message'] ?></textarea>
+			<textarea required="required" name="message" ><?php echo htmlspecialchars($row['message']); ?></textarea>
 		</div>
 
 		<div class="bottom right">
