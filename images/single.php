@@ -49,12 +49,12 @@
 			<h3>Informatie</h3>
 	
 			<div class="holder">
-				<div><span class="title">Titel:</span><span class="content"><?= $row['title']; ?></span></div>
-				<div><span class="title">Auteursrechthebbende:</span><span class="content"><?= $row['source']; ?></span></div>
-				<div><span class="title">Naam:</span><span class="content"><?= $row['name']; ?></span></div>
+				<div><span class="title">Titel:</span><span class="content"><?= htmlspecialchars($row['title']); ?></span></div>
+				<div><span class="title">Auteursrechthebbende:</span><span class="content"><?= htmlspecialchars($row['source']); ?></span></div>
+				<div><span class="title">Naam:</span><span class="content"><?= htmlspecialchars($row['name']); ?></span></div>
 				<div><span class="title">IP-adres:</span><span class="content"><?= $row['ip']; ?></span></div>
 				<div><span class="title">Geüpload op:</span><span class="content"><?= strftime("%e %B %Y om %H:%I:%S", $row['timestamp']) ?></span></div>
-				<div><span class="title">Beschrijving:</span><span class="content"><?= $row['description'];?></span></div>
+				<div><span class="title">Beschrijving:</span><span class="content"><?= htmlspecialchars($row['description']);?></span></div>
 			</div>
 		
 			<h3>Wat doen we ermee?</h3>
