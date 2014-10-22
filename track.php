@@ -46,11 +46,11 @@
 	<h3>Informatie</h3>
 
 	<p>
-	    <ul>
-		    <li>Titel: <?php echo $row['title']; ?></li>
-		    <li>Auteur: <?php echo $row['source']; ?></li>
-		    <li>Naam uploader: <?php echo $row['name']; ?></li>
-		    <li>Beschrijving: <?php echo $row['description'];?></li>
+	    <ul class="list">
+		    <li>Titel: <?php echo htmlspecialchars($row['title']); ?></li>
+		    <li>Auteur: <?php echo htmlspecialchars($row['source']); ?></li>
+		    <li>Naam uploader: <?php echo htmlspecialchars($row['name']); ?></li>
+		    <li>Beschrijving: <?php echo htmlspecialchars($row['description']);?></li>
 	    </ul>
 	</p>
         
