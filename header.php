@@ -18,6 +18,11 @@
 			header("Location:/wikiportret");
 
 	}
+	
+	if ($DevDebugging)
+	{
+		error_reporting(-1);
+	}
 ?>
 <!DOCTYPE html>
 <html>
