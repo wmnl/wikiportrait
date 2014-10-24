@@ -34,17 +34,6 @@ checkLogin();
 
 			if (empty($errors))
 			{
-				$query = sprintf("SELECT * FROM images WHERE title LIKE '%%%s%%'", mysqli_real_escape_string($connection, $_POST['search']));
-				$result = mysqli_query($connection, $query);
-
-				if (mysqli_num_rows($result) > 0)
-				{
-					while ($row = mysqli_fetch_assoc($result)):
-						$id = $row['id'];
-						$filename = $row['filename'];
-						$title = $row['title'];
-						$name = $row['name'];
-						$timestamp = $row['timestamp'];						
 	?>
 	<div class="table-container">
 
@@ -59,8 +48,22 @@ checkLogin();
 						<th class="actions-1">Acties</th>
 					</tr>
 				</thead>
-				<tbody>	
+				<tbody>
+				<?php
+				$query = sprintf("SELECT * FROM images WHERE title LIKE '%%%s%%'", mysqli_real_escape_string($connection, $_POST['search']));
+				$result = mysqli_query($connection, $query);
+
+				if (mysqli_num_rows($result) > 0)
+				{
+					while ($row = mysqli_fetch_assoc($result)):
+						$id = $row['id'];
+						$filename = $row['filename'];
+						$title = $row['title'];
+						$name = $row['name'];
+						$timestamp = $row['timestamp'];	
+				?>
 					<tr>
+					
 						<td data-title="Foto" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/<?php echo $filename?>" /></a></td>
 						<td data-title="Titel"><a href="single.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
 						<td data-title="Uploader"><?php echo $name ?></td>
