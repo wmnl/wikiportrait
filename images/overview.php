@@ -23,11 +23,11 @@
 
 		if (isset($_GET['personal']))
 		{
-		    $query = $query = "SELECT COUNT(*) FROM images WHERE archived = $archived AND owner = " . $_SESSION['user'];
+		    $query = sprintf("SELECT COUNT(*) FROM images WHERE archived = %d AND owner = '%s'", $archived, mysqli_real_escape_string($connection, $_SESSION['user']));
 		}
 		else
 		{
-		    $query = "SELECT COUNT(*) FROM images WHERE archived = $archived";
+		    $query = sprintf("SELECT COUNT(*) FROM images WHERE archived = %d", $archived);
 		}
 
 		$result = mysqli_query($connection, $query);
@@ -44,7 +44,7 @@
 
 			    <select class="select" name="page" onchange="loadPage()" id="page">
 		<?
-		    for ($i=1; $i<=$total_pages; $i++) :
+		    for ($i=1; $i<=$total_pages; $i++):
 		?>
 		    <option value='<?= $i ?>' <? if ($_GET['page'] == $i) echo 'selected' ?>><?= $i ?></option>";
 		<?
@@ -79,11 +79,11 @@
 			    $start_from = ($page-1) * 10;
 			    if (isset($_GET['personal']))
 			    {
-				$query = sprintf("SELECT images.id as image_id, images.title as title, images.filename as filename, images.name as name, images.timestamp as timestamp, users.otrsname as otrsname FROM images LEFT JOIN users ON users.id = owner WHERE archived = $archived AND owner = " . $_SESSION['user'] . " ORDER BY images.id DESC LIMIT %d, 10", mysqli_real_escape_string($connection, $start_from));
+				$query = sprintf("SELECT images.id as image_id, images.title as title, images.filename as filename, images.name as name, images.timestamp as timestamp, users.otrsname as otrsname FROM images LEFT JOIN users ON users.id = owner WHERE archived = %d AND owner = '%s' ORDER BY images.id DESC LIMIT %d, 10", $archived, mysqli_real_escape_string($connection, $_SESSION['user']), mysqli_real_escape_string($connection, $start_from));
 			    }
 			    else
 			    {
-				$query = sprintf("SELECT images.id as image_id, images.title as title, images.filename as filename, images.name as name, images.timestamp as timestamp, users.otrsname as otrsname FROM images LEFT JOIN users ON users.id = owner WHERE archived = $archived ORDER BY images.id DESC LIMIT %d, 10", mysqli_real_escape_string($connection, $start_from));
+				$query = sprintf("SELECT images.id as image_id, images.title as title, images.filename as filename, images.name as name, images.timestamp as timestamp, users.otrsname as otrsname FROM images LEFT JOIN users ON users.id = owner WHERE archived = %d ORDER BY images.id DESC LIMIT %d, 10", $archived, mysqli_real_escape_string($connection, $start_from));
 			    }
 
 			    $result = mysqli_query($connection, $query);
