@@ -28,7 +28,15 @@
 
 				<select class="select" name="page" onchange="loadPage()" id="page">
 					<?php
-					$query = "SELECT COUNT(*) FROM images WHERE archived = $archived";
+					if (isset($_GET['personal']))
+					{
+					    $query = $query = "SELECT COUNT(*) FROM images WHERE archived = $archived AND owner = " . $_SESSION['user'];
+					}
+					else
+					{
+					    $query = "SELECT COUNT(*) FROM images WHERE archived = $archived";
+					}
+					
 					$result = mysqli_query($connection, $query);
 					$row = mysqli_fetch_row($result);
 					$total_records = $row[0];
@@ -48,55 +56,62 @@
 
 	<div class="table-container">
 
-		<table>
-				<thead>
-					<tr>
-						<th>Foto</th>
-						<th>Titel</th>
-						<th>Uploader</th>
-						<th>Datum</th>
-						<th>Eigenaar</th>
-						<th class="actions-1">Acties</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-						setlocale(LC_ALL, 'nl_NL');
-						date_default_timezone_set('Europe/Amsterdam');
-						if (isset($_GET['page'])) { $page	= $_GET['page']; } else { $page = 1; };
-						$start_from = ($page-1) * 10;
-						$query = sprintf("SELECT images.id as image_id, images.title as title, images.filename as filename, images.name as name, images.timestamp as timestamp, users.otrsname as otrsname FROM images LEFT JOIN users ON users.id = owner WHERE archived = $archived ORDER BY images.id DESC LIMIT %d, 10", mysqli_real_escape_string($connection, $start_from));
+	    <table>
+		<thead>
+		    <tr>
+			<th>Foto</th>
+			<th>Titel</th>
+			<th>Uploader</th>
+			<th>Datum</th>
+			<th>Eigenaar</th>
+			<th class="actions-1">Acties</th>
+		    </tr>
+		</thead>
+		<tbody>
+			<?php
+			    setlocale(LC_ALL, 'nl_NL');
+			    date_default_timezone_set('Europe/Amsterdam');
+			    if (isset($_GET['page'])) { $page	= $_GET['page']; } else { $page = 1; };
+			    $start_from = ($page-1) * 10;
+			    if (isset($_GET['personal']))
+			    {
+				$query = sprintf("SELECT images.id as image_id, images.title as title, images.filename as filename, images.name as name, images.timestamp as timestamp, users.otrsname as otrsname FROM images LEFT JOIN users ON users.id = owner WHERE archived = $archived AND owner = " . $_SESSION['user'] . " ORDER BY images.id DESC LIMIT %d, 10", mysqli_real_escape_string($connection, $start_from));
+			    }
+			    else
+			    {
+				$query = sprintf("SELECT images.id as image_id, images.title as title, images.filename as filename, images.name as name, images.timestamp as timestamp, users.otrsname as otrsname FROM images LEFT JOIN users ON users.id = owner WHERE archived = $archived ORDER BY images.id DESC LIMIT %d, 10", mysqli_real_escape_string($connection, $start_from));
+			    }
 
-						$result = mysqli_query($connection, $query);
+			    $result = mysqli_query($connection, $query);
 
-						while ($row = mysqli_fetch_assoc($result)):
-							$id = $row['image_id'];
-							$filename = $row['filename'];
-							$title = $row['title'];
-							$name = $row['name'];
-							$timestamp = $row['timestamp'];
-							if (empty($row['otrsname']))
-							{
-							    $owner = "Aan niemand toegewezen";
-							}
-							else
-							{
-							    $owner = $row['otrsname'];
-							}
-					?>
-					<tr>
-						<td data-title="Foto" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/<?php echo $filename?>" /></a></td>
-						<td data-title="Titel"><a href="single.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
-						<td data-title="Uploader"><?php echo $name ?></td>
-						<td data-title="Datum"><?php echo strftime("%e %B %Y", $timestamp) ?></td>
-						<td data-title="Eigenaar"><?= $owner ?></td>
-						<td data-title="Acties" class="center"><a class="button" href="single.php?id=<?php echo $id ?>"><i class="fa fa-info"></i>Details</a></td>
-					</tr>
-					<?php
-					 endwhile;
-					?>
-				</tbody>
-		</table>
+			    while ($row = mysqli_fetch_assoc($result)):
+				    $id = $row['image_id'];
+				    $filename = $row['filename'];
+				    $title = $row['title'];
+				    $name = $row['name'];
+				    $timestamp = $row['timestamp'];
+				    if (empty($row['otrsname']))
+				    {
+					$owner = "Aan niemand toegewezen";
+				    }
+				    else
+				    {
+					$owner = $row['otrsname'];
+				    }
+			?>
+			<tr>
+			    <td data-title="Foto" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/<?php echo $filename?>" /></a></td>
+			    <td data-title="Titel"><a href="single.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
+			    <td data-title="Uploader"><?php echo $name ?></td>
+			    <td data-title="Datum"><?php echo strftime("%e %B %Y", $timestamp) ?></td>
+			    <td data-title="Eigenaar"><?= $owner ?></td>
+			    <td data-title="Acties" class="center"><a class="button" href="single.php?id=<?php echo $id ?>"><i class="fa fa-info"></i>Details</a></td>
+			</tr>
+			<?php
+			 endwhile;
+			?>
+		</tbody>
+	    </table>
 
 	</div>
 
