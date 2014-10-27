@@ -20,38 +20,42 @@
 				echo "<h2>Inzendingen</h2>";
 			if ($archived == 1)
 				echo "<h2>Archief</h2>";
+
+		if (isset($_GET['personal']))
+		{
+		    $query = $query = "SELECT COUNT(*) FROM images WHERE archived = $archived AND owner = " . $_SESSION['user'];
+		}
+		else
+		{
+		    $query = "SELECT COUNT(*) FROM images WHERE archived = $archived";
+		}
+
+		$result = mysqli_query($connection, $query);
+		$row = mysqli_fetch_row($result);
+		$total_records = $row[0];
+
+		$total_pages = ceil($total_records / 10);
+		
+		if ($total_pages > 1):		
 		?>
+		    <form class="navigation" method="post">
 
-		<form class="navigation" method="post">
+			    <label for="page">Pagina</label>
 
-				<label for="page">Pagina</label>
+			    <select class="select" name="page" onchange="loadPage()" id="page">
+		<?
+		    for ($i=1; $i<=$total_pages; $i++) :
+		?>
+		    <option value='<?= $i ?>' <? if ($_GET['page'] == $i) echo 'selected' ?>><?= $i ?></option>";
+		<?
+		    endfor;
+		?>
+			    </select>
+		    </form>
 
-				<select class="select" name="page" onchange="loadPage()" id="page">
-					<?php
-					if (isset($_GET['personal']))
-					{
-					    $query = $query = "SELECT COUNT(*) FROM images WHERE archived = $archived AND owner = " . $_SESSION['user'];
-					}
-					else
-					{
-					    $query = "SELECT COUNT(*) FROM images WHERE archived = $archived";
-					}
-					
-					$result = mysqli_query($connection, $query);
-					$row = mysqli_fetch_row($result);
-					$total_records = $row[0];
-
-					$total_pages = ceil($total_records / 10);
-					for ($i=1; $i<=$total_pages; $i++) :
-					?>
-					<option value='<?= $i ?>' <? if ($_GET['page'] == $i) echo 'selected' ?>><?= $i ?></option>";
-					<?
-					endfor;
-					?>
-				</select>
-
-		</form>
-
+		<?php
+		    endif;
+		?>
 	</div>
 
 	<div class="table-container">
