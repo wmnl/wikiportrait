@@ -50,6 +50,10 @@ a {
 a:hover, a:focus, .tabs .active a, #header a {
 	color:#000;
 	background-color:transparent;
+	-moz-transition:color 0.2s linear;
+	-o-transition:color 0.2s linear;
+	-webkit-transition:color 0.2s linear;
+	transition:color 0.2s linear;
 }
 
 p {
@@ -164,6 +168,10 @@ p:last-child {
 
 .menu a:hover, .menu .active a {
 	background:#005580;
+	-moz-transition:background 0.2s linear;
+	-o-transition:background 0.2s linear;
+	-webkit-transition:background 0.2s linear;
+	transition:background 0.2s linear;
 }
 
 .menu a:focus {
@@ -309,6 +317,10 @@ input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hov
 	background:#005580;
 	cursor:pointer;
 	color:#fff;
+	-moz-transition:background 0.2s linear;
+	-o-transition:background 0.2s linear;
+	-webkit-transition:background 0.2s linear;
+	transition:background 0.2s linear;
 }
 
 .optional {
