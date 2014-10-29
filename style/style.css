@@ -9,6 +9,7 @@
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 	box-sizing:border-box;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
 html {
@@ -16,8 +17,6 @@ html {
 	color:#444;
 	font-size:105%;
 	overflow-y:scroll;
-	-ms-touch-action:manipulation;
-	touch-action:manipulation;
 }
 
 /* Font styling */
@@ -149,6 +148,9 @@ p:last-child {
 	border-bottom-left-radius:5px;
 	border-bottom-right-radius:5px;
 	overflow:hidden;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
 }
 
 .menu ul {
@@ -182,6 +184,9 @@ p:last-child {
 .tabs {
 	margin-bottom:-20px;
 	width:100%;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
 }
 
 .tabs ul {
@@ -285,9 +290,10 @@ textarea {
 	height:auto;
 	resize:none;
 	-webkit-overflow-scrolling:touch;
-	-webkit-transition:height 0.2s;
-	-moz-transition:height 0.2s;
-	transition:height 0.2s;
+	-moz-transition:height 0.2s linear;
+	-o-transition:height 0.2s linear;
+	-webkit-transition:height 0.2s linear;
+	transition:height 0.2s linear;
 }
 
 input[disabled], textarea[disabled], select[disabled='disabled'] {
@@ -315,12 +321,15 @@ input[type="button"], input[type="submit"], button, .button {
 	color:#fff;
 	-moz-appearance:none;
 	-webkit-appearance:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
 }
 
 input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus, .button:hover, .button:focus, button:hover, button:focus {
 	background:#005580;
-	cursor:pointer;
 	color:#fff;
+	cursor:pointer;
 	-moz-transition:background 0.2s linear;
 	-o-transition:background 0.2s linear;
 	-webkit-transition:background 0.2s linear;
@@ -370,7 +379,6 @@ input[type="checkbox"] + label:hover {
 	-webkit-user-select:none;
 	-moz-user-select:none;
 	-ms-user-select:none;
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .simpleselect .placeholder {

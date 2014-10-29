@@ -23,6 +23,8 @@
 			return;
 		    }
 		}
+
+		document.addEventListener("touchstart", function(){}, true);
 		</script>
 	</body>
 </html>
