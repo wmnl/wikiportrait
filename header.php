@@ -18,7 +18,7 @@
 			header("Location:/wikiportret");
 
 	}
-	
+
 	if ($DevDebugging)
 	{
 		error_reporting(-1);
@@ -29,6 +29,11 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="initial-scale=1.0" />
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-title" content="Wikiportret">
+		<link rel="apple-touch-icon" href="<?php echo $basispad ?>/apple-touch-icon.png">
+		<link rel="icon" sizes="180x180" href="<?php echo $basispad ?>/apple-touch-icon.png">
 		<link rel="stylesheet" type="text/css" href="<?php echo $basispad ?>/style/style.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo $basispad ?>/style/responsive.css" />
 		<!--[if lt IE 8 ]>
