@@ -91,7 +91,7 @@ De uploader heeft het volgende IP-adres: '$ip'<br />
 Je kunt de foto bekijken op Wikiportret en de foto daar afwijzen, of een tekst genereren die je kan copy-pasten om een e-mail te schrijven.<br />
 <br />
 Klik op deze link:<br />
-http://www.wikidate.nl/wikiportret/image.php?id=" . mysqli_insert_id($connection) . "<br />
+http://www.wikidate.nl/wikiportret/images/single.php?id=" . mysqli_insert_id($connection) . "<br />
 <br />
 Als je vragen hebt over de uploadwizard kun je terecht bij JurgenNL via http://nl.wikipedia.org/wiki/Gebruiker:JurgenNL of eventueel via jurgennl.wp@gmail.com.<br />
 <br />
