@@ -92,7 +92,7 @@
 					    $query = sprintf("SELECT owner, archived FROM images WHERE id = %d", mysqli_real_escape_string($connection, $_GET['id']));
 					    $result = mysqli_query($connection,$query);
 					    $owner = mysqli_fetch_assoc($result);
-					    $query2 = "SELECT otrsname, id FROM users";
+					    $query2 = "SELECT otrsname, id FROM users WHERE active = 1";
 					    $result2 = mysqli_query($connection,$query2);
 					    
 					    while ($row = mysqli_fetch_assoc($result2)):
