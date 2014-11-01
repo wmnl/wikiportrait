@@ -3,7 +3,7 @@
 	{
 		echo "<p>$text</p>";
 		if (!empty($exp)) echo "<div class=\"box grey\">$exp</div>";
-		echo "<div class=\"bottom center\"><a class=\"button red\" href=\"wizard.php?question=$no\"><i class=\"fa fa-thumbs-down fa-lg fa-fw\"></i>Nee</a><span class=\"divider\">&nbsp;</span><a class=\"button green\" href=\"wizard.php?question=$yes\"><i class=\"fa fa-thumbs-up fa-lg fa-fw\"></i>Ja</a></div>";
+		echo "<div class=\"bottom center\"><a class=\"button\" href=\"wizard.php?question=$no\">Nee</a><span class=\"divider\">&nbsp;</span><a class=\"button\" href=\"wizard.php?question=$yes\">Ja</a></div>";
 	}
 
 	function result($result)
