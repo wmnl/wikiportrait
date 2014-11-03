@@ -93,7 +93,7 @@ Je kunt de foto bekijken op Wikiportret en de foto daar afwijzen, of een tekst g
 Klik op deze link:<br />
 https://www.wikidate.nl/wikiportret/images/single.php?id=" . mysqli_insert_id($connection) . "<br />
 <br />
-Als je vragen hebt over de uploadwizard kun je terecht bij JurgenNL via http://nl.wikipedia.org/wiki/Gebruiker:JurgenNL of eventueel via jurgennl.wp@gmail.com.<br />
+Als je vragen hebt over de uploadwizard kun je terecht bij JurgenNL via https://nl.wikipedia.org/wiki/Gebruiker:JurgenNL of eventueel via jurgennl.wp@gmail.com.<br />
 <br />
 Al vast heel erg bedankt voor je medewerking!<br />";
 
