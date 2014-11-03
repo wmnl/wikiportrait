@@ -5,13 +5,13 @@
 	$basispad = "/wikiportret";
 
 	function checkLogin(){
-		$basispad = "/wikiportret";
+		global $basispad;
 		if (!isset($_SESSION['user']))
 			header("Location:/wikiportret/login.php");
 	}
 
 	function checkAdmin(){
-		$basispad = "/wikiportret";
+		global $basispad;
 		if (!isset($_SESSION['user']))
 			header("Location:/wikiportret/login.php");
 		elseif (isset($_SESSION['user']) && $_SESSION['isSysop'] == false)
