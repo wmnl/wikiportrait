@@ -16,7 +16,7 @@
 		padding:10px;
 	}
 
-	input[type="text"], input[type="password"], input[type="email"], input[type="date"], select, textarea, .checkbox, .file, .simpleselect .placeholder, .simpleselect .options {
+	input[type="text"], input[type="password"], input[type="email"], input[type="date"], select, textarea, .checkbox, .file, .simpleselect .placeholder {
 		display:block;
 		border-bottom-left-radius:5px;
 		border-top-right-radius:0px;
