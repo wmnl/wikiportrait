@@ -34,7 +34,13 @@ checkLogin();
 
 			if (empty($errors))
 			{
-	?>
+				$query = sprintf("SELECT * FROM images WHERE title LIKE '%%%s%%'", mysqli_real_escape_string($connection, $_POST['search']));
+				$result = mysqli_query($connection, $query);
+
+				if (mysqli_num_rows($result) > 0)
+				{
+				?>
+				
 	<div class="table-container">
 
 		<table>
@@ -48,13 +54,9 @@ checkLogin();
 						<th class="actions-1">Acties</th>
 					</tr>
 				</thead>
+				
 				<tbody>
 				<?php
-				$query = sprintf("SELECT * FROM images WHERE title LIKE '%%%s%%'", mysqli_real_escape_string($connection, $_POST['search']));
-				$result = mysqli_query($connection, $query);
-
-				if (mysqli_num_rows($result) > 0)
-				{
 					while ($row = mysqli_fetch_assoc($result)):
 						$id = $row['id'];
 						$filename = $row['filename'];
