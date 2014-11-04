@@ -44,7 +44,6 @@
 			<link rel="stylesheet" type="text/css" href="<?php echo $basispad ?>/style/ie.css" />
 		<![endif]-->
 	   	<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-	   	<link href="<?php echo $basispad ?>/scripts/jQuery.SimpleSelect/jquery.simpleselect.css" rel="stylesheet" />
 		<script src="<?php echo $basispad ?>/scripts/jquery-2.1.1.min.js"></script>
 		<title>Wikiportret - Stel uw foto's ter beschikking</title>
 	</head>

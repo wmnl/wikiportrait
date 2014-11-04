@@ -50,7 +50,6 @@ a:hover, a:focus, .tabs .active a, #header a {
 	color:#000;
 	background-color:transparent;
 	-moz-transition:color 0.2s linear;
-	-o-transition:color 0.2s linear;
 	-webkit-transition:color 0.2s linear;
 	transition:color 0.2s linear;
 }
@@ -171,7 +170,6 @@ p:last-child {
 .menu a:hover, .menu .active a {
 	background:#005580;
 	-moz-transition:background 0.2s linear;
-	-o-transition:background 0.2s linear;
 	-webkit-transition:background 0.2s linear;
 	transition:background 0.2s linear;
 }
@@ -291,7 +289,6 @@ textarea {
 	resize:none;
 	-webkit-overflow-scrolling:touch;
 	-moz-transition:height 0.2s linear;
-	-o-transition:height 0.2s linear;
 	-webkit-transition:height 0.2s linear;
 	transition:height 0.2s linear;
 }
@@ -301,12 +298,11 @@ input[disabled], textarea[disabled], select[disabled='disabled'] {
 	-webkit-opacity:1;
 }
 
-input:focus, textarea:focus, .simpleselect .options {
+input:focus, textarea:focus {
 	-webkit-box-shadow:inset 0 0 1px 1px #e3e3e3;
 	-moz-box-shadow:inset 0 0 1px 1px #e3e3e3;
 	box-shadow:inset 0 0 1px 1px #e3e3e3;
 	-moz-transition:all 0.2s linear;
-	-o-transition:all 0.2s linear;
 	-webkit-transition:all 0.2s linear;
 	transition:all 0.2s linear;
 }
@@ -331,7 +327,6 @@ input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hov
 	color:#fff;
 	cursor:pointer;
 	-moz-transition:background 0.2s linear;
-	-o-transition:background 0.2s linear;
 	-webkit-transition:background 0.2s linear;
 	transition:background 0.2s linear;
 }
@@ -373,15 +368,32 @@ input[type="checkbox"] + label:hover {
 }
 
 /* Select */
+.hidden_select_container {
+	width:0;
+	height:0;
+	overflow:hidden;
+	display:none;
+}
+
+.simpleselect .options {
+	display:none;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:1000;
+}
+
 .simpleselect {
 	display:table-cell;
 	width:100%;
+	position:relative;
 	-webkit-user-select:none;
 	-moz-user-select:none;
 	-ms-user-select:none;
 }
 
 .simpleselect .placeholder {
+	position:relative;
 	border:1px solid #ddd;
 	border-top-right-radius:5px;
 	border-bottom-right-radius:5px;
@@ -402,8 +414,12 @@ input[type="checkbox"] + label:hover {
 	border:1px solid #bbb;
 	border-top-right-radius:5px;
 	border-bottom-right-radius:5px;
-	overflow:hidden;
-	margin-bottom:10px;
+	-webkit-box-shadow:inset 0 0 1px 1px #e3e3e3;
+	-moz-box-shadow:inset 0 0 1px 1px #e3e3e3;
+	box-shadow:inset 0 0 1px 1px #e3e3e3;
+	-moz-transition:opacity 0.15s linear;
+	-webkit-transition:opacity 0.15s linear;
+	transition:opacity 0.15s linear;
 }
 
 .simpleselect .option {
@@ -416,6 +432,11 @@ input[type="checkbox"] + label:hover {
 
 .simpleselect .options .option.active {
 	background:#EDEDED;
+}
+
+.simpleselect .placeholder, .simpleselect .options .option {
+    padding:10px;
+    cursor:pointer;
 }
 
 /* File input */
