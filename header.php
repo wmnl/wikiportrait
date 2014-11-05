@@ -37,10 +37,13 @@
 		<!-- Apple -->
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-title" content="Wikiportret" />
-		<link rel="apple-touch-icon" href="<?php echo $basispad ?>/icons/apple-touch-icon.png" />
+		<link rel="apple-touch-icon" href="<?php echo $basispad ?>/apple-touch-icon.png" />
 		<!-- Overige icons -->
-		<link rel="icon" type="image/png" href="<?php echo $basispad ?>/icons/apple-touch-icon.png" />
-		<link rel="shortcut icon" type="image/x-icon" href="<?php echo $basispad ?>/icons/favicon.ico" />
+		<link rel="shortcut icon" href="<?php echo $basispad ?>/favicon.ico" />
+		<link rel="icon" type="image/x-icon" href="<?php echo $basispad ?>/favicon.ico" />
+		<link rel="icon" type="image/png" href="<?php echo $basispad ?>/apple-touch-icon.png" />
+		<meta name="msapplication-TileColor" content="#444444">
+		<meta name="msapplication-TileImage" content="<?php echo $basispad ?>/apple-touch-icon.png">
 		<link rel="stylesheet" type="text/css" href="<?php echo $basispad ?>/style/style.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo $basispad ?>/style/responsive.css" />
 		<!--[if lt IE 8 ]>
