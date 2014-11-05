@@ -33,11 +33,11 @@
 			     }
 			     $row = mysqli_fetch_assoc($result);
 	?>
-	
+
 	<h2>Ingestuurde foto: <?= $row['title']; ?></h2>
-	
+
 	<div class="single">
-	
+
 	    <div class="single-box image">
 
 		<a href="../uploads/<?= $row['filename']; ?>" target="_blank"><img src="../uploads/<?= $row['filename'] ;?>" /></a>
@@ -94,7 +94,7 @@
 					    $owner = mysqli_fetch_assoc($result);
 					    $query2 = "SELECT otrsname, id FROM users WHERE active = 1";
 					    $result2 = mysqli_query($connection,$query2);
-					    
+
 					    while ($row = mysqli_fetch_assoc($result2)):
 						$selected = "";
 
@@ -122,17 +122,17 @@
 		</form>
 
 	    </div>
-	
+
 	</div>
 
 	<?php
 			    }
 		}
 	?>
-	
+
 </div>
 
-<script src="<?php echo $basispad ?>/scripts/imagelightbox.min.js"></script>
+<script src="<?php echo $basispad ?>/scripts/jquery.imagelightbox.min.js"></script>
 <script>
 $( function(){
 	var activityIndicatorOn = function()
