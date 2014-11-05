@@ -151,7 +151,7 @@ Al vast heel erg bedankt voor je medewerking!<br />";
 
 				<div class="input-container">
 					<label for="email"><i class="fa fa-envelope fa-lg fa-fw"></i>Uw e-mailadres</label>
-					<input type="email" id="email" name="email" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>" />
+					<input type="email" id="email" name="email" required="required" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>" />
 				</div>
 
 				<div class="input-container">
