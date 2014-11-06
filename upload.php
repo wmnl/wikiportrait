@@ -69,7 +69,7 @@
 
 		$thumb = imagecreatetruecolor($x,$y);
 
-		if (in_array($file['type'],array("image/jpg","image/pjpeg")))
+		if (in_array($file['type'],array("image/jpeg","image/pjpeg")))
 		{
 			$img=imagecreatefromjpeg("uploads/" . $filename);
 			//$thumb=imagescale($img,$x);
