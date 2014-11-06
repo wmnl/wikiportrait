@@ -1,5 +1,4 @@
 <?php
-	require '../config/connect.php';   
 	include '../header.php';
 	include 'tabs.php';
 	checkAdmin();

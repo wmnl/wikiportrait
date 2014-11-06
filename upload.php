@@ -1,6 +1,4 @@
 <?php
-    require 'config/connect.php';
-    require 'config/config.php';
     include 'header.php';
 
     if (isset($_POST['postback']))
