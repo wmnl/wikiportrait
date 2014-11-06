@@ -62,10 +62,10 @@
 		$x=300; //Width
 		$folder="uploads/thumbs"; //Foldername thumbnail
 
-		$size=getimagesize("uploads/" . $filename);
+		$size = getimagesize("uploads/" . $filename);
 
-		$scale=$size[0]/$x;
-		$y=$size[1]/$scale;
+		$scale = $size[0]/$x;
+		$y = $size[1]/$scale;
 
 		$thumb = imagecreatetruecolor($x,$y);
 
@@ -76,21 +76,21 @@
 			imagecopyresized($thumb,$img,0,0,0,0,$x,$y,$size[0],$size[1]);
 			imagejpeg($thumb,$folder."/".$filename);
 		}
-		elseif($file['type']=="image/png")
+		elseif ($file['type']=="image/png")
 		{
 			$img=imagecreatefrompng("uploads/" . $filename);
 			//$thumb=imagescale($img,$x);
 			imagecopyresized($thumb,$img,0,0,0,0,$x,$y,$size[0],$size[1]);
 			imagepng($thumb,$folder."/".$filename);
 		}
-		elseif($file['type']=="image/gif")
+		elseif ($file['type']=="image/gif")
 		{
 			$img=imagecreatefromgif("uploads/" . $filename);
 			//$thumb=imagescale($img,$x);
 			imagecopyresized($thumb,$img,0,0,0,0,$x,$y,$size[0],$size[1]);
 			imagegif($thumb,$folder."/".$filename);
 		}
-		elseif($file['type']=="image/bmp")
+		elseif ($file['type']=="image/bmp")
 		{
 			$img=imagecreatefromwbmp("uploads/" . $filename);
 			//$thumb=imagescale($img,$x);
@@ -99,8 +99,7 @@
 		}
 		/* Klaar met Tumpneel */
 
-		$query = sprintf("INSERT INTO images(filename, title, source, name, email, license, ip, date, description, timestamp)"
-						. "VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d);", mysqli_real_escape_string($connection, $filename), mysqli_real_escape_string($connection, $title), mysqli_real_escape_string($connection, $source), mysqli_real_escape_string($connection, $name), mysqli_real_escape_string($connection, $email), 'CC-BY-SA 3.0', mysqli_real_escape_string($connection, $ip), mysqli_real_escape_string($connection, $date), mysqli_real_escape_string($connection, $desc), mysqli_real_escape_string($connection,	 date_timestamp_get($time)));
+		$query = sprintf("INSERT INTO images(filename, title, source, name, email, license, ip, date, description, timestamp) VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d);", mysqli_real_escape_string($connection, $filename), mysqli_real_escape_string($connection, $title), mysqli_real_escape_string($connection, $source), mysqli_real_escape_string($connection, $name), mysqli_real_escape_string($connection, $email), 'CC-BY-SA 3.0', mysqli_real_escape_string($connection, $ip), mysqli_real_escape_string($connection, $date), mysqli_real_escape_string($connection, $desc), mysqli_real_escape_string($connection, date_timestamp_get($time)));
 mysqli_query($connection, $query);
 
 		require "PHPMailer/PHPMailerAutoload.php";
