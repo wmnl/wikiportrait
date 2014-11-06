@@ -104,7 +104,7 @@
 				    }
 			?>
 			<tr>
-			    <td data-title="Foto" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/<?php echo $filename?>" /></a></td>
+			    <td data-title="Foto" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/thumbs/<?php echo $filename?>" /></a></td>
 			    <td data-title="Titel"><a href="single.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
 			    <td data-title="Uploader"><?php echo $name ?></td>
 			    <td data-title="Datum"><?php echo strftime("%e %B %Y", $timestamp) ?></td>
