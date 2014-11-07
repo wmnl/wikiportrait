@@ -34,7 +34,7 @@
 
 			case "employment":
 				showquestion("Heeft u de foto gemaakt in opdracht van een ander?", "employpermission", "ownpermission", "Als een ander u opdracht heeft gegeven om foto('s) te maken, dan heeft die ander (ook) auteursrechten op de foto. Dat kan bijvoorbeeld uw werkgever zijn, of de organisatie of persoon waar u (freelance) een opdracht doet. Als u een foto maakt in opdracht van uw werkgever, dan heeft uw werkgever (bijna) altijd auteursrechten op de foto. Als u de foto heeft gemaakt voor een andere opdrachtgever, dan ligt het eraan wat u afgesproken heeft over de auteursrechten. Als de auteursrechten (deels) bij uw werkgever/opdrachtgever liggen, mag u de foto niet zomaar uploaden, ook al heeft u de foto zelf gemaakt.");
-			break;
+				break;
 
 			case "employpermission":
 				showquestion("Geeft de opdrachtgever toestemming voor onbeperkte verspreiding, bewerking en commercieel gebruik van de foto?", "upload", "noupload", "Als u de foto in opdracht van een ander hebt gemaakt, heeft u toestemming van die ander nodig om de foto te uploaden. Dit kunt u van tevoren hebben afgesproken (u heeft dan met de opdrachtgever afgesproken dat de auteursrechten volledig bij u liggen, en niet bij de opdrachtgever), maar u kunt ook achteraf toestemming vragen. 'Onbeperkt' betekent dat anderen zonder toestemming van de opdrachtgever uw foto mogen gebruiken, zonder dat zij aan u of de opdrachtgever hoeven te melden dat ze de foto gebruiken. Wel moet de ander u en/of de opdrachtgever als auteur noemen (tenzij u en de opdrachtgever aangegeven hebben dat dat niet nodig is). 'Onbeperkt' betekent dus ook dat de foto voor een commercieel doel gebruikt kan worden, bijvoorbeeld in een tijdschrift, website of reclamefolder.");
