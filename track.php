@@ -6,16 +6,16 @@
 	<?php
 		if (!isset($_GET['image']) || !isset($_GET['key']))
 		{
-			header("location:index.php");
+			echo "<div class=\"box red\">Geen afbeelding gevonden!</div>";
 		}
 		else
 		{
-			$query = sprintf("SELECT * FROM images WHERE id = %d AND key = '%s'", mysqli_real_escape_string($connection, $_GET['image']), mysqli_real_escape_string($connection, $_GET['key']);
+			$query = sprintf("SELECT * FROM images WHERE id = %d", mysqli_real_escape_string($connection, $_GET['image']));
 			$result = mysqli_query($connection, $query);
 			$row = mysqli_fetch_assoc($result);
-			if (mysqli_num_rows($result) == 0)
+			if (mysqli_num_rows($result) == 0 || sha1($row['id']) != $_GET['key'])
 			{
-				echo "<div class=\"box red\">Geen afbeelding gevonden of key onjuist!</div>";
+				echo "<div class=\"box red\">Geen afbeelding gevonden!</div>";
 			}
 			else
 			{
