@@ -12,14 +12,14 @@ checkLogin();
 	<?
 	if (!empty($errors))
 		{
-			echo "<div class=\"box red\"><ul>";
+			echo "<div class=\"box red\">";
 
 			foreach ($errors as $error)
 			{
-				echo "<li>$error</li>";
+				echo "$error";
 			}
 
-			echo "</ul></div>";
+			echo "</div>";
 		}
 		else
 		{
@@ -40,7 +40,7 @@ checkLogin();
 				if (mysqli_num_rows($result) > 0)
 				{
 				?>
-				
+
 	<div class="table-container">
 
 		<table>
@@ -54,7 +54,7 @@ checkLogin();
 						<th class="actions-1">Acties</th>
 					</tr>
 				</thead>
-				
+
 				<tbody>
 				<?php
 					while ($row = mysqli_fetch_assoc($result)):
@@ -62,10 +62,10 @@ checkLogin();
 						$filename = $row['filename'];
 						$title = $row['title'];
 						$name = $row['name'];
-						$timestamp = $row['timestamp'];	
+						$timestamp = $row['timestamp'];
 				?>
 					<tr>
-					
+
 						<td data-title="Foto" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/<?php echo $filename?>" /></a></td>
 						<td data-title="Titel"><a href="single.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
 						<td data-title="Uploader"><?php echo $name ?></td>
@@ -79,7 +79,7 @@ checkLogin();
 				</tbody>
 		</table>
 		<?php
-				
+
 				}
 				else
 				{
@@ -100,9 +100,9 @@ checkLogin();
 		}
 	}
 	?>
-	
+
 		<form method="post">
-		
+
 		<div class="input-container">
 			<label for="search"><i class="fa fa-search"></i>Zoekterm</label>
 			<input type="text" name="search" id="search" />
@@ -113,7 +113,7 @@ checkLogin();
 		</div>
 
 	</form>
-	
+
 </div>
 <?php
 include '../footer.php';
