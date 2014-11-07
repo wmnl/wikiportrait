@@ -6,11 +6,11 @@
         {
             $id = $_GET['id'];
         }
-        else 
+        else
         {
             header("Location: users.php");
         }
-?>			
+?>
 <div id="content">
 
 	<div class="page-header">
@@ -20,9 +20,9 @@
 		<a href="users.php" class="button red"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
 
 	</div>
-	
-    <?php					
-            $query = sprintf("SELECT * FROM users WHERE id = %d", mysqli_real_escape_string($connection, $id)); 
+
+    <?php
+            $query = sprintf("SELECT * FROM users WHERE id = %d", mysqli_real_escape_string($connection, $id));
             $result = mysqli_query($connection, $query);
             if (mysqli_num_rows($result) == 0)
             {
@@ -96,7 +96,7 @@
                         }
                         mysqli_query($connection, $query);
                         header("Location: users.php");
-                    }  
+                    }
 
                     if (!empty($errors))
                     {
@@ -128,12 +128,12 @@
 
             <div class="input-container">
                 <label for="password"><i class="fa fa-key fa-lg fa-fw"></i>Wachtwoord</label>
-                <input type="password" name="password" id="password" placeholder="Enkel invullen als je het wachtwoord wilt wijzigen"/>
+                <input type="password" name="password" id="password" placeholder="Enkel invullen als u het wachtwoord wilt wijzigen"/>
             </div>
 
             <div class="input-container">
                 <label for="password2"><i class="fa fa-key fa-lg fa-fw"></i>Wachtwoord nogmaals</label>
-                <input type="password" name="password2" id="password2" placeholder="Enkel invullen als je het wachtwoord wilt wijzigen" />
+                <input type="password" name="password2" id="password2" placeholder="Enkel invullen als u het wachtwoord wilt wijzigen" />
             </div>
 
             <div class="input-container">
@@ -147,7 +147,7 @@
                     <input type="checkbox" name="admin" id="admin" <?php if ($row['isSysop'] == 1) echo "checked"; ?> /><label for="admin">Ja</label>
                 </div>
             </div>
-        
+
             <div class="input-container">
                 <label for="active"><i class="fa fa-power-off fa-lg fa-fw"></i>Geactiveerd</label>
                 <div class="checkbox">

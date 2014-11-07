@@ -1,5 +1,5 @@
-<?php 
-include 'header.php'; 
+<?php
+	include 'header.php';
 ?>
 
 <div id="content">
@@ -13,7 +13,7 @@ include 'header.php';
 		{
 		    header("Location:index.php");
 		}
-		
+
 		if (!empty($errors))
 		{
 			echo "<div class=\"box red\"><ul>";
@@ -33,12 +33,12 @@ include 'header.php';
 
 			if (empty ($_POST['username']))
 			{
-				array_push($errors, "Je hebt geen gebruikersnaam ingevuld");
+				array_push($errors, "U heeft geen gebruikersnaam ingevuld");
 			}
 
 			if (empty ($_POST['password']))
 			{
-				array_push($errors, "Je hebt geen wachtwoord ingevuld");
+				array_push($errors, "U heeft geen wachtwoord ingevuld");
 			}
 
 			if (empty($errors))
@@ -111,6 +111,6 @@ include 'header.php';
 
 </div>
 
-<?php 
-include 'footer.php'; 
+<?php
+	include 'footer.php';
 ?>

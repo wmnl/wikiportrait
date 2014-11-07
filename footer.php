@@ -19,7 +19,7 @@
 
 		/* Delete confirmation */
 		function confirmDelete(id){
-		    if (confirm("Weet je zeker dat je dit bericht wilt verwijderen?")) {
+		    if (confirm("Weet u zeker dat u dit bericht wilt verwijderen?")) {
 			location.href = "deletemessage.php?id=" + id;
 		    }
 		    else {
