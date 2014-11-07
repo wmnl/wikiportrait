@@ -1,65 +1,122 @@
 <?php
-    include 'header.php';
+	include 'header.php';
 ?>
 <div id="content">
-    <?php
-        if (!isset($_GET['image']) || !isset($_GET['key']))
-        {
-            echo "<div class=\"box red\">Geen afbeelding gevonden!</div>";
-        }
-        else
-        {
-            $query = sprintf("SELECT * FROM images WHERE id = %d", mysqli_real_escape_string($connection, $_GET['image']));
-            $result = mysqli_query($connection, $query);
-            $row = mysqli_fetch_assoc($result);
-            if (mysqli_num_rows($result) == 0 || sha1($row['id']) != $_GET['key'])
-            {
-                echo "<div class=\"box red\">Geen afbeelding gevonden!</div>";
-            }
-            else
-            {
-            
-    ?>
-        <h2>Inzending volgen: <?php echo $row['title']; ?> </h2> 
-        <?php
-            if ($row['archived'] == 1)
-            {
-                echo "<div class=\"box green\"><i class=\"fa fa-check fa-lg fa-fw\"></i>Afgehandeld</div>";
-            }
-            elseif ($row['archived'] == 0 && $row['owner'] != 0)
-            {
-                echo "<div class=\"box grey\"><i class=\"fa fa-clock-o fa-lg fa-fw\"></i>In behandeling</div>";
-            }
-            elseif ($row['archived'] == 0 && $row['owner'] == 0)
-            {
-                echo "<div class=\"box grey\"><i class=\"fa fa-clock-o fa-lg fa-fw\"></i>In de wachtrij</div>";
-            }
-            else
-            {
-                echo "<div class=\"box red\"><i class=\"fa fa-exclamation-triangle  fa-lg fa-fw\"></i>Status onbekend</div>";
-            }
-            
-        ?>
-    
-    	<a href="uploads/<?php echo $row['filename']; ?>" target="_blank" class="float-right"><img src="uploads/<?php echo $row['filename'] ;?>" style="max-width:15em;" /></a>
-        
-	<h3>Informatie</h3>
 
-	<p>
-	    <ul class="list">
-		    <li>Titel: <?php echo htmlspecialchars($row['title']); ?></li>
-		    <li>Auteur: <?php echo htmlspecialchars($row['source']); ?></li>
-		    <li>Naam uploader: <?php echo htmlspecialchars($row['name']); ?></li>
-		    <li>Beschrijving: <?php echo htmlspecialchars($row['description']);?></li>
-	    </ul>
-	</p>
-        
-        <br clear="all" />
-    <?php
-            }
-        }
-    ?>
+	<?php
+		if (!isset($_GET['image']) || !isset($_GET['key']))
+		{
+			echo "<div class=\"box red\">Geen afbeelding gevonden!</div>";
+		}
+		else
+		{
+			$query = sprintf("SELECT * FROM images WHERE id = %d", mysqli_real_escape_string($connection, $_GET['image']));
+			$result = mysqli_query($connection, $query);
+			$row = mysqli_fetch_assoc($result);
+			if (mysqli_num_rows($result) == 0 || sha1($row['id']) != $_GET['key'])
+			{
+				echo "<div class=\"box red\">Geen afbeelding gevonden!</div>";
+			}
+			else
+			{
+
+	?>
+
+	<h2>Inzending volgen: <?php echo $row['title']; ?> </h2>
+
+	<div class="single">
+
+		<div class="single-box image">
+
+		<a href="uploads/<?php echo $row['filename']; ?>"><img src="uploads/<?php echo $row['filename'] ;?>" /></a>
+
+		</div>
+
+		<div class="single-box info">
+
+			<h3>Informatie</h3>
+
+			<div class="holder">
+				<div><span class="title">Titel:</span><span class="content"><?= htmlspecialchars($row['title']); ?></span></div>
+				<div><span class="title">Auteursrechthebbende:</span><span class="content"><?= htmlspecialchars($row['source']); ?></span></div>
+				<div><span class="title">Geupload door:</span><span class="content"><?= htmlspecialchars($row['name']); ?></span></div>
+				<div><span class="title">Beschrijving:</span><span class="content"><?= htmlspecialchars($row['description']);?></span></div>
+			</div>
+
+		</div>
+
+		<div class="single-box options">
+
+		<h3>Status</h3>
+
+		<?php
+			if ($row['archived'] == 1)
+			{
+				echo "<div class=\"box green\"><i class=\"fa fa-check fa-lg\"></i>Afgehandeld</div>";
+			}
+			elseif ($row['archived'] == 0 && $row['owner'] != 0)
+			{
+				echo "<div class=\"box grey\"><i class=\"fa fa-clock-o fa-lg\"></i>In behandeling</div>";
+			}
+			elseif ($row['archived'] == 0 && $row['owner'] == 0)
+			{
+				echo "<div class=\"box grey\"><i class=\"fa fa-clock-o fa-lg\"></i>In de wachtrij</div>";
+			}
+			else
+			{
+				echo "<div class=\"box red\"><i class=\"fa fa-exclamation-triangle fa-lg\"></i>Status onbekend</div>";
+			}
+		?>
+		</div>
+
+	</div>
+
+	<?php
+			}
+		}
+	?>
+
 </div>
+
+<script src="<?php echo $basispad ?>/scripts/jquery.imagelightbox.min.js"></script>
+<script>
+$( function(){
+	var activityIndicatorOn = function()
+	{
+		$( '<div id="imagelightbox-loading"><i class="fa fa-circle-o-notch fa-spin fa-lg"></i></div>' ).appendTo( 'body' );
+	},
+	activityIndicatorOff = function()
+	{
+		$( '#imagelightbox-loading' ).remove();
+	},
+
+	overlayOn = function()
+	{
+		$( '<div id="imagelightbox-overlay"></div>' ).appendTo( 'body' );
+	},
+	overlayOff = function()
+	{
+		$( '#imagelightbox-overlay' ).remove();
+	},
+
+	closeButtonOn = function( instance )
+	{
+		$( '<button type="button" id="imagelightbox-close" title="Close"><i class="fa fa-times fa-lg"></i></button>' ).appendTo( 'body' ).on( 'click touchend', function(){ $( this ).remove(); instance.quitImageLightbox(); return false; });
+	},
+	closeButtonOff = function()
+	{
+		$( '#imagelightbox-close' ).remove();
+	};
+
+	var instanceC = $( 'a' ).imageLightbox(
+	{
+		onStart:		function() { overlayOn(); closeButtonOn( instanceC ); },
+		onEnd:			function() { closeButtonOff(); overlayOff(); activityIndicatorOff(); },
+		onLoadStart: 	function() { activityIndicatorOn(); },
+		onLoadEnd:	 	function() { activityIndicatorOff(); }
+	});
+});
+</script>
 <?php
-    include 'footer.php';
+	include 'footer.php';
 ?>
