@@ -2,11 +2,15 @@
 	header('HTTP/1.1 404 Not Found');
 	header('Status: 404 Not Found');
 	include 'header.php';
-?>          
-	<div id="content">
-		<h2>Oei, deze pagina bestaat niet!</h2>
-		<p>Hier moet dan een begeleidend tekstje staan.</p>
-	</div>
+?>
+<div id="content">
+
+		<h2>Oh nee, deze pagina bestaat niet!</h2>
+
+		<p>Helaas, u bent terecht gekomen op een deel van Wikiportret wat eigenlijk niet bestaat. Het kan ook zijn dat de pagina wel bestaat, maar op dit moment niet beschikbaar is.</p>
+		<p>Controleer of u een correcte URL in uw adresbalk heeft staan of keer terug naar de vorige pagina. Pak anders een stroopwafel en probeer het later opnieuw.</p>
+
+</div>
 <?php
 	include 'footer.php';
 ?>
