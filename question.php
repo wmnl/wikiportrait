@@ -1,4 +1,6 @@
 <?php
+	require_once 'config/connect.php';
+
 	function showquestion($text, $yes, $no, $exp=null)
 	{
 		echo "<p>$text</p>";
@@ -16,9 +18,14 @@
 		}
 		elseif ($result == "success")
 		{
+		$query = sprintf("SELECT key FROM image WHERE key IS NULL AND id = %d", mysqli_real_escape_string($connection, $_GET['id']);
+		$result = mysqli_query($connection, $query);
+		if (mysqli_num_rows($result))
+		{
 			echo "<h3>Uploaden voltooid</h3>";
-			echo "<div class=\"box green\">De afbeelding is met succes geüpload.<br />Een vrijwilliger zal de afbeelding zo snel mogelijk beoordelen en contact met u opnemen.<br />Als u wilt, kunt u <a href='track.php?image=" . $_GET['id'] . "&key=" . sha1($_GET['id']) . "'>hier</a> uw inzending volgen.</div>";
+			echo "<div class=\"box green\">De afbeelding is met succes geüpload.<br />Een vrijwilliger zal de afbeelding zo snel mogelijk beoordelen en contact met u opnemen.<br />Als u wilt, kunt u <a href='track.php?image=" . $_GET['id'] . "&key=" . $row['key'] . "'>hier</a> uw inzending volgen.</div>";
 			echo "<div class=\"bottom right\"><a class=\"button\" href=\"upload.php\"><i class=\"fa fa-cloud-upload fa-lg\"></i>Nog een afbeelding uploaden</a></div>";
+		}
 		}
 		else
 		{

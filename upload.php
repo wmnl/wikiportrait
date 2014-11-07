@@ -96,8 +96,11 @@
 			imagewbmp($thumb,$folder."/".$filename);
 		}
 		/* Klaar met Tumpneel */
+		// SHA1 generator
+		$sha1hash = substr(sha1(rand()), 0, 15);
+		$sha1hash = str_shuffle($sha1hash);
 
-		$query = sprintf("INSERT INTO images(filename, title, source, name, email, license, ip, date, description, timestamp) VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d);", mysqli_real_escape_string($connection, $filename), mysqli_real_escape_string($connection, $title), mysqli_real_escape_string($connection, $source), mysqli_real_escape_string($connection, $name), mysqli_real_escape_string($connection, $email), 'CC-BY-SA 3.0', mysqli_real_escape_string($connection, $ip), mysqli_real_escape_string($connection, $date), mysqli_real_escape_string($connection, $desc), mysqli_real_escape_string($connection, date_timestamp_get($time)));
+		$query = sprintf("INSERT INTO images(filename, title, source, key, name, email, license, ip, date, description, timestamp) VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d);", mysqli_real_escape_string($connection, $filename), mysqli_real_escape_string($connection, $title), mysqli_real_escape_string($connection, $source), mysqli_real_escape_string($connection, $sha1hash), mysqli_real_escape_string($connection, $name), mysqli_real_escape_string($connection, $email), 'CC-BY-SA 3.0', mysqli_real_escape_string($connection, $ip), mysqli_real_escape_string($connection, $date), mysqli_real_escape_string($connection, $desc), mysqli_real_escape_string($connection, date_timestamp_get($time)));
 mysqli_query($connection, $query);
 
 		require "PHPMailer/PHPMailerAutoload.php";

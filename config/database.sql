@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `filename` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `source` varchar(255) NOT NULL,
+  `key` varchar(5) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `ip` varchar(255) NOT NULL,
