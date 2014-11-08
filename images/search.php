@@ -59,9 +59,9 @@ checkLogin();
 				<?php
 					while ($row = mysqli_fetch_assoc($result)):
 						$id = $row['id'];
-						$filename = $row['filename'];
-						$title = $row['title'];
-						$name = $row['name'];
+						$filename = htmlspecialchars($row['filename']);
+						$title = htmlspecialchars($row['title']);
+						$name = htmlspecialchars($row['name']);
 						$timestamp = $row['timestamp'];
 				?>
 					<tr>
