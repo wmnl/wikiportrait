@@ -9,7 +9,7 @@ checkLogin();
 	<div class="page-header">
 		<h2>Zoeken</h2>
 	</div>
-	        <form method="post">
+		<form method="post">
 
                 <div class="input-container">
                         <label for="search"><i class="fa fa-search"></i>Zoekterm</label>
@@ -20,7 +20,7 @@ checkLogin();
                         <button class="green" type="submit" name="postback"><i class="fa fa-search"></i>Zoeken</button>
                 </div>
 
-        </form>
+		</form>
 	<br />
 
 	<?
