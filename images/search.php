@@ -34,7 +34,7 @@ checkLogin();
 
 			if (empty($errors))
 			{
-				$query = sprintf("SELECT *, users.id AS owneruser FROM images INNER JOIN users ON images.owner = users.id WHERE title LIKE '%%%s%%'", mysqli_real_escape_string($connection, $_POST['search']));
+				$query = sprintf("SELECT *, users.otrsname AS owneruser FROM images INNER JOIN users ON images.owner = users.id WHERE title LIKE '%%%s%%'", mysqli_real_escape_string($connection, $_POST['search']));
 				$result = mysqli_query($connection, $query);
 
 				if (mysqli_num_rows($result) > 0)
