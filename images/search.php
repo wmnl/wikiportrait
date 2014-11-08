@@ -34,7 +34,7 @@ checkLogin();
 
 			if (empty($errors))
 			{
-				$query = sprintf("SELECT * FROM images WHERE title LIKE '%%%s%%'", mysqli_real_escape_string($connection, $_POST['search']));
+				$query = sprintf("SELECT *, users.id AS owneruser FROM images INNER JOIN users ON images.owner = users.id WHERE title LIKE '%%%s%%'", mysqli_real_escape_string($connection, $_POST['search']));
 				$result = mysqli_query($connection, $query);
 
 				if (mysqli_num_rows($result) > 0)
@@ -62,6 +62,7 @@ checkLogin();
 						$filename = htmlspecialchars($row['filename']);
 						$title = htmlspecialchars($row['title']);
 						$name = htmlspecialchars($row['name']);
+						$owner = htmlspecialchars($row['owneruser'])
 						$timestamp = $row['timestamp'];
 				?>
 					<tr>
@@ -70,7 +71,7 @@ checkLogin();
 						<td data-title="Titel"><a href="single.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
 						<td data-title="Uploader"><?php echo $name ?></td>
 						<td data-title="Datum"><?php echo strftime("%e %B %Y", $timestamp) ?></td>
-						<td data-title="Eigenaar"><?= $owner ?></td>
+						<td data-title="Eigenaar"><?= $ownseruser ?></td>
 						<td data-title="Acties" class="center"><a class="button" href="single.php?id=<?php echo $id ?>"><i class="fa fa-info"></i>Details</a></td>
 					</tr>
 					<?php
@@ -78,6 +79,7 @@ checkLogin();
 					?>
 				</tbody>
 		</table>
+		
 		<?php
 
 				}
@@ -100,7 +102,7 @@ checkLogin();
 		}
 	}
 	?>
-
+	<br />
 		<form method="post">
 
 		<div class="input-container">
