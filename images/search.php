@@ -62,7 +62,7 @@ checkLogin();
 						$filename = htmlspecialchars($row['filename']);
 						$title = htmlspecialchars($row['title']);
 						$name = htmlspecialchars($row['name']);
-						$owner = htmlspecialchars($row['owneruser'])
+						$owner = htmlspecialchars($row['owneruser']);
 						$timestamp = $row['timestamp'];
 				?>
 					<tr>
