@@ -9,6 +9,20 @@ checkLogin();
 	<div class="page-header">
 		<h2>Zoeken</h2>
 	</div>
+	        <form method="post">
+
+                <div class="input-container">
+                        <label for="search"><i class="fa fa-search"></i>Zoekterm</label>
+                        <input type="text" name="search" id="search" />
+                </div>
+
+                <div class="bottom right">
+                        <button class="green" type="submit" name="postback"><i class="fa fa-search"></i>Zoeken</button>
+                </div>
+
+        </form>
+	<br />
+
 	<?
 	if (!empty($errors))
 		{
@@ -102,19 +116,6 @@ checkLogin();
 		}
 	}
 	?>
-	<br />
-		<form method="post">
-
-		<div class="input-container">
-			<label for="search"><i class="fa fa-search"></i>Zoekterm</label>
-			<input type="text" name="search" id="search" />
-		</div>
-
-		<div class="bottom right">
-			<button class="green" type="submit" name="postback"><i class="fa fa-search"></i>Zoeken</button>
-		</div>
-
-	</form>
 
 </div>
 <?php
