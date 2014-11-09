@@ -108,8 +108,8 @@ mysqli_query($connection, $query);
 		$mail->isSMTP();								  // Set mailer to use SMTP
 
 		$mail->SMTPAuth	= true;					 // enable SMTP authentication
-		$mail->Host		= "mail.wikidate.nl";	 // sets the SMTP server
-		$mail->Port		= 587;					 // set the SMTP port for the GMAIL server
+		$mail->Host	= "mail.wikidate.nl";	 // sets the SMTP server
+		$mail->Port	= 587;					 // set the SMTP port for the GMAIL server
 		$mail->Username	= "info@wikidate.nl";	 // SMTP account username
 		$mail->Password	= "henk";				 // SMTP account password
 
@@ -137,8 +137,8 @@ Als je vragen hebt over de uploadwizard kun je terecht bij JurgenNL via https://
 Al vast heel erg bedankt voor je medewerking!<br />";
 
 		if(!$mail->send()) {
-		   echo "Message could not be sent.";
-		   echo "Mailer Error: " . $mail->ErrorInfo;
+		   echo "Er is een fout opgetreden tijdens het verzenden van de Wikiportret mail.";
+		   echo "Foutgegevens van de PHPMailer: " . $mail->ErrorInfo;
 		   exit;
 		}
 
