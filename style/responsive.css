@@ -1,3 +1,7 @@
+@-ms-viewport {
+	width:device-width;
+}
+
 @media (max-width:725px) {
 	body {
 		font-size:95%;
