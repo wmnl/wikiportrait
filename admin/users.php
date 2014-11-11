@@ -13,45 +13,44 @@
 
 	</div>
 
-	<div class="box grey">Welkom bij het gebruikersbeheer. Kies een gebruiker of maak een nieuwe gebruiker aan.</div>
-
 	<div class="table-container">
 
-		 <table>
-			 <thead>
-				 <tr>
+		<table>
+			<thead>
+				<tr>
 				 	<th class="id center">ID</th>
 					<th>Gebruikersnaam</th>
 					<th>OTRS-naam</th>
 					<th>E-mailadres</th>
 					<th>Beheerder</th>
 					<th class="actions-1">Acties</th>
-				 </tr>
-			 </thead>
-			 <tbody>
-			 <?php
-				 $query = "SELECT * FROM users";
-				 $result = mysqli_query($connection, $query);
-				 while ($row = mysqli_fetch_assoc($result))
-				 {
-						 $id = $row['id'];
-						 $username = htmlspecialchars($row['username']);
-						 $otrsname = htmlspecialchars($row['otrsname']);
-						 $email = $row['email'];
-						 $sysop = $row['isSysop'];
+				</tr>
+			</thead>
+			<tbody>
+			<?php
+				$query = "SELECT * FROM users";
+				$result = mysqli_query($connection, $query);
+				while ($row = mysqli_fetch_assoc($result))
+				{
+					$id 		= $row['id'];
+					$username	= htmlspecialchars($row['username']);
+					$otrsname	= htmlspecialchars($row['otrsname']);
+					$email		= $row['email'];
+					$sysop		= $row['isSysop'];
 
-						 echo "<tr>";
-				 	 	 	 echo "<td data-title =\"&#xf02e;\" class=\"center\">$id</td>";
-							 echo "<td data-title =\"&#xf007;\">$username</td>";
-							 echo "<td data-title =\"&#xf0b1;\">$otrsname</td>";
-							 echo "<td data-title =\"&#xf0e0;\">$email</td>";
-							 if ($sysop) echo "<td data-title =\"&#xf0f0;\">Ja</td>"; else echo "<td data-title =\"&#xf0f0;\">Nee</td>";
-							 echo "<td data-title =\"&#xf0ae;\" class=\"center\"><a class=\"button\" href=\"edituser.php?id=$id\"><i class=\"fa fa-pencil\"></i>Bewerken</a></td>";
-						 echo "</tr>";
-				 }
+					echo "<tr>";
+				 	 	echo "<td data-title =\"&#xf02e;\" class=\"center\">$id</td>";
+						echo "<td data-title =\"&#xf007;\">$username</td>";
+						echo "<td data-title =\"&#xf0b1;\">$otrsname</td>";
+						echo "<td data-title =\"&#xf0e0;\">$email</td>";
+						if ($sysop) echo "<td data-title =\"&#xf0f0;\">Ja</td>"; else echo "<td data-title =\"&#xf0f0;\">Nee</td>";
+						echo "<td data-title =\"&#xf0ae;\" class=\"center\"><a class=\"button\" href=\"edituser.php?id=$id\"><i class=\"fa fa-pencil\"></i>Bewerken</a></td>";
+					echo "</tr>";
+				}
 			 ?>
 			 </tbody>
-		 </table>
+		</table>
+
 	</div>
 
 </div>

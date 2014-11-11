@@ -7,43 +7,43 @@
 
 	<div class="page-header">
 
-		 <h2>Berichtenbeheer</h2>
+		<h2>Berichtenbeheer</h2>
 
-		 <a href="addmessage.php" class="button"><i class="fa fa-plus-square fa-lg"></i><span>Nieuw bericht</span></a>
+		<a href="addmessage.php" class="button"><i class="fa fa-plus-square fa-lg"></i><span>Nieuw bericht</span></a>
 
 	</div>
-
-	<div class="box grey">Welkom bij het berichtenbeheer. Kies een bericht of voeg een nieuw bericht toe.</div>
 
 	<div class="table-container">
 
 		<table>
-		<thead>
-			<tr>
-				<th class="id center">ID</th>
-				<th>Titel</th>
-				<th class="actions-2">Acties</th>
-			</tr>
-		</thead>
-		<tbody>
-		<?php
-			$query = "SELECT * FROM messages";
-			$result = mysqli_query($connection, $query);
-			while ($row = mysqli_fetch_assoc($result))
-			{
-				$id = $row['id'];
-				$title = htmlspecialchars($row['title']);
+			<thead>
+				<tr>
+					<th class="id center">ID</th>
+					<th>Titel</th>
+					<th class="actions-2">Acties</th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php
+				$query = "SELECT * FROM messages";
+				$result = mysqli_query($connection, $query);
+				while ($row = mysqli_fetch_assoc($result))
+				{
+					$id		= $row['id'];
+					$title	= htmlspecialchars($row['title']);
 
-				echo "<tr>";
-					echo "<td data-title=\"&#xf02e;\" class=\"center\">$id</td>";
-					echo "<td data-title=\"&#xf02b;\">$title</td>";
-					echo "<td data-title=\"&#xf0ae;\" class=\"center\"><a class=\"button\" href=\"editmessage.php?id=$id\"><i class=\"fa fa-pencil\"></i>Bewerken</a><div class=\"divider\"></div><a class=\"button red\" href=\"#\" onclick=\"confirmDelete($id)\");\"><i class=\"fa fa-trash-o\"></i>Verwijderen</a></td>";
-				echo "</tr>";
-			}
-		?>
-		</tbody>
+					echo "<tr>";
+						echo "<td data-title=\"&#xf02e;\" class=\"center\">$id</td>";
+						echo "<td data-title=\"&#xf02b;\">$title</td>";
+						echo "<td data-title=\"&#xf0ae;\" class=\"center\"><a class=\"button\" href=\"editmessage.php?id=$id\"><i class=\"fa fa-pencil\"></i>Bewerken</a><div class=\"divider\"></div><a class=\"button red\" href=\"#\" onclick=\"confirmDelete($id)\");\"><i class=\"fa fa-trash-o\"></i>Verwijderen</a></td>";
+					echo "</tr>";
+				}
+			?>
+			</tbody>
 		</table>
+
 	</div>
+
 </div>
 <?php
 	include '../footer.php';
