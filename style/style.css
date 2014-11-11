@@ -337,6 +337,10 @@ input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hov
 	font-size:0.9em;
 }
 
+.search-form {
+	margin-bottom:10px;
+}
+
 /* Checkbox */
 .checkbox label {
 	background:none;

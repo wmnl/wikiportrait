@@ -35,9 +35,9 @@
 				$title = htmlspecialchars($row['title']);
 
 				echo "<tr>";
-					echo "<td data-title=\"ID\" class=\"center\">$id</td>";
-					echo "<td data-title=\"Titel\">$title</td>";
-					echo "<td data-title=\"Acties\" class=\"center\"><a class=\"button\" href=\"editmessage.php?id=$id\"><i class=\"fa fa-pencil\"></i>Bewerken</a><div class=\"divider\"></div><a class=\"button red\" href=\"#\" onclick=\"confirmDelete($id)\");\"><i class=\"fa fa-trash-o\"></i>Verwijderen</a></td>";
+					echo "<td data-title=\"&#xf02e;\" class=\"center\">$id</td>";
+					echo "<td data-title=\"&#xf02b;\">$title</td>";
+					echo "<td data-title=\"&#xf0ae;\" class=\"center\"><a class=\"button\" href=\"editmessage.php?id=$id\"><i class=\"fa fa-pencil\"></i>Bewerken</a><div class=\"divider\"></div><a class=\"button red\" href=\"#\" onclick=\"confirmDelete($id)\");\"><i class=\"fa fa-trash-o\"></i>Verwijderen</a></td>";
 				echo "</tr>";
 			}
 		?>

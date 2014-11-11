@@ -35,8 +35,8 @@
 		$total_records = $row[0];
 
 		$total_pages = ceil($total_records / 10);
-		
-		if ($total_pages > 1):		
+
+		if ($total_pages > 1):
 		?>
 		    <form class="navigation" method="post">
 
@@ -104,12 +104,12 @@
 				    }
 			?>
 			<tr>
-			    <td data-title="Foto" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/thumbs/<?php echo $filename?>" /></a></td>
-			    <td data-title="Titel"><a href="single.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
-			    <td data-title="Uploader"><?php echo $name ?></td>
-			    <td data-title="Datum"><?php echo strftime("%e %B %Y", $timestamp) ?></td>
-			    <td data-title="Eigenaar"><?= $owner ?></td>
-			    <td data-title="Acties" class="center"><a class="button" href="single.php?id=<?php echo $id ?>"><i class="fa fa-info"></i>Details</a></td>
+			    <td data-title="&#xf03e;" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/thumbs/<?php echo $filename?>" /></a></td>
+			    <td data-title="&#xf02b;"><a href="single.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
+			    <td data-title="&#xf007;"><?php echo $name ?></td>
+			    <td data-title="&#xf073;"><?php echo strftime("%e %B %Y", $timestamp) ?></td>
+			    <td data-title="&#xf0f0;"><?= $owner ?></td>
+			    <td data-title="&#xf0ae;" class="center"><a class="button" href="single.php?id=<?php echo $id ?>"><i class="fa fa-info"></i>Details</a></td>
 			</tr>
 			<?php
 			 endwhile;

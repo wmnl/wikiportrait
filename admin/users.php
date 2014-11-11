@@ -41,12 +41,12 @@
 						 $sysop = $row['isSysop'];
 
 						 echo "<tr>";
-				 	 	 	 echo "<td data-title =\"ID\" class=\"center\">$id</td>";
-							 echo "<td data-title =\"Gebruikersnaam\">$username</td>";
-							 echo "<td data-title =\"OTRS-naam\">$otrsname</td>";
-							 echo "<td data-title =\"E-mailadres\">$email</td>";
-							 if ($sysop) echo "<td data-title =\"Beheerder\"><i class=\"fa fa-check-square\"></i>Ja</td>"; else echo "<td data-title =\"Beheerder\"><i class=\"fa fa-minus-square\"></i>Nee</td>";
-							 echo "<td data-title =\"Acties\" class=\"center\"><a class=\"button\" href=\"edituser.php?id=$id\"><i class=\"fa fa-pencil\"></i>Bewerken</a></td>";
+				 	 	 	 echo "<td data-title =\"&#xf02e;\" class=\"center\">$id</td>";
+							 echo "<td data-title =\"&#xf007;\">$username</td>";
+							 echo "<td data-title =\"&#xf0b1;\">$otrsname</td>";
+							 echo "<td data-title =\"&#xf0e0;\">$email</td>";
+							 if ($sysop) echo "<td data-title =\"&#xf0f0;\">Ja</td>"; else echo "<td data-title =\"&#xf0f0;\">Nee</td>";
+							 echo "<td data-title =\"&#xf0ae;\" class=\"center\"><a class=\"button\" href=\"edituser.php?id=$id\"><i class=\"fa fa-pencil\"></i>Bewerken</a></td>";
 						 echo "</tr>";
 				 }
 			 ?>

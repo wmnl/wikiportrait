@@ -4,7 +4,6 @@
 
 @media (max-width:725px) {
 	body {
-		font-size:95%;
 		-webkit-text-size-adjust:100%;
 	}
 
@@ -95,7 +94,7 @@
 
 	.table-container td {
 		position:relative;
-		padding-left:50%;
+		padding-left:2.5em;
 		padding-right:10px;
 		text-align:left;
 		border-bottom:1px solid #ddd;
@@ -108,14 +107,14 @@
 	.table-container td:before {
 		position:absolute;
 		top:10px;
-		left:10px;
-		width:50%;
-		padding-right:10px;
-		text-align:left;
-		font-weight:bold;
+		left:5px;
+		width:1.28571429em;
+		font-size:1.2em;
+		text-align:center;
 	}
 
 	.table-container td:before {
+		font-family:FontAwesome;
 		content:attr(data-title);
 	}
 
