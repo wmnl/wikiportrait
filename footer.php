@@ -14,7 +14,7 @@
 
 		/* Autoresize textarea */
 		$(document).ready(function(){
-			$('textarea').autosize();
+			$('textarea').autosize({append:false});
 		});
 
 		/* Delete confirmation */
