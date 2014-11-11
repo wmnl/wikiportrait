@@ -10,7 +10,6 @@
 	-webkit-box-sizing:border-box;
 	box-sizing:border-box;
 	-webkit-tap-highlight-color:rgba(0,0,0,0);
-	-webkit-font-smoothing:antialiased;
 }
 
 html {
@@ -79,6 +78,7 @@ p:last-child {
 
 .fa {
 	margin-right:10px;
+	-webkit-font-smoothing:antialiased;
 }
 
 /* Floating and align */
@@ -357,6 +357,7 @@ input[type=checkbox] + label:before {
 	font-family:FontAwesome;
 	display:inline-block;
 	letter-spacing:0px;
+	-webkit-font-smoothing:antialiased;
 }
 
 input[type=checkbox] + label:before {
@@ -412,6 +413,7 @@ input[type="checkbox"] + label:hover {
 	font-size:1.2em;
 	right:10px;
 	color:#aaa;
+	-webkit-font-smoothing:antialiased;
 }
 
 .simpleselect .options {

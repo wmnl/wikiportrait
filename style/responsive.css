@@ -110,6 +110,7 @@
 		left:5px;
 		width:1.28571429em;
 		font-size:1.2em;
+		-webkit-font-smoothing:antialiased;
 		text-align:center;
 	}
 
