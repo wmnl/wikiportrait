@@ -23,7 +23,7 @@
 		else
 		{
 			echo "<h3>Het advies van de uploadwizard is:</h3>";
-			echo "<div class=\"box green\">Upload de afbeelding onder de CC-BY-SA licentie</div>";
+			echo "<div class=\"box green\">Upload de afbeelding onder de CC-BY-SA 4.0 licentie</div>";
 			echo "<div class=\"bottom right\"><a class=\"button\" href=\"upload.php\"><i class=\"fa fa-cloud-upload fa-lg\"></i>Uploaden</a></div>";
 		}
 	}
