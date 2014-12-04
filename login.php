@@ -31,12 +31,12 @@
 			{
 				$errors = array();
 
-			if (empty ($_POST['username']))
+			if (empty($_POST['username']))
 			{
 				array_push($errors, "U heeft geen gebruikersnaam ingevuld");
 			}
 
-			if (empty ($_POST['password']))
+			if (empty($_POST['password']))
 			{
 				array_push($errors, "U heeft geen wachtwoord ingevuld");
 			}
@@ -60,6 +60,7 @@
 					}
 
 					$_SESSION['user'] = $row['id'];
+					
 					if ($isSysop)
 					{
 						$_SESSION['isSysop'] = true;
