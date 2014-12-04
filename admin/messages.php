@@ -25,12 +25,11 @@
 			</thead>
 			<tbody>
 			<?php
-				$query = "SELECT * FROM messages";
-				$result = mysqli_query($connection, $query);
+				$result = mysqli_query($connection, "SELECT id, title FROM messages");
 				while ($row = mysqli_fetch_assoc($result))
 				{
-					$id		= $row['id'];
-					$title	= htmlspecialchars($row['title']);
+					$id = $row['id'];
+					$title = htmlspecialchars($row['title']);
 
 					echo "<tr>";
 						echo "<td data-title=\"&#xf02e;\" class=\"center\">$id</td>";
