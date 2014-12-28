@@ -55,12 +55,7 @@
 	}
 
 	if (count($errors) == 0)
-	{
-	    $query = sprintf("INSERT INTO users(username, password, otrsname, email, isSysop, active)
-				    VALUES('%s', '%s', '%s', '%s', %d, %d)", mysqli_real_escape_string($connection, $username), mysqli_real_escape_string($connection, sha1($password)), mysqli_real_escape_string($connection, $otrsname), mysqli_real_escape_string($connection, $email), $admin, 1);
-
-	    mysqli_query($connection, $query);
-	    
+	{ 
 	    DB::insert('users', array(
 		'username' => $username,
 		'password' => $password,
