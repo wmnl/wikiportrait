@@ -1,68 +1,77 @@
 <?php
-	include '../header.php';
-	include 'tabs.php';
-	checkAdmin();
-	if (isset($_POST['postback']))
+    include '../header.php';
+    include 'tabs.php';
+    checkAdmin();
+    if (isset($_POST['postback']))
+    {
+	$errors = array();
+
+	$username = $_POST['username'];
+	$otrsname = $_POST['otrsname'];
+	$password = $_POST['password'];
+	$password2 = $_POST['password'];
+	$email = $_POST['email'];
+	if (isset($_POST['admin']))
 	{
-		$errors = array();
-
-		$username = $_POST['username'];
-		$otrsname = $_POST['otrsname'];
-		$password = $_POST['password'];
-		$password2 = $_POST['password'];
-		$email = $_POST['email'];
-		if (isset($_POST['admin']))
-		{
-			$admin = 1;
-		}
-		else
-		{
-			$admin = 0;
-		}
-
-		if (empty($username))
-		{
-			array_push($errors, "Er is geen gebruikersnaam ingevuld");
-		}
-		else
-		{
-			$query = "SELECT * FROM users WHERE username = '$username'";
-			if (mysqli_num_rows(mysqli_query($connection, $query)))
-				array_push($errors, "Deze gebruikersnaam bestaat al");
-		}
-
-		if (empty($otrsname))
-		{
-			array_push($errors, "Er is geen OTRS-naam ingevuld");
-		}
-
-		if (empty($password))
-		{
-			array_push($errors, "Er is geen wachtwoord ingevuld");
-		}
-		elseif($password != $password2)
-		{
-			array_push($errors, "De twee ingevulde wachtwoorden komen niet met elkaar overeen");
-		}
-
-		if (empty($email))
-		{
-			array_push($errors, "Er is geen e-mailadres ingevuld");
-		}
-		elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
-		{
-			array_push($errors, "Er is geen geldig e-mailadres ingevuld");
-		}
-
-		if (count($errors) == 0)
-		{
-			$query = sprintf("INSERT INTO users(username, password, otrsname, email, isSysop, active)
-						VALUES('%s', '%s', '%s', '%s', %d, %d)", mysqli_real_escape_string($connection, $username), mysqli_real_escape_string($connection, sha1($password)), mysqli_real_escape_string($connection, $otrsname), mysqli_real_escape_string($connection, $email), $admin, 1);
-
-			mysqli_query($connection, $query);
-			header("Location:users.php");
-		}
+	    $admin = 1;
 	}
+	else
+	{
+	    $admin = 0;
+	}
+
+	if (empty($username))
+	{
+	    array_push($errors, "Er is geen gebruikersnaam ingevuld");
+	}
+	else
+	{
+	    $query = "SELECT * FROM users WHERE username = '$username'";
+	    if (mysqli_num_rows(mysqli_query($connection, $query)))
+		    array_push($errors, "Deze gebruikersnaam bestaat al");
+	}
+
+	if (empty($otrsname))
+	{
+	    array_push($errors, "Er is geen OTRS-naam ingevuld");
+	}
+
+	if (empty($password))
+	{
+	    array_push($errors, "Er is geen wachtwoord ingevuld");
+	}
+	elseif($password != $password2)
+	{
+	    array_push($errors, "De twee ingevulde wachtwoorden komen niet met elkaar overeen");
+	}
+
+	if (empty($email))
+	{
+	    array_push($errors, "Er is geen e-mailadres ingevuld");
+	}
+	elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
+	{
+	    array_push($errors, "Er is geen geldig e-mailadres ingevuld");
+	}
+
+	if (count($errors) == 0)
+	{
+	    $query = sprintf("INSERT INTO users(username, password, otrsname, email, isSysop, active)
+				    VALUES('%s', '%s', '%s', '%s', %d, %d)", mysqli_real_escape_string($connection, $username), mysqli_real_escape_string($connection, sha1($password)), mysqli_real_escape_string($connection, $otrsname), mysqli_real_escape_string($connection, $email), $admin, 1);
+
+	    mysqli_query($connection, $query);
+	    
+	    DB::insert('users', array(
+		'username' => $username,
+		'password' => $password,
+		'otrsname' => $otrsname,
+		'email' => $email,
+		'isSysop' => $admin,
+		'active' => 1
+	    ));
+	    header("Location:users.php");
+	}
+    }
 ?>
 <div id="content">
 
