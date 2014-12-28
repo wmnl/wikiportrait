@@ -22,7 +22,7 @@
     </div>
 
     <?php  
-	DB::query('SELECT * FROM users WHERE id = %d', $_GET['id']);
+	$row = DB::query('SELECT * FROM users WHERE id = %d', $_GET['id'])[0];
 
 	if (DB::count() == 0)
 	{
@@ -120,9 +120,6 @@
 		    echo "</ul></div>";
 		}
 	    }
-
-
-	    $row = mysqli_fetch_assoc($result);
     ?>
 
     <form method="post">
