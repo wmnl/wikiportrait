@@ -60,7 +60,7 @@
 
 			foreach($results as $row):
 		    ?>
-		    <li><a href="message.php?message=<?= $row['id']; ?>&image=<?= mysqli_real_escape_string($connection, $_GET['id']) ?>"><?= htmlspecialchars($row['title']); ?></a></li>
+		    <li><a href="message.php?message=<?= $row['id']; ?>&image=<?= $_GET['id'] ?>"><?= htmlspecialchars($row['title']); ?></a></li>
 		    <?php
 		    endforeach;
 		    ?>
