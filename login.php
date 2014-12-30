@@ -41,7 +41,7 @@
 
 	    if (empty($errors))
 	    {
-		$row = DB::queryFirstRow("SELECT * FROM users WHERE username = '%s' AND password = '%s' AND active = 1", $_POST['username'], sha1($_POST['password']));
+		$row = DB::queryFirstRow("SELECT * FROM users WHERE username = %s AND password = %s AND active = 1", $_POST['username'], sha1($_POST['password']));
 
 		if (DB::count() != 0)
 		{
