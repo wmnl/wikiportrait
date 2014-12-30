@@ -8,18 +8,19 @@
     
     else
     {
-	$id = mysqli_real_escape_string($connection, $_GET['id']);
+	$id = $_GET['id'];
 	
-	$query = sprintf("SELECT * FROM images WHERE id = %d", $id);
-	$result = mysqli_query($connection, $query);
-	if (mysqli_num_rows($result) == 0)
+	DB::query('SELECT * FROM images WHERE id = %d', $id);
+	
+	if (DB::count() == 0)
 	{
 	    header("Location:overview.php");
 	}
 	else
 	{
-	    $query = sprintf("UPDATE images SET owner = %d WHERE id = %d", $_SESSION['user'], $id);
-	    mysqli_query($connection, $query);
+	    DB::update('images', array(
+		'owner' => $_SESSION['user']
+	    ), 'id = %d', $id);
 	    header("Location:single.php?id=$id");
 	}
     }
