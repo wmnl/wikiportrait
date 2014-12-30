@@ -69,41 +69,35 @@
 	</div>
 
 	<div class="single-box options">
-
 	    <h3>Opties</h3>
 
 	    <form method="post" id="owner" name="owner">
-
 		    <div class="input-container">
+			<label for="owner"><i class="fa fa-user-md fa-lg fa-fw"></i>Eigenaar</label>
 
-			    <label for="owner"><i class="fa fa-user-md fa-lg fa-fw"></i>Eigenaar</label>
+			<select class="select" name="owner" id="setowner">
+			    <option value="0">----</option>
+			    <?php
+				$owner = DB::queryFirstRow('SELECT owner, archived FROM images WHERE id = %d', $_GET['id']);
+				$accounts = DB::query("SELECT otrsname, id FROM users WHERE active = 1");
 
-			    <select class="select" name="owner" id="setowner">
-				    <option value="0">----</option>
-				    <?php
-					$query = sprintf("SELECT owner, archived FROM images WHERE id = %d", mysqli_real_escape_string($connection, $_GET['id']));
-					$result = mysqli_query($connection,$query);
-					$owner = mysqli_fetch_assoc($result);
-					$query2 = "SELECT otrsname, id FROM users WHERE active = 1";
-					$result2 = mysqli_query($connection,$query2);
+				foreach($accounts as $row):
+				    $selected = "";
 
-					while ($row = mysqli_fetch_assoc($result2)):
-					    $selected = "";
-
-					if ($row['id'] == $owner['owner'])
-					    $selected = "selected=\"selected\"";
-				    ?>
-				    <option value="<?= $row['id'] ?>" <?= $selected ?>><?= $row['otrsname'] ?></option>
-				    <?php
-					endwhile;
-				    ?>
-			    </select>
+				if ($row['id'] == $owner['owner'])
+				    $selected = "selected=\"selected\"";
+			    ?>
+			    <option value="<?= $row['id'] ?>" <?= $selected ?>><?= $row['otrsname'] ?></option>
+			    <?php
+				endforeach;
+			    ?>
+			</select>
 		    </div>
 
 		    <div class="input-container">
 			    <label for="done"><i class="fa fa-check fa-lg fa-fw"></i>Afgehandeld</label>
 			    <div class="checkbox">
-				<input type="checkbox" name="done" id="done" <? if ($owner['archived'] == 1) { echo "checked"; } ?> /><label for="done">Ja</label>
+				<input type="checkbox" name="done" id="done" <?php if ($owner['archived'] == 1) { echo "checked"; } ?> /><label for="done">Ja</label>
 			    </div>
 		    </div>
 
