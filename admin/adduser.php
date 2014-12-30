@@ -26,8 +26,8 @@
 	}
 	else
 	{
-	    $query = "SELECT * FROM users WHERE username = '$username'";
-	    if (mysqli_num_rows(mysqli_query($connection, $query)))
+	    DB::query("SELECT * FROM users WHERE username = %s", $username);
+	    if (DB::count() != 0)
 		    array_push($errors, "Deze gebruikersnaam bestaat al");
 	}
 
