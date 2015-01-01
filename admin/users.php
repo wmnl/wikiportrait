@@ -1,5 +1,5 @@
 <?php
-    include '../header.php';
+    include '../common/header.php';
     include 'tabs.php';
     checkAdmin();
 ?>
@@ -47,5 +47,5 @@
     </div>
 </div>
 <?php
-	include '../footer.php';
+	include '../common/footer.php';
 ?>
