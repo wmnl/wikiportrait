@@ -1,7 +1,7 @@
 <?php
     ob_start();
     session_start();
-    require 'config/connect.php';
+    require 'connect.php';
     
     $basispad = "/wikiportret";
 
@@ -17,11 +17,6 @@
 	    header("Location:/wikiportret/login.php");
 	elseif (isset($_SESSION['user']) && $_SESSION['isSysop'] == false)
 	    header("Location:/wikiportret");
-    }
-
-    if ($DevDebugging)
-    {
-	error_reporting(-1);
     }
 
     $cookieLifetime = 365 * 24 * 60 * 60;
