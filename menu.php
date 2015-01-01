@@ -12,7 +12,7 @@ echo "<ul>\n";
 		echo "\t\t\t\t\t<li" .(($page == 'overview')?' class="active"':""). "><a href=\"$basispad/images/overview.php\" title=\"Inzendingen\"><i class=\"fa fa-folder-open\"></i><span>Inzendingen</span></a></li>\n";
 	}
 	
-	if($_SESSION['isSysop'] == true)
+	if(isset($_SESSION['isSysop']) && $_SESSION['isSysop'] == true)
 	{
 		echo "\t\t\t\t\t<li" .(($page == 'users' || $page == 'messages')?' class="active"':""). "><a href=\"$basispad/admin/users.php\" title=\"Beheer\"><i class=\"fa fa-wrench\"></i><span>Beheer</span></a></li>\n";
 	}

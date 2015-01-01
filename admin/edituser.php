@@ -1,118 +1,125 @@
 <?php
-	include '../header.php';
-	include 'tabs.php';
-	checkAdmin();
-        if (isset($_GET['id']))
-        {
-            $id = $_GET['id'];
-        }
-        else
-        {
-            header("Location: users.php");
-        }
+    include '../header.php';
+    include 'tabs.php';
+    checkAdmin();
+    if (isset($_GET['id']))
+    {
+	$id = $_GET['id'];
+    }
+    else
+    {
+	header("Location: users.php");
+    }
 ?>
 <div id="content">
 
-	<div class="page-header">
+    <div class="page-header">
 
-		<h2>Gebruiker bewerken</h2>
+	<h2>Gebruiker bewerken</h2>
 
-		<a href="users.php" class="button red"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
+	<a href="users.php" class="button red"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
 
-	</div>
+    </div>
 
-    <?php
-            $query = sprintf("SELECT * FROM users WHERE id = %d", mysqli_real_escape_string($connection, $id));
-            $result = mysqli_query($connection, $query);
-            if (mysqli_num_rows($result) == 0)
-            {
-                echo "Gebruiker niet gevonden!";
-            }
-            else
-            {
-                if (isset($_POST['postback']))
-                {
-                    $errors = array();
+    <?php  
+	$row = DB::query('SELECT * FROM users WHERE id = %d', $_GET['id'])[0];
 
-                    $username = $_POST['username'];
-                    $otrsname = $_POST['otrsname'];
-                    $password = $_POST['password'];
-                    $password2 = $_POST['password'];
-                    $email = $_POST['email'];
-                    if (isset($_POST['admin']))
-                    {
-                        $admin = 1;
-                    }
-                    else
-                    {
-                        $admin = 0;
-                    }
+	if (DB::count() == 0)
+	{
+	    echo "Gebruiker niet gevonden!";
+	}
+	else
+	{
+	    if (isset($_POST['postback']))
+	    {
+		$errors = array();
 
-                    if (isset($_POST['active']))
-                    {
-                        $active = 1;
-                    }
-                    else
-                    {
-                        $active = 0;
-                    }
+		$username = $_POST['username'];
+		$otrsname = $_POST['otrsname'];
+		$password = $_POST['password'];
+		$password2 = $_POST['password'];
+		$email = $_POST['email'];
+		if (isset($_POST['admin']))
+		{
+		    $admin = 1;
+		}
+		else
+		{
+		    $admin = 0;
+		}
 
-                    if (empty($username))
-                    {
-                        array_push($errors, "Er is geen gebruikersnaam ingevuld");
-                    }
+		if (isset($_POST['active']))
+		{
+		    $active = 1;
+		}
+		else
+		{
+		    $active = 0;
+		}
 
-                    if (empty($otrsname))
-                    {
-                        array_push($errors, "Er is geen OTRS-naam ingevuld");
-                    }
+		if (empty($username))
+		{
+		    array_push($errors, "Er is geen gebruikersnaam ingevuld");
+		}
 
-                    if (isset($password))
-                    {
-                        if($password != $password2)
-                        {
-                            array_push($errors, "De twee ingevulde wachtwoorden komen niet met elkaar overeen");
-                        }
-                    }
+		if (empty($otrsname))
+		{
+		    array_push($errors, "Er is geen OTRS-naam ingevuld");
+		}
 
-                    if (empty($email))
-                    {
-                        array_push($errors, "Er is geen e-mailadres ingevuld");
-                    }
-                    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
-                    {
-                        array_push($errors, "Er is geen geldig e-mailadres ingevuld");
-                    }
+		if (isset($password))
+		{
+		    if($password != $password2)
+		    {
+			array_push($errors, "De twee ingevulde wachtwoorden komen niet met elkaar overeen");
+		    }
+		}
 
-                    if (count($errors) == 0)
-                    {
-                        if (empty($_POST['password']))
-                        {
-                            $query = sprintf("UPDATE users SET username = '%s', otrsname = '%s', email = '%s', isSysop = %d, active = %d WHERE id = %d", mysqli_real_escape_string($connection, $username), mysqli_real_escape_string($connection, $otrsname), mysqli_real_escape_string($connection, $email), $admin, $active, $id);
-                        }
-                        else
-                        {
-                            $query = sprintf("UPDATE users SET username = '%s', password =  '%s', otrsname = '%s', email = '%s', isSysop = %d, active = %d WHERE id = %d", mysqli_real_escape_string($connection, $username), mysqli_real_escape_string($connection, $password), mysqli_real_escape_string($connection, $otrsname), mysqli_real_escape_string($connection, $email), $admin, $active, $id);
-                        }
-                        mysqli_query($connection, $query);
-                        header("Location: users.php");
-                    }
+		if (empty($email))
+		{
+		    array_push($errors, "Er is geen e-mailadres ingevuld");
+		}
+		elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
+		{
+		    array_push($errors, "Er is geen geldig e-mailadres ingevuld");
+		}
 
-                    if (!empty($errors))
-                    {
-                        echo "<div class=\"box red\"><ul>";
+		if (count($errors) == 0)
+		{
+		    if (empty($_POST['password']))
+		    {
+			DB::update('users', array(
+			    'username' => $_POST['username'],
+			    'email' => $_POST['email'],
+			    'isSysop' => $admin,
+			    'active' => $active
+			), 'id = %d', $_GET['id']);
+		    }
+		    else
+		    {
+			DB::update('users', array(
+			    'username' => $_POST['username'],
+			    'password' => sha1($_POST['password']),
+			    'otrsname' => $_POST['otrsname'],
+			    'email' => $_POST['otrsname'],
+			    'isSysop' => $admin,
+			    'active' => $active
+			), 'id = %d', $_GET['id']);
+		    }
+		}
 
-                        foreach ($errors as $error)
-                        {
-                            echo "<li>" . $error . "</li>";
-                        }
+		if (!empty($errors))
+		{
+		    echo "<div class=\"box red\"><ul>";
 
-                        echo "</ul></div>";
-                    }
-                }
+		    foreach ($errors as $error)
+		    {
+			echo "<li>" . $error . "</li>";
+		    }
 
-
-                $row = mysqli_fetch_assoc($result);
+		    echo "</ul></div>";
+		}
+	    }
     ?>
 
     <form method="post">

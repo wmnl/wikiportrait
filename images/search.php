@@ -1,122 +1,116 @@
 <?php
-	include '../header.php';
-	include 'tabs.php';
-	checkLogin();
+    include '../header.php';
+    include 'tabs.php';
+    checkLogin();
 ?>
 
 <div id="content">
+    <div class="page-header">
+	<h2>Zoeken</h2>
+    </div>
 
-	<div class="page-header">
-		<h2>Zoeken</h2>
+    <form method="post" class="search-form">
+	<div class="input-container">
+	    <label for="search"><i class="fa fa-search"></i>Zoekterm</label>
+	    <input type="text" name="search" id="search" />
 	</div>
 
-	<form method="post" class="search-form">
+	<div class="bottom right">
+	    <button class="green" type="submit" name="postback"><i class="fa fa-search"></i>Zoeken</button>
+	</div>
+    </form>
 
-		<div class="input-container">
-			<label for="search"><i class="fa fa-search"></i>Zoekterm</label>
-			<input type="text" name="search" id="search" />
-		</div>
+    <?
+    if (!empty($errors))
+    {
+	echo "<div class=\"box red\">";
 
-		<div class="bottom right">
-			<button class="green" type="submit" name="postback"><i class="fa fa-search"></i>Zoeken</button>
-		</div>
-
-	</form>
-
-	<?
-	if (!empty($errors))
+	foreach ($errors as $error)
 	{
-		echo "<div class=\"box red\">";
-
-		foreach ($errors as $error)
-		{
-		echo "$error";
-		}
-
-		echo "</div>";
+	    echo "$error";
 	}
-	else
+
+	echo "</div>";
+    }
+    else
+    {
+	if (isset($_POST['postback']))
 	{
-		if (isset($_POST['postback']))
-		{
-		$errors = array();
+	    $errors = array();
 
-		if (empty ($_POST['search']))
-		{
+	    if (empty ($_POST['search']))
+	    {
 		array_push($errors, "Er is geen zoekterm ingevoerd");
-		}
+	    }
 
-		if (empty($errors))
+	    if (empty($errors))
+	    {
+		$results = DB::query("SELECT users.otrsname AS owneruser FROM images INNER JOIN users ON images.owner = users.id WHERE title LIKE '%%%s%%'", $_POST['search']);
+
+		if (DB::count() > 0)
 		{
-		$query = sprintf("SELECT *, users.otrsname AS owneruser FROM images INNER JOIN users ON images.owner = users.id WHERE title LIKE '%%%s%%'", mysqli_real_escape_string($connection, $_POST['search']));
-		$result = mysqli_query($connection, $query);
+    ?>
 
-		if (mysqli_num_rows($result) > 0)
-		{
-	?>
-
-	<div class="table-container">
-
-		<table>
+    <div class="table-container">\
+	    <table>
 		<thead>
-			<tr>
-			<th>Foto</th>
-			<th>Titel</th>
-			<th>Uploader</th>
-			<th>Datum</th>
-			<th>Eigenaar</th>
-			<th class="actions-1">Acties</th>
-			</tr>
+		    <tr>
+		    <th>Foto</th>
+		    <th>Titel</th>
+		    <th>Uploader</th>
+		    <th>Datum</th>
+		    <th>Eigenaar</th>
+		    <th class="actions-1">Acties</th>
+		    </tr>
 		</thead>
 
 		<tbody>
 		<?php
-			while ($row = mysqli_fetch_assoc($result)):
-			$id = $row['id'];
-			$filename = htmlspecialchars($row['filename']);
-			$title = htmlspecialchars($row['title']);
-			$name = htmlspecialchars($row['name']);
-			$owner = htmlspecialchars($row['owneruser']);
-			$timestamp = $row['timestamp'];
+		    foreach ($results as $row):
+		    $id = $row['id'];
+		    $filename = htmlspecialchars($row['filename']);
+		    $title = htmlspecialchars($row['title']);
+		    $name = htmlspecialchars($row['name']);
+		    $owner = htmlspecialchars($row['owneruser']);
+		    $timestamp = $row['timestamp'];
 		?>
-			<tr>
-			    <td data-title="&#xf03e;" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/thumbs/<?php echo $filename?>" /></a></td>
-			    <td data-title="&#xf02b;"><a href="single.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
-			    <td data-title="&#xf007;"><?php echo $name ?></td>
-			    <td data-title="&#xf073;"><?php echo strftime("%e %B %Y", $timestamp) ?></td>
-			    <td data-title="&#xf0f0;"><?= $owner ?></td>
-			    <td data-title="&#xf0ae;" class="center"><a class="button" href="single.php?id=<?php echo $id ?>"><i class="fa fa-info"></i>Details</a></td>
-			</tr>
+		    <tr>
+			<td data-title="&#xf03e;" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/thumbs/<?php echo $filename?>" /></a></td>
+			<td data-title="&#xf02b;"><a href="single.php?id=<?php echo $id ?>"><?php echo $title ?></a></td>
+			<td data-title="&#xf007;"><?php echo $name ?></td>
+			<td data-title="&#xf073;"><?php echo strftime("%e %B %Y", $timestamp) ?></td>
+			<td data-title="&#xf0f0;"><?= $owner ?></td>
+			<td data-title="&#xf0ae;" class="center"><a class="button" href="single.php?id=<?php echo $id ?>"><i class="fa fa-info"></i>Details</a></td>
+		    </tr>
 		<?php
-			endwhile;
+		    endforeach;
 		?>
 		</tbody>
-		</table>
+	    </table>
 
-		<?php
-			}
-			else
-			{
-				echo "<div class=\"box red\">Er zijn geen resultaten gevonden.</div>";
-			}
-			}
-			else
-			{
-				echo "<div class=\"box red\"><ul>";
+	    <?php
+		    }
+		    else
+		    {
+			echo "<div class=\"box red\">Er zijn geen resultaten gevonden.</div>";
+		    }
+		    }
+		    else
+		    {
+			echo "<div class=\"box red\"><ul>";
 
-			foreach ($errors as $error)
-			{
-				echo "<li>$error</li>";
-			}
+		    foreach ($errors as $error)
+		    {
+			echo "<li>$error</li>";
+		    }
 
-			echo "</ul></div>";
-			}
-			}
-		}
-		?>
+		    echo "</ul></div>";
+		    }
+		    }
+	    }
+	    ?>
 
-	</div>
-
+    </div>
 </div>
 
 <?php
