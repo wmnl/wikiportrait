@@ -1,5 +1,5 @@
 <?php
-    include '../header.php';
+    include '../common/header.php';
     include 'tabs.php';
     checkAdmin();
     if (isset($_POST['postback']))
@@ -73,5 +73,5 @@
 
 </div>
 <?php
-    include '../footer.php';
+    include '../common/footer.php';
 ?>
