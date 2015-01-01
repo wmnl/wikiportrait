@@ -2,7 +2,7 @@
     ob_start();
     session_start();
     require 'config/connect.php';
-    require_once 'common/meekrodb.class.php';
+    
     $basispad = "/wikiportret";
 
     function checkLogin(){
