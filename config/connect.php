@@ -1,8 +1,7 @@
 <?php
-	include 'config.php';
-	$connection = mysqli_connect($DBserver, $DBuser, $DBpassword, $DBname);
-	if (!$connection)
-	{
-	echo "An error occurred during connection: " . mysqli_connect_error($connection);
-	}
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/wikiportret/common/meekrodb.class.php';
+
+    DB::$user = ''; // database username
+    DB::$password = ''; // database password
+    DB::$dbName = ''; // database name
 ?>
