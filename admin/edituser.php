@@ -1,6 +1,7 @@
 <?php
     include '../common/header.php';
-    require '../common/formfunctions.php';
+    require_once '../common/formfunctions.php';
+    require_once '../common/passwordfunctions.php';
     include 'tabs.php';
     checkAdmin();
     if (isset($_GET['id']))
@@ -54,7 +55,8 @@
 		    {
 			DB::update('users', array(
 			    'username' => $_POST['username'],
-			    'password' => sha1($_POST['password']),
+			    'password' => generatepassword($_POST['password'], $salt),
+			    'salt' => $salt,
 			    'otrsname' => $_POST['otrsname'],
 			    'email' => $_POST['email'],
 			    'isSysop' => $admin,

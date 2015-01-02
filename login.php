@@ -1,5 +1,10 @@
 <?php
-    include 'common/header.php';
+    if (isset($_SESSION['user']))
+    {
+	header("Location:index.php");
+    }
+    require 'common/header.php';
+    require_once 'common/formfunctions.php';
 ?>
 
 <div id="content">
@@ -7,58 +12,21 @@
     <p>Hier kunnen medewerkers van Wikiportret inloggen in het beheergedeelte.</p>
 
     <?php
-	if (isset($_SESSION['user']))
+	if (isset($_POST['postback']))
 	{
-	    header("Location:index.php");
-	}
+	    isrequired('username', 'gebruikersnaam');
+	    isrequired('password', 'wachtwoord');
 
-	if (!empty($errors))
-	{
-	    echo "<div class=\"box red\"><ul>";
-
-	    foreach ($errors as $error)
+	    if (!hasvalidationerrors())
 	    {
-		echo "<li>$error</li>";
-	    }
-
-	    echo "</ul></div>";
-	}
-	else
-	{
-	    if (isset($_POST['postback']))
-	    {
-		    $errors = array();
-
-	    if (empty($_POST['username']))
-	    {
-		    array_push($errors, "U heeft geen gebruikersnaam ingevuld");
-	    }
-
-	    if (empty($_POST['password']))
-	    {
-		    array_push($errors, "U heeft geen wachtwoord ingevuld");
-	    }
-
-	    if (empty($errors))
-	    {
-		$row = DB::queryFirstRow("SELECT * FROM users WHERE username = %s AND password = %s AND active = 1", $_POST['username'], sha1($_POST['password']));
+		$row = DB::queryFirstRow("SELECT * FROM users WHERE username = %s AND active = 1", $_POST['username']);
 
 		if (DB::count() != 0)
 		{
-		    if ($row['isSysop'] == 1)
+		    if ($row['password'] == sha1($_POST['password'] . $row['salt'])) 
 		    {
-			$isSysop = true;
-		    }
-		    else
-		    {
-			$isSysop = false;
-		    }
-
-		    $_SESSION['user'] = $row['id'];
-
-		    if ($isSysop)
-		    {
-			$_SESSION['isSysop'] = true;
+			$_SESSION['user'] = $row['id'];
+			$_SESSION['isSysop'] = ($row['isSysop'] == 1 ? true : false);
 		    }
 
 		    header("Location:index.php");
@@ -70,15 +38,7 @@
 	    }
 	    else
 	    {
-		echo "<div class=\"box red\"><ul>";
-
-		foreach ($errors as $error)
-		{
-		    echo "<li>$error</li>";
-		}
-
-		echo "</ul></div>";
-		}
+		showvalidationsummary();
 	    }
 	}
     ?>

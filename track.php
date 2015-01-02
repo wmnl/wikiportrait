@@ -11,7 +11,7 @@
 	{
 	    $row = DB::queryFirstRow("SELECT * FROM images WHERE id = %d", $_GET['image']);
 
-	    if (DB::count() == 0 || sha1($row['id']) != $_GET['key'])
+	    if (DB::count() == 0 || $row['key'] != $_GET['key'])
 	    {
 		echo "<div class=\"box red\">Geen afbeelding gevonden!</div>";
 	    }
