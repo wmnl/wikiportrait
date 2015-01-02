@@ -41,6 +41,20 @@
 	}
     }
     
+    function checkfile ($file) {
+	global $validationerrors;
+	$allowedext = array("image/png", "image/gif", "image/jpeg", "image/bmp", "image/pjpeg");
+	
+	if (!isset($file))
+	{
+	    array_push($validationerrors, "Er is geen bestand geselecteerd");
+	}
+	elseif (!in_array($file['type'], $allowedext))
+	{
+	    array_push($validationerrors, "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund");
+	}
+    }
+    
     function addvalidationerror($message) {
 	global $validationerrors;
 	array_push($validationerrors, $message);
