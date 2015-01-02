@@ -5,8 +5,6 @@
     checkAdmin();
     if (isset($_POST['postback']))
     {
-	$errors = array();
-
 	if (isset($_POST['admin']))
 	{
 	    $admin = 1;
