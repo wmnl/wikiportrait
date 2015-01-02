@@ -1,31 +1,28 @@
 <?php
     require '../common/header.php';
     require_once '../common/formfunctions.php';
+    require_once '../common/passwordfunctions.php';
     include 'tabs.php';
     checkAdmin();
+    
     if (isset($_POST['postback']))
     {
-	if (isset($_POST['admin']))
-	{
-	    $admin = 1;
-	}
-	else
-	{
-	    $admin = 0;
-	}
+	$admin = (isset($_POST['admin']) ? 1 : 0);
 
 	isrequired('username', 'gebruikersnaam');
 	isrequired('otrsname', 'OTRS-naam');
-	isrequired($_POST['password'], 'wachtwoord');
+	isrequired('password', 'wachtwoord');
 	checkusername($_POST['username']);
 	comparepassword($_POST['password'], $_POST['password2']);
 	validateEmail('email');
 
 	if (!hasvalidationerrors())
 	{ 
+	    $salt = generatesalt();
 	    DB::insert('users', array(
 		'username' => $_POST['username'],
-		'password' => sha1($_POST['password']),
+		'password' => generatepassword($_POST['password'], $salt),
+		'salt' => $salt,
 		'otrsname' => $_POST['otrsname'],
 		'email' => $_POST['email'],
 		'isSysop' => $admin,
