@@ -1,5 +1,6 @@
 <?php
     include '../common/header.php';
+    require '../common/formfunctions.php';
     include 'tabs.php';
     checkAdmin();
     if (isset($_GET['id']))
@@ -12,13 +13,9 @@
     }
 ?>
 <div id="content">
-
     <div class="page-header">
-
 	<h2>Gebruiker bewerken</h2>
-
 	<a href="users.php" class="button red"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
-
     </div>
 
     <?php  
@@ -32,68 +29,26 @@
 	{
 	    if (isset($_POST['postback']))
 	    {
-		$errors = array();
+		$admin = (isset($_POST['admin']) ? 1 : 0);
+		$active = (isset($_POST['active']) ? 1 : 0);
+		
+		isrequired('username', 'gebruikersnaam');
+		isrequired('otrsname', 'OTRS-naam');
+		comparepassword($_POST['password'], $_POST['password2']);
+		validateEmail('email');
 
-		$username = $_POST['username'];
-		$otrsname = $_POST['otrsname'];
-		$password = $_POST['password'];
-		$password2 = $_POST['password'];
-		$email = $_POST['email'];
-		if (isset($_POST['admin']))
-		{
-		    $admin = 1;
-		}
-		else
-		{
-		    $admin = 0;
-		}
-
-		if (isset($_POST['active']))
-		{
-		    $active = 1;
-		}
-		else
-		{
-		    $active = 0;
-		}
-
-		if (empty($username))
-		{
-		    array_push($errors, "Er is geen gebruikersnaam ingevuld");
-		}
-
-		if (empty($otrsname))
-		{
-		    array_push($errors, "Er is geen OTRS-naam ingevuld");
-		}
-
-		if (isset($password))
-		{
-		    if($password != $password2)
-		    {
-			array_push($errors, "De twee ingevulde wachtwoorden komen niet met elkaar overeen");
-		    }
-		}
-
-		if (empty($email))
-		{
-		    array_push($errors, "Er is geen e-mailadres ingevuld");
-		}
-		elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
-		{
-		    array_push($errors, "Er is geen geldig e-mailadres ingevuld");
-		}
-
-		if (count($errors) == 0)
+		if (!hasvalidationerrors())
 		{
 		    if (empty($_POST['password']))
 		    {
 			DB::update('users', array(
 			    'username' => $_POST['username'],
+			    'otrsname' => $_POST['otrsname'],
 			    'email' => $_POST['email'],
 			    'isSysop' => $admin,
 			    'active' => $active
 			), 'id = %d', $_GET['id']);
+			header ("Location: users.php");
 		    }
 		    else
 		    {
@@ -101,23 +56,16 @@
 			    'username' => $_POST['username'],
 			    'password' => sha1($_POST['password']),
 			    'otrsname' => $_POST['otrsname'],
-			    'email' => $_POST['otrsname'],
+			    'email' => $_POST['email'],
 			    'isSysop' => $admin,
 			    'active' => $active
 			), 'id = %d', $_GET['id']);
+			header ("Location: users.php");
 		    }
 		}
 
-		if (!empty($errors))
-		{
-		    echo "<div class=\"box red\"><ul>";
-
-		    foreach ($errors as $error)
-		    {
-			echo "<li>" . $error . "</li>";
-		    }
-
-		    echo "</ul></div>";
+		if (hasvalidationerrors()) {
+		    showvalidationsummary();
 		}
 	    }
     ?>
