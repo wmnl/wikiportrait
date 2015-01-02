@@ -1,5 +1,5 @@
 <?php
-    include 'header.php';
+    include 'common/header.php';
 
     if (isset($_POST['postback']))
     {
@@ -225,5 +225,5 @@ Al vast heel erg bedankt voor je medewerking!<br />";
     </form>
 </div>
 <?php
-	include 'footer.php';
+	include 'common/footer.php';
 ?>
