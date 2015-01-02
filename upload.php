@@ -15,6 +15,7 @@
 	$ip = $_SERVER["REMOTE_ADDR"];
 	$date = $_POST['date'];
 	$desc = $_POST['description'];
+	$key = sha1(rand());
 
 	checkfile($_FILES['file']);
 	isrequired('title', 'titel');
@@ -81,7 +82,8 @@
 		    'ip' => $ip,
 		    'date' => $date,
 		    'description' => $desc,
-		    'timestamp' => date_timestamp_get($time)
+		    'timestamp' => date_timestamp_get($time),
+		    'key' => $key
 		));
 
 		require "PHPMailer/PHPMailerAutoload.php";
@@ -99,7 +101,7 @@
 
 		$mail->From = 'wikidate@axc.nl';
 		$mail->FromName = 'Wikiportret';
-		$mail->addAddress('otrs-test@wikimedia.org', 'otrs-test');			  // Add a recipient
+		$mail->addAddress('jurgen@hotmail.lv', 'otrs-test');			  // Add a recipient
 		$mail->addReplyTo($email, $name);
 
 		$mail->WordWrap = 50;								 // Set word wrap to 50 characters
@@ -126,7 +128,7 @@ Al vast heel erg bedankt voor je medewerking!<br />";
 		   exit;
 		}
 
-		header("Location:wizard.php?question=success&id=" . DB::insertId());
+		header("Location:wizard.php?question=success&key=" . $key);
 	    }
 	}
     }
