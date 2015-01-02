@@ -114,5 +114,5 @@
 </div>
 
 <?php
-	include '../footer.php';
+	include '../common/footer.php';
 ?>
