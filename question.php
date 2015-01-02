@@ -17,7 +17,7 @@
 		elseif ($result == "success")
 		{
 			echo "<h3>Uploaden voltooid</h3>";
-			echo "<div class=\"box green\">De afbeelding is met succes geüpload.<br />Een vrijwilliger zal de afbeelding zo snel mogelijk beoordelen en contact met u opnemen.<br />Als u wilt, kunt u <a href='track.php?image=" . $_GET['id'] . "&key=" . sha1($_GET['id']) . "'>hier</a> uw inzending volgen.</div>";
+			echo "<div class=\"box green\">De afbeelding is met succes geüpload.<br />Een vrijwilliger zal de afbeelding zo snel mogelijk beoordelen en contact met u opnemen.<br />Als u wilt, kunt u <a href='track.php?image=" . $_GET['id'] . "&key=" . $_GET['key'] . "'>hier</a> uw inzending volgen.</div>";
 			echo "<div class=\"bottom right\"><a class=\"button\" href=\"upload.php\"><i class=\"fa fa-cloud-upload fa-lg\"></i>Nog een afbeelding uploaden</a></div>";
 		}
 		else
