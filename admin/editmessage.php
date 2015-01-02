@@ -29,18 +29,10 @@
 	{
 	    if (isset($_POST['postback']))
 	    {
-		$errors = array();
+		isrequired('title', 'titel');
+		isrequired('message', 'bericht');
 
-		if (empty ($_POST['title']))
-		{
-		    array_push($errors, "Er is geen titel ingevuld");
-		}
-		if (empty($_POST['message']))
-		{
-		    array_push($errors, "Er is geen bericht ingevuld");
-		}
-
-		if (count($errors) == 0)
+		if (!hasvalidationerrors())
 		{		
 		    DB::update('messages', array(
 			'title' => $_POST['title'],
@@ -51,12 +43,7 @@
 		}
 		else
 		{
-		    echo "<div class=\"box red\"><ul>";
-		    foreach ($errors as $error)
-		    {
-			echo "<li>$error</li>";
-		    }
-		    echo "</div>";
+		    showvalidationsummary();
 		}
 	    }
     ?>

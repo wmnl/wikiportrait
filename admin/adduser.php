@@ -1,16 +1,10 @@
 <?php
-    include '../common/header.php';
+    require '../common/header.php';
+    require_once '../common/formfunctions.php';
     include 'tabs.php';
     checkAdmin();
     if (isset($_POST['postback']))
     {
-	$errors = array();
-
-	$username = $_POST['username'];
-	$otrsname = $_POST['otrsname'];
-	$password = $_POST['password'];
-	$password2 = $_POST['password'];
-	$email = $_POST['email'];
 	if (isset($_POST['admin']))
 	{
 	    $admin = 1;
@@ -20,47 +14,20 @@
 	    $admin = 0;
 	}
 
-	if (empty($username))
-	{
-	    array_push($errors, "Er is geen gebruikersnaam ingevuld");
-	}
-	else
-	{
-	    DB::query("SELECT * FROM users WHERE username = %s", $username);
-	    if (DB::count() != 0)
-		array_push($errors, "Deze gebruikersnaam bestaat al");
-	}
+	isrequired('username', 'gebruikersnaam');
+	isrequired('otrsname', 'OTRS-naam');
+	isrequired($_POST['password'], 'wachtwoord');
+	checkusername($_POST['username']);
+	comparepassword($_POST['password'], $_POST['password2']);
+	validateEmail('email');
 
-	if (empty($otrsname))
-	{
-	    array_push($errors, "Er is geen OTRS-naam ingevuld");
-	}
-
-	if (empty($password))
-	{
-	    array_push($errors, "Er is geen wachtwoord ingevuld");
-	}
-	elseif($password != $password2)
-	{
-	    array_push($errors, "De twee ingevulde wachtwoorden komen niet met elkaar overeen");
-	}
-
-	if (empty($email))
-	{
-	    array_push($errors, "Er is geen e-mailadres ingevuld");
-	}
-	elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
-	{
-	    array_push($errors, "Er is geen geldig e-mailadres ingevuld");
-	}
-
-	if (count($errors) == 0)
+	if (!hasvalidationerrors())
 	{ 
 	    DB::insert('users', array(
-		'username' => $username,
-		'password' => $password,
-		'otrsname' => $otrsname,
-		'email' => $email,
+		'username' => $_POST['username'],
+		'password' => sha1($_POST['password']),
+		'otrsname' => $_POST['otrsname'],
+		'email' => $_POST['email'],
 		'isSysop' => $admin,
 		'active' => 1
 	    ));
@@ -76,16 +43,8 @@
 	</div>
 
 	<?php
-	    if (!empty($errors))
-	    {
-		echo "<div class=\"box red\"><ul>";
-
-		foreach ($errors as $error)
-		{
-		    echo "<li>" . $error . "</li>";
-		}
-
-		echo "</ul></div>";
+	    if (hasvalidationerrors()) {
+		showvalidationsummary();
 	    }
 	?>
 

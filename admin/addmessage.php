@@ -1,28 +1,18 @@
 <?php
     include '../common/header.php';
+    include '../common/formfunctions.php';
     include 'tabs.php';
     checkAdmin();
     if (isset($_POST['postback']))
     {
-	$errors = array();
-
-	$title = $_POST['title'];
-	$message = $_POST['message'];
-
-	if (empty ($title))
-	{
-	    array_push($errors, "Er is geen titel ingevuld");
-	}
-	if (empty($message))
-	{
-	    array_push($errors, "Er is geen bericht ingevuld");
-	}
-
-	if (count($errors) == 0)
+	isrequired('title', 'titel');
+	isrequired('message', 'bericht');
+	
+	if (!hasvalidationerrors())
 	{
 	    DB::insert('messages', array(
-		'title' => $title,
-		'message' => $message
+		'title' => $_POST['title'],
+		'message' => $_POST['message']
 	    ));
 	    
 	    header("Location:messages.php");
@@ -40,16 +30,9 @@
     </div>
 
     <?php
-	if (!empty($errors))
+	if (hasvalidationerrors())
 	{
-	    echo "<div class=\"box red\"><ul>";
-
-	    foreach ($errors as $error)
-	    {
-    echo "<li>" . $error . "</li>";
-	    }
-
-	    echo "</ul></div>";
+	    showvalidationsummary();
 	}
     ?>
 

@@ -1,5 +1,6 @@
 <?php
     include 'common/header.php';
+    require_once 'common/formfunctions.php';
 
     if (isset($_POST['postback']))
     {
@@ -15,40 +16,13 @@
 	$date = $_POST['date'];
 	$desc = $_POST['description'];
 
-	if (!isset($file))
-	{
-	    array_push($errors, "Er is geen bestand geselecteerd");
-	}
-	elseif (!in_array($file['type'], $allowedext))
-	{
-	    array_push($errors, "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund");
-	}
+	checkfile($_FILES['file']);
+	isrequired('title', 'titel');
+	isrequired('source', 'auteursrechthebbende');
+	isrequired('name', 'naam');
+	validateEmail('email');
 
-	if (empty($title))
-	{
-	    array_push($errors, "Er is niet ingevuld wie er op de foto staat");
-	}
-
-	if (empty($source))
-	{
-	    array_push($errors, "Er is niet ingevuld wie de auteursrechthebbende is");
-	}
-
-	if (empty($name))
-	{
-	    array_push($errors, "Er is geen naam ingevuld");
-	}
-
-	if (empty($email))
-	{
-	    array_push($errors, "Er is geen e-mailadres ingevuld");
-	}
-	elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
-	{
-	    array_push($errors, "Er is geen geldig e-mailadres ingevuld");
-	}
-
-	if (count($errors) == 0)
+	if (!hasvalidationerrors())
 	{
 	    $time = new DateTime();
 	    $filename = strtolower(str_replace(" ", "_", $title)) . "-" . date_timestamp_get($time) . "." . pathinfo($file['name'], PATHINFO_EXTENSION);
@@ -142,7 +116,7 @@ Je kunt de foto bekijken op Wikiportret en de foto daar afwijzen, of een tekst g
 Klik op deze link:<br />
 https://www.wikidate.nl/wikiportret/images/single.php?id=" . DB::insertId() . "<br />
 <br />
-Als je vragen hebt over de uploadwizard kun je terecht bij JurgenNL via https://nl.wikipedia.org/wiki/Gebruiker:JurgenNL of eventueel via jurgennl.wp@gmail.com.<br />
+Als je vragen hebt over de uploadwizard kun je terecht bij JurgenNL via https://commons.wikimedia.org/wiki/User:JurgenNL of eventueel via jurgennl.wp@gmail.com.<br />
 <br />
 Al vast heel erg bedankt voor je medewerking!<br />";
 
@@ -159,16 +133,9 @@ Al vast heel erg bedankt voor je medewerking!<br />";
 ?>
 <div id="content">
     <?php
-	if (!empty($errors))
+	if (hasvalidationerrors())
 	{
-	    echo "<div class=\"box red\"><ul>";
-
-	    foreach ($errors as $error)
-	    {
-		echo "<li>" . $error . "</li>";
-	    }
-
-	    echo "</ul></div>";
+	    showvalidationsummary();
 	}
     ?>
 
@@ -179,7 +146,7 @@ Al vast heel erg bedankt voor je medewerking!<br />";
 	<div class="input-container">
 	    <label for="file"><i class="fa fa-file-image-o fa-lg fa-fw"></i>Kies een bestand</label>
 	    <div class="file">
-		    <input type="file" name="file" id="file" required="required" accept="image/*" />
+		<input type="file" name="file" id="file" required="required" accept="image/*" />
 	    </div>
 	</div>
 
