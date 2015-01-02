@@ -1,5 +1,5 @@
 <?php
-    include '../header.php';
+    include '../common/header.php';
     include 'tabs.php';
     checkLogin();
     if (isset ($_GET['archived']) && $_GET['archived'] == 1)
@@ -16,9 +16,9 @@
 
 	    <?php
 	    if ($archived == 0)
-		    echo "<h2>Inzendingen</h2>";
+		echo "<h2>Inzendingen</h2>";
 	    if ($archived == 1)
-		    echo "<h2>Archief</h2>";
+		echo "<h2>Archief</h2>";
 
 	    if (isset($_GET['personal']))
 	    {
@@ -138,5 +138,5 @@
 	}
 </script>
 <?php
-	include '../footer.php';
+	include '../common/footer.php';
 ?>

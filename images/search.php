@@ -1,5 +1,5 @@
 <?php
-    include '../header.php';
+    include '../common/header.php';
     include 'tabs.php';
     checkLogin();
 ?>
@@ -51,7 +51,7 @@
 		{
     ?>
 
-    <div class="table-container">\
+    <div class="table-container">
 	    <table>
 		<thead>
 		    <tr>
@@ -114,5 +114,5 @@
 </div>
 
 <?php
-	include '../footer.php';
+	include '../common/footer.php';
 ?>

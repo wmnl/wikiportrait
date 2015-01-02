@@ -1,5 +1,5 @@
 <?php
-    include '../header.php';
+    include '../common/header.php';
     include 'tabs.php';
     checkAdmin();
     if (isset($_GET['id']))
@@ -14,11 +14,8 @@
 <div id="content">
 
     <div class="page-header">
-
 	<h2>Bericht bewerken</h2>
-
 	<a href="messages.php" class="button red"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
-
     </div>
 	
     <?php
@@ -81,5 +78,5 @@
 </div>
 <?php
     }
-    include '../footer.php';
+    include '../common/footer.php';
 ?>
