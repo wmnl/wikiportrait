@@ -135,7 +135,7 @@ Al vast heel erg bedankt voor je medewerking!<br />";
 ?>
 <script>
 	function comparenames() {
-		var depicted = document.getElementById('title').value.length;
+		var depicted = document.getElementById('title').value;
 		var photographer = document.getElementById('source').value;
 		
 		if (depicted.length > 0 && photographer.length > 0 && (depicted == photographer)) {
