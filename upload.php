@@ -133,6 +133,16 @@ Al vast heel erg bedankt voor je medewerking!<br />";
 	}
     }
 ?>
+<script>
+	function comparenames() {
+		var depicted = document.getElementById('title').value.length;
+		var photographer = document.getElementById('source').value;
+		
+		if (depicted.length > 0 && photographer.length > 0 && (depicted == photographer)) {
+			swal('U hebt aangegeven dat de persoon op de foto dezelfde persoon is als de auteursrechthebbende', 'Let erop dat alleen de fotograaf toestemming kan geven om de foto vrij te geven onder een vrije licentie.', 'warning');
+		}
+	}
+</script>
 <div id="content">
     <?php
 	if (hasvalidationerrors())
@@ -154,12 +164,12 @@ Al vast heel erg bedankt voor je medewerking!<br />";
 
 	<div class="input-container">
 	    <label for="title"><i class="fa fa-eye fa-lg fa-fw"></i>Afgebeeld persoon</label>
-	    <input type="text" name="title" id="title" required="required" value="<?php if (!empty($title)) echo $title; ?>" />
+		<input type="text" name="title" id="title" required="required" value="<?php if (!empty($title)) echo $title; ?>" onblur="comparenames()" />
 	</div>
 
 	<div class="input-container">
 	    <label for="source"><i class="fa fa-camera fa-lg fa-fw"></i>Auteursrechthebbende</label>
-	    <input type="text" name="source" id="source" required="required" value="<?php if (!empty($_POST['source'])) echo $_POST['source']; ?>" />
+		<input type="text" name="source" id="source" required="required" value="<?php if (!empty($_POST['source'])) echo $_POST['source']; ?>" onblur="comparenames()" />
 	</div>
 
 	<div class="input-container">
