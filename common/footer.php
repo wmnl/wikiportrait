@@ -20,10 +20,7 @@
 		/* Delete confirmation */
 		function confirmDelete(id){
 		    if (confirm("Weet u zeker dat u dit bericht wilt verwijderen?")) {
-			location.href = "deletemessage.php?id=" + id;
-		    }
-		    else {
-			return;
+				location.href = "deletemessage.php?id=" + id;
 		    }
 		}
 
@@ -31,7 +28,7 @@
 		document.addEventListener("touchstart", function(){}, true);
 
 		/* Do not open links in Safari when in web-app mode */
-		if(("standalone" in window.navigator) && window.navigator.standalone){
+		if(("standalone" in window.navigator) && window.navigator.standalone) {
 
 		var noddy, remotes = false;
 
