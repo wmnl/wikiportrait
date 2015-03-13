@@ -6,6 +6,14 @@ class Session {
         setcookie(session_name(),session_id(),time()+$cookieLifetime);
     }
 
+    public function getLastUploadKey() {
+        return $_SESSION['lastuploadkey'];
+    }
+
+    public function setLastUploadKey($key) {
+        $_SESSION['lastuploadkey'] = $key;
+    }
+
     public function redirect($page, $args = false) {
         global $basispad;
         $location = "Location:$basispad$page.php";

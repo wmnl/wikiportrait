@@ -7,13 +7,16 @@
     }
 
     function result($result) {
+        global $session;
+
         if ($result == "noupload") {
             echo "<h3>Het advies van de uploadwizard is:</h3>";
             echo "<div class=\"box red\">Niet uploaden</div>";
             echo "<div class=\"bottom right\"><a class=\"button\" href=\"index.php\"><i class=\"fa fa-home fa-lg\"></i>Terug naar de startpagina</a></div>";
         } elseif ($result == "success") {
+            $key = $session->getLastUploadKey();
             echo "<h3>Uploaden voltooid</h3>";
-            echo "<div class=\"box green\">De afbeelding is met succes geüpload.<br />Een vrijwilliger zal de afbeelding zo snel mogelijk beoordelen en contact met u opnemen.<br />Als u wilt, kunt u <a href='track.php?image=" . $_GET['id'] . "&key=" . $_GET['key'] . "'>hier</a> uw inzending volgen.</div>";
+            echo "<div class=\"box green\">De afbeelding is met succes geüpload.<br />Een vrijwilliger zal de afbeelding zo snel mogelijk beoordelen en contact met u opnemen.<br />Als u wilt, kunt u <a href=\"track.php?key=$key\">hier</a> uw inzending volgen.</div>";
             echo "<div class=\"bottom right\"><a class=\"button\" href=\"upload.php\"><i class=\"fa fa-cloud-upload fa-lg\"></i>Nog een afbeelding uploaden</a></div>";
         } else {
             echo "<h3>Het advies van de uploadwizard is:</h3>";

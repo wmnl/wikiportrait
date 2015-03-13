@@ -1,7 +1,10 @@
 {
-  "require": {
-    "sergeytsalkov/meekrodb": "*",
-    "ircmaxell/password-compat": "~1.0",
-    "intervention/image": "~2.1"
-  }
+    "require": {
+        "sergeytsalkov/meekrodb": "*",
+        "ircmaxell/password-compat": "~1.0",
+        "intervention/image": "~2.1"
+    },
+    "config": {
+        "vendor-dir": "web/vendor"
+    }
 }
