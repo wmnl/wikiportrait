@@ -1,5 +1,4 @@
 <?php
-    session_start();
-    session_destroy();
-    header("location:login.php");
+    require 'common/bootstrap.php';
+    $session->logout();
 ?>

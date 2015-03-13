@@ -1,7 +1,9 @@
 <?php
-    include '../common/header.php';
+    require '../common/bootstrap.php';
+    $seession->checkAdmin();
+    require '../common/header.php';
+
     include 'tabs.php';
-    checkAdmin();
 ?>
 <div id="content">
     <div class="page-header">
@@ -21,8 +23,7 @@
 	    <tbody>
 	    <?php
 		$results = DB::query("SELECT id, title FROM messages");
-		foreach ($results as $row)
-		{
+		foreach ($results as $row) {
 		    $id = $row['id'];
 		    $title = htmlspecialchars($row['title']);
 

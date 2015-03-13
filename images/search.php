@@ -1,7 +1,9 @@
 <?php
-    include '../common/header.php';
+    require '../common/bootstrap.php';
+    $session->checkLogin();
+    require '../common/header.php';
+
     include 'tabs.php';
-    checkLogin();
 ?>
 
 <div id="content">

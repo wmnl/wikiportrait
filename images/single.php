@@ -1,6 +1,7 @@
 <?php
-    include '../common/header.php';
-    checkLogin();
+    require '../common/bootstrap.php';
+    $session->checkLogin();
+    require '../common/header.php';
 ?>
 
 <div id="content">

@@ -1,6 +1,8 @@
-<?php 
-    include '../common/header.php';
-    checkLogin();
+<?php
+    require '../common/bootstrap.php';
+    $session->checkLogin();
+    require '../common/header.php';
+
 ?>
 <div id="content">
     <h2>Kant-en-klaar berichtje versturen</h2>
@@ -13,7 +15,7 @@
 	    echo "<div class=\"box red\">Bericht of afbeelding niet gevonden!</div>";
 	}
 	else
-	{	
+	{
 	    $row = DB::queryFirstRow('SELECT * FROM messages LEFT JOIN users ON users.id = %d LEFT JOIN images ON images.id = %d WHERE messages.id = %d', $_SESSION['user'], $_GET['image'], $_GET['message']);
 
 	    $templates = array("%%name%%", "%%title%%", "%%otrsname%%");
@@ -26,5 +28,5 @@
     </div>
 </div>
 <?php
-    include '../common/footer.php';		 
+    include '../common/footer.php';
 ?>

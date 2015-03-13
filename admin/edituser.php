@@ -1,8 +1,9 @@
 <?php
-    include '../common/header.php';
-    require_once '../common/formfunctions.php';
+    require '../common/bootstrap.php';
+    $seession->checkAdmin();
+    require '../common/header.php';
+
     include 'tabs.php';
-    checkAdmin();
 
     if (isset($_GET['id'])) {
 		$id = $_GET['id'];

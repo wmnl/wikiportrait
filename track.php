@@ -1,5 +1,6 @@
 <?php
-    include 'common/header.php';
+	require 'common/bootstrap.php';
+    require 'common/header.php';
 ?>
 <div id="content">
     <?php

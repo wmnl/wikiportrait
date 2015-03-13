@@ -1,11 +1,14 @@
-<?php 
-    include 'common/header.php';
+<?php
+    require 'common/bootstrap.php';
+    require 'common/header.php';
     require 'question.php';
-    if (!isset($_GET['question']))
-	$question = "first";
-    else
-	$question = $_GET['question'];
-?>			  
+
+    if (!isset($_GET['question'])) {
+	   $question = "first";
+    } else {
+	   $question = $_GET['question'];
+    }
+?>
 <div id="content">
     <h2>Uploadwizard</h2>
     <?php

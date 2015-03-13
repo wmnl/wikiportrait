@@ -1,9 +1,9 @@
 <?php
+    require '../common/bootstrap.php';
+    $session->checkAdmin();
     require '../common/header.php';
-    require '../common/formfunctions.php';
 
     include 'tabs.php';
-    checkAdmin();
 
     if (isset($_POST['postback'])) {
         $admin = isset($_POST['admin']);
@@ -27,7 +27,7 @@
                 'active' => 1
             ]);
 
-            header("Location:users.php");
+            $session->redirect("admin/users");
         }
     }
 ?>
@@ -40,7 +40,7 @@
 
     <?php
         if (hasvalidationerrors()) {
-        showvalidationsummary();
+            showvalidationsummary();
         }
     ?>
 

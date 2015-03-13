@@ -1,7 +1,9 @@
 <?php
-    include '../common/header.php';
+    require '../common/bootstrap.php';
+    $session->checkAdmin();
+    require '../common/header.php';
+
     include 'tabs.php';
-    checkAdmin();
 ?>
 <div id="content">
     <div class="page-header">

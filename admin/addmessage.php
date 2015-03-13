@@ -1,22 +1,21 @@
 <?php
-    include '../common/header.php';
-    include '../common/formfunctions.php';
+    require '../common/bootstrap.php';
+    $seession->checkAdmin();
+    require '../common/header.php';
+
     include 'tabs.php';
-    checkAdmin();
-    if (isset($_POST['postback']))
-    {
-	isrequired('title', 'titel');
-	isrequired('message', 'bericht');
-	
-	if (!hasvalidationerrors())
-	{
-	    DB::insert('messages', array(
-		'title' => $_POST['title'],
-		'message' => $_POST['message']
-	    ));
-	    
-	    header("Location:messages.php");
-	}
+    if (isset($_POST['postback'])) {
+    	isrequired('title', 'titel');
+    	isrequired('message', 'bericht');
+
+    	if (!hasvalidationerrors()) {
+    	    DB::insert('messages', [
+    		  'title' => $_POST['title'],
+    		  'message' => $_POST['message']
+    	    ]);
+
+            $session->redirect("admin/messages.php");
+    	}
     }
 ?>
 <div id="content">

@@ -1,50 +1,43 @@
 <?php
-    include '../common/header.php';
+    require '../common/bootstrap.php';
+    $session->checkAdmin();
+    require '../common/header.php';
+
     include 'tabs.php';
-    checkAdmin();
-    if (isset($_GET['id']))
-    {
-	$id = $_GET['id'];
+
+    if (isset($_GET['id'])) {
+	   $id = $_GET['id'];
+    } else {
+	   $session->redirect("admin/users");
     }
-    else 
-    {
-	header("Location: users.php");
-    }
-?>			
+?>
 <div id="content">
 
     <div class="page-header">
 	<h2>Bericht bewerken</h2>
 	<a href="messages.php" class="button red"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
     </div>
-	
+
     <?php
 	DB::query('SELECT * FROM messages WHERE id = %d', $_GET['id']);
 
-	if (DB::count() == 0)
-	{
+	if (DB::count() == 0) :
 	    echo "<div class=\"box red\">Bericht niet gevonden!</div>";
-	}
-	else
-	{
-	    if (isset($_POST['postback']))
-	    {
-		isrequired('title', 'titel');
-		isrequired('message', 'bericht');
+	else:
+	    if (isset($_POST['postback'])) {
+    		isrequired('title', 'titel');
+    		isrequired('message', 'bericht');
 
-		if (!hasvalidationerrors())
-		{		
-		    DB::update('messages', array(
-			'title' => $_POST['title'],
-			'message' => $_POST['message']
-		    ), 'id = %d', $_GET['id']);
+    		if (!hasvalidationerrors()) {
+    		    DB::update('messages', [
+                    'title' => $_POST['title'],
+    			    'message' => $_POST['message']
+    		    ), 'id = %d', $_GET['id']);
 
-		    header("Location:messages.php");
-		}
-		else
-		{
-		    showvalidationsummary();
-		}
+    		    $session->redir("admin/messages");
+    		} else {
+    		    showvalidationsummary();
+    		}
 	    }
     ?>
     <form method="post">
@@ -64,6 +57,6 @@
     </form>
 </div>
 <?php
-    }
+    endif;
     include '../common/footer.php';
 ?>

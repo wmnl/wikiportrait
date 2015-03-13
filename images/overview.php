@@ -1,15 +1,11 @@
 <?php
-    include '../common/header.php';
+    require '../common/bootstrap.php';
+    $session->checkLogin();
+    require '../common/header.php';
+
     include 'tabs.php';
-    checkLogin();
-    if (isset ($_GET['archived']) && $_GET['archived'] == 1)
-    {
-	$archived = 1;
-    }
-    else
-    {
-	$archived = 0;
-    }
+
+    $archived = isset($_GET['archived']) && $_GET['archived'] == 1;
 ?>
 <div id="content">
     <div class="page-header">

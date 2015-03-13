@@ -1,7 +1,8 @@
 <?php
     header('HTTP/1.1 404 Not Found');
     header('Status: 404 Not Found');
-    include 'common/header.php';
+    require 'common/bootstrap.php';
+    require 'common/header.php';
 ?>
 <div id="content">
 

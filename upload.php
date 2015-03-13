@@ -1,11 +1,11 @@
 <?php
-    require 'common/header.php';
-    require 'common/formfunctions.php';
-    require 'common/uploadfunctions.php';
+	require 'common/bootstrap.php';
 
     if (isset($_POST['postback'])) {
     	checkUpload();
     }
+
+    require 'common/header.php';
 ?>
 <script>
 	function comparenames() {

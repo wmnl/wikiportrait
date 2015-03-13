@@ -1,33 +1,3 @@
-<?php
-    require 'config.php';
-
-    ob_start();
-    session_start();
-    require 'connect.php';
-
-    $basispad = BASE_URL;
-
-    function checkLogin() {
-	   global $basispad;
-
-	   if (!isset($_SESSION['user'])) {
-	       header("Location:$basispad/login.php");
-       }
-    }
-
-    function checkAdmin() {
-    	global $basispad;
-
-    	if (!isset($_SESSION['user'])) {
-    	    header("Location:$basispad/login.php");
-        } elseif (isset($_SESSION['user']) && $_SESSION['isSysop'] == false) {
-    	    header("Location:$basispad");
-        }
-    }
-
-    $cookieLifetime = 365 * 24 * 60 * 60;
-    setcookie(session_name(),session_id(),time()+$cookieLifetime);
-?>
 <!DOCTYPE html>
 <html>
     <head>
