@@ -1,16 +1,13 @@
 <?php
     include '../common/header.php';
     require_once '../common/formfunctions.php';
-    require_once '../common/passwordfunctions.php';
     include 'tabs.php';
     checkAdmin();
-    if (isset($_GET['id']))
-    {
-	$id = $_GET['id'];
-    }
-    else
-    {
-	header("Location: users.php");
+
+    if (isset($_GET['id'])) {
+		$id = $_GET['id'];
+    } else {
+		header("Location: users.php");
     }
 ?>
 <div id="content">
@@ -19,57 +16,53 @@
 	<a href="users.php" class="button red"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
     </div>
 
-    <?php  
+    <?php
 	$row = DB::queryFirstRow('SELECT * FROM users WHERE id = %d', $_GET['id']);
 
-	if (DB::count() == 0)
-	{
+	if (DB::count() == 0) {
 	    echo "Gebruiker niet gevonden!";
-	}
-	else
-	{
-	    if (isset($_POST['postback']))
-	    {
-		$admin = (isset($_POST['admin']) ? 1 : 0);
-		$active = (isset($_POST['active']) ? 1 : 0);
-		
-		isrequired('username', 'gebruikersnaam');
-		isrequired('otrsname', 'OTRS-naam');
-		comparepassword($_POST['password'], $_POST['password2']);
-		validateEmail('email');
+	} else {
+	    if (isset($_POST['postback'])) {
+			$admin = isset($_POST['admin']);
+			$active = isset($_POST['active']);
 
-		if (!hasvalidationerrors())
-		{
-		    if (empty($_POST['password']))
-		    {
-			DB::update('users', array(
-			    'username' => $_POST['username'],
-			    'otrsname' => $_POST['otrsname'],
-			    'email' => $_POST['email'],
-			    'isSysop' => $admin,
-			    'active' => $active
-			), 'id = %d', $_GET['id']);
-			header ("Location: users.php");
-		    }
-		    else
-		    {
-			DB::update('users', array(
-			    'username' => $_POST['username'],
-			    'password' => generatepassword($_POST['password'], $salt),
-			    'salt' => $salt,
-			    'otrsname' => $_POST['otrsname'],
-			    'email' => $_POST['email'],
-			    'isSysop' => $admin,
-			    'active' => $active
-			), 'id = %d', $_GET['id']);
-			header ("Location: users.php");
-		    }
-		}
+			isrequired('username', 'gebruikersnaam');
+			isrequired('otrsname', 'OTRS-naam');
+			comparepassword($_POST['password'], $_POST['password2']);
+			validateEmail('email');
 
-		if (hasvalidationerrors()) {
-		    showvalidationsummary();
-		}
+			if (!hasvalidationerrors()) {
+			    if (empty($_POST['password'])) {
+					DB::update('users', array(
+					    'username' => $_POST['username'],
+					    'otrsname' => $_POST['otrsname'],
+					    'email' => $_POST['email'],
+					    'isSysop' => $admin,
+					    'active' => $active
+					), 'id = %d', $_GET['id']);
+
+					header ("Location: users.php");
+			    } else {
+			    	$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+					DB::update('users', array(
+					    'username' => $_POST['username'],
+					    'password' => $password,
+					    'otrsname' => $_POST['otrsname'],
+					    'email' => $_POST['email'],
+					    'isSysop' => $admin,
+					    'active' => $active
+					), 'id = %d', $_GET['id']);
+
+					header ("Location: users.php");
+			    }
+			}
+
+			if (hasvalidationerrors()) {
+			    showvalidationsummary();
+			}
 	    }
+	}
     ?>
 
     <form method="post">
@@ -117,9 +110,6 @@
 	</div>
 
     </form>
-    <?php
-	}
-    ?>
 </div>
 <?php
     include '../common/footer.php';

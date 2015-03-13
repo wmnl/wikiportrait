@@ -1,5 +1,6 @@
 {
   "require": {
-    "sergeytsalkov/meekrodb": "*"
+    "sergeytsalkov/meekrodb": "*",
+    "ircmaxell/password-compat": "~1.0"
   }
 }

@@ -16,21 +16,22 @@
         isrequired('username', 'gebruikersnaam');
         isrequired('password', 'wachtwoord');
 
-        if (!hasvalidationerrors()) {
+        if (hasvalidationerrors()) {
+            showvalidationsummary();
+        } else {
             $row = DB::queryFirstRow("SELECT * FROM users WHERE username = %s AND active = 1", $_POST['username']);
 
             if (DB::count() != 0) {
-                if ($row['password'] == sha1($_POST['password'] . $row['salt'])) {
+                if (password_verify($_POST['password'], $row['password'])) {
                     $_SESSION['user'] = $row['id'];
-                    $_SESSION['isSysop'] = ($row['isSysop'] == 1 ? true : false);
+                    $_SESSION['isSysop'] = $row['isSysop'] == 1;
+                    header("Location:index.php");
+                } else {
+                    echo '<div class="box red">Wachtwoord incorrect.</div>';
                 }
-
-                header("Location:index.php");
             } else {
-                echo "<div class=\"box red\">Gebruikersnaam en/of wachtwoord incorrect</div>";
+                echo '<div class="box red">Gebruikersnaam onbekend.</div>';
             }
-        }  else {
-            showvalidationsummary();
         }
     }
     ?>
