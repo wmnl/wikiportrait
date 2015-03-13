@@ -1,7 +1,7 @@
 /* Custom select */
-$(".select").simpleSelect({
-    displayContainerInside: "container"
-});
+// $(".select").simpleSelect({
+//     displayContainerInside: "container"
+// });
 
 /* Autoresize textarea */
 autosize($('textarea'));

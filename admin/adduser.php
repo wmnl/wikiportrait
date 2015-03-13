@@ -27,7 +27,7 @@
                 'active' => 1
             ]);
 
-            $session->redirect("admin/users");
+            $session->redirect("/admin/users");
         }
     }
 ?>

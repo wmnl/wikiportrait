@@ -3,7 +3,7 @@
 		</div>
 		</div>
 
-		<script src="<?= $basispad; ?>/lib/simple-select/jquery.simpleselect.js"></script>
+		<!-- <script src="<?= $basispad; ?>/lib/simple-select/jquery.simpleselect.js"></script> -->
 		<script src="<?= $basispad; ?>/lib/jquery-autosize/dest/autosize.min.js"></script>
 
 		<script src="<?= $basispad; ?>/js/app.js"></script>

@@ -1,4 +1,6 @@
 <?php
+    use Intervention\Image\ImageManager;
+
     function checkUpload() {
         $errors = array();
         $allowedext = array("image/png", "image/gif", "image/jpeg", "image/bmp", "image/pjpeg");
@@ -23,48 +25,14 @@
             $time = new DateTime();
             $filename = strtolower(str_replace(" ", "_", $title)) . "-" . date_timestamp_get($time) . "." . pathinfo($file['name'], PATHINFO_EXTENSION);
 
-            if (move_uploaded_file($file['tmp_name'], "uploads/" . $filename)) {
-                /* Tumpneel maken (Hopelijk doetiet) */
+            $imagepath = IMAGE_FOLDER . "/$filename";
+            $thumbpath = THUMB_FOLDER . "/$filename";
 
-                $x=300; //Width
-                $folder="uploads/thumbs"; //Foldername thumbnail
-
-                $size = getimagesize("uploads/" . $filename);
-
-                $scale = $size[0]/$x;
-                $y = $size[1]/$scale;
-
-                $thumb = imagecreatetruecolor($x,$y);
-
-                if (in_array($file['type'],array("image/jpeg","image/pjpeg")))
-                {
-                    $img=imagecreatefromjpeg("uploads/" . $filename);
-                    //$thumb=imagescale($img,$x);
-                    imagecopyresized($thumb,$img,0,0,0,0,$x,$y,$size[0],$size[1]);
-                    imagejpeg($thumb,$folder."/".$filename);
-                }
-                elseif ($file['type']=="image/png")
-                {
-                    $img=imagecreatefrompng("uploads/" . $filename);
-                    //$thumb=imagescale($img,$x);
-                    imagecopyresized($thumb,$img,0,0,0,0,$x,$y,$size[0],$size[1]);
-                    imagepng($thumb,$folder."/".$filename);
-                }
-                elseif ($file['type']=="image/gif")
-                {
-                    $img=imagecreatefromgif("uploads/" . $filename);
-                    //$thumb=imagescale($img,$x);
-                    imagecopyresized($thumb,$img,0,0,0,0,$x,$y,$size[0],$size[1]);
-                    imagegif($thumb,$folder."/".$filename);
-                }
-                elseif ($file['type']=="image/bmp")
-                {
-                    $img=imagecreatefromwbmp("uploads/" . $filename);
-                    //$thumb=imagescale($img,$x);
-                    imagecopyresized($thumb,$img,0,0,0,0,$x,$y,$size[0],$size[1]);
-                    imagewbmp($thumb,$folder."/".$filename);
-                }
-                /* Klaar met Tumpneel */
+            if (move_uploaded_file($file['tmp_name'], $imagepath)) {
+                $imageManager = new ImageManager(array('driver' => 'gd'));
+                $thumb = $imageManager->make($imagepath);
+                $thumb->resize(300, 300);
+                $thumb->save($thumbpath);
 
                 DB::insert('images', array (
                     'filename' => $filename,

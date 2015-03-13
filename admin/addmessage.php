@@ -1,9 +1,7 @@
 <?php
     require '../common/bootstrap.php';
-    $seession->checkAdmin();
-    require '../common/header.php';
+    $session->checkAdmin();
 
-    include 'tabs.php';
     if (isset($_POST['postback'])) {
     	isrequired('title', 'titel');
     	isrequired('message', 'bericht');
@@ -14,9 +12,12 @@
     		  'message' => $_POST['message']
     	    ]);
 
-            $session->redirect("admin/messages.php");
+            $session->redirect("/admin/messages");
     	}
     }
+
+    require '../common/header.php';
+    include 'tabs.php';
 ?>
 <div id="content">
 

@@ -2,17 +2,25 @@
     $validationerrors = array();
 
     function showvalidationsummary() {
+        echo getvalidationsummary();
+    }
+
+    function getvalidationsummary() {
     	global $validationerrors;
 
+        $html = "";
+
     	if (isset($validationerrors)) {
-    	    echo '<div class="box red"><ul>';
+    	    $html .= '<div class="box red"><ul>';
 
     	    foreach ($validationerrors as $error) {
-    		echo "<li>$error</li>";
+                $html .= "<li>$error</li>";
     	    }
 
-    	    echo '</ul></div>';
+    	    $html .= '</ul></div>';
     	}
+
+        return $html;
     }
 
     function isrequired($parameter, $property) {
