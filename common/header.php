@@ -35,22 +35,27 @@
 	<meta name="viewport" content="initial-scale=1.0" />
 	<meta name="mobile-web-app-capable" content="yes" />
 	<meta name="application-name" content="Wikiportret" />
+
 	<!-- Apple -->
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-title" content="Wikiportret" />
 	<link rel="apple-touch-icon" href="<?= $basispad ?>/apple-touch-icon.png" />
+
 	<!-- Overige icons -->
 	<link rel="shortcut icon" href="<?= $basispad ?>/favicon.ico" />
 	<link rel="icon" type="image/x-icon" href="<?= $basispad ?>/favicon.ico" />
 	<link rel="icon" type="image/png" href="<?= $basispad ?>/apple-touch-icon.png" />
 	<meta name="msapplication-TileColor" content="#444444">
 	<meta name="msapplication-TileImage" content="<?= $basispad ?>/apple-touch-icon.png">
-	<link rel="stylesheet" type="text/css" href="<?= $basispad ?>/style/style.css" />
-	<link rel="stylesheet" type="text/css" href="<?= $basispad ?>/style/responsive.css" />
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="<?= $basispad ?>/style/sweet-alert.css" />
-	<script src="<?= $basispad ?>/style/jquery-2.1.1.min.js"></script>
-	<script src="<?= $basispad ?>/scripts/sweet-alert.min.js"></script>
+
+	<link rel="stylesheet" href="<?= $basispad ?>/style/style.css" />
+	<link rel="stylesheet" href="<?= $basispad ?>/style/responsive.css" />
+    <link rel="stylesheet" href="<?= $basispad; ?>/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?= $basispad; ?>/lib/sweetalert/lib/sweet-alert.css">
+
+    <script src="<?= $basispad; ?>/lib/jquery/dist/jquery.min.js"></script>
+    <script src="<?= $basispad; ?>/lib/sweetalert/lib/sweet-alert.min.js"></script>
+
 	<title>Wikiportret - Stel uw foto's ter beschikking</title>
     </head>
     <body>

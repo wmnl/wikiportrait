@@ -19,9 +19,9 @@
 </script>
 <div id="content">
     <?php
-	if (hasvalidationerrors()) {
-	    showvalidationsummary();
-	}
+		if (hasvalidationerrors()) {
+		    showvalidationsummary();
+		}
     ?>
 
     <h2>Uploadformulier</h2>
