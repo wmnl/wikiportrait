@@ -1,6 +1,6 @@
 <?php
     require '../common/bootstrap.php';
-    $seession->checkAdmin();
+    $session->checkAdmin();
     require '../common/header.php';
 
     include 'tabs.php';

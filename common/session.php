@@ -10,11 +10,15 @@ class Session {
         global $basispad;
         $location = "Location:$basispad$page.php";
         if ($args) $location .= $args;
-        header($location);;
+        header($location);
     }
 
     public function isLoggedIn() {
-        return isset($_SESSION['user']);
+        return !empty($_SESSION['user']);
+    }
+
+    public function isSysop() {
+        return !empty($_SESSION['isSysop']);
     }
 
     public function checkLogin() {
@@ -24,11 +28,15 @@ class Session {
     }
 
     public function checkAdmin() {
-        if (!isset($_SESSION['user'])) {
-            $this->redirect("/login");
-        } elseif (isset($_SESSION['user']) && $_SESSION['isSysop'] == false) {
+        $this->checkLogin();
+
+        if (!$this->isSysop()) {
             $this->redirect("/index");
         }
+    }
+
+    public function getUserName() {
+        return $_SESSION['username'];
     }
 
     public function login($user, $pass) {
@@ -45,6 +53,7 @@ class Session {
 
         $_SESSION['user'] = $row['id'];
         $_SESSION['isSysop'] = $row['isSysop'] == 1;
+        $_SESSION['username'] = $row['username'];
 
         return true;
     }

@@ -156,6 +156,11 @@ p:last-child {
 
 .menu ul {
 	display:table;
+	float: left;
+}
+
+.menu ul.right {
+	float: right;
 }
 
 .menu li {
@@ -163,11 +168,12 @@ p:last-child {
 	text-align:center;
 }
 
-.menu a {
+.menu a, .menu span {
 	padding:10px;
 	display:block;
 	color:#fff;
 }
+
 
 .menu a:hover, .menu .active a {
 	background:#005580;
