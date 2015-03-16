@@ -1,5 +1,9 @@
 <?php
-    require 'common/bootstrap.php';
+    require '../common/bootstrap.php';
+
+    if (!empty($_GET['logout'])) {
+        $session->logout();
+    }
 
     if (isset($_POST['postback'])) {
         isrequired('username', 'gebruikersnaam');
@@ -15,10 +19,10 @@
     }
 
     if ($session->isLoggedIn()) {
-        $session->redirect("/index");
+        $session->redirect("/images/overview");
     }
 
-    require 'common/header.php';
+    require '../common/header.php';
 ?>
 
 <div id="content">

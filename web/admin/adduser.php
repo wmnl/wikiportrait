@@ -1,9 +1,6 @@
 <?php
     require '../common/bootstrap.php';
     $session->checkAdmin();
-    require '../common/header.php';
-
-    include 'tabs.php';
 
     if (isset($_POST['postback'])) {
         $admin = isset($_POST['admin']);
@@ -30,6 +27,9 @@
             $session->redirect("/admin/users");
         }
     }
+
+    require '../common/header.php';
+    include 'tabs.php';
 ?>
 <div id="content">
 

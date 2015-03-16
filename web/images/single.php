@@ -2,6 +2,7 @@
 require '../common/bootstrap.php';
 $session->checkLogin();
 if (empty($_GET['id'])) $session->redirect("/images/overview");
+
 require '../common/header.php';
 $msg = false;
 ?>

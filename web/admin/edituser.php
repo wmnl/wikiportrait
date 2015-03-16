@@ -1,15 +1,15 @@
 <?php
     require '../common/bootstrap.php';
-    $seession->checkAdmin();
-    require '../common/header.php';
-
-    include 'tabs.php';
+    $session->checkAdmin();
 
     if (isset($_GET['id'])) {
 		$id = $_GET['id'];
     } else {
-		header("Location: users.php");
+		$session->redirect("/admin/users");
     }
+
+    require '../common/header.php';
+    include 'tabs.php';
 ?>
 <div id="content">
     <div class="page-header">
