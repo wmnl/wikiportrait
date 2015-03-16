@@ -31,7 +31,7 @@ class Session {
 
     public function checkLogin() {
         if (!$this->isLoggedIn()) {
-            $this->redirect("/login");
+            $this->redirect("/admin");
         }
     }
 
@@ -68,6 +68,6 @@ class Session {
 
     public function logout() {
         session_destroy();
-        $this->redirect("/login");
+        $this->redirect("/admin");
     }
 }
