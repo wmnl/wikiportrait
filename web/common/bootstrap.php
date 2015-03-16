@@ -11,5 +11,6 @@
     require 'formfunctions.php';
     require 'uploadfunctions.php';
     require 'session.php';
+    require 'messages.php';
 
     $session = new Session();
