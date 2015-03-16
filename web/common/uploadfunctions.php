@@ -61,11 +61,11 @@ function checkUpload() {
 
             $templateRenderer = new Handlebars;
 
-            $subject = $templateRenderer->render($messages['otrsSubject'],
-                ['title' => $title]
-            );
+            $subject = "[Wikiportret] $title is geüpload op Wikiportret";
 
-            $body = $templateRenderer->render($messages['otrsMail'], [
+            $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody.txt");
+
+            $body = $templateRenderer->render($bodyTxt, [
                 'title' => $title,
                 'source' => $source,
                 'desc' => $desc,
@@ -73,16 +73,24 @@ function checkUpload() {
                 'imageId' => DB::insertId()
             ]);
 
-            $headers = $templateRenderer->render($messages['otrsHeaders'], [
-                "name" => $name,
-                "email" => $email,
-                "mailOrigin" => OTRS_MAIL
-            ]);
+            $htmlBody = nl2br($body);
 
-            mail(OTRS_MAIL, $subject, $body, $headers);
+            $mail = new PHPMailer;
+            $mail->From = OTRS_MAIL;
+            $mail->CharSet = 'UTF-8';
+            $mail->addReplyTo($email, $name);
+            $mail->addAddress(OTRS_MAIL, "Wikiportret OTRS queue");
+            $mail->Subject = $subject;
+            $mail->isHTML(true);
+            $mail->Body = $htmlBody;
+            $mail->AltBody = $body;
 
-            $session->setLastUploadKey($key);
-            $session->redirect("/wizard", "?question=success");
+            if (!$mail->send()) {
+                $session->redict("/wizard", "?question=failupload");
+            } else {
+                $session->setLastUploadKey($key);
+                $session->redirect("/wizard", "?question=success");
+            }
         }
     }
 }

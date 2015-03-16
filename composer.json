@@ -3,7 +3,8 @@
         "sergeytsalkov/meekrodb": "*",
         "ircmaxell/password-compat": "~1.0",
         "intervention/image": "~2.1",
-        "xamin/handlebars.php" : "*"
+        "xamin/handlebars.php" : "*",
+        "phpmailer/phpmailer" : "~5.2.9"
     },
     "config": {
         "vendor-dir": "web/vendor"
