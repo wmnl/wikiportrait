@@ -58,7 +58,7 @@ function checkUpload() {
                 ['title' => $title]
             );
 
-            $body = $templateRenderer->render($messages['otrsMail'], [
+            $c = $templateRenderer->render($messages['otrsMail'], [
                 'title' => $title,
                 'source' => $source,
                 'desc' => $desc,
@@ -72,7 +72,7 @@ function checkUpload() {
                 "mailOrigin" => OTRS_MAIL
             ]);
 
-            mail(OTRS_MAIL, $subject, $message, $headers);
+            mail(OTRS_MAIL, $subject, $body, $headers);
 
             $session->setLastUploadKey($key);
             $session->redirect("/wizard", "?question=success");
