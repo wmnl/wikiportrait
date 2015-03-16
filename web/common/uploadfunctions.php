@@ -2,8 +2,15 @@
 use Intervention\Image\ImageManager;
 use Handlebars\Handlebars;
 
-// TODO: this should really be refactored in a class...
+function getFilename($title, $time, $file) {
+    $title = preg_replace("/[^A-Za-z0-9 ]/", '', $title);
+    $title = strtolower(str_replace(" ", "_", $title));
+    $datestamp = date_timestamp_get($time);
+    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+    return sprintf("%s-%s.%s", $title, $datestamp, $extension);
+}
 
+// TODO: this should really be refactored in a class...
 function checkUpload() {
     global $session, $messages;
     $errors = [];
@@ -27,7 +34,7 @@ function checkUpload() {
 
     if (!hasvalidationerrors()) {
         $time = new DateTime();
-        $filename = strtolower(str_replace(" ", "_", $title)) . "-" . date_timestamp_get($time) . "." . pathinfo($file['name'], PATHINFO_EXTENSION);
+        $filename = getFilename($title, $time, $file);
 
         $imagepath = IMAGE_FOLDER . "/$filename";
         $thumbpath = THUMB_FOLDER . "/$filename";
@@ -58,7 +65,7 @@ function checkUpload() {
                 ['title' => $title]
             );
 
-            $c = $templateRenderer->render($messages['otrsMail'], [
+            $body = $templateRenderer->render($messages['otrsMail'], [
                 'title' => $title,
                 'source' => $source,
                 'desc' => $desc,
