@@ -86,7 +86,7 @@ function checkUpload() {
             $mail->AltBody = $body;
 
             if (!$mail->send()) {
-                $session->redict("/wizard", "?question=failupload");
+                $session->redirect("/wizard", "?question=failupload");
             } else {
                 $session->setLastUploadKey($key);
                 $session->redirect("/wizard", "?question=success");
