@@ -2,7 +2,6 @@
     require '../common/bootstrap.php';
     $session->checkAdmin();
     require '../common/header.php';
-
     include 'tabs.php';
 ?>
 <div id="content">
