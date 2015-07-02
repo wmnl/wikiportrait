@@ -64,7 +64,15 @@ $msg = false;
                         $description = $row['description'];
                     }
                 ?>
-                <li><a href="//commons.wikimedia.org/wiki/Special:Upload?&uploadformstyle=basicwp&wpUploadFileURL=https://wikidate.nl/wikiportret/uploads/<?= $row['filename']; ?>&wpUploadDescription={{Information%0A|Description={{nl|1=<?= $description ?>}}%0A|Source=wikiportret.nl%0A|Permission=CC-BY-SA 4.0%0A|Date=<?= $row['date']; ?>%0A|Author=<?= $row['source']; ?>%0A}}%0A{{wikiportrait|}}" target="_blank">Uploaden naar Commons!</a></li>
+                <li>
+                    <a href="https://commons.wikimedia.org/wiki/Special:Upload?&uploadformstyle=basicwp&wpUploadFileURL=https://wikidate.nl/wikiportret/uploads/<?= $row['filename']; ?>&wpUploadDescription={{Information%0A|Description={{nl|1=<?= $description ?>}}%0A|Source=wikiportret.nl%0A|Permission=CC-BY-SA 4.0%0A|Date=<?= $row['date']; ?>%0A|Author=<?= $row['source']; ?>%0A}}%0A{{wikiportrait|}}" target="_blank">Uploaden naar Commons!</a>
+                </li>
+                <li>
+                    <?php
+                    $imgurl = BASE_URL . "/uploads/images/" . $row['filename'];
+                    ?>
+                    <a href="https://www.google.com/searchbyimage?image_url=$imgurl" target="_blank">Zoek naar deze afbeelding bij Google</a>
+                </li>
                 <?php
                 $results = DB::query('SELECT * FROM messages');
 
