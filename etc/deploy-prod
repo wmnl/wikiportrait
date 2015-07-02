@@ -1,0 +1,3 @@
+#!/bin/bash
+rsync -avz ../etc wikiportret:websites/wikiportret.nl/private/
+rsync -avz ../web/* --exclude config.php wikiportret:websites/wikiportret.nl/public/

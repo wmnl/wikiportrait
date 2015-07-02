@@ -55,17 +55,10 @@ $msg = false;
             <h3>Wat doen we ermee?</h3>
 
             <ul class="list">
-                <?php
-                    // #57: if description is available, use that, otherwise
-                    // simply use title
-                    if (empty($row['description'])) {
-                        $description = $row['title'];
-                    } else {
-                        $description = $row['description'];
-                    }
-                ?>
                 <li>
-                    <a href="https://commons.wikimedia.org/wiki/Special:Upload?&uploadformstyle=basicwp&wpUploadFileURL=https://wikidate.nl/wikiportret/uploads/<?= $row['filename']; ?>&wpUploadDescription={{Information%0A|Description={{nl|1=<?= $description ?>}}%0A|Source=wikiportret.nl%0A|Permission=CC-BY-SA 4.0%0A|Date=<?= $row['date']; ?>%0A|Author=<?= $row['source']; ?>%0A}}%0A{{wikiportrait|}}" target="_blank">Uploaden naar Commons!</a>
+                    <a href="<?php echo getCommonsUploadLink($row); ?>" target="_blank">
+                        Uploaden naar Commons!
+                    </a>
                 </li>
                 <li>
                     <?php

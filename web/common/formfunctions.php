@@ -1,6 +1,37 @@
 <?php
     $validationerrors = array();
 
+    function getCommonsUploadLink($row) {
+        // #57: if description is available, use that, otherwise
+        // simply use title
+        if (empty($row['description'])) {
+            $description = $row['title'];
+        } else {
+            $description = $row['description'];
+        }
+
+        $sourceUrl = BASE_URL . "/uploads/images/" . $row['filename'];
+        $date = $row['date'];
+        $author = $row['source'];
+        $filename = $row['filename'];
+
+        $link = <<<EOT
+            https://commons.wikimedia.org/wiki/Special:Upload
+            ?&uploadformstyle=basicwp
+            &wpSourceType=url
+            &wpDestFile=$filename
+            &wpUploadFileURL=$sourceUrl
+            &wpUploadDescription={{Information
+                |Description={{nl|1=$description}}
+                |Source=wikiportret.nl
+                |Permission=CC-BY-SA 4.0
+                |Date=$date
+                |Author=$author
+            }}%0A{{wikiportrait|VUL_HIER_HET_TICKET_NUMMER_IN}}
+EOT;
+        return trim(str_replace(["\n", " ", "\t"], "", $link));
+    }
+
     function showvalidationsummary() {
         echo getvalidationsummary();
     }
