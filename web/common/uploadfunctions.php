@@ -51,7 +51,7 @@ function checkUpload() {
                 'source' => $source,
                 'name' => $name,
                 'email' => $email,
-                'license' => 'CC-BY-SA 3.0',
+                'license' => 'CC-BY-SA 4.0',
                 'ip' => $ip,
                 'date' => $date,
                 'description' => $desc,

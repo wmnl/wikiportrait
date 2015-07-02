@@ -55,7 +55,7 @@ $msg = false;
             <h3>Wat doen we ermee?</h3>
 
             <ul class="list">
-                <li><a href="//commons.wikimedia.org/wiki/Special:Upload?&uploadformstyle=basicwp&wpUploadFileURL=https://wikidate.nl/wikiportret/uploads/<?= $row['filename']; ?>&wpUploadDescription={{Information%0A|Description={{nl|1=<?= $row['title'] ?>}}%0A|Source=wikiportret.nl%0A|Permission=CC-BY-SA 3.0%0A|Date=<?= $row['date']; ?>%0A|Author=<?= $row['source']; ?>%0A}}%0A{{wikiportrait|}}" target="_blank">Uploaden naar Commons!</a></li>
+                <li><a href="//commons.wikimedia.org/wiki/Special:Upload?&uploadformstyle=basicwp&wpUploadFileURL=https://wikidate.nl/wikiportret/uploads/<?= $row['filename']; ?>&wpUploadDescription={{Information%0A|Description={{nl|1=<?= $row['title'] ?>}}%0A|Source=wikiportret.nl%0A|Permission=CC-BY-SA 4.0%0A|Date=<?= $row['date']; ?>%0A|Author=<?= $row['source']; ?>%0A}}%0A{{wikiportrait|}}" target="_blank">Uploaden naar Commons!</a></li>
                 <?php
                 $results = DB::query('SELECT * FROM messages');
 
