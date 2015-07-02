@@ -68,6 +68,6 @@ class Session {
 
     public function logout() {
         session_destroy();
-        $this->redirect("/admin");
+        $this->redirect("/admin/index");
     }
 }
