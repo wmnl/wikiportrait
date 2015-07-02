@@ -31,7 +31,7 @@ class Session {
 
     public function checkLogin() {
         if (!$this->isLoggedIn()) {
-            $this->redirect("/admin");
+            $this->redirect("/admin/index");
         }
     }
 

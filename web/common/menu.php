@@ -23,10 +23,10 @@
 
     <ul class="right">
         <li>
-            <span>
+            <a href="<?= $basispad; ?>/admin/edituser.php?id=<?= $_SESSION['user']; ?>">
                 <i class="fa fa-user"></i>
                 <?php echo $session->getUserName(); ?>
-            </span>
+            </a>
         </li>
     </ul>
 <?php endif; ?>

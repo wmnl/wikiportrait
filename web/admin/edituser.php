@@ -1,9 +1,14 @@
 <?php
     require '../common/bootstrap.php';
-    $session->checkAdmin();
+    $session->checkLogin();
 
     if (isset($_GET['id'])) {
 		$id = $_GET['id'];
+
+		// Logged-in users may only edit themselves
+		if (!$session->isSysop() && $id != $_SESSION['user']) {
+			$session->redirect("/admin/index");
+		}
     } else {
 		$session->redirect("/admin/users");
     }
@@ -26,6 +31,11 @@
 	    if (isset($_POST['postback'])) {
 			$admin = isset($_POST['admin']);
 			$active = isset($_POST['active']);
+
+			// Make sure non-admins don't promote themselves to admin
+			if ($admin && !$session->isSysop()) {
+				die();
+			}
 
 			isrequired('username', 'gebruikersnaam');
 			isrequired('otrsname', 'OTRS-naam');
@@ -67,7 +77,16 @@
     ?>
 
     <form method="post">
-	<div class="input-container">
+
+    <?php
+ 		if ($session->isSysop()) {
+ 			$inputClass = "";
+ 		} else {
+ 			$inputClass = 'style="display:none;"';
+ 		}
+ 	?>
+
+	<div class="input-container" <?= $inputClass ?>>
 	    <label for="username"><i class="fa fa-user fa-lg fa-fw"></i>Gebruikersnaam</label>
 	    <input type="text" name="username" id="username" value="<?php echo htmlspecialchars($row['username']); ?>" />
 	</div>
@@ -92,14 +111,14 @@
 	    <input type="email" name="email" id="email" value="<?php echo $row['email']; ?>"/>
 	</div>
 
-	<div class="input-container">
+	<div class="input-container" <?= $inputClass ?>>
 	    <label for="admin"><i class="fa fa-user-md fa-lg fa-fw"></i>Beheerder</label>
 	    <div class="checkbox">
 		<input type="checkbox" name="admin" id="admin" <?php if ($row['isSysop'] == 1) echo "checked"; ?> /><label for="admin">Ja</label>
 	    </div>
 	</div>
 
-	<div class="input-container">
+	<div class="input-container" <?= $inputClass ?>>
 	    <label for="active"><i class="fa fa-power-off fa-lg fa-fw"></i>Geactiveerd</label>
 	    <div class="checkbox">
 		<input type="checkbox" name="active" id="active" <?php if ($row['active'] == 1) echo "checked"; ?> /><label for="active">Ja</label>
