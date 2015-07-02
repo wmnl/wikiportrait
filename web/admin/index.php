@@ -1,6 +1,12 @@
 <?php
     require '../common/bootstrap.php';
 
+    // Check for old v1 url's, and if so, redirect to old installation
+    if (!empty($_GET['id'] && !empty($_GET['secret'])) && defined('V1_PATH')) {
+        $url = sprintf(V1_PATH . '/admin/?id=%s&secret=%s', $_GET['id'], $_GET['secret']);
+        header("Location:$url");
+    }
+
     if (!empty($_GET['logout'])) {
         $session->logout();
     }

@@ -7,3 +7,4 @@
     define('DEBUG', false);
     define('ABSPATH', str_replace("/common", "", dirname(__FILE__)));
     define('OTRS_MAIL', 'wikiportret@wikimedia.org');
+    define('V1_PATH', BASE_URL . '/old');
