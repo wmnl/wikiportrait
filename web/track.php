@@ -18,7 +18,7 @@
 
     <div class="single">
         <div class="single-box image">
-            <a href="uploads/images/<?php echo $row['filename']; ?>">
+            <a href="uploads/images/<?php echo $row['filename']; ?>" data-lightbox>
                 <img src="uploads/thumbs/<?php echo $row['filename'] ;?>" />
             </a>
         </div>

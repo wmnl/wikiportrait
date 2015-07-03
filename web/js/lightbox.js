@@ -25,7 +25,7 @@
         $( '#imagelightbox-close' ).remove();
     };
 
-    var instanceC = $( 'a' ).imagelightbox(
+    var instanceC = $( '[data-lightbox]' ).imagelightbox(
     {
         onStart:        function() { overlayOn(); closeButtonOn( instanceC ); },
         onEnd:          function() { closeButtonOff(); overlayOff(); activityIndicatorOff(); },

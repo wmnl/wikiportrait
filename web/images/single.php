@@ -33,7 +33,7 @@ $msg = false;
 
     <div class="single">
         <div class="single-box image">
-            <a href="../uploads/images/<?= $row['filename']; ?>">
+            <a href="../uploads/images/<?= $row['filename']; ?>" data-lightbox>
                 <img src="../uploads/thumbs/<?= $row['filename'] ;?>" />
             </a>
         </div>
