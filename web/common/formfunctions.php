@@ -14,22 +14,28 @@
         $date = $row['date'];
         $author = $row['source'];
         $filename = $row['filename'];
-
-        $link = <<<EOT
-            https://commons.wikimedia.org/wiki/Special:Upload
-            ?&uploadformstyle=basicwp
-            &wpSourceType=url
-            &wpDestFile=$filename
-            &wpUploadFileURL=$sourceUrl
-            &wpUploadDescription={{Information
-                |Description={{nl|1=$description}}
-                |Source=wikiportret.nl
-                |Permission=CC-BY-SA 4.0
-                |Date=$date
-                |Author=$author
-            }}%0A{{wikiportrait|VUL_HIER_HET_TICKET_NUMMER_IN}}
+        $baselink = "https://commons.wikimedia.org/wiki/Special:Upload";
+        $description = <<<EOT
+{{Information
+    |Description={{nl|1=$description}}
+    |Source=wikiportret.nl
+    |Permission=CC-BY-SA 4.0
+    |Date=$date
+    |Author=$author
+}}
+{{wikiportrait|VUL_HIER_HET_TICKET_NUMMER_IN}}
 EOT;
-        return trim(str_replace(["\n", " ", "\t"], "", $link));
+
+        $urlargs = http_build_query([
+            "uploadformstyle" => "basicwp",
+            "wpSourceType" => "url",
+            "wpDestFile" => $filename,
+            "wpUploadFileURL" => $sourceUrl,
+            "wpUploadDescription" => $description
+        ]);
+
+        return sprintf("%s?%s", $baselink, $urlargs);
+
     }
 
     function showvalidationsummary() {
