@@ -23,7 +23,7 @@
     |Date=$date
     |Author=$author
 }}
-{{wikiportrait|VUL_HIER_HET_TICKET_NUMMER_IN}}
+{{wikiportrait2|VUL_HIER_HET_TICKET_NUMMER_IN}}
 EOT;
 
         $urlargs = http_build_query([
