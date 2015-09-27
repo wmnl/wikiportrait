@@ -12,7 +12,7 @@
 		var depicted = document.getElementById('title').value;
 		var photographer = document.getElementById('source').value;
 
-		if (depicted.length > 0 && photographer.length > 0 && (depicted == photographer)) {
+		if (depicted.length > 0 && photographer.length > 0 && (depicted.toLowerCase() == photographer.toLowerCase())) {
 			swal('U hebt aangegeven dat de persoon op de foto dezelfde persoon is als de auteursrechthebbende', 'Let erop dat alleen de fotograaf toestemming kan geven om de foto vrij te geven onder een vrije licentie.', 'warning');
 		}
 	}
