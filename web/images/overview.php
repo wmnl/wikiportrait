@@ -32,11 +32,11 @@ $archived = isset($_GET['archived']) && $_GET['archived'] == 1;
         <form class="navigation" method="post">
             <label for="page">Pagina</label>
             <select class="select" name="page" onchange="loadPage()" id="page">
-                <?
+                <?php
                 for ($i=1; $i<=$total_pages; $i++):
                     ?>
-                <option value='<?= $i ?>' <? if ($_GET['page'] == $i) echo 'selected' ?><?= $i ?></option>";
-                <?
+                <option value='<?= $i ?>' <?php if ($_GET['page'] == $i) echo 'selected' ?><?= $i ?></option>";
+                <?php
                 endfor;
                 ?>
             </select>
