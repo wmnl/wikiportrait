@@ -10,10 +10,7 @@
     <link rel="stylesheet" href="<?= $basispad; ?>/lib/sweetalert/lib/sweet-alert.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
-<!--    <script src="--><?//= $basispad; ?><!--/lib/jquery/dist/jquery.min.js"></script>
--->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
+    <script src="<?= $basispad; ?>/lib/jquery/dist/jquery.min.js"></script>
     <script src="<?= $basispad; ?>/lib/sweetalert/lib/sweet-alert.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
