@@ -275,7 +275,7 @@ label {
     -ms-user-select:none;
 }
 
-input[type="text"], input[type="password"], input[type="email"], input[type="date"], textarea, select, .file, .checkbox {
+input[type="text"], input[type="password"], input[type="email"], input[type="date"], textarea, select:not(.ui-datepicker-month):not(.ui-datepicker-year), .file, .checkbox {
     display:table-cell;
     margin:0px;
     width:100%;

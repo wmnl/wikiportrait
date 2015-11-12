@@ -11,7 +11,7 @@
         }
 
         $sourceUrl = BASE_URL . "/uploads/images/" . $row['filename'];
-        $date = $row['date'];
+        $date = date('Y-m-d', strtotime($row['date']));
         $author = $row['source'];
         $filename = $row['filename'];
         $baselink = "https://commons.wikimedia.org/wiki/Special:Upload";

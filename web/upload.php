@@ -57,7 +57,7 @@
 
 	<div class="input-container">
 	    <label for="date"><i class="fa fa-calendar fa-lg fa-fw"></i>Opnamedatum <span class="optional">(optioneel)</span></label>
-	    <input type="date" name="date" id="date" value="<?php if (!empty($_POST['date'])) echo $_POST['date']; ?>" />
+	    <input type="text" name="date" id="date" value="<?php if (!empty($_POST['date'])) echo $_POST['date']; ?>" />
 	</div>
 
 	<div class="input-container">
@@ -76,6 +76,17 @@
 
     </form>
 </div>
+
+<script>
+	$(function() {
+		$( "#date" ).datepicker({
+			changeMonth: true,
+			changeYear: true,
+			maxDate: '0',
+			dateFormat: 'dd-mm-yy'
+		});
+	});
+</script>
 
 <?php
 	include 'common/footer.php';
