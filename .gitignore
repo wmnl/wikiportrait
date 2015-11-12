@@ -3,3 +3,5 @@ vendor
 nbproject/
 uploads/
 config/
+.DS_Store
+.idea/*

@@ -35,7 +35,7 @@ $archived = isset($_GET['archived']) && $_GET['archived'] == 1;
                 <?php
                 for ($i=1; $i<=$total_pages; $i++):
                 ?>
-                <option value='<?= $i ?>' <?php if ($_GET['page'] == $i) echo 'selected' ?>><?= $i ?></option>
+                <option value='<?= $i ?>' <?php if (isset($_GET['page']) && $_GET['page'] == $i) echo 'selected' ?>><?= $i ?></option>
                 <?php
                 endfor;
                 ?>
