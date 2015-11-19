@@ -3,7 +3,8 @@ use Intervention\Image\ImageManager;
 use Handlebars\Handlebars;
 
 function getFilename($title, $time, $file) {
-    $title=strtr($title,"áàäâéèëêìíïîòóöôùúüûç","aaaaeeeeiiiioooouuuuc");
+    $replacementarray=('á'=>'a','à'=>'a','ä'=>'a','â'=>'a','é'=>'e','è'=>'e','ê'=>'e','ë'=>'e','ì'=>'i','í'=>'i','î'=>'i','ï'=>'i','ò'=>'o','ó'=>'o','ô'=>'o','ö'=>'o','ù'=>'u','ú'=>'u','û'=>'u','ü'=>'u','ç'=>'c')
+    $title=strtr($title,$replacementarray);
     $title = preg_replace("/[^A-Za-z0-9 ]/", '', $title);
     $title = strtolower(str_replace(" ", "_", $title));
     $datestamp = date_timestamp_get($time);
