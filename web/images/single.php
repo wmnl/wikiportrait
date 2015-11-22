@@ -56,11 +56,6 @@ $msg = false;
 
             <ul class="list">
                 <li>
-                    <a href="<?php echo getCommonsUploadLink($row); ?>" target="_blank">
-                        Uploaden naar Commons!
-                    </a>
-                </li>
-                <li>
                     <?php
                     $imgurl = urlencode(BASE_URL . "/uploads/images/" . $row['filename']);
                     ?>
@@ -75,6 +70,11 @@ $msg = false;
                 <?php
                 endforeach;
                 ?>
+                <li>
+                    <a href="<?php echo getCommonsUploadLink($row); ?>" target="_blank">
+                        Uploaden naar Commons!
+                    </a>
+                </li>
             </ul>
         </div>
 
