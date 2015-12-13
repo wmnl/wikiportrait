@@ -16,6 +16,7 @@
         $filename = $row['filename'];
         $baselink = "https://commons.wikimedia.org/wiki/Special:Upload";
         $description = <<<EOT
+== {{int:filedesc}} ==
 {{Information
     |Description={{nl|1=$description}}
     |Source=wikiportret.nl
