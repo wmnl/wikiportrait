@@ -18,7 +18,8 @@ $msg = false;
     if (isset($_POST['postback'])) {
         DB::update('images', [
             'owner' => $_POST['owner'],
-            'archived' => !empty($_POST['done'])
+            'archived' => !empty($_POST['done']),
+            'ticket' => $_POST['ticket']
             ], 'id = %d', $_GET['id']);
 
         $msg = 'Afbeelding is bijgewerkt. <a href="overview.php">Terug naar overzicht</a>';
@@ -110,6 +111,11 @@ $msg = false;
                     <div class="checkbox">
                         <input type="checkbox" name="done" id="done" <?php if ($owner['archived'] == 1) { echo "checked"; } ?> /><label for="done">Ja</label>
                     </div>
+                </div>
+                
+                <div class="input-container">
+                    <label for="ticket"><i class="fa fa-ticket fa-lg fa-fw"></i>OTRS-ticket:</label>
+                    <input type="text" name="ticket" id="ticket" value=<?= $row['ticket']; ?>>
                 </div>
 
                 <div class="bottom right">
