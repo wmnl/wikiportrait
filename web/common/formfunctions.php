@@ -78,6 +78,9 @@ EOT;
     	if (!filter_var($_POST[$email], FILTER_VALIDATE_EMAIL)) {
     	    addvalidationerror('Geen geldig e-mailadres ingevuld!');
     	}
+    	elseif (!checkdnsrr(array_pop(explode("@",$_POST[$email])),"MX")) {
+    	    addvalidationerror('Geen geldig e-mailadres ingevuld!');	
+    	}
     }
 
     function comparepassword ($pass1, $pass2) {
