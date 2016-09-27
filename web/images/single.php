@@ -85,24 +85,26 @@ $msg = false;
                 <div class="input-container">
                     <label for="owner"><i class="fa fa-user-md fa-lg fa-fw"></i>Eigenaar</label>
 
-                    <select class="select" name="owner" id="setowner">
-                        <option value="0">----</option>
-                        <?php
-                            $owner = DB::queryFirstRow('SELECT owner, archived FROM images WHERE id = %d', $_GET['id']);
-                            $accounts = DB::query("SELECT otrsname, id FROM users WHERE active = 1");
+                    <div class="checkbox">
+                        <select class="select" name="owner" id="setowner">
+                            <option value="0">----</option>
+                            <?php
+                                $owner = DB::queryFirstRow('SELECT owner, archived FROM images WHERE id = %d', $_GET['id']);
+                                $accounts = DB::query("SELECT otrsname, id FROM users WHERE active = 1");
 
-                            foreach($accounts as $row):
-                                $selected = "";
+                                foreach($accounts as $row):
+                                    $selected = "";
 
-                                if ($row['id'] == $owner['owner']) {
-                                    $selected = 'selected="selected"';
-                                }
-                        ?>
-                                <option value="<?= $row['id'] ?>" <?= $selected ?>><?= $row['otrsname'] ?></option>
-                        <?php
-                            endforeach;
-                        ?>
-                    </select>
+                                    if ($row['id'] == $owner['owner']) {
+                                        $selected = 'selected="selected"';
+                                    }
+                            ?>
+                                    <option value="<?= $row['id'] ?>" <?= $selected ?>><?= $row['otrsname'] ?></option>
+                            <?php
+                                endforeach;
+                            ?>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="input-container">

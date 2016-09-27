@@ -25,12 +25,11 @@ $archived = isset($_GET['archived']) && $_GET['archived'] == 1;
             $total_records = DB::queryFirstField('SELECT COUNT(*) FROM images WHERE archived = %d', $archived);
         }
 
-        $total_pages = ceil($total_records / 10);
+        $total_pages = ceil($total_records / 25);
 
         if ($total_pages > 1):
             ?>
         <form class="navigation" method="post">
-            <label for="page">Pagina</label>
             <select class="select" name="page" onchange="loadPage()" id="page">
                 <?php
                 for ($i=1; $i<=$total_pages; $i++):
@@ -51,7 +50,7 @@ $archived = isset($_GET['archived']) && $_GET['archived'] == 1;
         <table>
             <thead>
                 <tr>
-                    <th>Foto</th>
+                    <th class="img-container">Foto</th>
                     <th>Titel</th>
                     <th>Uploader</th>
                     <th>Datum</th>
@@ -64,11 +63,11 @@ $archived = isset($_GET['archived']) && $_GET['archived'] == 1;
                 setlocale(LC_ALL, 'nl_NL');
                 date_default_timezone_set('Europe/Amsterdam');
                 if (isset($_GET['page'])) { $page   = $_GET['page']; } else { $page = 1; };
-                $start_from = ($page-1) * 10;
+                $start_from = ($page-1) * 25;
                 if (isset($_GET['personal'])) {
-                    $results = DB::query("SELECT images.id as image_id, images.title as title, images.filename as filename, images.name as name, images.timestamp as timestamp, users.otrsname as otrsname FROM images LEFT JOIN users ON users.id = owner WHERE archived = %d AND owner = '%s' ORDER BY images.id DESC LIMIT %d, 10", $archived, $_SESSION['user'], $start_from);
+                    $results = DB::query("SELECT images.id as image_id, images.title as title, images.filename as filename, images.name as name, images.timestamp as timestamp, users.otrsname as otrsname FROM images LEFT JOIN users ON users.id = owner WHERE archived = %d AND owner = '%s' ORDER BY images.id DESC LIMIT %d, 25", $archived, $_SESSION['user'], $start_from);
                 } else {
-                    $results = DB::query("SELECT images.id as image_id, images.title as title, images.filename as filename, images.name as name, images.timestamp as timestamp, users.otrsname as otrsname FROM images LEFT JOIN users ON users.id = owner WHERE archived = %d ORDER BY images.id DESC LIMIT %d, 10", $archived, $start_from);
+                    $results = DB::query("SELECT images.id as image_id, images.title as title, images.filename as filename, images.name as name, images.timestamp as timestamp, users.otrsname as otrsname FROM images LEFT JOIN users ON users.id = owner WHERE archived = %d ORDER BY images.id DESC LIMIT %d, 25", $archived, $start_from);
                 }
 
                 foreach ($results as $row):
