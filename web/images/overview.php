@@ -55,7 +55,6 @@ $archived = isset($_GET['archived']) && $_GET['archived'] == 1;
                     <th>Uploader</th>
                     <th>Datum</th>
                     <th>Eigenaar</th>
-                    <th class="actions-1">Acties</th>
                 </tr>
             </thead>
             <tbody>
@@ -87,17 +86,10 @@ $archived = isset($_GET['archived']) && $_GET['archived'] == 1;
                 ?>
                 <tr>
                     <td data-title="&#xf03e;" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/thumbs/<?php echo $filename?>" /></a></td>
-                    <td data-title="&#xf02b;">
-                        <a href="single.php?id=<?php echo $id ?>"><?= htmlentities($title); ?></a>
-                    </td>
-                    <td data-title="&#xf007;">
-                        <?= htmlentities($name); ?>
-                    </td>
-                    <td data-title="&#xf073;">
-                        <?php echo strftime("%e %B %Y", $timestamp) ?>
-                    </td>
+                    <td data-title="&#xf02b;"><a href="single.php?id=<?php echo $id ?>"><?= htmlentities($title); ?></a></td>
+                    <td data-title="&#xf007;"><?= htmlentities($name); ?></td>
+                    <td data-title="&#xf073;"><?php echo strftime("%e %B %Y", $timestamp) ?></td>
                     <td data-title="&#xf0f0;"><?= $owner ?></td>
-                    <td data-title="&#xf0ae;" class="center"><a class="button" href="single.php?id=<?php echo $id ?>"><i class="fa fa-info"></i>Details</a></td>
                 </tr>
                 <?php
                 endforeach;

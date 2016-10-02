@@ -73,7 +73,8 @@ p:last-child {
 }
 
 .divider {
-    display:inline;
+    display:inline-block;
+    width:10px;
 }
 
 .fa {
@@ -332,6 +333,10 @@ input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hov
     transition:background 0.2s linear;
 }
 
+.bigbutton {
+    font-size:150%;
+}
+
 select:not(.ui-datepicker-month):not(.ui-datepicker-year) {
     border-radius:0px;
     padding:10px;
@@ -458,14 +463,6 @@ tbody tr:last-child td:last-child {
 
 .img-container {
     width:6em;
-}
-
-.actions-1 {
-    width:9em;
-}
-
-.actions-2 {
-    width:18em;
 }
 
 td .button {
