@@ -64,9 +64,9 @@ $msg = false;
                 <?php
                 $results = DB::query('SELECT * FROM messages');
 
-                foreach($results as $row):
+                foreach($results as $resultRow):
                     ?>
-                <li><a href="message.php?message=<?= $row['id']; ?>&image=<?= $_GET['id'] ?>"><?= htmlspecialchars($row['title']); ?></a></li>
+                <li><a href="message.php?message=<?= $resultRow['id']; ?>&image=<?= $_GET['id'] ?>"><?= htmlspecialchars($resultRow['title']); ?></a></li>
                 <?php
                 endforeach;
                 ?>
