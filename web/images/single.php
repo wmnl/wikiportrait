@@ -10,6 +10,7 @@ $msg = false;
 <div id="content">
     <?php
     $row = DB::queryFirstRow("SELECT * FROM images WHERE id = %d", $_GET['id']);
+    $ticketId = $row['ticket'];
 
     if (DB::count() == 0) {
         die("Foto niet gevonden!");
@@ -114,10 +115,10 @@ $msg = false;
                         <input type="checkbox" name="done" id="done" <?php if ($owner['archived'] == 1) { echo "checked"; } ?> /><label for="done">Ja</label>
                     </div>
                 </div>
-                
+
                 <div class="input-container">
                     <label for="ticket"><i class="fa fa-ticket fa-lg fa-fw"></i>OTRS-ticket:</label>
-                    <input type="text" name="ticket" id="ticket" value=<?= $row['ticket']; ?>>
+                    <input type="text" name="ticket" id="ticket" value="<?= $ticketId; ?>">
                 </div>
 
                 <div class="bottom right">
