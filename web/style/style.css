@@ -73,7 +73,8 @@ p:last-child {
 }
 
 .divider {
-    display:inline;
+    display:inline-block;
+    width:10px;
 }
 
 .fa {
@@ -109,7 +110,7 @@ p:last-child {
 /* Basic */
 #all {
     width:90%;
-    margin:10px auto;
+    margin:-10px auto;
 }
 
 #header {
@@ -135,6 +136,7 @@ p:last-child {
 
 .footer {
     margin-top:10px;
+    padding-bottom:10px;
     text-align:center;
     font-size:0.9em;
     color:#aaa;
@@ -232,17 +234,11 @@ p:last-child {
 }
 
 .page-header .navigation {
-    display:table-cell;
     border-left:10px solid #fff;
 }
 
 .navigation label, .navigation .simpleselect {
     width:50%;
-}
-
-.navigation .simpleselect {
-    width:auto;
-    min-width:3em;
 }
 
 /* Uploadformulier */
@@ -275,7 +271,7 @@ label {
     -ms-user-select:none;
 }
 
-input[type="text"], input[type="password"], input[type="email"], input[type="date"], textarea, select:not(.ui-datepicker-month):not(.ui-datepicker-year), .file, .checkbox {
+input[type="text"], input[type="password"], input[type="email"], input[type="date"], textarea, .file, .checkbox {
     display:table-cell;
     margin:0px;
     width:100%;
@@ -337,6 +333,20 @@ input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hov
     transition:background 0.2s linear;
 }
 
+.bigbutton {
+    font-size:150%;
+}
+
+select:not(.ui-datepicker-month):not(.ui-datepicker-year) {
+    border-radius:0px;
+    padding:10px;
+    border:1px solid #ddd;
+    background:#fff;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
+    color:#444;
+}
+
 .optional {
     color:#888;
     font-size:0.9em;
@@ -375,79 +385,6 @@ input[type=checkbox]:checked + label:before {
 }
 
 input[type="checkbox"] + label:hover {
-    cursor:pointer;
-}
-
-/* Select */
-.hidden_select_container {
-    width:0;
-    height:0;
-    overflow:hidden;
-    display:none;
-}
-
-.simpleselect .options {
-    display:none;
-    position:absolute;
-    top:0;
-    left:0;
-    z-index:1000;
-}
-
-.simpleselect {
-    display:table-cell;
-    width:100%;
-    position:relative;
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-}
-
-.simpleselect .placeholder {
-    position:relative;
-    border:1px solid #ddd;
-    border-top-right-radius:5px;
-    border-bottom-right-radius:5px;
-}
-
-.simpleselect .placeholder:after {
-    content:"\f0dc";
-    position:absolute;
-    font-family:FontAwesome;
-    font-size:1.2em;
-    right:10px;
-    color:#aaa;
-    -webkit-font-smoothing:antialiased;
-}
-
-.simpleselect .options {
-    width:100%;
-    background:#fff;
-    border:1px solid #bbb;
-    border-top-right-radius:5px;
-    border-bottom-right-radius:5px;
-    -webkit-box-shadow:inset 0 0 1px 1px #e3e3e3;
-    -moz-box-shadow:inset 0 0 1px 1px #e3e3e3;
-    box-shadow:inset 0 0 1px 1px #e3e3e3;
-    -moz-transition:opacity 0.15s linear;
-    -webkit-transition:opacity 0.15s linear;
-    transition:opacity 0.15s linear;
-}
-
-.simpleselect .option {
-    border-bottom:1px solid #bbb;
-}
-
-.simpleselect .option:last-child {
-    border-bottom:0px;
-}
-
-.simpleselect .options .option.active {
-    background:#EDEDED;
-}
-
-.simpleselect .placeholder, .simpleselect .options .option {
-    padding:10px;
     cursor:pointer;
 }
 
@@ -524,12 +461,8 @@ tbody tr:last-child td:last-child {
     width:3em;
 }
 
-.actions-1 {
-    width:9em;
-}
-
-.actions-2 {
-    width:18em;
+.img-container {
+    width:6em;
 }
 
 td .button {

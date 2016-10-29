@@ -14,12 +14,12 @@
 	<table>
 	    <thead>
 		<tr>
-		    <th class="id center">ID</th>
+		    <th class="id center">#</th>
 		    <th>Gebruikersnaam</th>
 		    <th>OTRS-naam</th>
 		    <th>E-mailadres</th>
 		    <th>Beheerder</th>
-		    <th class="actions-1">Acties</th>
+		    <th>Acties</th>
 		</tr>
 	    </thead>
 	    <tbody>
@@ -39,7 +39,7 @@
 			echo "<td data-title =\"&#xf0b1;\">$otrsname</td>";
 			echo "<td data-title =\"&#xf0e0;\">$email</td>";
 			if ($sysop) echo "<td data-title =\"&#xf0f0;\">Ja</td>"; else echo "<td data-title =\"&#xf0f0;\">Nee</td>";
-			echo "<td data-title =\"&#xf0ae;\" class=\"center\"><a class=\"button\" href=\"edituser.php?id=$id\"><i class=\"fa fa-pencil\"></i>Bewerken</a></td>";
+			echo "<td data-title =\"&#xf0ae;\"><a href=\"edituser.php?id=$id\">Bewerken</td>";
 		    echo "</tr>";
 		}
 	     ?>

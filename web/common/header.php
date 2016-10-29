@@ -15,6 +15,7 @@
     <script src="<?= $basispad; ?>/lib/jquery-ui/jquery-ui.min.js"></script>
 
     <title>Wikiportret - Stel uw foto's ter beschikking</title>
+    <meta name=”description” content=”Staat er op Wikipedia een artikel zonder portretfoto? En heeft u een foto die bij een artikel zou passen? Stel dan uw foto hier ter beschikking.” />
 
     <script>
         var _gaq = _gaq || [];
@@ -35,5 +36,5 @@
         </div>
 
         <div class="menu">
-         <?php include 'menu.php'; ?>
-     </div>
+            <?php include 'menu.php'; ?>
+        </div>

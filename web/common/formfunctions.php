@@ -11,11 +11,12 @@
         }
 
         $sourceUrl = BASE_URL . "/uploads/images/" . $row['filename'];
-        $date = date('Y-m-d', strtotime($row['date']));
+        if ($date!="") {$date =date('Y-m-d', strtotime($row['date']));}
         $author = $row['source'];
         $filename = $row['filename'];
         $baselink = "https://commons.wikimedia.org/wiki/Special:Upload";
         $description = <<<EOT
+== {{int:filedesc}} ==
 {{Information
     |Description={{nl|1=$description}}
     |Source=wikiportret.nl
@@ -76,6 +77,9 @@ EOT;
     function validateEmail($email) {
     	if (!filter_var($_POST[$email], FILTER_VALIDATE_EMAIL)) {
     	    addvalidationerror('Geen geldig e-mailadres ingevuld!');
+    	}
+    	elseif (!checkdnsrr(array_pop(explode("@",$_POST[$email])),"MX")) {
+    	    addvalidationerror('Geen geldig e-mailadres ingevuld!');	
     	}
     }
 

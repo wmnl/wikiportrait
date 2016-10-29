@@ -14,11 +14,6 @@
         </li>
         <?php endif; ?>
 
-        <li>
-            <a href="<?= $basispad; ?>/admin/?logout=1">
-                <i class="fa fa-sign-out"></i>Uitloggen
-            </a>
-        </li>
     </ul>
 
     <ul class="right">
@@ -28,5 +23,13 @@
                 <?php echo $session->getUserName(); ?>
             </a>
         </li>
+
+       <li>
+            <a href="<?= $basispad; ?>/admin/?logout=1">
+                <i class="fa fa-sign-out"></i>Uitloggen
+            </a>
+        </li>
     </ul>
+<?php else: ?>
+&nbsp;
 <?php endif; ?>
