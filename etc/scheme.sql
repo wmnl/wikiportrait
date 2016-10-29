@@ -38,6 +38,7 @@ CREATE TABLE `images` (
   `archived` int(1) NOT NULL DEFAULT '0',
   `owner` int(3) NOT NULL DEFAULT '0',
   `timestamp` int(10) NOT NULL,
+  `ticket` varchar(16) NOT NULL,
   `license` varchar(50) DEFAULT 'CC-BY-SA 3.0',
   `key` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
