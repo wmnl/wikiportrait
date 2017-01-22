@@ -1,5 +1,5 @@
 Beste OTRS-vrijwilliger,
-zojuist is er op http://www.wikiportret.nl een nieuwe foto geupload.
+zojuist is er op https://www.wikiportret.nl een nieuwe foto geupload.
 
 Deze foto heeft als titel '{{title}}', gemaakt door '{{source}}' onder de licentie 'CC-BY-SA 4.0' met als omschrijving '{{desc}}'
 
@@ -8,7 +8,7 @@ De uploader heeft het volgende IP-adres: '{{ip}}'
 Je kunt de foto bekijken op Wikiportret en de foto daar afwijzen, of een tekst genereren die je kan copy-pasten om een e-mail te schrijven.
 
 Klik op deze link:
-http://wikiportret.nl/images/single.php?id={{imageId}}
+https://wikiportret.nl/images/single.php?id={{imageId}}
 
 Eventuele vragen kun je achterlaten op de mailinglijst voor Nederlandstalige OTRS-vrijwilligers: https://lists.wikimedia.org/mailman/listinfo/contact-nl
 
