@@ -37,6 +37,10 @@ h3 {
     font-size:1.2em;
 }
 
+strong {
+    font-weight:bold;
+}
+
 img {
     border:0px;
     display:block;
@@ -55,12 +59,17 @@ a:hover, a:focus, .tabs .active a, #header a {
     transition:color 0.2s linear;
 }
 
-p {
+p, ul {
     margin-bottom:10px;
 }
 
-p:last-child {
+p:last-child, ul:last-child {
     margin-bottom:0px;
+}
+
+ul {
+    list-style:none;
+    padding-left:0.5em;
 }
 
 .list {
@@ -259,7 +268,7 @@ form {
 
 label {
     display:table-cell;
-    width:40%;
+    width:35%;
     padding:0px 10px;
     background:#ddd;
     white-space:nowrap;
@@ -361,6 +370,7 @@ select:not(.ui-datepicker-month):not(.ui-datepicker-year) {
     background:none;
     border-radius:0px;
     padding:0px;
+    white-space:pre-wrap;
 }
 
 input[type="checkbox"] {

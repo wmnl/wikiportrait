@@ -40,6 +40,8 @@ function checkUpload() {
     isrequired('source', 'auteursrechthebbende');
     isrequired('name', 'naam');
     validateEmail('email');
+    agreeterms('terms', 'de licentievoorwaarden, de privacyverklaring en het opslaan van uw IP-adres');
+    agreeterms('euvs', 'de toestemming voor het opslaan van uw gegevens');
 
     if (!hasvalidationerrors()) {
         $time = new DateTime();

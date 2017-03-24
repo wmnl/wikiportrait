@@ -67,6 +67,12 @@ EOT;
     	}
     }
 
+    function agreeterms($parameter, $property) {
+    	if (empty($_POST[$parameter])) {
+    	    addvalidationerror("Gelieve akkoord gaan met $property.");
+    	}
+    }
+
     function checkusername($username) {
     	DB::query('SELECT * FROM users WHERE username = %s', $username);
     	if (DB::count() != 0) {
@@ -79,7 +85,7 @@ EOT;
     	    addvalidationerror('Geen geldig e-mailadres ingevuld!');
     	}
     	elseif (!checkdnsrr(array_pop(explode("@",$_POST[$email])),"MX")) {
-    	    addvalidationerror('Geen geldig e-mailadres ingevuld!');	
+    	    addvalidationerror('Geen geldig e-mailadres ingevuld!');
     	}
     }
 
@@ -94,9 +100,9 @@ EOT;
     	$allowedext = array("image/png", "image/gif", "image/jpeg", "image/bmp", "image/pjpeg");
 
     	if (!isset($file)){
-    	    array_push($validationerrors, "Er is geen bestand geselecteerd");
+    	    array_push($validationerrors, "Er is geen bestand geselecteerd.");
     	} elseif (!in_array($file['type'], $allowedext)) {
-    	    array_push($validationerrors, "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund");
+    	    array_push($validationerrors, "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund.");
     	}
     }
 
