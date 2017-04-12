@@ -19,7 +19,7 @@
 <div id="content">
     <div class="page-header">
 	<h2>Gebruiker bewerken</h2>
-	<a href="users.php" class="button red"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
+	<a href="users.php" class="button red"><i class="fa fa-times-circle fa-lg"></i><span>Annuleren</span></a>
     </div>
 
     <?php

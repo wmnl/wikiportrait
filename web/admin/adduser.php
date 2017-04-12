@@ -35,7 +35,7 @@
 
     <div class="page-header">
         <h2>Gebruiker toevoegen</h2>
-        <a href="users.php" class="button red"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
+        <a href="users.php" class="button red"><i class="fa fa-times-circle fa-lg"></i><span>Annuleren</span></a>
     </div>
 
     <?php
@@ -78,7 +78,7 @@
         </div>
 
         <div class="bottom right">
-        <button class="green" type="submit" name="postback"><i class="fa fa-plus-square fa-lg"></i>Toevoegen</button>
+        <button class="green" type="submit" name="postback"><i class="fa fa-plus fa-lg"></i>Toevoegen</button>
         </div>
     </form>
 </div>

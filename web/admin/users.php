@@ -7,7 +7,7 @@
 <div id="content">
     <div class="page-header">
 	<h2>Gebruikersbeheer</h2>
-	<a href="adduser.php" class="button"><i class="fa fa-plus-square fa-lg"></i><span>Nieuwe gebruiker</span></a>
+	<a href="adduser.php" class="button"><i class="fa fa-plus fa-lg"></i><span>Nieuwe gebruiker</span></a>
     </div>
 
     <div class="table-container">

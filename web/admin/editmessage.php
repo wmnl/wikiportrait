@@ -39,7 +39,7 @@
 
     <div class="page-header">
     	<h2>Bericht bewerken</h2>
-        <a href="messages.php" class="button red"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
+        <a href="messages.php" class="button red"><i class="fa fa-times-circle fa-lg"></i><span>Annuleren</span></a>
     </div>
 
     <form method="post">

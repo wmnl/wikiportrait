@@ -25,7 +25,7 @@
 
 	<h2>Bericht toevoegen</h2>
 
-	<a href="messages.php" class="button red"><i class="fa fa-ban fa-lg"></i><span>Annuleren</span></a>
+	<a href="messages.php" class="button red"><i class="fa fa-times-circle fa-lg"></i><span>Annuleren</span></a>
 
     </div>
 
@@ -49,7 +49,7 @@
 	</div>
 
 	<div class="bottom right">
-	    <button class="green" type="submit" name="postback"><i class="fa fa-plus-square fa-lg"></i>Toevoegen</button>
+	    <button class="green" type="submit" name="postback"><i class="fa fa-plus fa-lg"></i>Toevoegen</button>
 	</div>
 
     </form>

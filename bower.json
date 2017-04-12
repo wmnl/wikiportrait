@@ -11,10 +11,8 @@
   ],
   "dependencies": {
     "jquery": "~2.1.1",
-    "sweetalert": "~0.4.2",
     "jquery-autosize": "~2.0.0",
     "imagelightbox": "~0.1.3",
-    "font-awesome": "~4.7.0",
-    "jquery-ui": "~1.11.4"
+    "font-awesome": "~4.7.0"
   }
 }

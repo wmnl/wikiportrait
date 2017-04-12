@@ -43,16 +43,16 @@ $msg = false;
         <div class="single-box info">
             <h3>Informatie</h3>
 
-            <div class="holder">
-                <div><span class="title">Titel:</span><span class="content"><?= htmlspecialchars($row['title']); ?></span></div>
-                <div><span class="title">Auteursrechthebbende:</span><span class="content"><?= htmlspecialchars($row['source']); ?></span></div>
-                <div><span class="title">Email:</span><span class="content"><?= htmlspecialchars($row['email']); ?></span></div>
-                <div><span class="title">Geupload door:</span><span class="content"><?= htmlspecialchars($row['name']); ?></span></div>
-                <div><span class="title">IP-adres:</span><span class="content"><?= $row['ip']; ?></span></div>
-                <div><span class="title">Geüpload op:</span><span class="content"><?= strftime("%e %B %Y om %H:%I:%S", $row['timestamp']) ?></span></div>
-                <div><span class="title">Key</span><span class="content"><?= $row['key']; ?></span></div>
-                <div><span class="title">Beschrijving:</span><span class="content"><?= htmlspecialchars($row['description']);?></span></div>
-            </div>
+             <ul class="list">
+                <li><strong>Titel:</strong><br /><?= htmlspecialchars($row['title']); ?></li>
+                <li><strong>Auteursrechthebbende:</strong><br /><?= htmlspecialchars($row['source']); ?></li>
+                <li><strong>E-mailadres:</strong><br /><?= htmlspecialchars($row['email']); ?></li>
+                <li><strong>Geupload door:</strong><br /><?= htmlspecialchars($row['name']); ?></li>
+                <li><strong>IP-adres:</strong><br /><?= $row['ip']; ?></li>
+                <li><strong>Geüpload op:</strong><br /><?= strftime("%e %B %Y om %H:%I:%S", $row['timestamp']) ?></li>
+                <li><strong>Key:</strong><br /><?= $row['key']; ?></li>
+                <li><strong>Beschrijving:</strong><br /><?= htmlspecialchars($row['description']);?></li>
+            </ul>
 
             <h3>Wat doen we ermee?</h3>
 

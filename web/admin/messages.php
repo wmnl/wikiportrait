@@ -7,7 +7,7 @@
 <div id="content">
     <div class="page-header">
 	<h2>Berichtenbeheer</h2>
-	<a href="addmessage.php" class="button"><i class="fa fa-plus-square fa-lg"></i><span>Nieuw bericht</span></a>
+	<a href="addmessage.php" class="button"><i class="fa fa-plus fa-lg"></i><span>Nieuw bericht</span></a>
     </div>
 
     <div class="table-container">

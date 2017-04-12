@@ -38,7 +38,7 @@ h3 {
 }
 
 strong {
-    font-weight:bold;
+    font-weight:500;
 }
 
 img {
@@ -73,8 +73,11 @@ ul {
 }
 
 .list {
-    margin-left:20px;
-    margin-bottom:10px;
+    border-left:3px solid #ddd;
+}
+
+.list li {
+    line-height:175%;
 }
 
 .clear {
@@ -165,11 +168,14 @@ ul {
 
 .menu ul {
     display:table;
-    float: left;
+    float:left;
+    margin:0;
+    padding:0;
+
 }
 
 .menu ul.right {
-    float: right;
+    float:right;
 }
 
 .menu li {
@@ -177,12 +183,11 @@ ul {
     text-align:center;
 }
 
-.menu a, .menu span {
+.menu a {
     padding:10px;
     display:block;
     color:#fff;
 }
-
 
 .menu a:hover, .menu .active a {
     background:#005580;
@@ -365,6 +370,10 @@ select:not(.ui-datepicker-month):not(.ui-datepicker-year) {
     margin-bottom:10px;
 }
 
+#key {
+    border-radius:5px;
+}
+
 /* Checkbox */
 .checkbox label {
     background:none;
@@ -519,7 +528,8 @@ a.red:hover, a.red:focus, button.red:hover, button.red:focus {
 }
 
 .box li {
-    margin-left:20px;
+    list-style-type:square;
+    margin-left:10px;
 }
 
 /* Single */
@@ -537,31 +547,6 @@ a.red:hover, a.red:focus, button.red:hover, button.red:focus {
 
 .single-box:last-child {
     border-right:0px;
-}
-
-.holder {
-    display:table;
-    width:100%;
-    margin-bottom:10px;
-}
-
-.holder div {
-    display:table-row;
-}
-
-.holder .title, .holder .content {
-    display:table-cell;
-    word-wrap:break-word;
-}
-
-.holder .title {
-    width:40%;
-    font-weight:400;
-    border-right:5px solid #fff;
-}
-
-.holder .content {
-    width:60%;
 }
 
 .single .image {
