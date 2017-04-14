@@ -9,6 +9,12 @@
         } else {
             $description = $row['description'];
         }
+	if(empty($row['ticket'])) {
+	    $otrsTicket = "VUL_HIER_HET_TICKET_NUMMER_IN";
+	}
+	else {
+	    $otrsTicket = $row['ticket'];
+	}
 
         $sourceUrl = BASE_URL . "/uploads/images/" . $row['filename'];
         if ($date!="") {$date =date('Y-m-d', strtotime($row['date']));}
@@ -24,7 +30,7 @@
     |Date=$date
     |Author=$author
 }}
-{{wikiportrait2|VUL_HIER_HET_TICKET_NUMMER_IN}}
+{{wikiportrait2|$otrsTicket}}
 EOT;
 
         $urlargs = http_build_query([
