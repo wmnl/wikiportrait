@@ -81,7 +81,8 @@ function checkUpload() {
                 'source' => $source,
                 'desc' => $desc,
                 'ip' => $ip,
-                'imageId' => DB::insertId()
+                'imageId' => DB::insertId(),
+		'key' => $key
             ]);
 
             $htmlBody = nl2br($body);
