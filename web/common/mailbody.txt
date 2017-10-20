@@ -10,6 +10,8 @@ Je kunt de foto bekijken op Wikiportret en de foto daar afwijzen, of een tekst g
 Klik op deze link:
 https://www.wikiportret.nl/images/single.php?id={{imageId}}
 
+De afbeelding is voor de uploader te volgen via https://www.wikiportret.nl/track.php?key={{key}}
+
 Eventuele vragen kun je achterlaten op de mailinglijst voor Nederlandstalige OTRS-vrijwilligers: https://lists.wikimedia.org/mailman/listinfo/contact-nl
 
 Voor suggesties of fouten met betrekking tot de software van Wikiportret, zie GitHub: https://github.com/wmnl/wikiportrait/issues
