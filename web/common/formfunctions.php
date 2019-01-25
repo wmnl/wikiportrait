@@ -1,5 +1,7 @@
 <?php
 
+$validationerrors = array();
+
 function getCommonsUploadLink($row) {
 // #57: if description is available, use that, otherwise
 // simply use title
@@ -129,5 +131,3 @@ function hasvalidationerrors() {
     global $validationerrors;
     return count($validationerrors) > 0;
 }
-
-?>
