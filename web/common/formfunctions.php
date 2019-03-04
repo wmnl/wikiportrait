@@ -18,6 +18,8 @@ function getCommonsUploadLink($row) {
     $sourceUrl = BASE_URL . "/uploads/images/" . $row['filename'];
     if ($row['date'] != "") {
 	$date = date('Y-m-d', strtotime($row['date']));
+    } else {
+	$date = '';
     }
     $author = $row['source'];
     $filename = $row['filename'];
@@ -110,7 +112,7 @@ function validateEmail($email) {
 function checkfile($file) {
     global $validationerrors;
     $allowedext = array("image/png", "image/gif", "image/jpeg", "image/bmp", "image/pjpeg");
-
+    var_dump($file);
     if (!isset($file)) {
 	array_push($validationerrors, "Er is geen bestand geselecteerd.");
 	return "empty file";
@@ -130,4 +132,8 @@ function addvalidationerror($message) {
 function hasvalidationerrors() {
     global $validationerrors;
     return count($validationerrors) > 0;
+}
+
+function validateUploader() {
+    return strtolower(filter_input(INPUT_POST, 'title')) == strtolower(filter_input(INPUT_POST, 'name'));
 }
