@@ -18,8 +18,6 @@ function getCommonsUploadLink($row) {
     $sourceUrl = BASE_URL . "/uploads/images/" . $row['filename'];
     if ($row['date'] != "") {
 	$date = date('Y-m-d', strtotime($row['date']));
-    } else {
-	$date = '';
     }
     $author = $row['source'];
     $filename = $row['filename'];
