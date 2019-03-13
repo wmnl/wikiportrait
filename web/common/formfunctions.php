@@ -9,15 +9,17 @@
         } else {
             $description = $row['description'];
         }
-	if(empty($row['ticket'])) {
-	    $otrsTicket = "VUL_HIER_HET_TICKET_NUMMER_IN";
-	}
-	else {
-	    $otrsTicket = $row['ticket'];
-	}
+        if(empty($row['ticket'])) {
+            $otrsTicket = "VUL_HIER_HET_TICKET_NUMMER_IN";
+        }
+        else {
+            $otrsTicket = $row['ticket'];
+        }
 
         $sourceUrl = BASE_URL . "/uploads/images/" . $row['filename'];
-        if ($date!="") {$date =date('Y-m-d', strtotime($row['date']));}
+        if (!isset($date) || $date==="") {
+            $date = date('Y-m-d', strtotime($row['date']));
+        }
         $author = $row['source'];
         $filename = $row['filename'];
         $baselink = "https://commons.wikimedia.org/wiki/Special:Upload";
@@ -87,12 +89,19 @@ EOT;
     }
 
     function validateEmail($email) {
-    	if (!filter_var($_POST[$email], FILTER_VALIDATE_EMAIL)) {
+        $mailpost = $_POST[$email];
+        $mailarrayfull = explode("@", $mailpost);
+        $mailarray = array_pop($mailarrayfull);
+    	if (!filter_var($mailpost, FILTER_VALIDATE_EMAIL)) {
     	    addvalidationerror('Geen geldig e-mailadres ingevuld!');
-    	}
-    	elseif (!checkdnsrr(array_pop(explode("@",$_POST[$email])),"MX")) {
+    	    return "Geen geldig e-mailadres ingevuld!";
+        }
+    	elseif (!checkdnsrr($mailarray,"MX")) {
     	    addvalidationerror('Geen geldig e-mailadres ingevuld!');
-    	}
+    	    return "Geen geldig e-mailadres ingevuld!";
+    	} else {
+    	    return "ok";
+        }
     }
 
     function comparepassword ($pass1, $pass2) {
@@ -107,9 +116,13 @@ EOT;
 
     	if (!isset($file)){
     	    array_push($validationerrors, "Er is geen bestand geselecteerd.");
+    	    return "empty file";
     	} elseif (!in_array($file['type'], $allowedext)) {
     	    array_push($validationerrors, "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund.");
-    	}
+    	    return "unsupported file";
+    	} else {
+    	    return "ok";
+        }
     }
 
     function addvalidationerror($message) {

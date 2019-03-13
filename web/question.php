@@ -23,6 +23,11 @@
             <h3>Uploaden is niet gelukt</h3>
             <div class="box red">Helaas, het is niet gelukt deze afbeelding te uploaden. Wellicht zijn er technische problemen. Probeer het later nog eens.</div>
             <?php
+        } elseif ($result == "fail1" || $result == "fail2") {
+            ?>
+            <h3>Uploaden is niet gelukt</h3>
+            <div class="box red">Helaas, het is niet gelukt deze afbeelding te uploaden. Wellicht zijn er technische problemen. Probeer het later nog eens.</div>
+            <?php
         } else {
             echo "<h3>Het advies van de uploadwizard is:</h3>";
             echo "<div class=\"box green\">Upload de afbeelding onder de <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.nl\" target=\"_blank\">CC-BY-SA 4.0</a> licentie</div>";

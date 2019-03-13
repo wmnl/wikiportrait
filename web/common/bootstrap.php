@@ -9,6 +9,7 @@
     DB::$user = DB_USER;
     DB::$password = DB_PASS;
     DB::$dbName = DB_DB;
+    DB::$host = DB_HOST;
     require 'formfunctions.php';
     require 'uploadfunctions.php';
     require 'session.php';

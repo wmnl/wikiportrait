@@ -559,6 +559,12 @@ a.red:hover, a.red:focus, button.red:hover, button.red:focus {
     border-radius:5px;
 }
 
+.single-box .list span {
+    width:35%;
+    display:inline-block;
+    font-weight:500;
+}
+
 /* Lightbox */
 #imagelightbox {
     position:fixed;

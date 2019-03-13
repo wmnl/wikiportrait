@@ -35,11 +35,17 @@ function checkUpload() {
     $desc = $_POST['description'];
     $key = sha1(rand());
 
-    checkfile($_FILES['file']);
+    $fileresult = checkfile($_FILES['file']);
+    if($fileresult!=='ok') {
+        $session->redirect("/wizard", "?question=failupload");
+    }
     isrequired('title', 'titel');
     isrequired('source', 'auteursrechthebbende');
     isrequired('name', 'naam');
-    validateEmail('email');
+    $mailresult = validateEmail('email');
+    if($mailresult!=='ok') {
+        $session->redirect("/wizard", "?question=fail1");
+    }
     agreeterms('terms', 'de licentievoorwaarden, de privacyverklaring en het opslaan van uw IP-adres');
     agreeterms('euvs', 'de toestemming voor het opslaan van uw gegevens');
 
@@ -51,10 +57,14 @@ function checkUpload() {
         $thumbpath = THUMB_FOLDER . "/$filename";
 
         if (move_uploaded_file($file['tmp_name'], $imagepath)) {
-            $imageManager = new ImageManager(array('driver' => 'gd'));
-            $thumb = $imageManager->make($imagepath);
-            $thumb->fit(300, 300);
-            $thumb->save($thumbpath);
+            if(file_exists($imagepath) && filesize($imagepath) > 0) {
+                $imageManager = new ImageManager(array('driver' => 'gd'));
+                $thumb = $imageManager->make($imagepath);
+                $thumb->fit(300, 300);
+                $thumb->save($thumbpath);
+            } else {
+                print("<p>Image " . $imagepath . " is empty</p>");
+            }
 
             DB::insert('images', [
                 'filename' => $filename,
@@ -82,12 +92,12 @@ function checkUpload() {
                 'desc' => $desc,
                 'ip' => $ip,
                 'imageId' => DB::insertId(),
-		'key' => $key
+		        'key' => $key
             ]);
 
             $htmlBody = nl2br($body);
 
-            $mail = new PHPMailer;
+            $mail = new \PHPMailer\PHPMailer\PHPMailer();
             $mail->From = OTRS_MAIL;
             $mail->CharSet = 'UTF-8';
             $mail->addReplyTo($email, $name);
@@ -98,7 +108,7 @@ function checkUpload() {
             $mail->AltBody = $body;
 
             if (!$mail->send()) {
-                $session->redirect("/wizard", "?question=failupload");
+                $session->redirect("/wizard", "?question=fail2");
             } else {
                 $session->setLastUploadKey($key);
                 $session->redirect("/wizard", "?question=success");

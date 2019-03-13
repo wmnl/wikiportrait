@@ -44,14 +44,14 @@ $msg = false;
             <h3>Informatie</h3>
 
              <ul class="list">
-                <li><strong>Titel:</strong><br /><?= htmlspecialchars($row['title']); ?></li>
-                <li><strong>Auteursrechthebbende:</strong><br /><?= htmlspecialchars($row['source']); ?></li>
-                <li><strong>E-mailadres:</strong><br /><?= htmlspecialchars($row['email']); ?></li>
-                <li><strong>Geupload door:</strong><br /><?= htmlspecialchars($row['name']); ?></li>
-                <li><strong>IP-adres:</strong><br /><?= $row['ip']; ?></li>
-                <li><strong>Geüpload op:</strong><br /><?= strftime("%e %B %Y om %H:%I:%S", $row['timestamp']) ?></li>
-                <li><strong>Key:</strong><br /><?= $row['key']; ?></li>
-                <li><strong>Beschrijving:</strong><br /><?= htmlspecialchars($row['description']);?></li>
+                <li><span>Titel:</span> <?= htmlspecialchars($row['title']); ?></li>
+                <li><span>Rechthebbende:</span> <?= htmlspecialchars($row['source']); ?></li>
+                <li><span>Geüpload door:</span> <?= htmlspecialchars($row['name']); ?></li>
+                <li><span>E-mailadres:</span> <?= htmlspecialchars($row['email']); ?></li>
+                <li><span>IP-adres:</span> <?= $row['ip']; ?></li>
+                <li><span>Geüpload op:</span> <?= strftime("%e %B %Y om %H:%I:%S", $row['timestamp']) ?></li>
+                <li><span>Key:</span><br /><input type="text" id="key" disabled="disabled" value="<?= $row['key']; ?>" /></li>
+                <li><span>Beschrijving:</span><br /><?= htmlspecialchars($row['description']);?></li>
             </ul>
 
             <h3>Wat doen we ermee?</h3>

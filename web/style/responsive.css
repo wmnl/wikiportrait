@@ -2,7 +2,7 @@
     width:device-width;
 }
 
-@media (max-width:725px) {
+@media (max-width:925px) {
     body {
         -webkit-text-size-adjust:100%;
     }

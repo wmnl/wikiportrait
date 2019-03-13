@@ -7,15 +7,11 @@
     <link rel="stylesheet" href="<?= $basispad ?>/style/style.css" />
     <link rel="stylesheet" href="<?= $basispad ?>/style/responsive.css" />
     <link rel="stylesheet" href="<?= $basispad; ?>/lib/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="<?= $basispad; ?>/lib/sweetalert/lib/sweet-alert.css">
-    <link rel="stylesheet" href="<?= $basispad; ?>/lib/jquery-ui/themes/smoothness/jquery-ui.css">
 
     <script src="<?= $basispad; ?>/lib/jquery/dist/jquery.min.js"></script>
-    <script src="<?= $basispad; ?>/lib/sweetalert/lib/sweet-alert.min.js"></script>
-    <script src="<?= $basispad; ?>/lib/jquery-ui/jquery-ui.min.js"></script>
 
     <title>Wikiportret - Stel uw foto's ter beschikking</title>
-    <meta name=”description” content=”Staat er op Wikipedia een artikel zonder portretfoto? En heeft u een foto die bij een artikel zou passen? Stel dan uw foto hier ter beschikking.” />
+    <meta name="description" content="Staat er op Wikipedia een artikel zonder portretfoto? En heeft u een foto die bij een artikel zou passen? Stel dan uw foto hier ter beschikking." />
 
     <script>
         // Set to the same value as the web property used on the site
