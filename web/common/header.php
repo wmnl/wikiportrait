@@ -11,7 +11,8 @@
     <script src="<?= $basispad; ?>/lib/jquery/dist/jquery.min.js"></script>
 
     <title>Wikiportret - Stel uw foto's ter beschikking</title>
-    <meta name="description" content="Staat er op Wikipedia een artikel zonder portretfoto? En heeft u een foto die bij een artikel zou passen? Stel dan uw foto hier ter beschikking." />
+
+    <meta name="description" content="Staat er op Wikipedia een artikel zonder portretfoto? En heeft u een foto die bij een artikel zou passen? Stel dan uw foto hier ter beschikking." />
 
     <script>
         // Set to the same value as the web property used on the site
