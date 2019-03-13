@@ -110,7 +110,7 @@ function validateEmail($email) {
 function checkfile($file) {
     global $validationerrors;
     $allowedext = array("image/png", "image/gif", "image/jpeg", "image/bmp", "image/pjpeg");
-    var_dump($file);
+
     if (!isset($file)) {
 	array_push($validationerrors, "Er is geen bestand geselecteerd.");
 	return "empty file";
