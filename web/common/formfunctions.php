@@ -1,5 +1,7 @@
 <?php
 
+$validationerrors = array();
+
 function getCommonsUploadLink($row) {
 // #57: if description is available, use that, otherwise
 // simply use title
@@ -130,4 +132,6 @@ function hasvalidationerrors() {
     return count($validationerrors) > 0;
 }
 
-?>
+function validateUploader() {
+    return strtolower(filter_input(INPUT_POST, 'title')) == strtolower(filter_input(INPUT_POST, 'name'));
+}
