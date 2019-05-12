@@ -50,69 +50,72 @@ function checkUpload() {
     agreeterms('euvs', 'de toestemming voor het opslaan van uw gegevens');
 
     if (!hasvalidationerrors()) {
-        $time = new DateTime();
-        $filename = getFilename($title, $time, $file);
+	$mail = new \PHPMailer\PHPMailer\PHPMailer();
+	$templateRenderer = new Handlebars;
 
-        $imagepath = IMAGE_FOLDER . "/$filename";
-        $thumbpath = THUMB_FOLDER . "/$filename";
+	if ($validateUploader) {
+	    $archived = 1;
+	    $subject = "[Wikiportret] $title is geüpload op Wikiportret";
+	    $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_uploadercheck.txt");
+	} else {
+	    $archived = 0;
+	    $subject = "[Wikiportret] $title is geüpload op Wikiportret";
+	    $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody.txt");
+	}
 
-        if (move_uploaded_file($file['tmp_name'], $imagepath)) {
-            if(file_exists($imagepath) && filesize($imagepath) > 0) {
-                $imageManager = new ImageManager(array('driver' => 'gd'));
-                $thumb = $imageManager->make($imagepath);
-                $thumb->fit(300, 300);
-                $thumb->save($thumbpath);
-            } else {
-                print("<p>Image " . $imagepath . " is empty</p>");
-            }
+	$time = new DateTime();
+	$filename = getFilename($title, $time, $file);
 
-            DB::insert('images', [
-                'filename' => $filename,
-                'title' => $title,
-                'source' => $source,
-                'name' => $name,
-                'email' => $email,
-                'license' => 'CC-BY-SA 4.0',
-                'ip' => $ip,
-                'date' => $date,
-                'description' => $desc,
-                'timestamp' => date_timestamp_get($time),
-                'key' => $key
-            ]);
+	$imagepath = IMAGE_FOLDER . "/$filename";
+	$thumbpath = THUMB_FOLDER . "/$filename";
 
-            $templateRenderer = new Handlebars;
+	if (move_uploaded_file($file['tmp_name'], $imagepath)) {
+	    $imageManager = new ImageManager(array('driver' => 'gd'));
+	    $thumb = $imageManager->make($imagepath);
+	    $thumb->fit(300, 300);
+	    $thumb->save($thumbpath);
 
-            $subject = "[Wikiportret] $title is geüpload op Wikiportret";
+	    DB::insert('images', [
+		'filename' => $filename,
+		'title' => $title,
+		'source' => $source,
+		'name' => $name,
+		'email' => $email,
+		'license' => 'CC-BY-SA 4.0',
+		'ip' => $ip,
+		'date' => $date,
+		'description' => $desc,
+		'timestamp' => date_timestamp_get($time),
+		'key' => $key,
+		'archived' => $archived
+	    ]);
 
-            $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody.txt");
+	    $body = $templateRenderer->render($bodyTxt, [
+		'title' => $title,
+		'name' => $name,
+		'source' => $source,
+		'desc' => $desc,
+		'ip' => $ip,
+		'imageId' => DB::insertId(),
+		'key' => $key
+	    ]);
+	    $htmlBody = nl2br($body);
 
-            $body = $templateRenderer->render($bodyTxt, [
-                'title' => $title,
-                'source' => $source,
-                'desc' => $desc,
-                'ip' => $ip,
-                'imageId' => DB::insertId(),
-		        'key' => $key
-            ]);
+	    $mail->From = OTRS_MAIL;
+	    $mail->CharSet = 'UTF-8';
+	    $validateUploader ? $mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue") : $mail->addReplyTo($email, $name);
+	    $validateUploader ? $mail->addAddress($email, $name) : $mail->addAddress(OTRS_MAIL, "Wikiportret OTRS queue");
+	    $mail->Subject = $subject;
+	    $mail->isHTML(true);
+	    $mail->Body = $htmlBody;
+	    $mail->AltBody = $body;
 
-            $htmlBody = nl2br($body);
-
-            $mail = new \PHPMailer\PHPMailer\PHPMailer();
-            $mail->From = OTRS_MAIL;
-            $mail->CharSet = 'UTF-8';
-            $mail->addReplyTo($email, $name);
-            $mail->addAddress(OTRS_MAIL, "Wikiportret OTRS queue");
-            $mail->Subject = $subject;
-            $mail->isHTML(true);
-            $mail->Body = $htmlBody;
-            $mail->AltBody = $body;
-
-            if (!$mail->send()) {
-                $session->redirect("/wizard", "?question=fail2");
-            } else {
-                $session->setLastUploadKey($key);
-                $session->redirect("/wizard", "?question=success");
-            }
-        }
+	    if (!$mail->send()) {
+		$session->redirect("/wizard", "?question=failupload");
+	    } else {
+		$session->setLastUploadKey($key);
+		$session->redirect("/wizard", "?question=success");
+	    }
+	}
     }
 }
