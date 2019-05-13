@@ -130,4 +130,6 @@ function hasvalidationerrors() {
     return count($validationerrors) > 0;
 }
 
-?>
+function validateUploader() {
+    return strtolower(filter_input(INPUT_POST, 'title')) == strtolower(filter_input(INPUT_POST, 'name'));
+}
