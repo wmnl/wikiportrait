@@ -49,8 +49,11 @@
                 echo "<div class=\"box red\"><i class=\"fa fa-exclamation-triangle fa-lg\"></i>Status onbekend</div>";
             }
             ?>
-        </div>
-    </div>
+		    <?php if ($session->isLoggedIn()) { ?>
+	    	    <a href="images/single.php?id=<?php echo $row['id']; ?>"><button class="blue">Bekijk</button></a>
+		    <?php } ?>
+		</div>
+	    </div>
 
     <?php
         endif;
