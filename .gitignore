@@ -5,4 +5,3 @@ uploads/
 config/
 .DS_Store
 .idea/*
-config.php
