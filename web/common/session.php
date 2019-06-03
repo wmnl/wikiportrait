@@ -38,9 +38,7 @@ class Session {
     public function checkAdmin() {
         $this->checkLogin();
 
-        if (!$this->isSysop()) {
-            $this->redirect("/index");
-        }
+        return !$this->isSysop();
     }
 
     public function getUserName() {
