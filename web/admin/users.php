@@ -1,7 +1,7 @@
 <?php
     require '../common/bootstrap.php';
-    echo $session->checkAdmin();
     require '../common/header.php';
+    $session->checkAdmin();
     include 'tabs.php';
 ?>
 <div id="content">
