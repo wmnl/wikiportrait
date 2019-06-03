@@ -38,7 +38,10 @@ class Session {
     public function checkAdmin() {
         $this->checkLogin();
 
-        return !$this->isSysop();
+        if (!$this->isSysop()) {
+            echo ADMIN_ERROR;
+            exit;
+        }
     }
 
     public function getUserName() {
