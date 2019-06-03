@@ -39,8 +39,7 @@ class Session {
         $this->checkLogin();
 
         if (!$this->isSysop()) {
-            echo ADMIN_ERROR;
-            exit;
+            exit(ADMIN_ERROR);
         }
     }
 
