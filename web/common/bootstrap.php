@@ -5,6 +5,7 @@
     require ABSPATH . '/vendor/autoload.php';
     define('IMAGE_FOLDER', ABSPATH . "/uploads/images");
     define('THUMB_FOLDER', ABSPATH . "/uploads/thumbs");
+    define('ADMIN_ERROR', "<br>Deze pagina is voor admins bedoeld.<br>");
     header("Access-Control-Allow-Origin: *");
     DB::$user = DB_USER;
     DB::$password = DB_PASS;

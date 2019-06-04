@@ -1,6 +1,8 @@
 <?php
     require '../common/bootstrap.php';
+    require '../common/header.php';
     $session->checkAdmin();
+    include 'tabs.php';
 
     if (isset($_GET['id'])) {
 	   $id = $_GET['id'];
@@ -28,9 +30,6 @@
             $session->redirect("/admin/messages");
         }
     }
-
-    require '../common/header.php';
-    include 'tabs.php';
 ?>
 <div id="content">
     <?php

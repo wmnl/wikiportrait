@@ -39,7 +39,7 @@ class Session {
         $this->checkLogin();
 
         if (!$this->isSysop()) {
-            $this->redirect("/index");
+            exit(ADMIN_ERROR);
         }
     }
 
