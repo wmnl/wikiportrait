@@ -51,7 +51,7 @@ function checkUpload() {
     $validateUploader = validateUploader();
 
     if (!hasvalidationerrors()) {
-	$mail = new \PHPMailer\PHPMailer\PHPMailer();
+	$mail = new PHPMailer();
 	$templateRenderer = new Handlebars;
 
 	if ($validateUploader) {
@@ -110,6 +110,9 @@ function checkUpload() {
 	    $mail->isHTML(true);
 	    $mail->Body = $htmlBody;
 	    $mail->AltBody = $body;
+
+      // Extra local:
+      require('localmailconf.php');
 
 	    if (!$mail->send()) {
 		$session->redirect("/wizard", "?question=failupload");
