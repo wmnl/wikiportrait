@@ -514,6 +514,11 @@ td .button:last-child {
     color:#fff;
 }
 
+.blue {
+    background:#006699;
+    color:#fff;
+}
+
 a.green:hover, a.green:focus, button.green:hover, button.green:focus {
     background:#2D8659;
 }

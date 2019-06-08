@@ -1,0 +1,8 @@
+Beste {{name}},
+
+Dank u wel voor het uploaden van een foto op Wikiportret.
+
+Voor het verwerken van uw foto verifieër graag uw email via onderstande link:
+http://localhost:8003/verificatie.php?key={{key}}&email={{email}}
+
+Met vriendelijke groet, de vrijwilligers van Wikiportret.
