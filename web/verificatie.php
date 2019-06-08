@@ -32,7 +32,7 @@
             ], 'id = %d', $row['imageid']);
 
             // send email to OTRS
-            $mail = new PHPMailer();
+            $mail = new \PHPMailer\PHPMailer\PHPMailer();
             $templateRenderer = new Handlebars;
             $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody.txt");
 
