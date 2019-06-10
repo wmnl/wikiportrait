@@ -73,7 +73,7 @@ function checkUpload() {
       $redirect = "success";
       } else {
 	    $archived = 1;
-	    $subject = "[Wikiportret] Uw email veriefiëren";
+	    $subject = "[Wikiportret] Uw email verifiëren";
 	    $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_verificatie.txt");
       $redirect = "verificatie";
       }
