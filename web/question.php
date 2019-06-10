@@ -18,6 +18,10 @@
             echo "<h3>Uploaden voltooid</h3>";
             echo "<div class=\"box green\">De afbeelding is met succes geüpload.<br />Een vrijwilliger zal de afbeelding zo snel mogelijk beoordelen en contact met u opnemen.<br />Als u wilt, kunt u <a href=\"track.php?key=$key\">hier</a> uw inzending volgen.</div>";
             echo "<div class=\"bottom right\"><a class=\"button\" href=\"upload.php\"><i class=\"fa fa-cloud-upload fa-lg\"></i>Nog een afbeelding uploaden</a></div>";
+        } elseif ($result == "verificatie") {
+            $email = $session->getLastUploadEmail();
+            echo "<h3>Email verificatie vereist</h3>";
+            echo "<div class=\"box blue\">Wij hebben een email naar <strong>$email</strong> gestuurd voor verificatie.<br />Na succesvolle verificatie, is uw upload voltooid.<br /></div>";
         } elseif ($result == "failupload") {
             ?>
             <h3>Uploaden is niet gelukt</h3>

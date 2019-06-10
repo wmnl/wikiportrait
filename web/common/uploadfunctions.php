@@ -19,6 +19,12 @@ function getFilename($title, $time, $file) {
     return sprintf("%s-%s.%s", $title, $datestamp, $extension);
 }
 
+function contributorEmailCheck($email) {
+    $row = DB::queryFirstRow('SELECT email, verified FROM contributors WHERE email = %s', $email);
+    (DB::count() > 0) ? $check = array(True, $row['verified']) : $check = array(False, 0);
+    return $check;
+}
+
 // TODO: this should really be refactored in a class...
 function checkUpload() {
     global $session, $messages;
@@ -53,15 +59,24 @@ function checkUpload() {
     if (!hasvalidationerrors()) {
 	$mail = new \PHPMailer\PHPMailer\PHPMailer();
 	$templateRenderer = new Handlebars;
+  list($email_exists, $email_verified) = contributorEmailCheck($email);
 
 	if ($validateUploader) {
 	    $archived = 1;
 	    $subject = "[Wikiportret] $title is geüpload op Wikiportret";
 	    $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_uploadercheck.txt");
 	} else {
-	    $archived = 0;
-	    $subject = "[Wikiportret] $title is geüpload op Wikiportret";
-	    $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody.txt");
+      if ($email_verified) {
+      $archived = 0;
+      $subject = "[Wikiportret] $title is geüpload op Wikiportret";
+      $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody.txt");
+      $redirect = "success";
+      } else {
+	    $archived = 1;
+	    $subject = "[Wikiportret] Uw email veriefiëren";
+	    $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_verificatie.txt");
+      $redirect = "verificatie";
+      }
 	}
 
 	$time = new DateTime();
@@ -91,9 +106,16 @@ function checkUpload() {
 		'archived' => $archived
 	    ]);
 
+    if (!$email_exists)
+	    DB::insert('contributors', [
+		'email' => $email,
+		'verified' => 0,
+	    ]);
+
 	    $body = $templateRenderer->render($bodyTxt, [
 		'title' => $title,
 		'name' => $name,
+    'email' => $email,
 		'source' => $source,
 		'desc' => $desc,
 		'ip' => $ip,
@@ -104,8 +126,15 @@ function checkUpload() {
 
 	    $mail->From = OTRS_MAIL;
 	    $mail->CharSet = 'UTF-8';
-	    $validateUploader ? $mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue") : $mail->addReplyTo($email, $name);
-	    $validateUploader ? $mail->addAddress($email, $name) : $mail->addAddress(OTRS_MAIL, "Wikiportret OTRS queue");
+
+	    if ($validateUploader) {
+      $mail->addAddress($email, $name);
+      $mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue");
+      } else {
+      $email_verified ? $mail->addAddress(OTRS_MAIL, "Wikiportret OTRS queue") : $mail->addAddress($email, "Wikiportret OTRS queue");
+      $email_verified ? $mail->addReplyTo($email, $name) : $mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue");
+      };
+
 	    $mail->Subject = $subject;
 	    $mail->isHTML(true);
 	    $mail->Body = $htmlBody;
@@ -114,9 +143,10 @@ function checkUpload() {
 	    if (!$mail->send()) {
 		$session->redirect("/wizard", "?question=failupload");
 	    } else {
-		$session->setLastUploadKey($key);
-		$session->redirect("/wizard", "?question=success");
+    $session->setLastUploadKey($key);
+    $session->setLastUploadEmail($email);
+    $session->redirect("/wizard", "?question=$redirect");
 	    }
-	}
-    }
+	  }
+  }
 }

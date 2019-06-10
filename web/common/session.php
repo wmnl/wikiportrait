@@ -14,6 +14,14 @@ class Session {
         $_SESSION['lastuploadkey'] = $key;
     }
 
+    public function getLastUploadEmail() {
+        return $_SESSION['email'];
+    }
+
+    public function setLastUploadEmail($email) {
+        $_SESSION['email'] = $email;
+    }
+
     public function redirect($page, $args = false) {
         global $basispad;
         $location = "Location:$basispad$page.php";
