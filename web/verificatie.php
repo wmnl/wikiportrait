@@ -51,14 +51,12 @@
         	  $mail->From = OTRS_MAIL;
         	  $mail->CharSet = 'UTF-8';
             $mail->addAddress(OTRS_MAIL, "Wikiportret OTRS queue");
-            $mail->addReplyTo($email, $name);
+            $mail->addReplyTo($email, $row['name']);
         	  $mail->Subject = "[Wikiportret] ". $row['title'] ." is geüpload op Wikiportret";
         	  $mail->isHTML(true);
         	  $mail->Body = $htmlBody;
         	  $mail->AltBody = $body;
 
-            // Extra local:
-            require(ABSPATH . "/common/localmailconf.php");
             $mail->send();
     ?>
 
