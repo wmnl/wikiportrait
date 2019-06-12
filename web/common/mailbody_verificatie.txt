@@ -1,0 +1,7 @@
+Beste {{name}},
+
+Bedankt voor het uploaden van een afbeelding op Wikiportret. U wordt vriendelijk verzocht om eenmalig uw e-mailadres te valideren. Als dit gebeurd is, zult u een reactie ontvangen op de geuploade afbeelding.
+
+Klikt u op https://www.wikiportret.nl/verificatie.php?key={{key}}&email={{email}} om uw e-mailadres te valideren.
+
+Met vriendelijke groet, de vrijwilligers van Wikiportret.
