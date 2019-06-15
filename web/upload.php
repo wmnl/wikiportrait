@@ -2,7 +2,10 @@
     require 'common/bootstrap.php';
 
     if (isset($_POST['postback'])) {
+        $button = "<img src='../images/loading.gif'></img>";
         checkUpload();
+    } else {
+        $button = "<button class='green' type='submit' name='postback'><i class='fa fa-cloud-upload fa-lg'></i>Upload foto</button>";
     }
 
     require 'common/header.php';
@@ -79,7 +82,7 @@
     </div>
 
     <div class="bottom right">
-         <button class="green" type="submit" name="postback"><i class="fa fa-cloud-upload fa-lg"></i>Upload foto</button>
+         <?php echo $button; ?>
     </div>
 
     </form>
