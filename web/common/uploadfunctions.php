@@ -40,6 +40,7 @@ function checkUpload() {
     $date = $_POST['date'];
     $desc = $_POST['description'];
     $key = sha1(rand());
+    $hash = sha1_file($file['tmp_name']);
 
     $fileresult = checkfile($_FILES['file']);
     if($fileresult!=='ok') {
@@ -57,7 +58,8 @@ function checkUpload() {
     $validateUploader = validateUploader();
 
     if (!hasvalidationerrors()) {
-	$mail = new \PHPMailer\PHPMailer\PHPMailer();
+	// $mail = new \PHPMailer\PHPMailer\PHPMailer(); //or
+  $mail = new PHPMailer(); // narcode
 	$templateRenderer = new Handlebars;
   list($email_exists, $email_verified) = contributorEmailCheck($email);
 
@@ -103,7 +105,8 @@ function checkUpload() {
 		'description' => $desc,
 		'timestamp' => date_timestamp_get($time),
 		'key' => $key,
-		'archived' => $archived
+		'archived' => $archived,
+    'filehash' => $hash
 	    ]);
 
     if (!$email_exists)
@@ -139,6 +142,8 @@ function checkUpload() {
 	    $mail->isHTML(true);
 	    $mail->Body = $htmlBody;
 	    $mail->AltBody = $body;
+
+      require_once 'localmailconf.php'; // narcode
 
 	    if (!$mail->send()) {
 		$session->redirect("/wizard", "?question=failupload");
