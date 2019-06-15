@@ -2,7 +2,7 @@
     require 'common/bootstrap.php';
 
     if (isset($_POST['postback'])) {
-        $button = "<img src='../images/loading.gif'></img>";
+        $button = "<img style='height:42px; display: inline'  src='../images/loading.gif'></img>";
         checkUpload();
     } else {
         $button = "<button class='green' type='submit' name='postback'><i class='fa fa-cloud-upload fa-lg'></i>Upload foto</button>";
