@@ -39,13 +39,17 @@ function checkUpload() {
     $ip = $_SERVER["REMOTE_ADDR"];
     $date = $_POST['date'];
     $desc = $_POST['description'];
-    $key = sha1(rand());
-    $hash = sha1_file($file['tmp_name']);
+    $key = sha1_file($file['tmp_name']);
 
     $fileresult = checkfile($_FILES['file']);
     if($fileresult!=='ok') {
         $session->redirect("/wizard", "?question=failupload");
     }
+
+    if (isDuplicateFile($key)) {
+        $session->redirect("/wizard", "?question=duplicate");
+    }
+
     isrequired('title', 'titel');
     isrequired('source', 'auteursrechthebbende');
     isrequired('name', 'naam');
@@ -106,7 +110,6 @@ function checkUpload() {
 		'timestamp' => date_timestamp_get($time),
 		'key' => $key,
 		'archived' => $archived,
-    'filehash' => $hash
 	    ]);
 
     if (!$email_exists)
@@ -145,13 +148,13 @@ function checkUpload() {
 
       require_once 'localmailconf.php'; // narcode
 
-	    if (!$mail->send()) {
-		$session->redirect("/wizard", "?question=failupload");
-	    } else {
-    $session->setLastUploadKey($key);
-    $session->setLastUploadEmail($email);
-    $session->redirect("/wizard", "?question=$redirect");
-	    }
+	  //   if (!$mail->send()) {
+		// $session->redirect("/wizard", "?question=failupload");
+	  //   } else {
+    // $session->setLastUploadKey($key);
+    // $session->setLastUploadEmail($email);
+    // $session->redirect("/wizard", "?question=$redirect");
+	  //   }
 	  }
   }
 }
