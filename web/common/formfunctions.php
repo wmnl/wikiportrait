@@ -84,6 +84,19 @@ function checkusername($username) {
     }
 }
 
+function isDuplicateFile($file_hash) {
+  $query = DB::queryRaw('SELECT `key` from images ORDER BY id DESC');
+  if ($query->num_rows > 0) {
+    while ($files = $query->fetch_array(MYSQLI_NUM)) {
+      if (in_array($file_hash, $files)) {
+        echo "True";
+        break;
+      }
+    }
+  }
+  echo "False";
+}
+
 function comparepassword($pass1, $pass2) {
     if ($pass1 != $pass2) {
 	addvalidationerror('De twee ingevulde wachtwoorden komen niet overeen!');

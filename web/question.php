@@ -22,6 +22,9 @@
             $email = $session->getLastUploadEmail();
             echo "<h3>Email verificatie vereist</h3>";
             echo "<div class=\"box blue\">Wij hebben een email naar <strong>$email</strong> gestuurd voor verificatie.<br />Na succesvolle verificatie, is uw upload voltooid.<br /></div>";
+        } elseif ($result == "duplicate") {
+            echo "<h3>Uploaden is niet gelukt</h3>";
+            echo "<div class=\"box blue\">".DUPLICATE_ERROR."<br /></div>";
         } elseif ($result == "failupload") {
             ?>
             <h3>Uploaden is niet gelukt</h3>
