@@ -5,6 +5,6 @@
 
 		<script src="<?= $basispad; ?>/lib/jquery-autosize/dest/autosize.min.js"></script>
 
-		<script src="<?= $basispad; ?>/js/app.js?narcode"></script>
+		<script src="<?= $basispad; ?>/js/app.js?v1"></script>
 	</body>
 </html>

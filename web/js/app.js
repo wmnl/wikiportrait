@@ -1,5 +1,5 @@
 /* Autoresize textarea */
-// autosize($('textarea')); // narcode
+autosize($('textarea'));
 
 /* Delete confirmation */
 function confirmDelete(id) {

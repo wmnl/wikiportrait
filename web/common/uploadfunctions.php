@@ -55,15 +55,14 @@ function checkUpload() {
     isrequired('name', 'naam');
     $mailresult = validateEmail('email');
     if($mailresult!=='ok') {
-        $session->redirect("/wizard", "?question=fail1");
+        $session->redirect("/wizard", "?question=failupload");
     }
     agreeterms('terms', 'de licentievoorwaarden, de privacyverklaring en het opslaan van uw IP-adres');
     agreeterms('euvs', 'de toestemming voor het opslaan van uw gegevens');
     $validateUploader = validateUploader();
 
     if (!hasvalidationerrors()) {
-	// $mail = new \PHPMailer\PHPMailer\PHPMailer(); //or
-  $mail = new PHPMailer(); // narcode
+	$mail = new \PHPMailer\PHPMailer\PHPMailer();
 	$templateRenderer = new Handlebars;
   list($email_exists, $email_verified) = contributorEmailCheck($email);
 
@@ -71,6 +70,7 @@ function checkUpload() {
 	    $archived = 1;
 	    $subject = "[Wikiportret] $title is geüpload op Wikiportret";
 	    $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_uploadercheck.txt");
+      $redirect = "success";
 	} else {
       if ($email_verified) {
       $archived = 0;
@@ -146,15 +146,13 @@ function checkUpload() {
 	    $mail->Body = $htmlBody;
 	    $mail->AltBody = $body;
 
-      require_once 'localmailconf.php'; // narcode
-
-	  //   if (!$mail->send()) {
-		// $session->redirect("/wizard", "?question=failupload");
-	  //   } else {
-    // $session->setLastUploadKey($key);
-    // $session->setLastUploadEmail($email);
-    // $session->redirect("/wizard", "?question=$redirect");
-	  //   }
+	    if (!$mail->send()) {
+		$session->redirect("/wizard", "?question=failupload");
+	    } else {
+    $session->setLastUploadKey($key);
+    $session->setLastUploadEmail($email);
+    $session->redirect("/wizard", "?question=$redirect");
+	    }
 	  }
   }
 }

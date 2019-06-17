@@ -89,12 +89,12 @@ function isDuplicateFile($file_hash) {
   if ($query->num_rows > 0) {
     while ($files = $query->fetch_array(MYSQLI_NUM)) {
       if (in_array($file_hash, $files)) {
-        echo "True";
-        break;
+        addvalidationerror(DUPLICATE_ERROR);
+        return True;
       }
     }
   }
-  echo "False";
+  return False;
 }
 
 function comparepassword($pass1, $pass2) {
@@ -135,6 +135,9 @@ function checkfile($file) {
 
 function addvalidationerror($message) {
     global $validationerrors;
+    if (!isset($validationerrors)) {
+      $validationerrors = [];
+    }
     array_push($validationerrors, $message);
 }
 
