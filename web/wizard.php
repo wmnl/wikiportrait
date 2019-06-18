@@ -34,12 +34,8 @@
     result("failupload");
     break;
 
-    case "dail1":
-    result("fail1");
-    break;
-
-    case "fail2":
-    result("fail2");
+    case "duplicate":
+    result("duplicate");
     break;
 
 	  case "first":
