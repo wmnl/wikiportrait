@@ -80,7 +80,7 @@
 
     <div class="bottom right">
          <input type='hidden' name='postback'></input>
-         <button class="green" onclick='disableButton(this)'><i class="fa fa-cloud-upload fa-lg"></i>Upload foto</button>
+         <button class="green" type='button' onclick='disableButton(this)'><i class="fa fa-cloud-upload fa-lg"></i>Upload foto</button>
     </div>
 
     </form>
