@@ -34,18 +34,19 @@ if (("standalone" in window.navigator) && window.navigator.standalone) {
 
 /* Prevent more than 1 click on upload button */
 function disableButton(e) {
-  f = document.querySelector('form');
+    f = document.querySelector('form');
     if (!f.checkValidity()) {
     f.reportValidity();
   } else {
     e.disabled = true;
     p = e.parentElement;
-    e.remove();
+    e.style.display = 'none';
     img = document.createElement('img');
     img.style.display = 'inline';
     img.style.height = '42px';
     img.src = 'js/loading.gif';
-    p.append(img);
-    f.submit();
-  };
+    img.style.zindex = 2;
+    p.appendChild(img);
+    setTimeout(function() {f.submit();}, 100);
+  }
 }
