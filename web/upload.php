@@ -79,7 +79,8 @@
     </div>
 
     <div class="bottom right">
-         <button class="green" type="submit" name="postback"><i class="fa fa-cloud-upload fa-lg"></i>Upload foto</button>
+         <input type='hidden' name='postback'></input>
+         <button class="green" type='button' onclick='disableButton(this)'><i class="fa fa-cloud-upload fa-lg"></i>Upload foto</button>
     </div>
 
     </form>

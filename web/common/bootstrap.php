@@ -6,6 +6,7 @@
     define('IMAGE_FOLDER', ABSPATH . "/uploads/images");
     define('THUMB_FOLDER', ABSPATH . "/uploads/thumbs");
     define('ADMIN_ERROR', "<br>Deze pagina is voor admins bedoeld.<br>");
+    define('DUPLICATE_ERROR', "Deze afbeedling is al geüpload");
     header("Access-Control-Allow-Origin: *");
     DB::$user = DB_USER;
     DB::$password = DB_PASS;
