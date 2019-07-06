@@ -22,12 +22,11 @@
             $email = $session->getLastUploadEmail();
             echo "<h3>Email verificatie vereist</h3>";
             echo "<div class=\"box blue\">Wij hebben een email naar <strong>$email</strong> gestuurd voor verificatie.<br />Na succesvolle verificatie, is uw upload voltooid.<br /></div>";
+        } elseif ($result == "duplicate") {
+            echo "<h3>Uploaden is niet gelukt</h3>";
+            echo "<div class=\"box red\">".DUPLICATE_ERROR."<br /></div>";
+            echo "<div class=\"bottom right\"><a class=\"button\" href=\"index.php\"><i class=\"fa fa-home fa-lg\"></i>Terug naar de startpagina</a></div>";
         } elseif ($result == "failupload") {
-            ?>
-            <h3>Uploaden is niet gelukt</h3>
-            <div class="box red">Helaas, het is niet gelukt deze afbeelding te uploaden. Wellicht zijn er technische problemen. Probeer het later nog eens.</div>
-            <?php
-        } elseif ($result == "fail1" || $result == "fail2") {
             ?>
             <h3>Uploaden is niet gelukt</h3>
             <div class="box red">Helaas, het is niet gelukt deze afbeelding te uploaden. Wellicht zijn er technische problemen. Probeer het later nog eens.</div>

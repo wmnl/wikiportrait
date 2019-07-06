@@ -39,18 +39,23 @@ function checkUpload() {
     $ip = $_SERVER["REMOTE_ADDR"];
     $date = $_POST['date'];
     $desc = $_POST['description'];
-    $key = sha1(rand());
+    $key = sha1_file($file['tmp_name']);
 
     $fileresult = checkfile($_FILES['file']);
     if($fileresult!=='ok') {
         $session->redirect("/wizard", "?question=failupload");
     }
+
+    if (isDuplicateFile($key)) {
+        $session->redirect("/wizard", "?question=duplicate");
+    }
+
     isrequired('title', 'titel');
     isrequired('source', 'auteursrechthebbende');
     isrequired('name', 'naam');
     $mailresult = validateEmail('email');
     if($mailresult!=='ok') {
-        $session->redirect("/wizard", "?question=fail1");
+        $session->redirect("/wizard", "?question=failupload");
     }
     agreeterms('terms', 'de licentievoorwaarden, de privacyverklaring en het opslaan van uw IP-adres');
     agreeterms('euvs', 'de toestemming voor het opslaan van uw gegevens');
@@ -65,6 +70,7 @@ function checkUpload() {
 	    $archived = 1;
 	    $subject = "[Wikiportret] $title is geüpload op Wikiportret";
 	    $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_uploadercheck.txt");
+      $redirect = "success";
 	} else {
       if ($email_verified) {
       $archived = 0;
@@ -103,7 +109,7 @@ function checkUpload() {
 		'description' => $desc,
 		'timestamp' => date_timestamp_get($time),
 		'key' => $key,
-		'archived' => $archived
+		'archived' => $archived,
 	    ]);
 
     if (!$email_exists)
