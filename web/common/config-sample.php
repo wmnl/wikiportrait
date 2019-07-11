@@ -8,3 +8,4 @@
     define('ABSPATH', str_replace("/common", "", dirname(__FILE__)));
     define('OTRS_MAIL', 'wikiportret@wikimedia.org');
     define('V1_PATH', BASE_URL . '/old');
+    define('GOOGLE_CREDENTIALS', dirname(__FILE__) . '/your_credentials_file.json');
