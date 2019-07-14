@@ -97,6 +97,12 @@ function checkUpload() {
 	    $thumb->fit(300, 300);
 	    $thumb->save($thumbpath);
 
+    if (!$email_exists)
+	    DB::insert('contributors', [
+		'email' => $email,
+		'verified' => 0,
+	    ]);
+
 	    DB::insert('images', [
 		'filename' => $filename,
 		'title' => $title,
@@ -110,12 +116,6 @@ function checkUpload() {
 		'timestamp' => date_timestamp_get($time),
 		'key' => $key,
 		'archived' => $archived,
-	    ]);
-
-    if (!$email_exists)
-	    DB::insert('contributors', [
-		'email' => $email,
-		'verified' => 0,
 	    ]);
 
 	    $body = $templateRenderer->render($bodyTxt, [
