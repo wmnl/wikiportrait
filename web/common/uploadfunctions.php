@@ -2,6 +2,8 @@
 use Intervention\Image\ImageManager;
 use Handlebars\Handlebars;
 
+require ABSPATH . "/ml/web_entities.php";
+
 function removeAccentedCharacters($str) {
     return strtr($str, [
         'á'=>'a','à'=>'a','ä'=>'a','â'=>'a','é'=>'e','è'=>'e','ê'=>'e',
@@ -39,7 +41,6 @@ function checkUpload() {
     $ip = $_SERVER["REMOTE_ADDR"];
     $date = $_POST['date'];
     $desc = $_POST['description'];
-    $key = sha1_file($file['tmp_name']);
 
     $fileresult = checkfile($_FILES['file']);
     if($fileresult!=='ok') {
@@ -49,6 +50,8 @@ function checkUpload() {
     if (isDuplicateFile($key)) {
         $session->redirect("/wizard", "?question=duplicate");
     }
+
+    $key = sha1_file($file['tmp_name']);
 
     isrequired('title', 'titel');
     isrequired('source', 'auteursrechthebbende');
@@ -151,6 +154,9 @@ function checkUpload() {
 	    } else {
     $session->setLastUploadKey($key);
     $session->setLastUploadEmail($email);
+    if ($archived == 0 && GVISION_MACHINE_LEARNING) {
+      detect_web($filename);
+    }
     $session->redirect("/wizard", "?question=$redirect");
 	    }
 	  }

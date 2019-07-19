@@ -16,6 +16,9 @@ $msg = false;
         die("Foto niet gevonden!");
     }
 
+    $google_vision_results = DB::queryFirstRow("SELECT vision_api_results.date, labels, description, matching_pages,
+      matching_img, similar_img, partial_pages FROM vision_api_results WHERE image_id = %d ORDER BY id DESC", $_GET['id']);
+
     if (isset($_POST['postback'])) {
         DB::update('images', [
             'owner' => $_POST['owner'],
@@ -133,12 +136,64 @@ $msg = false;
                     </button>
                 </div>
             </form>
+
+        <div>
+        <h3>Google Vision Analysis</h3>
+        <div id='ml_resp'>
+        <?php
+        if (GVISION_MACHINE_LEARNING) {
+        if (!empty($google_vision_results['description'])) {
+          $matching_pages = explode(',', $google_vision_results['matching_pages']);
+          (!empty($google_vision_results['matching_pages'])) ? $mathing_p_count = count($matching_pages) : $mathing_p_count = 0;
+          $matching_img = explode(',', $google_vision_results['matching_img']);
+          (!empty($google_vision_results['matching_img'])) ? $mathing_i_count = count($matching_img) : $mathing_i_count = 0;
+          $similar_img = explode(',', $google_vision_results['similar_img']);
+          (!empty($google_vision_results['similar_img'])) ? $similar_i_count = count($similar_img) : $similar_i_count = 0;
+          $partial_img = explode(',', $google_vision_results['partial_img']) ;
+          (!empty($google_vision_results['partial_img'])) ? $partialcount = count($partial_img) : $partialcount = 0;
+        ?>
+        <ul class="list_ml">
+           <li><span>Datum analyse:</span> <?php echo $google_vision_results['date']; ?> <i class='performgv' onclick="performGVResults('<?php echo $_GET['id']; ?>')">Nog een keer analyseren</i></li>
+           <li><span>Beste categorie:</span> <?php echo $google_vision_results['labels']; ?></li>
+           <li><span>Beschrijving:</span> <?php echo $google_vision_results['description']; ?></li>
+            <?php
+            if ($mathing_p_count > 0) {
+              echo "<li class='matching_pages'><span>Aantal webpaginas met dezelfde afbeelding:</span> $mathing_p_count <i class='toon' onclick='showGVResults(this)'>tonen</i>";
+              echo makeGVResults($matching_pages);
+              echo "</li>";
+            }
+            if ($similar_i_count > 0) {
+              echo "<li class='similar_img'><span>Aantal vergelijkbare afbeeldingen:</span> $similar_i_count <i class='toon' onclick='showGVResults(this)'>tonen</i>";
+              echo makeGVResults($similar_img);
+              echo "</li>";
+            }
+            if ($partialcount > 0) {
+              echo "<li class='partial_img'><span>Aantal gedeeltelijke afbeeldingen:</span> $partialcount <i class='toon' onclick='showGVResults(this)'>tonen</i>";
+              echo makeGVResults($partial_img);
+              echo "</li>";
+            }
+            if ($mathing_i_count > 0) {
+              echo "<li class='matching_img'><span>Aantal gedeeltelijke afbeeldingen:</span> $mathing_i_count <i class='toon' onclick='showGVResults(this)'>tonen</i>";
+              echo makeGVResults($matching_img);
+              echo "</li></ul>";
+              }
+            } else { // Analysis results are empty....
+              echo "<span>Geen resultaten</span> <i class='performgv' onclick=\"performGVResults('". $_GET['id'] . "')\">Nog een keer analyseren</i>";
+            }
+        } else { // Analysis results are empty....
+          echo "Niet geactiveerd";
+        }
+        ?>
+        </div>
+        </div>
+
         </div>
     </div>
 </div>
 
 <script src="<?= $basispad ?>/lib/imagelightbox/dist/imagelightbox.min.js"></script>
 <script src="<?= $basispad ?>/js/lightbox.js"></script>
+<script src="<?= $basispad ?>/js/ml.js"></script>
 
 <?php
 include '../common/footer.php';

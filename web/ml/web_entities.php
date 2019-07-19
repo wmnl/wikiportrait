@@ -1,82 +1,72 @@
 <?php
-namespace Google\Cloud\Samples\Vision;
-
-ini_set('display_errors', 1);
-
-require '../common/bootstrap.php';
-
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 
 putenv('GOOGLE_APPLICATION_CREDENTIALS=' . GOOGLE_CREDENTIALS);
 
-$imgpath = "ABSPATH . '/uploads/images/";
-$imgname = "dfs-1560015237.png";
+// $imgname = "dfs-1560015237.png";
 
-$img = $imgpath . $imgname;
-
-function detect_web($path)
+function detect_web($name)
 {
     $imageAnnotator = new ImageAnnotatorClient();
 
     # annotate the image
-    $image = file_get_contents($path);
+    $path = $imgpath = ABSPATH . "/uploads/images/";
+    $image = file_get_contents($path . $name);
     $response = $imageAnnotator->webDetection($image);
     $web = $response->getWebDetection();
+    $labels = [];
+    $matching_pages = [];
+    $matching_images = [];
+    $similar_images = [];
+    $partial_pages = [];
+    $description = [];
+
+    // get labels:
+    foreach ($web->getBestGuessLabels() as $label) {
+        array_push($labels, $label->getLabel());
+    }
+    // get pages with matching images
+    foreach ($web->getPagesWithMatchingImages() as $page) {
+        array_push($matching_pages, $page->getUrl());
+    }
+    // get full matching images
+    foreach ($web->getFullMatchingImages() as $fullMatchingImage) {
+        array_push($matching_images, $fullMatchingImage->getUrl());
+    }
+    // get partial matching pages
+    foreach ($web->getPartialMatchingImages() as $partialMatchingImage) {
+        array_push($partial_pages, $partialMatchingImage->getUrl());
+    }
+    // get visually similar images
+    foreach ($web->getVisuallySimilarImages() as $visuallySimilarImage) {
+        array_push($similar_images, $visuallySimilarImage->getUrl());
+    }
+    // get web entities
+    foreach ($web->getWebEntities() as $entity) {
+        if ($entity->getDescription() != "") {
+        $entity_formatted = $entity->getDescription() . " (" . round($entity->getScore(),2) . ")";
+        array_push($description, $entity_formatted);
+        }
+    }
 
     // store ML analysis
-    DB::update('images', [
-    'ml_analysis' => 'JSON_OBJECT()',
-    ], 'filename = %s', $imgname);
+    $imagequery = DB::queryFirstRow('SELECT id FROM images WHERE filename = %s', $name);
+    if (DB::count() > 0) {$image_id = $imagequery['id'];}
 
-    printf('%d best guess labels found' . "<br><br>",
-        count($web->getBestGuessLabels()));
-    foreach ($web->getBestGuessLabels() as $label) {
-        printf('Best guess label: %s' . "<br><br>", $label->getLabel());
-    }
-    print(PHP_EOL);
-
-    // Print pages with matching images
-    printf('%d pages with matching images found' . "<br><br>",
-        count($web->getPagesWithMatchingImages()));
-    foreach ($web->getPagesWithMatchingImages() as $page) {
-        printf('URL: %s' . "<br><br>", $page->getUrl());
-    }
-    print("<br><br>");
-
-    // Print full matching images
-    printf('%d full matching images found' . "<br><br>",
-        count($web->getFullMatchingImages()));
-    foreach ($web->getFullMatchingImages() as $fullMatchingImage) {
-        printf('URL: %s' . "<br><br>", $fullMatchingImage->getUrl());
-    }
-    print("<br><br>");
-
-    // Print partial matching images
-    printf('%d partial matching images found' . "<br><br>",
-        count($web->getPartialMatchingImages()));
-    foreach ($web->getPartialMatchingImages() as $partialMatchingImage) {
-        printf('URL: %s' . PHP_EOL, $partialMatchingImage->getUrl());
-    }
-    print("<br><br>");
-
-    // Print visually similar images
-    printf('%d visually similar images found' . "<br><br>",
-        count($web->getVisuallySimilarImages()));
-    foreach ($web->getVisuallySimilarImages() as $visuallySimilarImage) {
-        printf('URL: %s' . "<br><br>", $visuallySimilarImage->getUrl());
-    }
-    print("<br><br>");
-
-    // Print web entities
-    printf('%d web entities found' . "<br><br>",
-        count($web->getWebEntities()));
-    foreach ($web->getWebEntities() as $entity) {
-        printf('Description: %s, Score %s' . "<br>",
-            $entity->getDescription(),
-            $entity->getScore());
+    if (isset($image_id)) {
+    DB::insert('vision_api_results', [
+    'image_id' => $image_id,
+    'date' => Date('Y-m-d H:i:s'),
+    'labels' => implode(',', $labels),
+    'description' => implode(',', $description),
+    'matching_pages' => implode(',', $matching_pages),
+    'matching_img' => implode(',', $matching_images),
+    'similar_img' => implode(',', $similar_images),
+    'partial_pages' => implode(',', $partial_pages)
+    ]);
     }
 
     $imageAnnotator->close();
 }
 
-detect_web($img);
+// detect_web($imgname);
