@@ -570,6 +570,26 @@ a.red:hover, a.red:focus, button.red:hover, button.red:focus {
     font-weight:500;
 }
 
+.single-box .list_ml span {
+    display:inline-block;
+    font-weight:500;
+}
+
+.toon {
+color: #069;
+text-decoration: underline;
+cursor: pointer;
+}
+
+.gv_results {
+display: none;
+}
+
+.performgv {
+color: #069;
+cursor: pointer;
+}
+
 /* Lightbox */
 #imagelightbox {
     position:fixed;
