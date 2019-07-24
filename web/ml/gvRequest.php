@@ -11,14 +11,15 @@ $decoded = json_decode($content, true);
 
 if (!empty($decoded)) {
 
-$row = DB::queryFirstRow('SELECT filename FROM images WHERE id = %i', $decoded['id']);
+if ( activeGVRequests() ) {
 
-detect_web($row['filename']);
+  $row = DB::queryFirstRow('SELECT filename FROM images WHERE id = %i', $decoded['id']);
 
-$google_vision_results = DB::queryFirstRow("SELECT vision_api_results.date, labels, description, matching_pages,
+  detect_web($row['filename']);
+
+  $google_vision_results = DB::queryFirstRow("SELECT vision_api_results.date, labels, description, matching_pages,
   matching_img, similar_img, partial_pages FROM vision_api_results WHERE image_id = %i ORDER BY id DESC", $decoded['id']);
 
-if (GVISION_MACHINE_LEARNING) {
 if (!empty($google_vision_results['description'])) {
   $matching_pages = explode(',', $google_vision_results['matching_pages']);
   (!empty($google_vision_results['matching_pages'])) ? $mathing_p_count = count($matching_pages) : $mathing_p_count = 0;

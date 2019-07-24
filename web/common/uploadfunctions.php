@@ -154,7 +154,7 @@ function checkUpload() {
 	    } else {
     $session->setLastUploadKey($key);
     $session->setLastUploadEmail($email);
-    if ($archived == 0 && GVISION_MACHINE_LEARNING) {
+    if ( $archived == 0 && activeGVRequests() ) {
       detect_web($filename);
     }
     $session->redirect("/wizard", "?question=$redirect");

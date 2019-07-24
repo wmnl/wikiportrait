@@ -141,7 +141,7 @@ $msg = false;
         <h3>Google Vision Analysis</h3>
         <div id='ml_resp'>
         <?php
-        if (GVISION_MACHINE_LEARNING) {
+        if ( activeGVRequests() || !empty($google_vision_results['description'])) {
         if (!empty($google_vision_results['description'])) {
           $matching_pages = explode(',', $google_vision_results['matching_pages']);
           (!empty($google_vision_results['matching_pages'])) ? $mathing_p_count = count($matching_pages) : $mathing_p_count = 0;
