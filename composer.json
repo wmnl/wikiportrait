@@ -4,7 +4,8 @@
         "ircmaxell/password-compat": "~1.0",
         "intervention/image": "~2.1",
         "xamin/handlebars.php" : "*",
-        "phpmailer/phpmailer" : "~5.2.9"
+        "phpmailer/phpmailer" : "~5.2.9",
+        "google/cloud-vision": "^0.22.5"
     },
     "config": {
         "vendor-dir": "web/vendor"

@@ -90,6 +90,24 @@ CREATE TABLE `contributors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+# Dump of table vision_api_results
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `vision_api_results`;
+
+CREATE TABLE `vision_api_results` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `image_id` int(11) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `labels` varchar(255) DEFAULT NULL,
+  `description` longtext,
+  `matching_pages` longtext,
+  `matching_img` longtext,
+  `similar_img` longtext,
+  `partial_pages` longtext,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

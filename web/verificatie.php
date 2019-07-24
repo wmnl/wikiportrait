@@ -1,9 +1,9 @@
 <?php
-    ini_set('display_errors', 1);
     use Handlebars\Handlebars;
 
     require 'common/bootstrap.php';
     require 'common/header.php';
+    // require ABSPATH . "/ml/web_entities.php";
 ?>
 <div id="content">
     <?php
@@ -13,7 +13,7 @@
         $key = $_GET['key'];
         $email = $_GET['email'];
         $row = DB::queryFirstRow("SELECT i.id as imageid, title, source, description,
-        name, ip, c.id, c.email, c.verified
+        name, ip, c.id, c.email, c.verified, filename
         FROM contributors c
         INNER JOIN images i ON `key` = %s WHERE `c`.`email` = %s", $key, $email);
 
@@ -31,6 +31,10 @@
                 'archived' => 0,
             ], 'id = %d', $row['imageid']);
 
+            // ML analysis
+            if ( activeGVRequests() ) {
+              detect_web($row['filename']);
+            }
             // send email to OTRS
             $mail = new \PHPMailer\PHPMailer\PHPMailer();
             $templateRenderer = new Handlebars;
