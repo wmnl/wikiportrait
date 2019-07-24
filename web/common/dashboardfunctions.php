@@ -9,3 +9,20 @@ function makeGVResults($results_array) {
 
 return $list;
 }
+
+function countGVRequests() {
+  $num = DB::queryFirstField("SELECT COUNT(*) FROM vision_api_results WHERE vision_api_results.date > %s and vision_api_results.date < %s",
+  Date('Y-m-01'), Date('Y-m-t') );
+
+  return $num;
+}
+
+function activeGVRequests() {
+  $num = countGVRequests();
+
+  if ($num < GV_REQUESTS_LIMIT) {
+    return True;
+  } else {
+    return False;
+  }
+}

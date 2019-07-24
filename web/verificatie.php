@@ -32,7 +32,7 @@
             ], 'id = %d', $row['imageid']);
 
             // ML analysis
-            if (GVISION_MACHINE_LEARNING) {
+            if ( activeGVRequests() ) {
               detect_web($row['filename']);
             }
             // send email to OTRS

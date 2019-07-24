@@ -4,6 +4,7 @@
         <?php if ($session->isSysop()) : ?>
         <li><a href="<?= $basispad; ?>/admin/users.php"><i class="fa fa-wrench"></i><span>Beheer</span></a></li>
         <?php endif; ?>
+        <li style='color: rgba(255, 255, 255, 0.5)'><?php echo "(in " . Date('F')  . " geanalyseerd: " . countGVRequests() . ")";?></li>
     </ul>
 
     <ul class="right">
