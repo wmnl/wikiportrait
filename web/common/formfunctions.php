@@ -120,6 +120,9 @@ function validateEmail($email) {
 
 function checkfile($file) {
     global $validationerrors;
+    if (!isset($validationerrors)) {
+      $validationerrors = [];
+    }
     $allowedext = array("image/png", "image/gif", "image/jpeg", "image/bmp", "image/pjpeg");
 
     if (!isset($file)) {
