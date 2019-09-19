@@ -63,6 +63,7 @@ $msg = false;
                 <li>
                     <?php
                     $imgurl = urlencode(BASE_URL . "/uploads/images/" . $row['filename']);
+                    $imgpath = ABSPATH . "/uploads/images/" . $row['filename'];
                     ?>
                     <a href="https://www.google.com/searchbyimage?image_url=<?= $imgurl ?>" target="_blank">Zoek naar deze afbeelding bij Google</a>
                 </li>
@@ -141,6 +142,9 @@ $msg = false;
         <h3>Google Vision Analysis</h3>
         <div id='ml_resp'>
         <?php
+        if (filesize($imgpath) > 10000000) {
+        echo "Geen analyse (Bestand is groter dan 10MB)";
+        } else {
         if ( activeGVRequests() || !empty($google_vision_results['description'])) {
         if (!empty($google_vision_results['description'])) {
           $matching_pages = explode(',', $google_vision_results['matching_pages']);
@@ -180,8 +184,9 @@ $msg = false;
             } else { // Analysis results are empty....
               echo "<span>Geen resultaten</span> <i class='performgv' onclick=\"performGVResults('". $_GET['id'] . "')\">Nog een keer analyseren</i>";
             }
-        } else { // Analysis results are empty....
-          echo "Niet geactiveerd";
+          } else { // Analysis results are empty....
+            echo "Niet geactiveerd";
+          }
         }
         ?>
         </div>
