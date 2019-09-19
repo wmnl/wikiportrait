@@ -65,7 +65,7 @@ function checkUpload() {
     $validateUploader = validateUploader();
 
     if (!hasvalidationerrors()) {
-	$mail = new \PHPMailer();
+  	$mail = new \PHPMailer();
 	$templateRenderer = new Handlebars;
   list($email_exists, $email_verified) = contributorEmailCheck($email);
 
