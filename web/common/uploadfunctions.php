@@ -47,11 +47,11 @@ function checkUpload() {
         $session->redirect("/wizard", "?question=failupload");
     }
 
+    $key = sha1_file($file['tmp_name']);
+
     if (isDuplicateFile($key)) {
         $session->redirect("/wizard", "?question=duplicate");
     }
-
-    $key = sha1_file($file['tmp_name']);
 
     isrequired('title', 'titel');
     isrequired('source', 'auteursrechthebbende');
@@ -65,7 +65,7 @@ function checkUpload() {
     $validateUploader = validateUploader();
 
     if (!hasvalidationerrors()) {
-	$mail = new \PHPMailer();
+  	$mail = new \PHPMailer();
 	$templateRenderer = new Handlebars;
   list($email_exists, $email_verified) = contributorEmailCheck($email);
 
