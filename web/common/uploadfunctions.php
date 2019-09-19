@@ -47,11 +47,11 @@ function checkUpload() {
         $session->redirect("/wizard", "?question=failupload");
     }
 
+    $key = sha1_file($file['tmp_name']);
+
     if (isDuplicateFile($key)) {
         $session->redirect("/wizard", "?question=duplicate");
     }
-
-    $key = sha1_file($file['tmp_name']);
 
     isrequired('title', 'titel');
     isrequired('source', 'auteursrechthebbende');
