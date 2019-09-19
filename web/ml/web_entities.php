@@ -7,11 +7,15 @@ putenv('GOOGLE_APPLICATION_CREDENTIALS=' . GOOGLE_CREDENTIALS);
 
 function detect_web($name)
 {
-    $imageAnnotator = new ImageAnnotatorClient();
 
-    # annotate the image
-    $path = $imgpath = ABSPATH . "/uploads/images/";
+    $path = ABSPATH . "/uploads/images/";
     $image = file_get_contents($path . $name);
+
+    if (filesize($path . $name) > 10000000) { // 10MB
+      // echo filesize($path . $name);
+    } else {
+
+    $imageAnnotator = new ImageAnnotatorClient();
     $response = $imageAnnotator->webDetection($image);
     $web = $response->getWebDetection();
     $labels = [];
@@ -67,6 +71,7 @@ function detect_web($name)
     }
 
     $imageAnnotator->close();
+  }
 }
 
 // detect_web($imgname);
