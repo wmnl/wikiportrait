@@ -36,7 +36,7 @@
               detect_web($row['filename']);
             }
             // send email to OTRS
-            $mail = new \PHPMailer\PHPMailer\PHPMailer();
+            $mail = new \PHPMailer();
             $templateRenderer = new Handlebars;
             $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody.txt");
 
