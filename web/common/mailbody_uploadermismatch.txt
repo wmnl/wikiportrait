@@ -1,0 +1,20 @@
+Beste {{name}},
+
+U heeft aangegeven bij het uploaden dat iemand anders de fotograaf of rechthebbende is.
+
+De fotograaf van de foto bezit zeer waarschijnlijk de auteursrechten van deze foto waardoor wij schriftelijke (per mail) toestemming van deze fotograaf nodig hebben. Zonder deze toestemming mogen wij deze foto niet onder de cc-by-4.0-licentie verspreiden. Alle foto's op Wikipedia zijn namelijk vrij bewerkbaar en ook buiten Wikipedia te gebruiken. Wel dient er aan naamsvermelding te worden voldaan.
+
+In dit geval kunt u de fotograaf vragen om deze toestemming aan ons te mailen. Graag de fotograaf vragen aan ons terug te mailen vanaf een eigen e-mail adres. U kunt dus niet zijn of haar toestemming kopiëren. Hieronder de tekst die de fotograaf voor het verlenen van zijn/haar toestemming kan gebruiken:
+----
+Ik verklaar hierbij dat ik de auteur en/of de enige eigenaar van de exclusieve auteursrechten ben op afbeelding met weblink https://www.wikiportret.nl/track.php?key={{key}}. Toegangslink voor medewerkers van Wikiportret: https://www.wikiportret.nl/images/single.php?id={{imageId}}.
+
+Ik verklaar hierbij dit werk te publiceren onder CC-BY-SA-4.0 en ik verklaar dat ik eenieder het recht geef om het werk te gebruiken in een commercieel product en het te wijzigen naar behoefte, zoals CC-BY-SA-4.0 voorschrijft.
+
+Ik ben me ervan bewust dat ik altijd de rechten van mijn werk behoud en het recht behoud om met mijn naam vermeld te worden volgens de CC-BY-SA-4.0.
+
+Ik ben me ervan bewust dat ik deze verklaring niet in kan trekken, en dat de tekst permanent kan worden bewaard op een Wikimedia-project.
+
+Onderteken met uw naam, de datum en uw woonplaats
+----
+
+Met vriendelijke groet, de vrijwilligers van Wikiportret.
