@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="nl">
+    <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
@@ -13,8 +13,8 @@
     <title>Wikiportret - Stel uw foto's ter beschikking</title>
 
     <meta name="description" content="Staat er op Wikipedia een artikel zonder portretfoto? En heeft u een foto die bij een artikel zou passen? Stel dan uw foto hier ter beschikking." />
-
-    <script>
+    <?php if (strpos($_SERVER['SERVER_NAME'], "wikiportret.nl") !== false) { ?>
+        <script>
         // Set to the same value as the web property used on the site
         var gaProperty = 'UA-8050986-7';
         // Disable tracking if the opt-out cookie exists.
@@ -28,9 +28,8 @@
             window[disableStr] = true;
         }
     </script>
-
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
@@ -40,6 +39,7 @@
         ga('set', 'anonymizeIp', true);
         ga('send', 'pageview');
     </script>
+    <?php } ?>
 </head>
 <body>
     <div id="all">

@@ -1,4 +1,5 @@
 <?php
+
 use Intervention\Image\ImageManager;
 use Handlebars\Handlebars;
 
@@ -6,9 +7,9 @@ require ABSPATH . "/ml/web_entities.php";
 
 function removeAccentedCharacters($str) {
     return strtr($str, [
-        'á'=>'a','à'=>'a','ä'=>'a','â'=>'a','é'=>'e','è'=>'e','ê'=>'e',
-        'ë'=>'e','ì'=>'i','í'=>'i','î'=>'i','ï'=>'i','ò'=>'o','ó'=>'o',
-        'ô'=>'o','ö'=>'o','ù'=>'u','ú'=>'u','û'=>'u','ü'=>'u','ç'=>'c'
+	'á' => 'a', 'à' => 'a', 'ä' => 'a', 'â' => 'a', 'é' => 'e', 'è' => 'e', 'ê' => 'e',
+	'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ò' => 'o', 'ó' => 'o',
+	'ô' => 'o', 'ö' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u', 'ç' => 'c'
     ]);
 }
 
@@ -35,7 +36,7 @@ function checkUpload() {
 
     $file = $_FILES['file'];
     $title = $_POST['title'];
-    $source = $_POST['source'];
+    $source = $_POST['source_self'] == "Yes" ? $_POST['name'] : $_POST['source'];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $ip = $_SERVER["REMOTE_ADDR"];
@@ -43,49 +44,54 @@ function checkUpload() {
     $desc = $_POST['description'];
 
     $fileresult = checkfile($_FILES['file']);
-    if($fileresult!=='ok') {
-        $session->redirect("/wizard", "?question=failupload");
+    if ($fileresult !== 'ok') {
+	$session->redirect("/wizard", "?question=failupload");
     }
 
     $key = sha1_file($file['tmp_name']);
 
     if (isDuplicateFile($key)) {
-        $session->redirect("/wizard", "?question=duplicate");
+	$session->redirect("/wizard", "?question=duplicate");
     }
 
     isrequired('title', 'titel');
-    isrequired('source', 'auteursrechthebbende');
+    $_POST['source_self'] != "Yes" ? isrequired('source', 'auteursrechthebbende') : '';
     isrequired('name', 'naam');
     $mailresult = validateEmail('email');
-    if($mailresult!=='ok') {
-        $session->redirect("/wizard", "?question=failupload");
+    if ($mailresult !== 'ok') {
+	$session->redirect("/wizard", "?question=failupload");
     }
     agreeterms('terms', 'de licentievoorwaarden, de privacyverklaring en het opslaan van uw IP-adres');
     agreeterms('euvs', 'de toestemming voor het opslaan van uw gegevens');
     $validateUploader = validateUploader();
 
     if (!hasvalidationerrors()) {
-  	$mail = new \PHPMailer();
+	$mail = new \PHPMailer();
 	$templateRenderer = new Handlebars;
-  list($email_exists, $email_verified) = contributorEmailCheck($email);
+	list($email_exists, $email_verified) = contributorEmailCheck($email);
 
-	if ($validateUploader) {
+	if ($validateUploader == 'selfie') {
 	    $archived = 1;
 	    $subject = "[Wikiportret] $title is geüpload op Wikiportret";
-	    $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_uploadercheck.txt");
-      $redirect = "success";
-	} else {
-      if ($email_verified) {
-      $archived = 0;
-      $subject = "[Wikiportret] $title is geüpload op Wikiportret";
-      $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody.txt");
-      $redirect = "success";
-      } else {
+	    $bodyTxt = file_get_contents (ABSPATH . "/common/mailbody_uploadercheck.txt");
+	    $redirect = "success";
+	    } elseif ($validateUploader == 'invalid') {
 	    $archived = 1;
-	    $subject = "[Wikiportret] Uw email verifiëren";
-	    $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_verificatie.txt");
-      $redirect = "verificatie";
-      }
+	    $subject = "[Wikiportret] $title is geüpload op Wikiportret";
+	    $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_uploadermismatch.txt");
+	    $redirect = "success";
+	} else {
+	    if ($email_verified) {
+		$archived = 0;
+		$subject = "[Wikiportret] $title is geüpload op Wikiportret";
+		$bodyTxt = file_get_contents(ABSPATH . "/common/mailbody.txt");
+		$redirect = "success";
+	    } else {
+		$archived = 1;
+		$subject = "[Wikiportret] Uw email verifiëren";
+		$bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_verificatie.txt");
+		$redirect = "verificatie";
+	    }
 	}
 
 	$time = new DateTime();
@@ -100,11 +106,11 @@ function checkUpload() {
 	    $thumb->fit(300, 300);
 	    $thumb->save($thumbpath);
 
-    if (!$email_exists)
-	    DB::insert('contributors', [
-		'email' => $email,
-		'verified' => 0,
-	    ]);
+	    if (!$email_exists)
+		DB::insert('contributors', [
+		    'email' => $email,
+		    'verified' => 0,
+		]);
 
 	    DB::insert('images', [
 		'filename' => $filename,
@@ -124,7 +130,7 @@ function checkUpload() {
 	    $body = $templateRenderer->render($bodyTxt, [
 		'title' => $title,
 		'name' => $name,
-    'email' => $email,
+		'email' => $email,
 		'source' => $source,
 		'desc' => $desc,
 		'ip' => $ip,
@@ -137,12 +143,12 @@ function checkUpload() {
 	    $mail->CharSet = 'UTF-8';
 
 	    if ($validateUploader) {
-      $mail->addAddress($email, $name);
-      $mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue");
-      } else {
-      $email_verified ? $mail->addAddress(OTRS_MAIL, "Wikiportret OTRS queue") : $mail->addAddress($email, "Wikiportret OTRS queue");
-      $email_verified ? $mail->addReplyTo($email, $name) : $mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue");
-      };
+		$mail->addAddress($email, $name);
+		$mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue");
+	    } else {
+		$email_verified ? $mail->addAddress(OTRS_MAIL, "Wikiportret OTRS queue") : $mail->addAddress($email, "Wikiportret OTRS queue");
+		$email_verified ? $mail->addReplyTo($email, $name) : $mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue");
+	    };
 
 	    $mail->Subject = $subject;
 	    $mail->isHTML(true);
@@ -152,13 +158,13 @@ function checkUpload() {
 	    if (!$mail->send()) {
 		$session->redirect("/wizard", "?question=failupload");
 	    } else {
-    $session->setLastUploadKey($key);
-    $session->setLastUploadEmail($email);
-    if ( $archived == 0 && activeGVRequests() ) {
-      detect_web($filename);
-    }
-    $session->redirect("/wizard", "?question=$redirect");
+		$session->setLastUploadKey($key);
+		$session->setLastUploadEmail($email);
+		if ($archived == 0 && activeGVRequests()) {
+		    detect_web($filename);
+		}
+		$session->redirect("/wizard", "?question=$redirect");
 	    }
-	  }
-  }
+	}
+    }
 }

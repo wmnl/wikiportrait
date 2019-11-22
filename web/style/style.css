@@ -266,6 +266,9 @@ form {
     width:100%;
     margin-bottom:10px;
 }
+.input-container.hidden {
+    display:none;
+}
 
 .input-container:last-child {
     margin-bottom:0px;
@@ -285,7 +288,7 @@ label {
     -ms-user-select:none;
 }
 
-input[type="text"], input[type="password"], input[type="email"], input[type="date"], textarea, .file, .checkbox {
+input[type="text"], input[type="password"], input[type="email"], input[type="date"], textarea, .file, .checkbox, .radiogroup {
     display:table-cell;
     margin:0px;
     width:100%;
@@ -347,6 +350,12 @@ input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hov
     transition:background 0.2s linear;
 }
 
+input[type="radio"]:not(:last-child) {
+    margin-bottom: 10px;
+}
+input[type="radio"] {
+    margin-right: 10px;
+}
 .bigbutton {
     font-size:150%;
 }
@@ -576,18 +585,18 @@ a.red:hover, a.red:focus, button.red:hover, button.red:focus {
 }
 
 .toon {
-color: #069;
-text-decoration: underline;
-cursor: pointer;
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .gv_results {
-display: none;
+    display: none;
 }
 
 .performgv {
-color: #069;
-cursor: pointer;
+    color: #069;
+    cursor: pointer;
 }
 
 /* Lightbox */
