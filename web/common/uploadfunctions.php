@@ -142,7 +142,7 @@ function checkUpload() {
 	    $mail->From = OTRS_MAIL;
 	    $mail->CharSet = 'UTF-8';
 
-	    if ($validateUploader) {
+	    if ($validateUploader!=="valid") {
 		$mail->addAddress($email, $name);
 		$mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue");
 	    } else {
