@@ -85,16 +85,16 @@ function checkusername($username) {
 }
 
 function isDuplicateFile($file_hash) {
-  $query = DB::queryRaw('SELECT `key` from images ORDER BY id DESC');
-  if ($query->num_rows > 0) {
-    while ($files = $query->fetch_array(MYSQLI_NUM)) {
-      if (in_array($file_hash, $files)) {
-        addvalidationerror(DUPLICATE_ERROR);
-        return True;
-      }
+    $query = DB::queryRaw('SELECT `key` from images ORDER BY id DESC');
+    if ($query->num_rows > 0) {
+	while ($files = $query->fetch_array(MYSQLI_NUM)) {
+	    if (in_array($file_hash, $files)) {
+		addvalidationerror(DUPLICATE_ERROR);
+		return True;
+	    }
+	}
     }
-  }
-  return False;
+    return False;
 }
 
 function comparepassword($pass1, $pass2) {
@@ -121,7 +121,7 @@ function validateEmail($email) {
 function checkfile($file) {
     global $validationerrors;
     if (!isset($validationerrors)) {
-      $validationerrors = [];
+	$validationerrors = [];
     }
     $allowedext = array("image/png", "image/gif", "image/jpeg", "image/bmp", "image/pjpeg");
 
@@ -139,7 +139,7 @@ function checkfile($file) {
 function addvalidationerror($message) {
     global $validationerrors;
     if (!isset($validationerrors)) {
-      $validationerrors = [];
+	$validationerrors = [];
     }
     array_push($validationerrors, $message);
 }
@@ -150,5 +150,11 @@ function hasvalidationerrors() {
 }
 
 function validateUploader() {
-    return strtolower(filter_input(INPUT_POST, 'title')) == strtolower(filter_input(INPUT_POST, 'name'));
+    if (strtolower(filter_input(INPUT_POST, 'title')) == strtolower(filter_input(INPUT_POST, 'name'))) {
+	return 'selfie';
+    } elseif (strtolower(filter_input(INPUT_POST, 'source')) == strtolower(filter_input(INPUT_POST, 'name'))) {
+	return 'valid';
+    } else {
+	return 'invalid';
+    }
 }
