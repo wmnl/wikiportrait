@@ -288,7 +288,7 @@ label {
     -ms-user-select:none;
 }
 
-input[type="text"], input[type="password"], input[type="email"], input[type="date"], textarea, .file, .checkbox, .radiogroup {
+input[type="text"], input[type="password"], input[type="email"], input[type="date"], textarea, .file, .checkbox, .radiogroup, #categoriesContainer {
     display:table-cell;
     margin:0px;
     width:100%;
@@ -302,7 +302,13 @@ input[type="text"], input[type="password"], input[type="email"], input[type="dat
     border-bottom-right-radius:5px;
     color:#444;
 }
-
+#categoriesContainer .checkbox {
+    border: none;
+}
+#categoriesContainer .alert {
+    color: #990000;
+    font-size: 85%;
+}
 textarea {
     height:auto;
     resize:none;
