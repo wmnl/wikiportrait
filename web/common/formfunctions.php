@@ -20,6 +20,10 @@ function getCommonsUploadLink($row) {
     $author = $row['source'];
     $filename = $row['filename'];
     $baselink = "https://commons.wikimedia.org/wiki/Special:Upload";
+    $categories = '';
+    foreach (json_decode($row['categories']) as $cat) {
+	$categories .= '[[Category:' . str_replace('Category:', '', $cat) . ']]' . PHP_EOL;
+    }
     $description = <<<EOT
 == {{int:filedesc}} ==
 {{Information
@@ -30,6 +34,7 @@ function getCommonsUploadLink($row) {
     |Author=$author
 }}
 {{wikiportrait2|$otrsTicket}}
+$categories
 EOT;
 
     $urlargs = http_build_query([
