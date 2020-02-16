@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
-    <link rel="stylesheet" href="<?= $basispad ?>/style/style.css" />
-    <link rel="stylesheet" href="<?= $basispad ?>/style/responsive.css" />
-    <link rel="stylesheet" href="<?= $basispad; ?>/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../style/style.css" />
+    <link rel="stylesheet" href="../style/responsive.css" />
+    <link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.min.css">
 
-    <script src="<?= $basispad; ?>/lib/jquery/dist/jquery.min.js"></script>
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
 
     <title>Wikiportret - Stel uw foto's ter beschikking</title>
 
