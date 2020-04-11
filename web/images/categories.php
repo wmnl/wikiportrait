@@ -20,8 +20,8 @@ function checkIfCategoryExists($cat) {
     $params = [
 	"action" => "query",
 	"format" => "json",
-	"titles" => "Category:$cat",
-	"prop" => "pageprops"
+	"titles" => "Category:" . $cat,
+        "prop" => "pageprops"
     ];
     $url = commonsApi . "?" . http_build_query($params);
 
@@ -37,8 +37,8 @@ function findAlternativeCategories($cat) {
     $params = [
 	"action" => "query",
 	"format" => "json",
-	"srsearch" => "$cat",
-	"list" => "search",
+	"srsearch" => strtolower($cat),
+        "list" => "search",
 	"srnamespace" => categoryNS
     ];
     $url = commonsApi . "?" . http_build_query($params);
