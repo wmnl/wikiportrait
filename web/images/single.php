@@ -136,13 +136,12 @@ $msg = false;
 			    <?php
 			    foreach ($accounts as $rowdata):
 				$selected = "";
-
-				if ($rowdata['id'] == $owner['owner']) {
-				    $selected = 'selected="selected"';
+                                if ($rowdata['id'] == $owner['owner']) {
+                                    $selected = 'selected="selected"';
 				}
 				?>
-    			    <option value="<?= $row['id'] ?>" <?= $selected ?>><?= $rowdata['otrsname'] ?></option>
-				<?php
+                                <option value="<?= $rowdata['id'] ?>" <?= $selected ?>><?= $rowdata['otrsname'] ?></option>
+                                <?php
 			    endforeach;
 			    ?>
                         </select>
