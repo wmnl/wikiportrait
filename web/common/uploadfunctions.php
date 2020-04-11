@@ -4,6 +4,7 @@ use Intervention\Image\ImageManager;
 use Handlebars\Handlebars;
 
 require ABSPATH . "/ml/web_entities.php";
+require_once ABSPATH . "/vendor/autoload.php";
 
 function removeAccentedCharacters($str) {
     return strtr($str, [
@@ -66,7 +67,7 @@ function checkUpload() {
     $validateUploader = validateUploader();
 
     if (!hasvalidationerrors()) {
-	$mail = new \PHPMailer\PHPMailer();
+	$mail = new \PHPMailer\PHPMailer\PHPMailer();
         $templateRenderer = new Handlebars;
 	list($email_exists, $email_verified) = contributorEmailCheck($email);
 
