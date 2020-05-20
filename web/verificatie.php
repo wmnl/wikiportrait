@@ -31,12 +31,8 @@
                 'archived' => 0,
             ], 'id = %d', $row['imageid']);
 
-            // ML analysis
-            if ( activeGVRequests() ) {
-              detect_web($row['filename']);
-            }
             // send email to OTRS
-            $mail = new \PHPMailer();
+            $mail = new  \PHPMailer\PHPMailer\PHPMailer();
             $templateRenderer = new Handlebars;
             $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody.txt");
 
@@ -62,6 +58,10 @@
         	  $mail->AltBody = $body;
 
             $mail->send();
+            // ML analysis
+            if ( activeGVRequests() ) {
+              detect_web($row['filename']);
+            }
     ?>
 
     <h2>Email geverifieerd, Bedankt!</h2>

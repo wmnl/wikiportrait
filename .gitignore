@@ -5,3 +5,4 @@ uploads/
 config/
 .DS_Store
 .idea/*
+/web/common/config.php.live

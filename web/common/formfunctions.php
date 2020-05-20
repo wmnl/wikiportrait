@@ -21,8 +21,10 @@ function getCommonsUploadLink($row) {
     $filename = $row['filename'];
     $baselink = "https://commons.wikimedia.org/wiki/Special:Upload";
     $categories = '';
+    if(array_key_exists('categories',$row) {
     foreach (json_decode($row['categories']) as $cat) {
 	$categories .= '[[Category:' . str_replace('Category:', '', $cat) . ']]' . PHP_EOL;
+    }
     }
     $description = <<<EOT
 == {{int:filedesc}} ==
@@ -154,11 +156,12 @@ function hasvalidationerrors() {
     return count($validationerrors) > 0;
 }
 
-function validateUploader() {
+function validateUploader($source) {
     if (strtolower(filter_input(INPUT_POST, 'title')) == strtolower(filter_input(INPUT_POST, 'name'))) {
 	return 'selfie';
-    } elseif (strtolower(filter_input(INPUT_POST, 'source')) == strtolower(filter_input(INPUT_POST, 'name'))) {
-	return 'valid';
+    } else
+    if (strtolower($source) == strtolower(filter_input(INPUT_POST, 'name'))) {
+        return 'valid';
     } else {
 	return 'invalid';
     }
