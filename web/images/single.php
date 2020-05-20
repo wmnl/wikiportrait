@@ -167,9 +167,11 @@ $msg = false;
 		<div class="input-container">
 		    <label for="categories">Categorieën: </label>
 		    <div id="categoriesContainer"><div class="checkbox"><?php
+		    if(array_key_exists('categories',$row) {
 			    foreach (json_decode($owner['categories']) as $category) {
 				echo '	<input type="checkbox" name="categories[]" value="Category:' . str_replace('Category:', '', $category) . '" id="categories_' . strtolower(preg_replace('/\s/i', '_', str_replace('Category:', '', $category))) . '" checked="checked"><label for="categories_' . strtolower(preg_replace('/\s/i', '_', str_replace('Category:', '', $category))) . '">' . str_replace('Category:', '', $category) . '</label><br>';
 			    }
+		    }
 ?></div></div>
 		</div>
                 <div class="bottom right">

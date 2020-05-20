@@ -64,7 +64,7 @@ function checkUpload() {
     }
     agreeterms('terms', 'de licentievoorwaarden, de privacyverklaring en het opslaan van uw IP-adres');
     agreeterms('euvs', 'de toestemming voor het opslaan van uw gegevens');
-    $validateUploader = validateUploader();
+    $validateUploader = validateUploader($source);
 
     if (!hasvalidationerrors()) {
 	$mail = new \PHPMailer\PHPMailer\PHPMailer();
