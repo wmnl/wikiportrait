@@ -1,5 +1,6 @@
 <?php
 
+// phpcs:disable PSR1.Files.SideEffects
 // Loads config and necessary stuff
 require 'config.php';
 $basispad = BASE_URL;
@@ -10,6 +11,7 @@ define('ADMIN_ERROR', "<br>Deze pagina is voor admins bedoeld.<br>");
 define('DUPLICATE_ERROR', "Deze afbeedling is al geüpload");
 define('GVISION_MACHINE_LEARNING', true);
 define('GV_REQUESTS_LIMIT', 900);
+define('CLOSED', true); //Don't allow uploads
 header("Access-Control-Allow-Origin: *");
 DB::$user = DB_USER;
 DB::$password = DB_PASS;
@@ -24,7 +26,8 @@ $session = new Session();
 
 if (!function_exists('is_countable')) {
 
-    function is_countable($var) {
+    function is_countable($var)
+    {
         return (is_array($var) || $var instanceof Countable);
     }
 
