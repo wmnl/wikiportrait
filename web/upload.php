@@ -162,24 +162,16 @@ if (!empty($_POST['source'])) {
             ?>
             <textarea disabled="disabled"><?= $licentie; ?></textarea>
         </div>
-
-        <div class="input-container">
+            <?php //phpcs:disable Generic.Files.LineLength.TooLong ?>
+            <div class="input-container">
             <label for="terms"><i aria-hidden="true" class="fa fa-gavel fa-lg fa-fw"></i>Toestemming</label>
             <div class="checkbox">
-                <input type="checkbox" name="terms" id="terms" /><label for="terms">Ja, ik ga akkoord met de
-                    bovenstaande licentievoorwaarden, de <a href="<?= $basispad ?>/privacyverklaring.php"
-                                                            target="_blank">privacyverklaring</a> en het opslaan van
-                    mijn IP-adres.</label><br />
-                <input type="checkbox" name="euvs" id="euvs" /><label for="euvs">Ja, ik geef toestemming voor het
-                    opslaan van mijn gegevens op de servers van de Wikimedia Foundation in de Verenigde Staten,
-                    waarbij de gegevens niet worden doorgegeven op grond van het EU-US Privacy Shield of de wettelijke
-                    uitzondering die is opgenomen in artikel 77 van de Wet bescherming persoonsgegevens (Wbp). Bij
-                    doorgifte buiten de Europese Unie bestaat er een kans dat het beschermingsniveau minder hoog zal
-                    zijn dan binnen de EU.</label>
-            </div>
+                    <input type="checkbox" name="terms" id="terms" /><label for="terms">Ja, ik ga akkoord met de bovenstaande licentievoorwaarden, de <a href="<?= $basispad ?>/privacyverklaring.php" target="_blank">privacyverklaring</a> en het opslaan van mijn IP-adres.</label><br />
+                    <input type="checkbox" name="euvs" id="euvs" /><label for="euvs">Ja, ik geef toestemming voor het opslaan van mijn gegevens op de servers van de Wikimedia Foundation in de Verenigde Staten, waarbij de gegevens niet worden doorgegeven op grond van het EU-US Privacy Shield of de wettelijke uitzondering die is opgenomen in artikel 77 van de Wet bescherming persoonsgegevens (Wbp). Bij doorgifte buiten de Europese Unie bestaat er een kans dat het beschermingsniveau minder hoog zal zijn dan binnen de EU.</label>
+                </div>
         </div>
-
-        <div class="bottom right">
+            <?php //phpcs:enable Generic.Files.LineLength.TooLong ?>
+            <div class="bottom right">
             <input type='hidden' name='postback'></input>
             <button class="green" type='button' onclick='disableButton(this)'><i aria-hidden="true"
                                                                                  class="fa fa-cloud-upload fa-lg"
@@ -189,13 +181,15 @@ if (!empty($_POST['source'])) {
     </form>
 </div>
 <?php } else { ?>
-    <h2>Welkom op Wikiportret!</h2>
+    <div id="content">
+        <h2>Welkom op Wikiportret!</h2>
     <p>Helaas is het momenteel niet mogelijk om foto's te uploaden.
         Het is niet bekend wanneer Wikiportret weer beschikbaar is.
         U kunt in de tussentijd uw foto rechtstreeks uploaden naar
         <a href="https://commons.wikimedia.org/wiki/Special:UploadWizard?uselang=nl"
            target="_blank" rel="noopener nofollow">Wikimedia Commons</a></p>
-    <p>Onze excuses voor het ongemak<br>Team Wikiportret</p>
+           <p>Onze excuses voor het ongemak<br>Team Wikiportret</p>
+    </div>
 <?php } ?>
 <?php
             include 'common/footer.php';
