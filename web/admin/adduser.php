@@ -4,31 +4,31 @@
     $session->checkAdmin();
     include 'tabs.php';
 
-    if (isset($_POST['postback'])) {
-        $admin = isset($_POST['admin']);
+if (isset($_POST['postback'])) {
+    $admin = isset($_POST['admin']);
 
-        isrequired('username', 'gebruikersnaam');
-        isrequired('otrsname', 'OTRS-naam');
-        isrequired('password', 'wachtwoord');
-        checkusername($_POST['username']);
-        comparepassword($_POST['password'], $_POST['password2']);
-        validateEmail('email');
+    isrequired('username', 'gebruikersnaam');
+    isrequired('otrsname', 'OTRS-naam');
+    isrequired('password', 'wachtwoord');
+    checkusername($_POST['username']);
+    comparepassword($_POST['password'], $_POST['password2']);
+    validateEmail('email');
 
-        if (!hasvalidationerrors()) {
-            $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    if (!hasvalidationerrors()) {
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-            DB::insert('users', [
-                'username' => $_POST['username'],
-                'password' => $password,
-                'otrsname' => $_POST['otrsname'],
-                'email' => $_POST['email'],
-                'isSysop' => $admin,
-                'active' => 1
-            ]);
+        DB::insert('users', [
+            'username' => $_POST['username'],
+            'password' => $password,
+            'otrsname' => $_POST['otrsname'],
+            'email' => $_POST['email'],
+            'isSysop' => $admin,
+            'active' => 1
+        ]);
 
-            $session->redirect("/admin/users");
-        }
+        $session->redirect("/admin/users");
     }
+}
 ?>
 <div id="content">
 
@@ -38,20 +38,24 @@
     </div>
 
     <?php
-        if (hasvalidationerrors()) {
-            showvalidationsummary();
-        }
+    if (hasvalidationerrors()) {
+        showvalidationsummary();
+    }
     ?>
 
     <form method="post">
         <div class="input-container">
         <label for="username"><i class="fa fa-user fa-lg fa-fw"></i>Gebruikersnaam</label>
-        <input type="text" name="username" id="username" value="<?php if (isset($_POST['username'])) echo $_POST['username'] ?>"/>
+        <input type="text" name="username" id="username" value="<?php if (isset($_POST['username'])) {
+            echo $_POST['username'];
+                                                                } ?>"/>
         </div>
 
         <div class="input-container">
         <label for="otrsname"><i class="fa fa-briefcase fa-lg fa-fw"></i>OTRS-naam</label>
-        <input type="text" name="otrsname" id="otrsname" <?php if (isset($_POST['otrsname'])) echo $_POST['otrsname'] ?> />
+        <input type="text" name="otrsname" id="otrsname" <?php if (isset($_POST['otrsname'])) {
+            echo $_POST['otrsname'];
+                                                         } ?> />
         </div>
 
         <div class="input-container">
@@ -66,7 +70,9 @@
 
         <div class="input-container">
         <label for="email"><i class="fa fa-envelope fa-lg fa-fw"></i>E-mailadres</label>
-        <input type="email" name="email" id="email" <?php if (isset($_POST['email'])) echo $_POST['email'] ?> />
+        <input type="email" name="email" id="email" <?php if (isset($_POST['email'])) {
+            echo $_POST['email'];
+                                                    } ?> />
         </div>
 
         <div class="input-container">
