@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Remko">
+    <description>Custom made for Remko
+    </description>
+    <rule ref="PSR12"/>
+    <rule ref="Generic.Debug.JSHint"/>
+    <rule ref="Generic.Debug.CSSLint"/>
+    <rule ref="MySource.PHP.EvalObjectFactory"/>
+    <rule ref="MySource.PHP.AjaxNullComparison"/>
+    <rule ref="Squiz.PHP.EmbeddedPhp"/>
+    <rule ref="Squiz.PHP.Eval"/>
+    <rule ref="Generic.PHP.ForbiddenFunctions.Found"/>
+    <rule ref="Squiz.PHP.LowercasePHPFunctions"/>
+    <rule ref="Squiz.PHP.NonExecutableCode"/>
+    <rule ref="Squiz.Scope.MemberVarScope"/>
+    <rule ref="Squiz.Scope.StaticThisUsage"/>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+    <rule ref="Generic.Formatting.SpaceAfterCast"/>
+    <rule ref="Generic.PHP.DeprecatedFunctions"/>
+    <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+
+    <file>.</file>
+
+    <exclude-pattern>vendor</exclude-pattern>
+
+    <arg value='sv'/>
+    <arg name='colors'/>
+</ruleset>

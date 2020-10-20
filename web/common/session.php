@@ -1,49 +1,65 @@
 <?php
-class Session {
-    function __construct() {
+
+namespace Wikiportret\Common;
+
+class Session
+{
+    public function __construct()
+    {
         session_start();
         $cookieLifetime = 365 * 24 * 60 * 60;
-        setcookie(session_name(),session_id(),time()+$cookieLifetime);
+        setcookie(session_name(), session_id(), time()+$cookieLifetime);
     }
 
-    public function getLastUploadKey() {
+    public function getLastUploadKey()
+    {
         return $_SESSION['lastuploadkey'];
     }
 
-    public function setLastUploadKey($key) {
+    public function setLastUploadKey($key)
+    {
         $_SESSION['lastuploadkey'] = $key;
     }
 
-    public function getLastUploadEmail() {
+    public function getLastUploadEmail()
+    {
         return $_SESSION['email'];
     }
 
-    public function setLastUploadEmail($email) {
+    public function setLastUploadEmail($email)
+    {
         $_SESSION['email'] = $email;
     }
 
-    public function redirect($page, $args = false) {
+    public function redirect($page, $args = false)
+    {
         global $basispad;
         $location = "Location:$basispad$page.php";
-        if ($args) $location .= $args;
+        if ($args) {
+            $location .= $args;
+        }
         header($location);
     }
 
-    public function isLoggedIn() {
+    public function isLoggedIn()
+    {
         return !empty($_SESSION['user']);
     }
 
-    public function isSysop() {
+    public function isSysop()
+    {
         return !empty($_SESSION['isSysop']);
     }
 
-    public function checkLogin() {
+    public function checkLogin()
+    {
         if (!$this->isLoggedIn()) {
             $this->redirect("/admin/index");
         }
     }
 
-    public function checkAdmin() {
+    public function checkAdmin()
+    {
         $this->checkLogin();
 
         if (!$this->isSysop()) {
@@ -51,11 +67,13 @@ class Session {
         }
     }
 
-    public function getUserName() {
+    public function getUserName()
+    {
         return $_SESSION['username'];
     }
 
-    public function login($user, $pass) {
+    public function login($user, $pass)
+    {
         $row = DB::queryFirstRow("SELECT * FROM users WHERE username = %s AND active = 1", $_POST['username']);
 
         if (!$row) {
@@ -74,7 +92,8 @@ class Session {
         return true;
     }
 
-    public function logout() {
+    public function logout()
+    {
         session_destroy();
         $this->redirect("/admin/index");
     }

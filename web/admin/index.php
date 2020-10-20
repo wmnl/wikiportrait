@@ -2,31 +2,31 @@
     require '../common/bootstrap.php';
 
     // Check for old v1 url's, and if so, redirect to old installation
-    if (!empty($_GET['id']) && !empty($_GET['secret']) && defined('V1_PATH')) {
-        $url = sprintf(V1_PATH . '/admin/?id=%s&secret=%s', $_GET['id'], $_GET['secret']);
-        header("Location:$url");
-    }
+if (!empty($_GET['id']) && !empty($_GET['secret']) && defined('V1_PATH')) {
+    $url = sprintf(V1_PATH . '/admin/?id=%s&secret=%s', $_GET['id'], $_GET['secret']);
+    header("Location:$url");
+}
 
-    if (!empty($_GET['logout'])) {
-        $session->logout();
-    }
+if (!empty($_GET['logout'])) {
+    $session->logout();
+}
 
-    if (isset($_POST['postback'])) {
-        isrequired('username', 'gebruikersnaam');
-        isrequired('password', 'wachtwoord');
+if (isset($_POST['postback'])) {
+    isrequired('username', 'gebruikersnaam');
+    isrequired('password', 'wachtwoord');
 
-        if (!hasvalidationerrors()) {
-            if ($session->login($_POST['username'], $_POST['password'])) {
-                $session->redirect("/index");
-            } else {
-                addvalidationerror("Gebruikersnaam of wachtwoord is verkeerd");
-            }
+    if (!hasvalidationerrors()) {
+        if ($session->login($_POST['username'], $_POST['password'])) {
+            $session->redirect("/index");
+        } else {
+            addvalidationerror("Gebruikersnaam of wachtwoord is verkeerd");
         }
     }
+}
 
-    if ($session->isLoggedIn()) {
-        $session->redirect("/images/overview");
-    }
+if ($session->isLoggedIn()) {
+    $session->redirect("/images/overview");
+}
 
     require '../common/header.php';
 ?>
@@ -36,9 +36,9 @@
     <p>Hier kunnen medewerkers van Wikiportret inloggen in het beheergedeelte.</p>
 
     <?php
-        if (hasvalidationerrors()) {
-            showvalidationsummary();
-        }
+    if (hasvalidationerrors()) {
+        showvalidationsummary();
+    }
     ?>
 
     <form method="post">

@@ -1,7 +1,8 @@
 <?php
+// phpcs:disable PSR1.Files.SideEffects
 
-define('commonsApi', 'https://commons.wikimedia.org/w/api.php');
-define('categoryNS', 14);
+define('COMMONSAPI', 'https://commons.wikimedia.org/w/api.php');
+define('CATEGORYNS', 14);
 
 $categories = filter_input(INPUT_POST, 'cat', FILTER_SANITIZE_STRING, FILTER_FORCE_ARRAY);
 $cats = [];
@@ -12,18 +13,19 @@ foreach ($categories as $cat) {
 }
 
 foreach ($altCatsResult['search'] as $searchresult) {
-    $cats[] = [$searchresult['title'] => TRUE];
+    $cats[] = [$searchresult['title'] => true];
 }
 echo json_encode($cats);
 
-function checkIfCategoryExists($cat) {
+function checkIfCategoryExists($cat)
+{
     $params = [
-	"action" => "query",
-	"format" => "json",
-	"titles" => "Category:" . $cat,
+    "action" => "query",
+    "format" => "json",
+    "titles" => "Category:" . $cat,
         "prop" => "pageprops"
     ];
-    $url = commonsApi . "?" . http_build_query($params);
+    $url = COMMONSAPI . "?" . http_build_query($params);
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -33,15 +35,16 @@ function checkIfCategoryExists($cat) {
     return $result["query"]["pages"];
 }
 
-function findAlternativeCategories($cat) {
+function findAlternativeCategories($cat)
+{
     $params = [
-	"action" => "query",
-	"format" => "json",
-	"srsearch" => strtolower($cat),
+    "action" => "query",
+    "format" => "json",
+    "srsearch" => strtolower($cat),
         "list" => "search",
-	"srnamespace" => categoryNS
+    "srnamespace" => CATEGORYNS
     ];
-    $url = commonsApi . "?" . http_build_query($params);
+    $url = COMMONSAPI . "?" . http_build_query($params);
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
