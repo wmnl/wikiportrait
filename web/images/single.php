@@ -113,7 +113,7 @@ $msg = false;
                     $imgurl = urlencode(BASE_URL . "/uploads/images/" . $row['filename']);
                     $imgpath = ABSPATH . "/uploads/images/" . $row['filename'];
                     ?>
-                    <a href="https://www.google.com/searchbyimage?image_url=<?= $imgurl ?>" target="_blank">Zoek naar
+                    <a href="https://www.google.com/searchbyimage?image_url=<?= $imgurl ?>&q=<?= urlencode($row['title']); ?>" target="_blank">Zoek naar
                         deze afbeelding bij Google</a>
                 </li>
                 <?php
