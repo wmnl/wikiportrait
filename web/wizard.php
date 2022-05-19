@@ -37,13 +37,13 @@ if (!isset($_GET['question'])) {
             result("duplicate");
             break;
 
-        case "first":
+        default: // including "first":
             showquestion("Is het hoofdonderwerp van de foto mogelijk auteursrechtelijk beschermd? (Bijvoorbeeld: hoes "
-            . "van CD of DVD, logo, reclamebord)", "noupload", "ownwork", "Als u een foto maakt, heeft u zelf de "
+            . "van cd of dvd, logo, reclamebord)", "noupload", "ownwork", "Als u een foto maakt, heeft u zelf de "
             . "auteursrechten van die foto. Als u echter een foto maakt van iets anders, waarop ook auteursrechten "
             . "rusten, dan mag u uw foto toch niet vrij verspreiden. Dat kan bijvoorbeeld zo zijn bij foto's van "
-            . "een CD-hoes, DVD-hoes, logo, reclamebord of (film)poster. Het uploaden van uw foto betekent dan dat "
-            . "u de auteursrechten schendt op die CD-hoes enz.");
+            . "een cd-hoes, dvd-hoes, logo, reclamebord of (film)poster. Het uploaden van uw foto betekent dan dat "
+            . "u de auteursrechten schendt op die cd-hoes enz.");
             break;
 
         case "ownwork":
@@ -86,14 +86,6 @@ if (!isset($_GET['question'])) {
             . "betekent dus ook dat uw foto voor een commercieel doel gebruikt kan worden, bijvoorbeeld in een "
             . "tijdschrift, website of reclamefolder.");
             break;
-
-        default:
-            showquestion("Is het hoofdonderwerp van de foto mogelijk auteursrechtelijk beschermd? (Bijvoorbeeld: hoes "
-            . "van CD of DVD, logo, reclamebord)", "noupload", "ownwork", "Als u een foto maakt, heeft u zelf de "
-            . "auteursrechten van die foto. Als u echter een foto maakt van iets anders, waarop ook auteursrechten "
-            . "rusten, dan mag u uw foto toch niet vrij verspreiden. Dat kan bijvoorbeeld zo zijn bij foto's van "
-            . "een CD-hoes, DVD-hoes, logo, reclamebord of (film)poster. Het uploaden van uw foto betekent dan dat "
-            . "u de auteursrechten schendt op die CD-hoes enz.");
     }
     ?>
 </div>
