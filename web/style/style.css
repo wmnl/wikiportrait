@@ -302,6 +302,9 @@ input[type="text"], input[type="password"], input[type="email"], input[type="dat
     border-bottom-right-radius:5px;
     color:#444;
 }
+.input-container .radiogroup {
+    display: block;
+}
 #categoriesContainer .checkbox {
     border: none;
 }
