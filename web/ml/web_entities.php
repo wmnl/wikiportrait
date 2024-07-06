@@ -1,5 +1,4 @@
 <?php
-// phpcs:disable PSR1.Files.SideEffects
 
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 
@@ -63,7 +62,7 @@ function detect_web($name)
         if (isset($image_id)) {
             DB::insert('vision_api_results', [
             'image_id' => $image_id,
-            'date' => Date('Y-m-d H:i:s'),
+            'date' => date('Y-m-d H:i:s'),
             'labels' => implode(',', $labels),
             'description' => implode(',', $description),
             'matching_pages' => implode(',', $matching_pages),

@@ -1,4 +1,3 @@
-composer.lock
 vendor
 nbproject/
 uploads/
@@ -6,3 +5,5 @@ config/
 .DS_Store
 .idea/*
 /web/common/config.php.live
+
+/web/archive/cronlog.txt

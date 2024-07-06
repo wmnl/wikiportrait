@@ -19,7 +19,7 @@
     <div class="single">
         <div class="single-box image">
             <a href="uploads/images/<?php echo $row['filename']; ?>" data-lightbox>
-                <img src="uploads/thumbs/<?php echo $row['filename'] ;?>" />
+                <img src="uploads/thumbs/<?php echo $row['filename'] ; ?>" />
             </a>
         </div>
 
@@ -27,23 +27,11 @@
             <h3>Informatie</h3>
 
             <div class="holder">
-                        <div><span class="title">Titel:</span><span class="content"><?=
-                                htmlspecialchars($row['title']);
-
-                        ?></span></div>
-                <div><span class="title">Auteursrechthebbende:</span><span class="content"><?=
-                                htmlspecialchars($row['source']);
-
-                ?></span></div>
-                <div><span class="title">Geupload door:</span><span class="content"><?=
-                                htmlspecialchars($row['name']);
-
-                ?></span></div>
-                <div><span class="title">Beschrijving:</span><span class="content"><?=
-                                htmlspecialchars($row['description']);
-
-                ?></span></div>
-                    </div>
+            <div><span class="title">Titel:</span><span class="content"><?= htmlspecialchars($row['title']); ?></span></div>
+            <div><span class="title">Auteursrechthebbende:</span><span class="content"><?= htmlspecialchars($row['source']); ?></span></div>
+            <div><span class="title">Geupload door:</span><span class="content"><?= htmlspecialchars($row['name']); ?></span></div>
+            <div><span class="title">Beschrijving:</span><span class="content"><?= htmlspecialchars($row['description']);?></span></div>
+            </div>
         </div>
 
         <div class="single-box options">

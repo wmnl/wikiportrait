@@ -29,8 +29,7 @@
             echo "<tr>";
             echo "<td data-title=\"&#xf02e;\" class=\"center\">$id</td>";
             echo "<td data-title=\"&#xf02b;\">$title</td>";
-            echo "<td data-title=\"&#xf0ae;\"><a href=\"editmessage.php?id=$id\">Bewerken</a><div class=\"divider\">"
-            . "</div><a href=\"#\" onclick=\"confirmDelete($id)\");\">Verwijderen</a></td>";
+            echo "<td data-title=\"&#xf0ae;\"><a href=\"editmessage.php?id=$id\">Bewerken</a><div class=\"divider\"></div><a href=\"#\" onclick=\"confirmDelete($id)\");\">Verwijderen</a></td>";
             echo "</tr>";
         }
         ?>

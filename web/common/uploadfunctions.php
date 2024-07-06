@@ -1,18 +1,17 @@
 <?php
 
-use Intervention\Image\ImageManager;
 use Handlebars\Handlebars;
+use Intervention\Image\ImageManager;
 
-// phpcs:disable PSR1.Files.SideEffects
 require ABSPATH . "/ml/web_entities.php";
 require_once ABSPATH . "/vendor/autoload.php";
 
 function removeAccentedCharacters($str)
 {
     return strtr($str, [
-    'á' => 'a', 'à' => 'a', 'ä' => 'a', 'â' => 'a', 'é' => 'e', 'è' => 'e', 'ê' => 'e',
-    'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ò' => 'o', 'ó' => 'o',
-    'ô' => 'o', 'ö' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u', 'ç' => 'c'
+        'á' => 'a', 'à' => 'a', 'ä' => 'a', 'â' => 'a', 'é' => 'e', 'è' => 'e', 'ê' => 'e',
+        'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ò' => 'o', 'ó' => 'o',
+        'ô' => 'o', 'ö' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u', 'ç' => 'c'
     ]);
 }
 
@@ -29,7 +28,7 @@ function getFilename($title, $time, $file)
 function contributorEmailCheck($email)
 {
     $row = DB::queryFirstRow('SELECT email, verified FROM contributors WHERE email = %s', $email);
-    (DB::count() > 0) ? $check = array(true, $row['verified']) : $check = array(false, 0);
+    (DB::count() > 0) ? $check = [true, $row['verified']] : $check = [false, 0];
     return $check;
 }
 
@@ -73,7 +72,7 @@ function checkUpload()
 
     if (!hasvalidationerrors()) {
         $mail = new \PHPMailer\PHPMailer\PHPMailer();
-        $templateRenderer = new Handlebars;
+        $templateRenderer = new Handlebars();
         list($email_exists, $email_verified) = contributorEmailCheck($email);
 
         if ($validateUploader == 'selfie') {
@@ -93,7 +92,7 @@ function checkUpload()
                 $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody.txt");
                 $redirect = "success";
             } else {
-                $archived = 1;
+                $archived = 2;
                 $subject = "[Wikiportret] Uw email verifiëren";
                 $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_verificatie.txt");
                 $redirect = "verificatie";
@@ -107,59 +106,58 @@ function checkUpload()
         $thumbpath = THUMB_FOLDER . "/$filename";
 
         if (move_uploaded_file($file['tmp_name'], $imagepath)) {
-            $imageManager = new ImageManager(array('driver' => 'gd'));
+            $imageManager = new ImageManager(['driver' => 'gd']);
             $thumb = $imageManager->make($imagepath);
             $thumb->fit(300, 300);
             $thumb->save($thumbpath);
 
             if (!$email_exists) {
                 DB::insert('contributors', [
-                'email' => $email,
-                'verified' => 0,
+                    'email' => $email,
+                    'verified' => 0,
                 ]);
             }
 
             DB::insert('images', [
-            'filename' => $filename,
-            'title' => $title,
-            'source' => $source,
-            'name' => $name,
-            'email' => $email,
-            'license' => 'CC-BY-SA 4.0',
-            'ip' => $ip,
-            'date' => $date,
-            'description' => $desc,
-            'timestamp' => date_timestamp_get($time),
-            'key' => $key,
-            'archived' => $archived,
+                'filename' => $filename,
+                'title' => $title,
+                'source' => $source,
+                'name' => $name,
+                'email' => $email,
+                'license' => 'CC-BY-SA 4.0',
+                'ip' => $ip,
+                'date' => $date,
+                'description' => $desc,
+                'timestamp' => date_timestamp_get($time),
+                'key' => $key,
+                'archived' => $archived,
             ]);
 
             $body = $templateRenderer->render($bodyTxt, [
-            'title' => $title,
-            'name' => $name,
-            'email' => $email,
-            'source' => $source,
-            'desc' => $desc,
-            'ip' => $ip,
-            'imageId' => DB::insertId(),
-            'key' => $key
+                'title' => $title,
+                'name' => $name,
+                'email' => $email,
+                'source' => $source,
+                'desc' => $desc,
+                'ip' => $ip,
+                'imageId' => DB::insertId(),
+                'key' => $key
             ]);
             $htmlBody = nl2br($body);
 
             $mail->From = OTRS_MAIL;
             $mail->CharSet = 'UTF-8';
 
-            if ($validateUploader!=="valid") {
+            if ($validateUploader !== "valid") {
                 $mail->addAddress($email, $name);
                 $mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue");
             } else {
-                $email_verified ? $mail->addAddress(OTRS_MAIL, "Wikiportret OTRS queue") :
-                                $mail->addAddress($email, "Wikiportret OTRS queue");
-                $email_verified ? $mail->addReplyTo($email, $name) :
-                                $mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue");
+                $email_verified ? $mail->addAddress(OTRS_MAIL, "Wikiportret OTRS queue") : $mail->addAddress($email, "Wikiportret OTRS queue");
+                $email_verified ? $mail->addReplyTo($email, $name) : $mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue");
             };
 
             $mail->Subject = $subject;
+            $mail->Sender = OTRS_MAIL;
             $mail->isHTML(true);
             $mail->Body = $htmlBody;
             $mail->AltBody = $body;

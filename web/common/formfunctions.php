@@ -2,8 +2,8 @@
 
 function getCommonsUploadLink($row)
 {
-// #57: if description is available, use that, otherwise
-// simply use title
+    // #57: if description is available, use that, otherwise
+    // simply use title
     if (empty($row['description'])) {
         $description = $row['title'];
     } else {
@@ -16,19 +16,22 @@ function getCommonsUploadLink($row)
     }
     $sourceUrl = BASE_URL . "/uploads/images/" . $row['filename'];
     if ($row['date'] != "") {
-        $date = date('Y-m-d', strtotime($row['date']));
+        $date = $row['date'];
     }
     $author = $row['source'];
     $filename = $row['filename'];
     $baselink = "https://commons.wikimedia.org/wiki/Special:Upload";
     $categories = '';
     if (array_key_exists('categories', $row)) {
-        $categoriesList = json_decode($row['categories']);
-        if (is_array($categoriesList)) {
-            foreach ($categoriesList as $cat) {
+        $categoryList = json_decode($row['categories']);
+        if (is_iterable($categoryList)) {
+            foreach (json_decode($row['categories']) as $cat) {
                 $categories .= '[[Category:' . str_replace('Category:', '', $cat) . ']]' . PHP_EOL;
             }
         }
+    }
+    if (!isset($date)) {
+        $date = null;
     }
     $description = <<<EOT
 == {{int:filedesc}} ==
@@ -149,8 +152,7 @@ function checkfile($file)
         array_push($validationerrors, "Er is geen bestand geselecteerd.");
         return "empty file";
     } elseif (!in_array($file['type'], $allowedext)) {
-        array_push($validationerrors, "Het bestand dat geüpload is, is geen afbeelding of dit "
-                . "bestandsformaat wordt niet ondersteund.");
+        array_push($validationerrors, "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund.");
         return "unsupported file";
     } else {
         return "ok";
@@ -169,11 +171,10 @@ function addvalidationerror($message)
 function hasvalidationerrors()
 {
     global $validationerrors;
-    $errorCount = 0;
-    if (is_countable($validationerrors)) {
-        $errorCount = count($validationerrors);
+    if (!isset($validationerrors)) {
+        return false;
     }
-    return $errorCount > 0;
+    return count($validationerrors) > 0;
 }
 
 function validateUploader($source)

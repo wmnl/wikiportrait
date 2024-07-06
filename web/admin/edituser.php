@@ -44,26 +44,26 @@ if (isset($_GET['id'])) {
 
             if (!hasvalidationerrors()) {
                 if (empty($_POST['password'])) {
-                    DB::update('users', array(
+                    DB::update('users', [
                         'username' => $_POST['username'],
                         'otrsname' => $_POST['otrsname'],
                         'email' => $_POST['email'],
                         'isSysop' => $admin,
                         'active' => $active
-                    ), 'id = %d', $_GET['id']);
+                    ], 'id = %d', $_GET['id']);
 
                     header("Location: users.php");
                 } else {
                     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-                    DB::update('users', array(
+                    DB::update('users', [
                         'username' => $_POST['username'],
                         'password' => $password,
                         'otrsname' => $_POST['otrsname'],
                         'email' => $_POST['email'],
                         'isSysop' => $admin,
                         'active' => $active
-                    ), 'id = %d', $_GET['id']);
+                    ], 'id = %d', $_GET['id']);
 
                     header("Location: users.php");
                 }
@@ -98,14 +98,12 @@ if (isset($_GET['id'])) {
 
     <div class="input-container">
         <label for="password"><i class="fa fa-key fa-lg fa-fw"></i>Wachtwoord</label>
-        <input type="password" name="password" id="password" placeholder="Enkel invullen als u het wachtwoord
-               wilt wijzigen"/>
+        <input type="password" name="password" id="password" placeholder="Enkel invullen als u het wachtwoord wilt wijzigen"/>
     </div>
 
     <div class="input-container">
         <label for="password2"><i class="fa fa-key fa-lg fa-fw"></i>Wachtwoord nogmaals</label>
-        <input type="password" name="password2" id="password2" placeholder="Enkel invullen als u het wachtwoord
-               wilt wijzigen" />
+        <input type="password" name="password2" id="password2" placeholder="Enkel invullen als u het wachtwoord wilt wijzigen" />
     </div>
 
     <div class="input-container">
@@ -116,18 +114,26 @@ if (isset($_GET['id'])) {
     <div class="input-container" <?= $inputClass ?>>
         <label for="admin"><i class="fa fa-user-md fa-lg fa-fw"></i>Beheerder</label>
         <div class="checkbox">
-        <input type="checkbox" name="admin" id="admin" <?php if ($row['isSysop'] == 1) {
+        <input type="checkbox" name="admin" id="admin" 
+        <?php
+        if ($row['isSysop'] == 1) {
             echo "checked";
-                                                       } ?> /><label for="admin">Ja</label>
+        }
+        ?>
+         /><label for="admin">Ja</label>
         </div>
     </div>
 
     <div class="input-container" <?= $inputClass ?>>
         <label for="active"><i class="fa fa-power-off fa-lg fa-fw"></i>Geactiveerd</label>
         <div class="checkbox">
-        <input type="checkbox" name="active" id="active" <?php if ($row['active'] == 1) {
+        <input type="checkbox" name="active" id="active" 
+        <?php
+        if ($row['active'] == 1) {
             echo "checked";
-                                                         } ?> /><label for="active">Ja</label>
+        }
+        ?>
+         /><label for="active">Ja</label>
         </div>
     </div>
 

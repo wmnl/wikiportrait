@@ -4,16 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
-    <link rel="stylesheet" href="../style/style.css" />
-    <link rel="stylesheet" href="../style/responsive.css" />
-    <link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?= $basispad; ?>/style/style.css" />
+    <link rel="stylesheet" href="<?= $basispad; ?>/style/responsive.css" />
+    <link rel="stylesheet" href="<?= $basispad; ?>/lib/font-awesome/css/font-awesome.min.css">
 
-    <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script src="<?= $basispad; ?>/lib/jquery/dist/jquery.min.js"></script>
 
     <title>Wikiportret - Stel uw foto's ter beschikking</title>
 
-    <meta name="description" content="Staat er op Wikipedia een artikel zonder portretfoto? En heeft u een foto die
-          bij een artikel zou passen? Stel dan uw foto hier ter beschikking." />
+    <meta name="description" content="Staat er op Wikipedia een artikel zonder portretfoto? En heeft u een foto die bij een artikel zou passen? Stel dan uw foto hier ter beschikking." />
     <?php if (strpos($_SERVER['SERVER_NAME'], "wikiportret.nl") !== false) { ?>
         <script>
         // Set to the same value as the web property used on the site
