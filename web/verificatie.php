@@ -14,11 +14,13 @@ require 'common/header.php';
         $key = $_GET['key'];
         $email = $_GET['email'];
         $verified = DB::queryFirstField('SELECT c.verified from contributors c WHERE email=%s', $email);
+        $validEmail = DB::queryFirstField("SELECT COUNT(i.id) FROM images i INNER JOIN contributors c ON `key` = %s 
+        WHERE `c`.`email` = %s AND `i`.`archived`=2", $key, $email);
         $rows = DB::query("SELECT i.id as imageid, title, source, description,
-        name, ip, c.id, c.email, c.verified, filename
+        name, ip, c.id, c.email, filename
         FROM contributors c
-        INNER JOIN images i ON `key` = %s WHERE `c`.`email` = %s", $key, $email);
-        if (DB::count() == 0) :
+        INNER JOIN images i USING (email) WHERE `c`.`email` = %s AND `i`.`archived`!=0", $email);
+        if ($validEmail == 0 || DB::count() == 0) :
             echo "<div class=\"box red\">Geen record gevonden!</div>";
         else :
             if ($verified == 1) :
