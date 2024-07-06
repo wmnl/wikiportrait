@@ -38,16 +38,24 @@ if (isset($_POST['postback'])) {
 
     <div class="input-container">
         <label for="title"><i class="fa fa-tag fa-lg fa-fw"></i>Titel</label>
-        <input type="text" name="title" id="title" value="<?php if (isset($_POST['title'])) {
+        <input type="text" name="title" id="title" value="
+        <?php
+        if (isset($_POST['title'])) {
             echo $_POST['title'];
-                                                          } ?>" required="required"/>
+        }
+        ?>
+        " required="required"/>
     </div>
 
     <div class="input-container">
         <label for="message"><i class="fa fa-align-left fa-lg fa-fw"></i>Bericht</label>
-        <textarea required="required" name="message"><?php if (isset($_POST['message'])) {
+        <textarea required="required" name="message">
+        <?php
+        if (isset($_POST['message'])) {
             echo $_POST['message'];
-                                                     } ?></textarea>
+        }
+        ?>
+        </textarea>
     </div>
 
     <div class="bottom right">

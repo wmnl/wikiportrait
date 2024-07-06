@@ -1,14 +1,12 @@
 <?php
 
-namespace Wikiportret\Common;
-
 class Session
 {
     public function __construct()
     {
         session_start();
         $cookieLifetime = 365 * 24 * 60 * 60;
-        setcookie(session_name(), session_id(), time()+$cookieLifetime);
+        setcookie(session_name(), session_id(), time() + $cookieLifetime);
     }
 
     public function getLastUploadKey()
@@ -23,7 +21,7 @@ class Session
 
     public function getLastUploadEmail()
     {
-        return $_SESSION['email'];
+        return array_key_exists('email', $_SESSION) ? $_SESSION['email'] : null;
     }
 
     public function setLastUploadEmail($email)

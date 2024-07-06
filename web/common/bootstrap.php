@@ -11,7 +11,7 @@ define('ADMIN_ERROR', "<br>Deze pagina is voor admins bedoeld.<br>");
 define('DUPLICATE_ERROR', "Deze afbeedling is al geüpload");
 define('GVISION_MACHINE_LEARNING', true);
 define('GV_REQUESTS_LIMIT', 900);
-define('CLOSED', true); //Don't allow uploads
+define('CLOSED', false); //Allow uploads (true = geen uploads)
 header("Access-Control-Allow-Origin: *");
 DB::$user = DB_USER;
 DB::$password = DB_PASS;
@@ -21,7 +21,7 @@ require 'formfunctions.php';
 require 'uploadfunctions.php';
 require 'dashboardfunctions.php';
 require 'session.php';
-
+// DB::$logfile = ABSPATH . '/db_logfile.txt';
 $session = new Session();
 
 if (!function_exists('is_countable')) {
@@ -30,5 +30,4 @@ if (!function_exists('is_countable')) {
     {
         return (is_array($var) || $var instanceof Countable);
     }
-
 }

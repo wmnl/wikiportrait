@@ -46,8 +46,7 @@ if (isset($_POST['postback'])) {
     <form method="post">
         <div class="input-container">
         <label for="title"><i class="fa fa-tag fa-lg fa-fw"></i>Titel</label>
-        <input type="text" name="title" id="title" value="<?php echo htmlspecialchars($row['title']); ?>"
-               required="required" />
+        <input type="text" name="title" id="title" value="<?php echo htmlspecialchars($row['title']); ?>" required="required" />
         </div>
 
         <div class="input-container">

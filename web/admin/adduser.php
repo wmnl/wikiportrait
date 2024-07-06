@@ -46,16 +46,24 @@ if (isset($_POST['postback'])) {
     <form method="post">
         <div class="input-container">
         <label for="username"><i class="fa fa-user fa-lg fa-fw"></i>Gebruikersnaam</label>
-        <input type="text" name="username" id="username" value="<?php if (isset($_POST['username'])) {
+        <input type="text" name="username" id="username" value="
+        <?php
+        if (isset($_POST['username'])) {
             echo $_POST['username'];
-                                                                } ?>"/>
+        }
+        ?>
+        "/>
         </div>
 
         <div class="input-container">
         <label for="otrsname"><i class="fa fa-briefcase fa-lg fa-fw"></i>OTRS-naam</label>
-        <input type="text" name="otrsname" id="otrsname" <?php if (isset($_POST['otrsname'])) {
+        <input type="text" name="otrsname" id="otrsname" 
+        <?php
+        if (isset($_POST['otrsname'])) {
             echo $_POST['otrsname'];
-                                                         } ?> />
+        }
+        ?>
+         />
         </div>
 
         <div class="input-container">
@@ -70,9 +78,13 @@ if (isset($_POST['postback'])) {
 
         <div class="input-container">
         <label for="email"><i class="fa fa-envelope fa-lg fa-fw"></i>E-mailadres</label>
-        <input type="email" name="email" id="email" <?php if (isset($_POST['email'])) {
+        <input type="email" name="email" id="email" 
+        <?php
+        if (isset($_POST['email'])) {
             echo $_POST['email'];
-                                                    } ?> />
+        }
+        ?>
+         />
         </div>
 
         <div class="input-container">
