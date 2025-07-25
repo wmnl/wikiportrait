@@ -8,7 +8,7 @@ if (isset($_POST['postback'])) {
     $admin = isset($_POST['admin']);
 
     isrequired('username', 'gebruikersnaam');
-    isrequired('otrsname', 'OTRS-naam');
+    isrequired('otrsname', 'VRTS-naam');
     isrequired('password', 'wachtwoord');
     checkusername($_POST['username']);
     comparepassword($_POST['password'], $_POST['password2']);
@@ -56,7 +56,7 @@ if (isset($_POST['postback'])) {
         </div>
 
         <div class="input-container">
-        <label for="otrsname"><i class="fa fa-briefcase fa-lg fa-fw"></i>OTRS-naam</label>
+        <label for="otrsname"><i class="fa fa-briefcase fa-lg fa-fw"></i>VRTS-naam</label>
         <input type="text" name="otrsname" id="otrsname" 
         <?php
         if (isset($_POST['otrsname'])) {

@@ -38,7 +38,7 @@ if (isset($_GET['id'])) {
             }
 
             isrequired('username', 'gebruikersnaam');
-            isrequired('otrsname', 'OTRS-naam');
+            isrequired('otrsname', 'VRTS-naam');
             comparepassword($_POST['password'], $_POST['password2']);
             validateEmail('email');
 
@@ -92,7 +92,7 @@ if (isset($_GET['id'])) {
     </div>
 
     <div class="input-container">
-        <label for="otrsname"><i class="fa fa-briefcase fa-lg fa-fw"></i>OTRS-naam</label>
+        <label for="otrsname"><i class="fa fa-briefcase fa-lg fa-fw"></i>VRTS-naam</label>
         <input type="text" name="otrsname" id="otrsname" value="<?php echo htmlspecialchars($row['otrsname']); ?>" />
     </div>
 

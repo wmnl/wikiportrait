@@ -6,4 +6,4 @@ config/
 .idea/*
 /web/common/config.php.live
 
-/web/archive/cronlog.txt
+/web/archive/cronlog.txtweb/db_logfile.txt

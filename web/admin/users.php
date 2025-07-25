@@ -16,7 +16,7 @@
         <tr>
             <th class="id center">#</th>
             <th>Gebruikersnaam</th>
-            <th>OTRS-naam</th>
+            <th>VRTS-naam</th>
             <th>E-mailadres</th>
             <th>Beheerder</th>
             <th>Acties</th>

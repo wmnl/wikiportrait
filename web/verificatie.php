@@ -35,7 +35,7 @@ require 'common/header.php';
                         'archived' => 0,
                     ], 'id = %d', $row['imageid']);
 
-                    // send email to OTRS
+                    // send email to VRTS
                     $mail = new \PHPMailer\PHPMailer\PHPMailer();
                     $templateRenderer = new Handlebars();
                     $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody.txt");
@@ -52,10 +52,10 @@ require 'common/header.php';
                     ]);
 
                     $htmlBody = nl2br($body);
-                    $mail->From = OTRS_MAIL;
-                    $mail->Sender = OTRS_MAIL;
+                    $mail->From = VRTS_MAIL;
+                    $mail->Sender = VRTS_MAIL;
                     $mail->CharSet = 'UTF-8';
-                    $mail->addAddress(OTRS_MAIL, "Wikiportret OTRS queue");
+                    $mail->addAddress(VRTS_MAIL, "Wikiportret VRTS queue");
                     $mail->addReplyTo($email, $row['name']);
                     $mail->Subject = "[Wikiportret] " . $row['title'] . " is geüpload op Wikiportret";
                     $mail->isHTML(true);

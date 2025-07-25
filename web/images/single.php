@@ -75,7 +75,7 @@ function getTrueFalse(truefalse) {
             'owner' => $_POST['owner'],
             'archived' => !empty($_POST['done']),
             'ticket' => $_POST['ticket'],
-            'categories' => json_encode($_POST['categories'])
+            'categories' => json_encode(array_key_exists('categories',$_POST)?$_POST['categories']:'')
         ], 'id = %d', $_GET['id']);
 
         $msg = 'Afbeelding is bijgewerkt. <a href="overview.php">Terug naar overzicht</a>';
@@ -183,7 +183,7 @@ function getTrueFalse(truefalse) {
                 </div>
 
                 <div class="input-container">
-                    <label for="ticket"><i class="fa fa-ticket fa-lg fa-fw"></i>OTRS-ticket:</label>
+                    <label for="ticket"><i class="fa fa-ticket fa-lg fa-fw"></i>VRTS-ticket:</label>
                     <input type="text" name="ticket" id="ticket" value="<?= $owner['ticket']; ?>">
                 </div>
 
@@ -257,7 +257,7 @@ function getTrueFalse(truefalse) {
                                 $similar_img = explode(',', $google_vision_results['similar_img']);
                                 (!empty($google_vision_results['similar_img'])) ?
                                     $similar_i_count = count($similar_img) : $similar_i_count = 0;
-                                $partial_img = explode(',', $google_vision_results['partial_img']);
+                                $partial_img = array_key_exists('partial_img',$google_vision_results)?explode(',', $google_vision_results['partial_img']):[];
                                 (!empty($google_vision_results['partial_img'])) ? $partialcount = count($partial_img) :
                                     $partialcount = 0;
 

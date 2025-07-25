@@ -21,7 +21,7 @@ require 'formfunctions.php';
 require 'uploadfunctions.php';
 require 'dashboardfunctions.php';
 require 'session.php';
-// DB::$logfile = ABSPATH . '/db_logfile.txt';
+DB::$logfile = ABSPATH . '/db_logfile.txt';
 $session = new Session();
 
 if (!function_exists('is_countable')) {

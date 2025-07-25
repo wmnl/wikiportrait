@@ -145,19 +145,19 @@ function checkUpload()
             ]);
             $htmlBody = nl2br($body);
 
-            $mail->From = OTRS_MAIL;
+            $mail->From = VRTS_MAIL;
             $mail->CharSet = 'UTF-8';
 
             if ($validateUploader !== "valid") {
                 $mail->addAddress($email, $name);
-                $mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue");
+                $mail->addReplyTo(VRTS_MAIL, "Wikiportret VRTS queue");
             } else {
-                $email_verified ? $mail->addAddress(OTRS_MAIL, "Wikiportret OTRS queue") : $mail->addAddress($email, "Wikiportret OTRS queue");
-                $email_verified ? $mail->addReplyTo($email, $name) : $mail->addReplyTo(OTRS_MAIL, "Wikiportret OTRS queue");
+                $email_verified ? $mail->addAddress(VRTS_MAIL, "Wikiportret VRTS queue") : $mail->addAddress($email, "Wikiportret VRTS queue");
+                $email_verified ? $mail->addReplyTo($email, $name) : $mail->addReplyTo(VRTS_MAIL, "Wikiportret VRTS queue");
             };
 
             $mail->Subject = $subject;
-            $mail->Sender = OTRS_MAIL;
+            $mail->Sender = VRTS_MAIL;
             $mail->isHTML(true);
             $mail->Body = $htmlBody;
             $mail->AltBody = $body;
