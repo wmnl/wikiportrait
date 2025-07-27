@@ -80,7 +80,7 @@ require 'common/header.php';
                   Een vrijwilliger zal de afbeelding zo snel mogelijk beoordelen en contact met u opnemen.<br />
                   Als u wilt, kunt u <a href=\"track.php?key=$key\">hier</a> uw inzending volgen.</div>";
                         echo "<div class=\"bottom right\"><a class=\"button\" href=\"upload.php\">
-                  <i class=\"fa fa-cloud-upload fa-lg\"></i>Nog een afbeelding uploaden</a></div>";
+                  <i class=\"fa-solid fa-cloud-upload fa-lg\"></i>Nog een afbeelding uploaden</a></div>";
                         ?>
                     </div>
                 </div>

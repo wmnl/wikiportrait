@@ -1,6 +1,6 @@
 <?php
-    require '../common/bootstrap.php';
-    $session->checkLogin();
+require '../common/bootstrap.php';
+$session->checkLogin();
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -13,13 +13,13 @@ if (isset($_GET['id'])) {
     $session->redirect("/admin/users");
 }
 
-    require '../common/header.php';
-    include 'tabs.php';
+require '../common/header.php';
+include 'tabs.php';
 ?>
 <div id="content">
     <div class="page-header">
-    <h2>Gebruiker bewerken</h2>
-    <a href="users.php" class="button red"><i class="fa fa-times-circle fa-lg"></i><span>Annuleren</span></a>
+        <h2>Gebruiker bewerken</h2>
+        <a href="users.php" class="button red"><i class="fa-solid fa-times-circle fa-lg"></i><span>Annuleren</span></a>
     </div>
 
     <?php
@@ -78,71 +78,69 @@ if (isset($_GET['id'])) {
 
     <form method="post">
 
-    <?php
-    if ($session->isSysop()) {
-        $inputClass = "";
-    } else {
-        $inputClass = 'style="display:none;"';
-    }
-    ?>
-
-    <div class="input-container" <?= $inputClass ?>>
-        <label for="username"><i class="fa fa-user fa-lg fa-fw"></i>Gebruikersnaam</label>
-        <input type="text" name="username" id="username" value="<?php echo htmlspecialchars($row['username']); ?>" />
-    </div>
-
-    <div class="input-container">
-        <label for="otrsname"><i class="fa fa-briefcase fa-lg fa-fw"></i>VRTS-naam</label>
-        <input type="text" name="otrsname" id="otrsname" value="<?php echo htmlspecialchars($row['otrsname']); ?>" />
-    </div>
-
-    <div class="input-container">
-        <label for="password"><i class="fa fa-key fa-lg fa-fw"></i>Wachtwoord</label>
-        <input type="password" name="password" id="password" placeholder="Enkel invullen als u het wachtwoord wilt wijzigen"/>
-    </div>
-
-    <div class="input-container">
-        <label for="password2"><i class="fa fa-key fa-lg fa-fw"></i>Wachtwoord nogmaals</label>
-        <input type="password" name="password2" id="password2" placeholder="Enkel invullen als u het wachtwoord wilt wijzigen" />
-    </div>
-
-    <div class="input-container">
-        <label for="email"><i class="fa fa-envelope fa-lg fa-fw"></i>E-mailadres</label>
-        <input type="email" name="email" id="email" value="<?php echo $row['email']; ?>"/>
-    </div>
-
-    <div class="input-container" <?= $inputClass ?>>
-        <label for="admin"><i class="fa fa-user-md fa-lg fa-fw"></i>Beheerder</label>
-        <div class="checkbox">
-        <input type="checkbox" name="admin" id="admin" 
         <?php
-        if ($row['isSysop'] == 1) {
-            echo "checked";
+        if ($session->isSysop()) {
+            $inputClass = "";
+        } else {
+            $inputClass = 'style="display:none;"';
         }
         ?>
-         /><label for="admin">Ja</label>
-        </div>
-    </div>
 
-    <div class="input-container" <?= $inputClass ?>>
-        <label for="active"><i class="fa fa-power-off fa-lg fa-fw"></i>Geactiveerd</label>
-        <div class="checkbox">
-        <input type="checkbox" name="active" id="active" 
-        <?php
-        if ($row['active'] == 1) {
-            echo "checked";
-        }
-        ?>
-         /><label for="active">Ja</label>
+        <div class="input-container" <?= $inputClass ?>>
+            <label for="username"><i class="fa-solid fa-user fa-lg"></i>Gebruikersnaam</label>
+            <input type="text" name="username" id="username" value="<?php echo htmlspecialchars($row['username']); ?>" />
         </div>
-    </div>
 
-    <div class="bottom right">
-        <button class="green" name="postback"><i class="fa fa-floppy-o fa-lg"></i>Opslaan</button>
-    </div>
+        <div class="input-container">
+            <label for="otrsname"><i class="fa-solid fa-briefcase fa-lg"></i>VRTS-naam</label>
+            <input type="text" name="otrsname" id="otrsname" value="<?php echo htmlspecialchars($row['otrsname']); ?>" />
+        </div>
+
+        <div class="input-container">
+            <label for="password"><i class="fa-solid fa-key fa-lg"></i>Wachtwoord</label>
+            <input type="password" name="password" id="password" placeholder="Enkel invullen als u het wachtwoord wilt wijzigen" />
+        </div>
+
+        <div class="input-container">
+            <label for="password2"><i class="fa-solid fa-key fa-lg"></i>Wachtwoord nogmaals</label>
+            <input type="password" name="password2" id="password2" placeholder="Enkel invullen als u het wachtwoord wilt wijzigen" />
+        </div>
+
+        <div class="input-container">
+            <label for="email"><i class="fa-solid fa-envelope fa-lg"></i>E-mailadres</label>
+            <input type="email" name="email" id="email" value="<?php echo $row['email']; ?>" />
+        </div>
+
+        <div class="input-container" <?= $inputClass ?>>
+            <label for="admin"><i class="fa-solid fa-user-md fa-lg"></i>Beheerder</label>
+            <div class="checkbox">
+                <input type="checkbox" name="admin" id="admin"
+                    <?php
+                    if ($row['isSysop'] == 1) {
+                        echo "checked";
+                    }
+                    ?> /><label for="admin">Ja</label>
+            </div>
+        </div>
+
+        <div class="input-container" <?= $inputClass ?>>
+            <label for="active"><i class="fa-solid fa-power-off fa-lg"></i>Geactiveerd</label>
+            <div class="checkbox">
+                <input type="checkbox" name="active" id="active"
+                    <?php
+                    if ($row['active'] == 1) {
+                        echo "checked";
+                    }
+                    ?> /><label for="active">Ja</label>
+            </div>
+        </div>
+
+        <div class="bottom right">
+            <button class="green" name="postback"><i class="fa-solid fa-floppy-o fa-lg"></i>Opslaan</button>
+        </div>
 
     </form>
 </div>
 <?php
-    include '../common/footer.php';
+include '../common/footer.php';
 ?>

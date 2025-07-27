@@ -9,52 +9,52 @@ require '../common/header.php';
 $msg = false;
 ?>
 <script>
-function getCategories(cats, existingCats) {
-    getData(cats).success(
-        fillCatList.bind(existingCats)
-    );
-}
-
-function getData(cats) {
-    return $.ajax({
-        url: 'categories.php',
-        type: 'POST',
-        data: {
-            cat: cats
-        },
-        dataType: "json"
-    });
-
-}
-
-function fillCatList(data) {
-    var existingCats = this;
-    $html = $('#categoriesContainer .checkbox').html();
-    $.each(data,
-        function(index, items) {
-            $.each(items, function(item, truefalse) {
-                var itemcat = 'Category:' + item.replace('Category:', '');
-                if ($.inArray(itemcat, existingCats) == -1) {
-                    $html += '<input type="checkbox" name="categories[]" value="Category:' +
-                        item.replace('Category:', '') + '" id="categories_' +
-                        item.toLowerCase().replace(
-                            'category:', '').replace(/\s/g, '_') + '">\n\
-                        <label for="categories_' + item.toLowerCase().replace('category:', '').replace(/\s/g, '_') +
-                        '">' + item.replace('Category:', '') +
-                        getTrueFalse(truefalse) + '</label><br>';
-                }
-            }.bind(this))
-        }.bind(this));
-    $('#categoriesContainer .checkbox').html($html);
-}
-
-function getTrueFalse(truefalse) {
-    if (!truefalse) {
-        return ' <span class="alert">Categorie bestaat niet</span>';
-    } else {
-        return '';
+    function getCategories(cats, existingCats) {
+        getData(cats).success(
+            fillCatList.bind(existingCats)
+        );
     }
-}
+
+    function getData(cats) {
+        return $.ajax({
+            url: 'categories.php',
+            type: 'POST',
+            data: {
+                cat: cats
+            },
+            dataType: "json"
+        });
+
+    }
+
+    function fillCatList(data) {
+        var existingCats = this;
+        $html = $('#categoriesContainer .checkbox').html();
+        $.each(data,
+            function(index, items) {
+                $.each(items, function(item, truefalse) {
+                    var itemcat = 'Category:' + item.replace('Category:', '');
+                    if ($.inArray(itemcat, existingCats) == -1) {
+                        $html += '<input type="checkbox" name="categories[]" value="Category:' +
+                            item.replace('Category:', '') + '" id="categories_' +
+                            item.toLowerCase().replace(
+                                'category:', '').replace(/\s/g, '_') + '">\n\
+                        <label for="categories_' + item.toLowerCase().replace('category:', '').replace(/\s/g, '_') +
+                            '">' + item.replace('Category:', '') +
+                            getTrueFalse(truefalse) + '</label><br>';
+                    }
+                }.bind(this))
+            }.bind(this));
+        $('#categoriesContainer .checkbox').html($html);
+    }
+
+    function getTrueFalse(truefalse) {
+        if (!truefalse) {
+            return ' <span class="alert">Categorie bestaat niet</span>';
+        } else {
+            return '';
+        }
+    }
 </script>
 <div id="content">
     <?php
@@ -75,7 +75,7 @@ function getTrueFalse(truefalse) {
             'owner' => $_POST['owner'],
             'archived' => !empty($_POST['done']),
             'ticket' => $_POST['ticket'],
-            'categories' => json_encode(array_key_exists('categories',$_POST)?$_POST['categories']:'')
+            'categories' => json_encode(array_key_exists('categories', $_POST) ? $_POST['categories'] : '')
         ], 'id = %d', $_GET['id']);
 
         $msg = 'Afbeelding is bijgewerkt. <a href="overview.php">Terug naar overzicht</a>';
@@ -85,7 +85,7 @@ function getTrueFalse(truefalse) {
     <h2>Ingestuurde foto: <?= $row['title']; ?></h2>
 
     <?php if ($msg) : ?>
-    <div class="box green"><?= $msg; ?></div>
+        <div class="box green"><?= $msg; ?></div>
     <?php endif; ?>
 
     <div class="single">
@@ -132,9 +132,9 @@ function getTrueFalse(truefalse) {
 
                 foreach ($results as $resultRow) :
                 ?>
-                <li><a
-                        href="message.php?message=<?= $resultRow['id']; ?>&image=<?= $_GET['id'] ?>"><?= htmlspecialchars($resultRow['title']); ?></a>
-                </li>
+                    <li><a
+                            href="message.php?message=<?= $resultRow['id']; ?>&image=<?= $_GET['id'] ?>"><?= htmlspecialchars($resultRow['title']); ?></a>
+                    </li>
                 <?php
                 endforeach;
                 ?>
@@ -151,7 +151,7 @@ function getTrueFalse(truefalse) {
 
             <form method="post" id="owner" name="owner">
                 <div class="input-container">
-                    <label for="owner"><i class="fa fa-user-md fa-lg fa-fw"></i>Eigenaar</label>
+                    <label for="owner"><i class="fa-solid fa-user-md fa-lg"></i>Eigenaar</label>
 
                     <div class="checkbox">
                         <select class="select" name="owner" id="setowner">
@@ -163,7 +163,7 @@ function getTrueFalse(truefalse) {
                                     $selected = 'selected="selected"';
                                 }
                             ?>
-                            <option value="<?= $rowdata['id'] ?>" <?= $selected ?>><?= $rowdata['otrsname'] ?></option>
+                                <option value="<?= $rowdata['id'] ?>" <?= $selected ?>><?= $rowdata['otrsname'] ?></option>
                             <?php
                             endforeach;
                             ?>
@@ -172,7 +172,7 @@ function getTrueFalse(truefalse) {
                 </div>
 
                 <div class="input-container">
-                    <label for="done"><i class="fa fa-check fa-lg fa-fw"></i>Afgehandeld</label>
+                    <label for="done"><i class="fa-solid fa-check fa-lg"></i>Afgehandeld</label>
                     <div class="checkbox">
                         <input type="checkbox" name="done" id="done" <?php
                                                                         if ($owner['archived'] == 1) {
@@ -183,7 +183,7 @@ function getTrueFalse(truefalse) {
                 </div>
 
                 <div class="input-container">
-                    <label for="ticket"><i class="fa fa-ticket fa-lg fa-fw"></i>VRTS-ticket:</label>
+                    <label for="ticket"><i class="fa-solid fa-ticket fa-lg"></i>VRTS-ticket:</label>
                     <input type="text" name="ticket" id="ticket" value="<?= $owner['ticket']; ?>">
                 </div>
 
@@ -224,17 +224,17 @@ function getTrueFalse(truefalse) {
                                                                         '\'',
                                                                         $owner['categories'] ?? ''
                                                                     );
-                                                                    ?>)"> <i class="fa fa-list-alt"
+                                                                    ?>)"> <i class="fa-solid fa-list-alt"
                             aria-hidden="true"></i> Krijg categorieën
                     </button>
                     <button type="button" onClick="parent.location = 'get.php?id=<?= $_GET['id'] ?>'" name="claim">
-                        <i class="fa fa-bolt fa-lg"></i>Ik neem hem
+                        <i class="fa-solid fa-bolt fa-lg"></i>Ik neem hem
                     </button>
 
                     <span class="divider">&nbsp;</span>
 
                     <button class="green" type="submit" name="postback">
-                        <i class="fa fa-floppy-o fa-lg"></i>Opslaan
+                        <i class="fa-solid fa-floppy-o fa-lg"></i>Opslaan
                     </button>
                 </div>
             </form>
@@ -257,18 +257,18 @@ function getTrueFalse(truefalse) {
                                 $similar_img = explode(',', $google_vision_results['similar_img']);
                                 (!empty($google_vision_results['similar_img'])) ?
                                     $similar_i_count = count($similar_img) : $similar_i_count = 0;
-                                $partial_img = array_key_exists('partial_img',$google_vision_results)?explode(',', $google_vision_results['partial_img']):[];
+                                $partial_img = array_key_exists('partial_img', $google_vision_results) ? explode(',', $google_vision_results['partial_img']) : [];
                                 (!empty($google_vision_results['partial_img'])) ? $partialcount = count($partial_img) :
                                     $partialcount = 0;
 
                     ?>
-                    <ul class="list_ml">
-                        <li><span>Datum analyse:</span> <?php echo $google_vision_results['date']; ?> <i
-                                class='performgv' onclick="performGVResults('<?php echo $_GET['id']; ?>')">Nog een keer
-                                analyseren</i></li>
-                        <li><span>Beste categorie:</span> <?php echo $google_vision_results['labels'];
+                                <ul class="list_ml">
+                                    <li><span>Datum analyse:</span> <?php echo $google_vision_results['date']; ?> <i
+                                            class='performgv' onclick="performGVResults('<?php echo $_GET['id']; ?>')">Nog een keer
+                                            analyseren</i></li>
+                                    <li><span>Beste categorie:</span> <?php echo $google_vision_results['labels'];
                                                                         ?></li>
-                        <li><span>Beschrijving:</span> <?php echo $google_vision_results['description'];
+                                    <li><span>Beschrijving:</span> <?php echo $google_vision_results['description'];
                                                                     ?></li>
                         <?php
                                 if ($mathing_p_count > 0) {

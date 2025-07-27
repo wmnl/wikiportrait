@@ -5,5 +5,5 @@ config/
 .DS_Store
 .idea/*
 /web/common/config.php.live
-
-/web/archive/cronlog.txtweb/db_logfile.txt
+/web/archive/cronlog.txt
+web/db_logfile.txt
