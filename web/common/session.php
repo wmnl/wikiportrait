@@ -82,6 +82,9 @@ class Session
         if (!password_verify($_POST['password'], $row['password'])) {
             return false;
         }
+        if ($row['bot'] == 1) {
+            return false;
+        }
 
         $_SESSION['user'] = $row['id'];
         $_SESSION['isSysop'] = $row['isSysop'] == 1;

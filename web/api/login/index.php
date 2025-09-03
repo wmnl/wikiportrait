@@ -1,5 +1,5 @@
 <?php
-require_once '../common/bootstrap.php';
+require_once '../../vendor/autoload.php';
 $headers = apache_request_headers();
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(403);
@@ -11,20 +11,27 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $_SERVER['REQUEST_METHOD'] !== 'GET
     || !array_key_exists('Authentication', $headers)
 ) {
     http_response_code(401);
-    echo "Please provide correct credentials.";
+    echo "U dient correcte inloggegevens te verstrekken";
     return;
 } else {
     $returnValue = validateApi($headers['User'], $headers['Pass'], $headers['Authentication']);
     echo $returnValue;
-    // print_r($_POST);
+    return;
 }
-// echo json_encode("Welcome to the API");
-// echo "U dient inloggegevens te verstrekken";
 
+
+/**
+ * @param string $user
+ * @param string $pass
+ * @param string $key
+ * 
+ * @return string
+ */
 function validateApi(string $user, string $pass, string $key)
 {
-    // $apiKey =
-    //     SECRET_KEY
+    /**
+     * @var array
+     */
     $row = DB::queryFirstRow("SELECT * FROM users WHERE username = %s AND active = 1", $user);
     if (!$row) {
         http_response_code(401);
@@ -35,8 +42,7 @@ function validateApi(string $user, string $pass, string $key)
         http_response_code(401);
         return "U dient correcte inloggegevens te verstrekken";
     }
-    // var_dump(hash('sha512', $key . SECRET_KEY, false), $row['apiKey']);
-    if (!$row['isBot']) {
+    if (!$row['isBot'] || !$row['active']) {
         http_response_code(401);
         return "U dient correcte inloggegevens te verstrekken";
     }
@@ -44,6 +50,14 @@ function validateApi(string $user, string $pass, string $key)
         http_response_code(401);
         return "U dient correcte inloggegevens te verstrekken";
     }
+    $hashkey = hash('sha512', $key . SECRET_KEY . date('c'), false);
+    $expiry = new DateTime();
+    $expiry->modify('+1 hour');
+    DB::insert('botkeys', [
+        'token' => $hashkey,
+        'user' => $row['id'],
+        'expires' => $expiry->format('Y-m-d H:i:s'),
+    ]);
     http_response_code(200);
-    return "U bent ingelogd";
+    return $hashkey;
 }

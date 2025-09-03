@@ -15,5 +15,13 @@
     "allow-plugins": {
       "cweagans/composer-patches": true
     }
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^2.1"
+  },
+  "autoload": {
+    "files": [
+      "web/common/bootstrap.php"
+    ]
   }
 }
