@@ -5,6 +5,7 @@ class Session
 {
     public function __construct()
     {
+
         session_status() != PHP_SESSION_ACTIVE ? session_start() : '';
         $cookieLifetime = 365 * 24 * 60 * 60;
         setcookie(session_name(), session_id(), time() + $cookieLifetime);

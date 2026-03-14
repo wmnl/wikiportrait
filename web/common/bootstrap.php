@@ -1,5 +1,35 @@
 <?php
 
+ob_start();
+if (!function_exists('convertToBytes')) {
+    function convertToBytes(string $val): int
+    {
+        $val  = trim($val);
+        $last = strtolower($val[strlen($val) - 1]);
+        $num  = (int) $val;
+        return match ($last) {
+            'g' => $num * 1024 * 1024 * 1024,
+            'm' => $num * 1024 * 1024,
+            'k' => $num * 1024,
+            default => $num,
+        };
+    }
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $contentLength = (int) ($_SERVER['CONTENT_LENGTH'] ?? 0);
+    $postMaxBytes  = convertToBytes(ini_get('post_max_size'));
+
+    if ($contentLength > $postMaxBytes) {
+        ob_clean();
+        $protocol = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
+        $host     = $_SERVER['HTTP_HOST'];
+        $path     = strtok($_SERVER['REQUEST_URI'], '?');
+        header("Location: {$protocol}{$host}{$path}?upload_error=te_groot");
+        http_response_code(302);
+        exit;
+    }
+}
+
 $protocol = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
 
 if (substr($_SERVER['HTTP_HOST'], 0, 4) !== 'www.' && $_SERVER['HTTP_HOST'] !== 'localhost') {

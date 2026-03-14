@@ -149,6 +149,13 @@ function checkfile($file)
         $validationerrors = [];
     }
     $allowedext = ["image/png", "image/gif", "image/jpeg", "image/bmp", "image/pjpeg", "image/jfif"];
+    if (!in_array($file['type'], $allowedext)) {
+        array_push(
+            $validationerrors,
+            "Dit bestandsformaat wordt niet ondersteund. Toegestane formaten: JPG, PNG, GIF, BMP."
+        );
+        return "unsupported file";
+    }
 
     if (!isset($file)) {
         array_push($validationerrors, "Er is geen bestand geselecteerd.");
@@ -160,10 +167,18 @@ function checkfile($file)
         );
         return "unsupported file";
     } else {
-        $filePath = normalizeImageFormat($file['tmp_name']);
-        $imageManager = new ImageManager(['driver' => 'gd']);
-        $imageManager->make($filePath);
-        return "ok";
+        try {
+            $filePath = normalizeImageFormat($file['tmp_name']);
+            $imageManager = new ImageManager(['driver' => 'gd']);
+            $imageManager->make($filePath);
+            return "ok";
+        } catch (\Exception $e) {
+            array_push(
+                $validationerrors,
+                "Het bestand kon niet worden verwerkt. Controleer of het een geldig afbeeldingsbestand is."
+            );
+            return "invalid image";
+        }
     }
 }
 
