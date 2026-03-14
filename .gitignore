@@ -4,8 +4,8 @@ uploads/
 config/
 .DS_Store
 .idea/*
-/web/common/config.php.live
-/web/archive/cronlog.txt
-web/db_logfile.txt
+/public/common/config.php.live
+/public/archive/cronlog.txt
+public/db_logfile.txt
 Wikiportret.code-workspace
 .vscode/settings.json
