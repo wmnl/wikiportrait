@@ -1,6 +1,6 @@
 <?php
-require '../common/bootstrap.php';
-require '../common/header.php';
+require_once '../common/bootstrap.php';
+require_once '../common/header.php';
 $session->checkAdmin();
 include 'tabs.php';
 ?>
@@ -29,7 +29,9 @@ include 'tabs.php';
                     echo "<tr>";
                     echo "<td data-title=\"&#xf02e;\" class=\"center\">$id</td>";
                     echo "<td data-title=\"&#xf02b;\">$title</td>";
-                    echo "<td data-title=\"&#xf0ae;\"><a href=\"editmessage.php?id=$id\">Bewerken</a><div class=\"divider\"></div><a href=\"#\" onclick=\"confirmDelete($id)\");\">Verwijderen</a></td>";
+                    echo "<td data-title=\"&#xf0ae;\"><a href=\"editmessage.php?id={$id}\">Bewerken</a><div ";
+                    echo "class=\"divider\"></div><a href=\"#\" ";
+                    echo "onclick=\"confirmDelete({$id})\");\">Verwijderen</a></td>";
                     echo "</tr>";
                 }
                 ?>

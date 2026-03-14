@@ -152,7 +152,10 @@ function checkfile($file)
         array_push($validationerrors, "Er is geen bestand geselecteerd.");
         return "empty file";
     } elseif (!in_array($file['type'], $allowedext)) {
-        array_push($validationerrors, "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund.");
+        array_push(
+            $validationerrors,
+            "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund."
+        );
         return "unsupported file";
     } else {
         return "ok";

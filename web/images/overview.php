@@ -1,7 +1,7 @@
 <?php
-require '../common/bootstrap.php';
+require_once '../common/bootstrap.php';
 $session->checkLogin();
-require '../common/header.php';
+require_once '../common/header.php';
 
 include 'tabs.php';
 
@@ -33,22 +33,26 @@ $archive = $archived ? $_GET['archived'] : 0;
         $total_pages = ceil($total_records / 25);
 
         if ($total_pages > 1) :
-        ?>
+            ?>
             <form class="navigation" method="post">
                 <select class="select" name="page" onchange="loadPage()" id="page">
                     <?php
                     for ($i = 1; $i <= $total_pages; $i++) :
-                    ?>
-                        <option value='<?= $i ?>' <?php if (isset($_GET['page']) && $_GET['page'] == $i) {
-                                                        echo 'selected';
-                                                    } ?>><?= $i ?></option>
-                    <?php
+                        ?>
+                        <option value='<?= $i; ?>' 
+                        <?php
+                        if (isset($_GET['page']) && $_GET['page'] == $i) {
+                            echo 'selected';
+                        }
+                        ?>
+                                                    ><?= $i; ?></option>
+                        <?php
                     endfor;
                     ?>
                 </select>
             </form>
 
-        <?php
+            <?php
         endif;
         ?>
     </div>
@@ -102,16 +106,29 @@ $archive = $archived ? $_GET['archived'] : 0;
                     } else {
                         $owner = $row['otrsname'];
                     }
-                ?>
+                    ?>
                     <tr>
-                        <td data-title="&#xf03e;" class="image"><a href="single.php?id=<?php echo $id ?>"><img src="../uploads/thumbs/<?php echo $filename ?>" /></a></td>
-                        <td data-title="&#xf02b;"><a href="single.php?id=<?php echo $id ?>"><?= htmlentities($title); ?></a>
+                        <td data-title="&#xf03e;" class="image"><a href="single.php?id=<?php echo $id; ?>">
+                                <img src="../uploads/thumbs/<?php echo $filename; ?>" /></a></td>
+                        <td data-title="&#xf02b;"><a
+                                href="single.php?id=<?php echo $id; ?>"><?= htmlentities($title); ?></a>
                         </td>
                         <td data-title="&#xf007;"><?= htmlentities($name); ?></td>
-                        <td data-title="&#xf073;"><?php echo strftime("%e %B %Y", $timestamp) ?></td>
-                        <td data-title="&#xf0f0;"><?= $owner ?></td>
+                        <td data-title="&#xf073;">
+                        <?=
+                        (new IntlDateFormatter(
+                            'nl_NL',
+                            IntlDateFormatter::NONE,
+                            IntlDateFormatter::NONE,
+                            null,
+                            null,
+                            "d MMMM yyyy"
+                        ))->format($timestamp);
+                        ?>
+                                                    </td>
+                        <td data-title="&#xf0f0;"><?= $owner; ?></td>
                     </tr>
-                <?php
+                    <?php
                 endforeach;
                 ?>
             </tbody>

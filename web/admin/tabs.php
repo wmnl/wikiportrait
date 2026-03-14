@@ -7,13 +7,15 @@
                 if ($page2 == 'users') {
                     echo ' class="active"';
                 }
-                ?>><a href="users.php"><i class="fa-solid fa-users"></i>Gebruikers</a></li>
+                ?>
+                ><a href="users.php"><i class="fa-solid fa-users"></i>Gebruikers</a></li>
             <li
                 <?php
                 if ($page2 == 'messages') {
                     echo ' class="active"';
                 }
-                ?>><a href="messages.php"><i class="fa-solid fa-comments"></i>Berichten</a></li>
+                ?>
+                ><a href="messages.php"><i class="fa-solid fa-comments"></i>Berichten</a></li>
         </ul>
     </div>
 <?php endif; ?>

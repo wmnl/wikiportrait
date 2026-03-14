@@ -1,15 +1,18 @@
 <?php
-require '../common/bootstrap.php';
-require '../common/header.php';
+require_once '../common/bootstrap.php';
+require_once '../common/header.php';
 $session->checkAdmin();
 include 'tabs.php';
+
+$results = DB::query('SELECT * FROM users');
 ?>
 <div id="content">
     <div class="page-header">
         <h2>Gebruikersbeheer</h2>
-        <a href="adduser.php" class="button"><i class="fa-solid fa-plus fa-lg"></i><span>Nieuwe gebruiker</span></a>
+        <a href="adduser.php" class="button">
+            <i class="fa-solid fa-plus fa-lg"></i><span>Nieuwe gebruiker</span>
+        </a>
     </div>
-
     <div class="table-container">
         <table>
             <thead>
@@ -24,39 +27,25 @@ include 'tabs.php';
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $results = DB::query('SELECT * FROM users');
-                foreach ($results as $row) {
-                    $id = $row['id'];
-                    $username = htmlspecialchars($row['username']);
-                    $otrsname = htmlspecialchars($row['otrsname']);
-                    $email = $row['email'];
-                    $sysop = $row['isSysop'];
-                    $active = $row['active'];
-
-                    echo "<tr>";
-                    echo "<td data-title =\"&#xf02e;\" class=\"center\">$id</td>";
-                    echo "<td data-title =\"&#xf007;\">$username</td>";
-                    echo "<td data-title =\"&#xf0b1;\">$otrsname</td>";
-                    echo "<td data-title =\"&#xf0e0;\">$email</td>";
-                    if ($sysop) {
-                        echo "<td data-title =\"&#xf0f0;\">Ja</td>";
-                    } else {
-                        echo "<td data-title =\"&#xf0f0;\">Nee</td>";
-                    }
-                    echo "<td data-title =\"&#xf0ae;\"><a href=\"edituser.php?id=$id\">Bewerken</td>";
-                    if ($active) {
-                        echo "<td data-title=\"&#xf235;\"><i class=\"fa-solid fa-check\" style=\"color: green;\"></i></td>";
-                    } else {
-                        echo "<td data-title=\"&#xf235;\"><i class=\"fa-solid fa-times\" style=\"color: red;\"></i></td>";
-                    }
-                    echo "</tr>";
-                }
-                ?>
+                <?php foreach ($results as $row) : ?>
+                <tr>
+                    <td data-title="&#xf02e;" class="center"><?= $row['id']; ?></td>
+                    <td data-title="&#xf007;"><?= htmlspecialchars($row['username']); ?></td>
+                    <td data-title="&#xf0b1;"><?= htmlspecialchars($row['otrsname']); ?></td>
+                    <td data-title="&#xf0e0;"><?= htmlspecialchars($row['email']); ?></td>
+                    <td data-title="&#xf0f0;"><?= $row['isSysop'] ? 'Ja' : 'Nee'; ?></td>
+                    <td data-title="&#xf0ae;">
+                        <a href="edituser.php?id=<?= $row['id']; ?>">Bewerken</a>
+                    </td>
+                    <td data-title="&#xf235;">
+                        <i class="fa-solid <?= $row['active'] ? 'fa-check' : 'fa-times'; ?>"
+                            style="color: <?= $row['active'] ? 'green' : 'red'; ?>"></i>
+                    </td>
+                </tr>
+                <?php endforeach ?>
             </tbody>
         </table>
     </div>
 </div>
-<?php
-include '../common/footer.php';
-?>
+
+<?php include '../common/footer.php'; ?>

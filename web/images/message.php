@@ -1,7 +1,7 @@
 <?php
-require '../common/bootstrap.php';
+require_once '../common/bootstrap.php';
 $session->checkLogin();
-require '../common/header.php';
+require_once '../common/header.php';
 
 ?>
 <div id="content">
@@ -21,12 +21,12 @@ require '../common/header.php';
                 $_GET['message']
             );
 
-            $templates = array("%%name%%", "%%title%%", "%%otrsname%%");
-            $replace = array($row['name'], $row['title'], $row['otrsname']);
+            $templates = ["%%name%%", "%%title%%", "%%otrsname%%"];
+            $replace = [$row['name'], $row['title'], $row['otrsname']];
             $newTxt = str_replace($templates, $replace, $row['message']);
-        ?>
+            ?>
             <textarea name="message" onclick="this.focus();this.select()"><?php echo $newTxt; ?></textarea>
-        <?php
+            <?php
         }
 
         ?>

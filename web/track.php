@@ -1,6 +1,6 @@
 <?php
-require 'common/bootstrap.php';
-require 'common/header.php';
+require_once 'common/bootstrap.php';
+require_once 'common/header.php';
 ?>
 <div id="content">
     <?php
@@ -12,7 +12,7 @@ require 'common/header.php';
         if (DB::count() == 0) :
             echo "<div class=\"box red\">Geen afbeelding gevonden!</div>";
         else :
-    ?>
+            ?>
 
             <h2>Inzending volgen: <?php echo $row['title']; ?> </h2>
 
@@ -55,15 +55,15 @@ require 'common/header.php';
                 </div>
             </div>
 
-    <?php
+            <?php
         endif;
     endif;
     ?>
 
 </div>
 
-<script src="<?= $basispad ?>/lib/imagelightbox/dist/imagelightbox.min.js"></script>
-<script src="<?= $basispad ?>/js/lightbox.js"></script>
+<script src="<?= $basispad; ?>/lib/imagelightbox/dist/imagelightbox.min.js"></script>
+<script src="<?= $basispad; ?>/js/lightbox.js"></script>
 
 <?php
 include 'common/footer.php';

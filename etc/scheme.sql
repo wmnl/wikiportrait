@@ -17,6 +17,23 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `botkeys`
+--
+
+DROP TABLE IF EXISTS `botkeys`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `botkeys` (
+  `token` varchar(255) NOT NULL,
+  `user` int(11) NOT NULL,
+  `expires` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`token`),
+  KEY `botkeys_user_users_id` (`user`),
+  CONSTRAINT `botkeys_user_users_id` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `contributors`
 --
 
@@ -125,4 +142,4 @@ CREATE TABLE `vision_api_results` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-27 17:17:15
+-- Dump completed on 2025-09-03 15:15:55

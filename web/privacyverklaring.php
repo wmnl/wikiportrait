@@ -1,6 +1,6 @@
 <?php
-    require 'common/bootstrap.php';
-    require 'common/header.php';
+require_once 'common/bootstrap.php';
+require_once 'common/header.php';
 ?>
 <div id="content">
     <h2>Privacyverklaring</h2>
@@ -14,11 +14,11 @@
     <p>Onze gegevens zijn:</p>
 
     <ul class="list">
-    <li>Vereniging Wikimedia Nederland</li>
-    <li>Mariaplaats 3
-    <li>3511 LH  Utrecht
-    <li>Tel: 030 320 0238
-    <li>KvK: 17189036
+        <li>Vereniging Wikimedia Nederland</li>
+        <li>Mariaplaats 3
+        <li>3511 LH Utrecht
+        <li>Tel: 030 320 0238
+        <li>KvK: 17189036
     </ul>
 
     <h3>Welke gegevens verzamelen we?</h3>
@@ -63,5 +63,5 @@
 
 </div>
 <?php
-    include 'common/footer.php';
+include 'common/footer.php';
 ?>

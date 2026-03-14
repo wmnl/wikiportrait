@@ -1,5 +1,5 @@
 <?php
-require '../common/bootstrap.php';
+require_once '../common/bootstrap.php';
 $session->checkLogin();
 
 if (isset($_GET['id'])) {
@@ -13,7 +13,51 @@ if (isset($_GET['id'])) {
     $session->redirect("/admin/users");
 }
 
-require '../common/header.php';
+$row = DB::queryFirstRow('SELECT * FROM users WHERE id = %d', $_GET['id']);
+
+if (DB::count() == 0) {
+    echo "Gebruiker niet gevonden!";
+} else {
+    if (isset($_POST['postback'])) {
+        $admin = isset($_POST['admin']);
+        $active = isset($_POST['active']);
+
+        // Make sure non-admins don't promote themselves to admin
+        if ($admin && !$session->isSysop()) {
+            die();
+        }
+
+        isrequired('username', 'gebruikersnaam');
+        isrequired('otrsname', 'VRTS-naam');
+        comparepassword($_POST['password'], $_POST['password2']);
+        validateEmail('email');
+
+        if (!hasvalidationerrors()) {
+            $data = [
+                'username' => $_POST['username'],
+                'otrsname' => $_POST['otrsname'],
+                'email' => $_POST['email'],
+                'isSysop' => $admin,
+                'isBot' => $_POST['bot'],
+                'active' => $active,
+            ];
+            if ($_POST['bot'] && $_POST['key']) {
+                $data['apiKey'] = hash('sha512', $_POST['key'] . SECRET_KEY, false);
+            }
+            if (!empty($_POST['password'])) {
+                $data['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
+            }
+            DB::update('users', $data, 'id = %d', $_GET['id']);
+
+            header("Location: users.php");
+        }
+
+        if (hasvalidationerrors()) {
+            showvalidationsummary();
+        }
+    }
+}
+require_once '../common/header.php';
 include 'tabs.php';
 ?>
 <div id="content">
@@ -22,59 +66,6 @@ include 'tabs.php';
         <a href="users.php" class="button red"><i class="fa-solid fa-times-circle fa-lg"></i><span>Annuleren</span></a>
     </div>
 
-    <?php
-    $row = DB::queryFirstRow('SELECT * FROM users WHERE id = %d', $_GET['id']);
-
-    if (DB::count() == 0) {
-        echo "Gebruiker niet gevonden!";
-    } else {
-        if (isset($_POST['postback'])) {
-            $admin = isset($_POST['admin']);
-            $active = isset($_POST['active']);
-
-            // Make sure non-admins don't promote themselves to admin
-            if ($admin && !$session->isSysop()) {
-                die();
-            }
-
-            isrequired('username', 'gebruikersnaam');
-            isrequired('otrsname', 'VRTS-naam');
-            comparepassword($_POST['password'], $_POST['password2']);
-            validateEmail('email');
-
-            if (!hasvalidationerrors()) {
-                if (empty($_POST['password'])) {
-                    DB::update('users', [
-                        'username' => $_POST['username'],
-                        'otrsname' => $_POST['otrsname'],
-                        'email' => $_POST['email'],
-                        'isSysop' => $admin,
-                        'active' => $active
-                    ], 'id = %d', $_GET['id']);
-
-                    header("Location: users.php");
-                } else {
-                    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
-                    DB::update('users', [
-                        'username' => $_POST['username'],
-                        'password' => $password,
-                        'otrsname' => $_POST['otrsname'],
-                        'email' => $_POST['email'],
-                        'isSysop' => $admin,
-                        'active' => $active
-                    ], 'id = %d', $_GET['id']);
-
-                    header("Location: users.php");
-                }
-            }
-
-            if (hasvalidationerrors()) {
-                showvalidationsummary();
-            }
-        }
-    }
-    ?>
 
     <form method="post">
 
@@ -86,24 +77,28 @@ include 'tabs.php';
         }
         ?>
 
-        <div class="input-container" <?= $inputClass ?>>
+        <div class="input-container" <?= $inputClass; ?>>
             <label for="username"><i class="fa-solid fa-user fa-lg"></i>Gebruikersnaam</label>
-            <input type="text" name="username" id="username" value="<?php echo htmlspecialchars($row['username']); ?>" />
+            <input type="text" name="username" id="username"
+                value="<?php echo htmlspecialchars($row['username']); ?>" />
         </div>
 
         <div class="input-container">
             <label for="otrsname"><i class="fa-solid fa-briefcase fa-lg"></i>VRTS-naam</label>
-            <input type="text" name="otrsname" id="otrsname" value="<?php echo htmlspecialchars($row['otrsname']); ?>" />
+            <input type="text" name="otrsname" id="otrsname"
+                value="<?php echo htmlspecialchars($row['otrsname']); ?>" />
         </div>
 
         <div class="input-container">
             <label for="password"><i class="fa-solid fa-key fa-lg"></i>Wachtwoord</label>
-            <input type="password" name="password" id="password" placeholder="Enkel invullen als u het wachtwoord wilt wijzigen" />
+            <input type="password" name="password" id="password"
+                placeholder="Enkel invullen als u het wachtwoord wilt wijzigen" />
         </div>
 
         <div class="input-container">
             <label for="password2"><i class="fa-solid fa-key fa-lg"></i>Wachtwoord nogmaals</label>
-            <input type="password" name="password2" id="password2" placeholder="Enkel invullen als u het wachtwoord wilt wijzigen" />
+            <input type="password" name="password2" id="password2"
+                placeholder="Enkel invullen als u het wachtwoord wilt wijzigen" />
         </div>
 
         <div class="input-container">
@@ -111,30 +106,53 @@ include 'tabs.php';
             <input type="email" name="email" id="email" value="<?php echo $row['email']; ?>" />
         </div>
 
-        <div class="input-container" <?= $inputClass ?>>
+        <div class="input-container" <?= $inputClass; ?>>
             <label for="admin"><i class="fa-solid fa-user-md fa-lg"></i>Beheerder</label>
             <div class="checkbox">
-                <input type="checkbox" name="admin" id="admin"
-                    <?php
-                    if ($row['isSysop'] == 1) {
-                        echo "checked";
-                    }
-                    ?> /><label for="admin">Ja</label>
+                <input type="checkbox" name="admin" id="admin" 
+                <?php
+                if ($row['isSysop'] == 1) {
+                    echo "checked";
+                }
+                ?>
+                                                                /><label for="admin">Ja</label>
             </div>
         </div>
 
-        <div class="input-container" <?= $inputClass ?>>
+        <div class="input-container" <?= $inputClass; ?>>
             <label for="active"><i class="fa-solid fa-power-off fa-lg"></i>Geactiveerd</label>
             <div class="checkbox">
-                <input type="checkbox" name="active" id="active"
-                    <?php
-                    if ($row['active'] == 1) {
-                        echo "checked";
-                    }
-                    ?> /><label for="active">Ja</label>
+                <input type="checkbox" name="active" id="active" 
+                <?php
+                if ($row['active'] == 1) {
+                    echo "checked";
+                }
+                ?>
+                                                                    /><label for="active">Ja</label>
             </div>
         </div>
-
+        <div class="input-container">
+            <label for="admin"><i class="fa-solid fa-user-md fa-lg"></i>Bot</label>
+            <div class="checkbox">
+                <input type="checkbox" name="bot" id="bot" value="1" 
+                <?php
+                if ($row['isBot'] == 1) {
+                    echo "checked";
+                }
+                ?>
+                                                                        /><label for="bot">Ja</label>
+            </div>
+        </div>
+        <div class="input-container 
+        <?php
+        if ($row['isBot'] != 1) {
+                                        echo 'd-none';
+        }
+        ?>
+                                    ">
+            <label for="key"><i class="fa-solid fa-hashtag fa-lg"></i>Api key</label>
+            <input type="text" name="key" id="key" />
+        </div>
         <div class="bottom right">
             <button class="green" name="postback"><i class="fa-solid fa-floppy-o fa-lg"></i>Opslaan</button>
         </div>

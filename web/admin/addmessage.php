@@ -1,6 +1,6 @@
 <?php
-require '../common/bootstrap.php';
-require '../common/header.php';
+require_once '../common/bootstrap.php';
+require_once '../common/header.php';
 $session->checkAdmin();
 include 'tabs.php';
 
@@ -24,7 +24,8 @@ if (isset($_POST['postback'])) {
 
         <h2>Bericht toevoegen</h2>
 
-        <a href="messages.php" class="button red"><i class="fa-solid fa-times-circle fa-lg"></i><span>Annuleren</span></a>
+        <a href="messages.php" class="button red"><i
+                class="fa-solid fa-times-circle fa-lg"></i><span>Annuleren</span></a>
 
     </div>
 

@@ -1,4 +1,5 @@
 <?php
+
 require_once '../../vendor/autoload.php';
 $headers = apache_request_headers();
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -14,10 +15,25 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $_SERVER['REQUEST_METHOD'] !== 'GET
     echo "U dient correcte inloggegevens te verstrekken";
     return;
 }
+if (isset($_POST['key'])) {
+    $row = DB::queryFirstRow(
+        "SELECT * from images WHERE `key`=%s",
+        $_POST['key']
+    );
+    $returnData = [];
+    $returnData['description'] = $row['description'] ?: $row['title'];
+    $returnData['ticket'] = $row['ticket'] ?: 'VUL_HIER_HET_TICKETNUMMER_IN';
+    $returnData['image'] = BASE_URL . "/uploads/images/" . $row['filename'];
+    $returnData['date'] =    $row['date'] ?: null;
+    $returnData['author'] = $row['source'];
+    $returnData['filename'] = $row['filename'];
+    $returnData['categories'] = $row['categories'];
+    echo json_encode($returnData);
+}
 
 /**
  * @param array $headers
- * 
+ *
  * @return bool
  */
 function validateToken(array $headers)

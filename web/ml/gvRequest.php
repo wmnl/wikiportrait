@@ -1,7 +1,7 @@
 <?php
 
-require '../common/config.php';
-require ABSPATH . '/common/bootstrap.php';
+require_once '../common/config.php';
+require_onceABSPATH . '/common/bootstrap.php';
 
 $session->checkLogin();
 
@@ -20,16 +20,16 @@ if (!empty($decoded)) {
   matching_img, similar_img, partial_pages FROM vision_api_results WHERE image_id = %i ORDER BY id DESC", $decoded['id']);
 
         if (!empty($google_vision_results['description'])) {
-              $matching_pages = explode(',', $google_vision_results['matching_pages']);
-              (!empty($google_vision_results['matching_pages'])) ? $mathing_p_count = count($matching_pages) : $mathing_p_count = 0;
-              $matching_img = explode(',', $google_vision_results['matching_img']);
-              (!empty($google_vision_results['matching_img'])) ? $mathing_i_count = count($matching_img) : $mathing_i_count = 0;
-              $similar_img = explode(',', $google_vision_results['similar_img']);
-              (!empty($google_vision_results['similar_img'])) ? $similar_i_count = count($similar_img) : $similar_i_count = 0;
-              $partial_img = explode(',', $google_vision_results['partial_img']) ;
-              (!empty($google_vision_results['partial_img'])) ? $partialcount = count($partial_img) : $partialcount = 0;
+            $matching_pages = explode(',', $google_vision_results['matching_pages']);
+            (!empty($google_vision_results['matching_pages'])) ? $mathing_p_count = count($matching_pages) : $mathing_p_count = 0;
+            $matching_img = explode(',', $google_vision_results['matching_img']);
+            (!empty($google_vision_results['matching_img'])) ? $mathing_i_count = count($matching_img) : $mathing_i_count = 0;
+            $similar_img = explode(',', $google_vision_results['similar_img']);
+            (!empty($google_vision_results['similar_img'])) ? $similar_i_count = count($similar_img) : $similar_i_count = 0;
+            $partial_img = explode(',', $google_vision_results['partial_img']);
+            (!empty($google_vision_results['partial_img'])) ? $partialcount = count($partial_img) : $partialcount = 0;
 
-              echo "<ul class='list_ml'>
+            echo "<ul class='list_ml'>
    <li><span>Datum analyse:</span> " . $google_vision_results['date'] . " <i class='performgv' onclick=\"performGVResults('" . $decoded['id'] . "')\">Nog een keer analyseren</i></li>
    <li><span>Beste categorie:</span> " . $google_vision_results['labels'] . "</li>
    <li><span>Beschrijving:</span> " . $google_vision_results['description'] . "</li>";
@@ -45,9 +45,9 @@ if (!empty($decoded)) {
                 echo "</li>";
             }
             if ($partialcount > 0) {
-                  echo "<li class='partial_img'><span>Aantal gedeeltelijke afbeeldingen:</span> $partialcount <i class='toon' onclick='showGVResults(this)'>tonen</i>";
-                  echo makeGVResults($partial_img);
-                  echo "</li>";
+                echo "<li class='partial_img'><span>Aantal gedeeltelijke afbeeldingen:</span> $partialcount <i class='toon' onclick='showGVResults(this)'>tonen</i>";
+                echo makeGVResults($partial_img);
+                echo "</li>";
             }
             if ($mathing_i_count > 0) {
                 echo "<li class='matching_img'><span>Aantal gedeeltelijke afbeeldingen:</span> $mathing_i_count <i class='toon' onclick='showGVResults(this)'>tonen</i>";

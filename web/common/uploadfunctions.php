@@ -1,17 +1,37 @@
 <?php
 
+//@phpcs:disable PSR1.Files.SideEffects.FoundWithSymbols
+
 use Handlebars\Handlebars;
 use Intervention\Image\ImageManager;
 
-require ABSPATH . "/ml/web_entities.php";
+require_once ABSPATH . "/ml/web_entities.php";
 require_once ABSPATH . "/vendor/autoload.php";
 
 function removeAccentedCharacters($str)
 {
     return strtr($str, [
-        'á' => 'a', 'à' => 'a', 'ä' => 'a', 'â' => 'a', 'é' => 'e', 'è' => 'e', 'ê' => 'e',
-        'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ò' => 'o', 'ó' => 'o',
-        'ô' => 'o', 'ö' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u', 'ç' => 'c'
+        'á' => 'a',
+        'à' => 'a',
+        'ä' => 'a',
+        'â' => 'a',
+        'é' => 'e',
+        'è' => 'e',
+        'ê' => 'e',
+        'ë' => 'e',
+        'ì' => 'i',
+        'í' => 'i',
+        'î' => 'i',
+        'ï' => 'i',
+        'ò' => 'o',
+        'ó' => 'o',
+        'ô' => 'o',
+        'ö' => 'o',
+        'ù' => 'u',
+        'ú' => 'u',
+        'û' => 'u',
+        'ü' => 'u',
+        'ç' => 'c'
     ]);
 }
 
@@ -152,8 +172,10 @@ function checkUpload()
                 $mail->addAddress($email, $name);
                 $mail->addReplyTo(VRTS_MAIL, "Wikiportret VRTS queue");
             } else {
-                $email_verified ? $mail->addAddress(VRTS_MAIL, "Wikiportret VRTS queue") : $mail->addAddress($email, "Wikiportret VRTS queue");
-                $email_verified ? $mail->addReplyTo($email, $name) : $mail->addReplyTo(VRTS_MAIL, "Wikiportret VRTS queue");
+                $email_verified ? $mail->addAddress(VRTS_MAIL, "Wikiportret VRTS queue") :
+                    $mail->addAddress($email, "Wikiportret VRTS queue");
+                $email_verified ? $mail->addReplyTo($email, $name) :
+                    $mail->addReplyTo(VRTS_MAIL, "Wikiportret VRTS queue");
             };
 
             $mail->Subject = $subject;

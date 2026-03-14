@@ -2,11 +2,9 @@
 <ruleset name="Remko">
     <description>Custom made for Remko
     </description>
-    <rule ref="PSR12"/>
-    <rule ref="Generic.Debug.JSHint"/>
-    <rule ref="Generic.Debug.CSSLint"/>
-    <rule ref="MySource.PHP.EvalObjectFactory"/>
-    <rule ref="MySource.PHP.AjaxNullComparison"/>
+    <rule ref="PSR12">
+        <exclude name="PSR1.Files.SideEffects"/>
+    </rule>
     <rule ref="Squiz.PHP.EmbeddedPhp"/>
     <rule ref="Squiz.PHP.Eval"/>
     <rule ref="Generic.PHP.ForbiddenFunctions.Found"/>

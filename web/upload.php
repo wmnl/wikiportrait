@@ -1,13 +1,14 @@
 <?php
-require 'common/bootstrap.php';
+require_once 'common/bootstrap.php';
+//@phpcs:disable Generic.Files.LineLength.TooLong
 
 if (isset($_POST['postback'])) {
     checkUpload();
 }
 
-require 'common/header.php';
+require_once 'common/header.php';
 if (!CLOSED) {
-?>
+    ?>
     <script>
         function comparenames() {
             var depicted = document.getElementById('title').value;
@@ -54,57 +55,67 @@ if (!CLOSED) {
             <div class="input-container">
                 <label for="title"><i aria-hidden="true" class="fa-solid fa-eye fa-lg"></i>Wie staat
                     er op de foto?</label>
-                <input type="text" name="title" id="title" required="required" value="<?= (!empty($_POST['title'])) ? $_POST['title'] : ''; ?>" onblur="comparenames()" />
+                <input type="text" name="title" id="title" required="required"
+                    value="<?= (!empty($_POST['title'])) ? $_POST['title'] : ''; ?>" onblur="comparenames()" />
             </div>
 
             <div class="input-container">
-                <label for="source"><i aria-hidden="true" class="fa-solid fa-camera fa-lg"></i>Heeft u deze foto zelfgemaakt?</label>
+                <label for="source"><i aria-hidden="true" class="fa-solid fa-camera fa-lg"></i>Heeft u deze foto
+                    zelfgemaakt?</label>
                 <div class="radiogroup">
                     <input type="radio" name="source_self" value="Yes" id="source_self_yes" required="required"
-                        <?= (array_key_exists('source_self', $_POST) && $_POST['source_self'] == 'Yes') ? 'checked="checked"' : ''; ?>>Ja, ik heb deze foto zelf gemaakt<br>
-                    <input type="radio" name="source_self" value="No" id="source_self_no" required="required"
-                        <?php
-                        echo (array_key_exists('source_self', $_POST) && $_POST['source_self'] == 'No') ? 'checked="checked"' :
-                            '';
-                        ?>>Nee, ik heb deze foto niet zelf gemaakt<br>
-                    <input type="radio" name="source_self" value="Unknown" id="source_self_unknown"
-                        required="required"
-                        <?php //phpcs:ignore Squiz.PHP.EmbeddedPhp.Indent
-                        echo (array_key_exists('source_self', $_POST) && $_POST['source_self'] == 'Unknown') ?
-                            'checked="checked"' : '';
-                        ?>>Ik weet niet wie de foto gemaakt heeft
+                        <?= (array_key_exists('source_self', $_POST) && $_POST['source_self'] == 'Yes') ? 'checked="checked"' : ''; ?>>Ja,
+                    ik heb deze foto zelf gemaakt<br>
+                    <input type="radio" name="source_self" value="No" id="source_self_no" required="required" 
+                    <?php
+                    echo (array_key_exists('source_self', $_POST) && $_POST['source_self'] == 'No') ? 'checked="checked"' :
+                                                                                                                    '';
+                    ?>
+                                                                                                                >Nee, ik heb deze foto niet zelf gemaakt<br>
+                    <input type="radio" name="source_self" value="Unknown" id="source_self_unknown" required="required" 
+                    <?php
+                    //phpcs:ignore Squiz.PHP.EmbeddedPhp.Indent
+                                                                                                                        echo (array_key_exists('source_self', $_POST) && $_POST['source_self'] == 'Unknown') ?
+                                                                                                                            'checked="checked"' : '';
+                    ?>
+                                                                                                                        >Ik weet niet wie de foto gemaakt heeft
                 </div>
             </div>
 
             <div class="input-container hidden" id="source_container">
-                <label for="source"><i aria-hidden="true" class="fa-solid fa-camera-retro fa-lg"></i>Wat is de naam van de fotograaf?</label>
-                <input type="text" name="source" id="source"
-                    <?php
-                    echo (array_key_exists('source_self', $_POST) &&
-                        $_POST['source_self'] != 'Yes') ? 'required="required"' : '';
-                    ?>
-                    value="<?= (!empty($_POST['source'])) ? $_POST['source'] : ''; ?>" onblur="comparenames()" />
+                <label for="source"><i aria-hidden="true" class="fa-solid fa-camera-retro fa-lg"></i>Wat is de naam van de
+                    fotograaf?</label>
+                <input type="text" name="source" id="source" 
+                <?php
+                echo (array_key_exists('source_self', $_POST) &&
+                                                                    $_POST['source_self'] != 'Yes') ? 'required="required"' : '';
+                ?>
+                                                                value="<?= (!empty($_POST['source'])) ? $_POST['source'] : ''; ?>" onblur="comparenames()" />
             </div>
 
             <div class="input-container">
                 <label for="name"><i aria-hidden="true" class="fa-solid fa-user fa-lg"></i>Uw naam</label>
-                <input type="text" name="name" id="name" required="required" value="<?= (!empty($_POST['name'])) ? $_POST['name'] : ''; ?>" />
+                <input type="text" name="name" id="name" required="required"
+                    value="<?= (!empty($_POST['name'])) ? $_POST['name'] : ''; ?>" />
             </div>
 
             <div class="input-container">
                 <label for="email"><i aria-hidden="true" class="fa-solid fa-envelope fa-lg"></i>Uw e-mailadres</label>
-                <input type="email" id="email" name="email" required="required" value="<?= (!empty($_POST['email'])) ? $_POST['email'] : ''; ?>" />
+                <input type="email" id="email" name="email" required="required"
+                    value="<?= (!empty($_POST['email'])) ? $_POST['email'] : ''; ?>" />
             </div>
 
             <div class="input-container">
-                <label for="date"><i aria-hidden="true" class="fa-solid fa-calendar fa-lg"></i>Wanneer is de foto genomen? <span class="optional">(optioneel)</span></label>
+                <label for="date"><i aria-hidden="true" class="fa-solid fa-calendar fa-lg"></i>Wanneer is de foto genomen?
+                    <span class="optional">(optioneel)</span></label>
                 <input type="text" name="date" id="date" value="<?= (!empty($_POST['date'])) ? $_POST['date'] : ''; ?>" />
             </div>
 
             <div class="input-container">
                 <label for="description"><i aria-hidden="true" class="fa-solid fa-comment fa-lg"></i>Omschrijving <span
                         class="optional">(optioneel)</span></label>
-                <textarea name="description" id="description"><?= (!empty($_POST['description'])) ? $_POST['description'] : ''; ?></textarea>
+                <textarea name="description"
+                    id="description"><?= (!empty($_POST['description'])) ? $_POST['description'] : ''; ?></textarea>
             </div>
 
             <div class="input-container">
@@ -130,9 +141,16 @@ if (!CLOSED) {
             <div class="input-container">
                 <label for="terms"><i aria-hidden="true" class="fa-solid fa-gavel fa-lg"></i>Toestemming</label>
                 <div class="checkbox">
-                    <input type="checkbox" name="terms" id="terms" /><label for="terms">Ja, ik ga akkoord met de bovenstaande licentievoorwaarden, de <a href="
-    <?= $basispad ?>/privacyverklaring.php" target="_blank">privacyverklaring</a> en het opslaan van mijn IP-adres.</label><br />
-                    <input type="checkbox" name="euvs" id="euvs" /><label for="euvs">Ja, ik geef toestemming voor het opslaan van mijn gegevens op de servers van de Wikimedia Foundation in de Verenigde Staten, waarbij de gegevens niet worden doorgegeven op grond van het EU-US Privacy Shield of de wettelijke uitzondering die is opgenomen in artikel 77 van de Wet bescherming persoonsgegevens (Wbp). Bij doorgifte buiten de Europese Unie bestaat er een kans dat het beschermingsniveau minder hoog zal zijn dan binnen de EU.</label>
+                    <input type="checkbox" name="terms" id="terms" /><label for="terms">Ja, ik ga akkoord met de
+                        bovenstaande licentievoorwaarden, de <a href="
+    <?= $basispad; ?>/privacyverklaring.php" target="_blank">privacyverklaring</a> en het opslaan van mijn
+                        IP-adres.</label><br />
+                    <input type="checkbox" name="euvs" id="euvs" /><label for="euvs">Ja, ik geef toestemming voor het
+                        opslaan van mijn gegevens op de servers van de Wikimedia Foundation in de Verenigde Staten, waarbij
+                        de gegevens niet worden doorgegeven op grond van het EU-US Privacy Shield of de wettelijke
+                        uitzondering die is opgenomen in artikel 77 van de Wet bescherming persoonsgegevens (Wbp). Bij
+                        doorgifte buiten de Europese Unie bestaat er een kans dat het beschermingsniveau minder hoog zal
+                        zijn dan binnen de EU.</label>
                 </div>
             </div>
             <?php //phpcs:enable Generic.Files.LineLength.TooLong  
@@ -151,8 +169,8 @@ if (!CLOSED) {
         <p>Helaas is het momenteel niet mogelijk om foto's te uploaden.
             Het is niet bekend wanneer Wikiportret weer beschikbaar is.
             U kunt in de tussentijd uw foto rechtstreeks uploaden naar
-            <a href="https://commons.wikimedia.org/wiki/Special:UploadWizard?uselang=nl"
-                target="_blank" rel="noopener nofollow">Wikimedia Commons</a>
+            <a href="https://commons.wikimedia.org/wiki/Special:UploadWizard?uselang=nl" target="_blank"
+                rel="noopener nofollow">Wikimedia Commons</a>
         </p>
         <p>Onze excuses voor het ongemak<br>Team Wikiportret</p>
     </div>

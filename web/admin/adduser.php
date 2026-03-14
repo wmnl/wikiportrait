@@ -1,5 +1,5 @@
 <?php
-require '../common/bootstrap.php';
+require_once '../common/bootstrap.php';
 $session->checkAdmin();
 
 if (isset($_POST['postback'])) {
@@ -29,7 +29,7 @@ if (isset($_POST['postback'])) {
         $session->redirect("/admin/users");
     }
 }
-require '../common/header.php';
+require_once '../common/header.php';
 include 'tabs.php';
 
 ?>

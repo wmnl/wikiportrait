@@ -730,3 +730,12 @@ button::-moz-focus-inner {
 .d-none {
     display: none;
 }
+.not_verified {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    font-size: 0.9em;
+    margin-top: 3px;
+}

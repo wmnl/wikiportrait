@@ -1,5 +1,6 @@
 <?php
-    require '../common/bootstrap.php';
+
+require_once '../common/bootstrap.php';
 
 if (!isset($_GET['id'])) {
     $session->redirect("/images/overview");
@@ -11,11 +12,11 @@ if (!isset($_GET['id'])) {
         $session->redirect("/images/overview");
     } else {
         DB::update('images', [
-           'owner' => $_SESSION['user']
+            'owner' => $_SESSION['user']
         ], 'id = %d', $id);
 
         $session->redirect("/images/single", "?id=$id");
     }
 }
 
-    require '../common/header.php';
+require_once '../common/header.php';

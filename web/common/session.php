@@ -1,10 +1,11 @@
 <?php
 
+//@phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 class Session
 {
     public function __construct()
     {
-        session_start();
+        session_status() != PHP_SESSION_ACTIVE ? session_start() : '';
         $cookieLifetime = 365 * 24 * 60 * 60;
         setcookie(session_name(), session_id(), time() + $cookieLifetime);
     }
@@ -82,7 +83,7 @@ class Session
         if (!password_verify($_POST['password'], $row['password'])) {
             return false;
         }
-        if ($row['bot'] == 1) {
+        if ($row['isBot'] == 1) {
             return false;
         }
 

@@ -1,5 +1,5 @@
 <?php
-require '../common/bootstrap.php';
+require_once '../common/bootstrap.php';
 
 // Check for old v1 url's, and if so, redirect to old installation
 if (!empty($_GET['id']) && !empty($_GET['secret']) && defined('V1_PATH')) {
@@ -28,7 +28,7 @@ if ($session->isLoggedIn()) {
     $session->redirect("/images/overview");
 }
 
-require '../common/header.php';
+require_once '../common/header.php';
 ?>
 
 <div id="content">
@@ -53,7 +53,8 @@ require '../common/header.php';
         </div>
 
         <div class="bottom right">
-            <button class="green" type="submit" name="postback"><i class="fa-solid fa-sign-in fa-lg"></i>Inloggen</button>
+            <button class="green" type="submit" name="postback"><i
+                    class="fa-solid fa-sign-in fa-lg"></i>Inloggen</button>
         </div>
     </form>
 </div>

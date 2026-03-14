@@ -1,5 +1,5 @@
 <?php
-
+//@phpcs:disable Generic.Files.LineLength.TooLong
 function showquestion($text, $yes, $no, $exp = null)
 {
     echo "<p>$text</p>";
@@ -39,10 +39,11 @@ function result($result)
         echo "<div class=\"box red\">" . DUPLICATE_ERROR . "<br /></div>";
         echo "<div class=\"bottom right\"><a class=\"button\" href=\"index.php\"><i class=\"fa-solid fa-home fa-lg\"></i>Terug naar de startpagina</a></div>";
     } elseif ($result == "failupload") {
-?>
+        ?>
         <h3>Uploaden is niet gelukt</h3>
-        <div class="box red">Helaas, het is niet gelukt deze afbeelding te uploaden. Wellicht zijn er technische problemen. Probeer het later nog eens.</div>
-<?php
+        <div class="box red">Helaas, het is niet gelukt deze afbeelding te uploaden. Wellicht zijn er technische problemen.
+            Probeer het later nog eens.</div>
+        <?php
     } else {
         echo "<h3>Het advies van de uploadwizard is:</h3>";
         echo "<div class=\"box green\">Upload de afbeelding onder de <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.nl\" target=\"_blank\">CC-BY-SA 4.0</a> licentie</div>";

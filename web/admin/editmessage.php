@@ -1,6 +1,6 @@
 <?php
-require '../common/bootstrap.php';
-require '../common/header.php';
+require_once '../common/bootstrap.php';
+require_once '../common/header.php';
 $session->checkAdmin();
 include 'tabs.php';
 
@@ -40,18 +40,28 @@ if (isset($_POST['postback'])) {
 
     <div class="page-header">
         <h2>Bericht bewerken</h2>
-        <a href="messages.php" class="button red"><i class="fa-solid fa-times-circle fa-lg"></i><span>Annuleren</span></a>
+        <a href="messages.php" class="button red"><i
+                class="fa-solid fa-times-circle fa-lg"></i><span>Annuleren</span></a>
     </div>
 
     <form method="post">
         <div class="input-container">
             <label for="title"><i class="fa-solid fa-tag fa-lg"></i>Titel</label>
-            <input type="text" name="title" id="title" value="<?php echo htmlspecialchars($row['title']); ?>" required="required" />
+            <input type="text" name="title" id="title" value="
+            <?=
+            htmlspecialchars($row['title']);
+            ?>
+            "
+                required="required" />
         </div>
 
         <div class="input-container">
             <label for="message"><i class="fa-solid fa-align-left fa-lg"></i>Bericht</label>
-            <textarea required="required" name="message"><?php echo htmlspecialchars($row['message']); ?></textarea>
+            <textarea required="required" name="message">
+            <?=
+            htmlspecialchars($row['message']);
+            ?>
+            </textarea>
         </div>
 
         <div class="bottom right">
