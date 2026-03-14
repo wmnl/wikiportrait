@@ -11,7 +11,7 @@
     "cweagans/composer-patches": "^1.7"
   },
   "config": {
-    "vendor-dir": "web/vendor",
+    "vendor-dir": "vendor",
     "allow-plugins": {
       "cweagans/composer-patches": true
     }
@@ -21,7 +21,7 @@
   },
   "autoload": {
     "files": [
-      "web/common/bootstrap.php"
+      "common/bootstrap.php"
     ]
   }
 }
