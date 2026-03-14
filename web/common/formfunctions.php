@@ -1,5 +1,7 @@
 <?php
 
+use Intervention\Image\ImageManager;
+
 function getCommonsUploadLink($row)
 {
     // #57: if description is available, use that, otherwise
@@ -146,7 +148,7 @@ function checkfile($file)
     if (!isset($validationerrors)) {
         $validationerrors = [];
     }
-    $allowedext = ["image/png", "image/gif", "image/jpeg", "image/bmp", "image/pjpeg"];
+    $allowedext = ["image/png", "image/gif", "image/jpeg", "image/bmp", "image/pjpeg", "image/jfif"];
 
     if (!isset($file)) {
         array_push($validationerrors, "Er is geen bestand geselecteerd.");
@@ -158,6 +160,9 @@ function checkfile($file)
         );
         return "unsupported file";
     } else {
+        $filePath = normalizeImageFormat($file['tmp_name']);
+        $imageManager = new ImageManager(['driver' => 'gd']);
+        $imageManager->make($filePath);
         return "ok";
     }
 }
@@ -189,4 +194,28 @@ function validateUploader($source)
     } else {
         return 'invalid';
     }
+}
+
+function normalizeImageFormat(string $tmpPath): string
+{
+    $mime = mime_content_type($tmpPath);
+
+    if (
+        $mime === 'image/jfif' ||
+        pathinfo($tmpPath, PATHINFO_EXTENSION) === 'jfif'
+    ) {
+        // JFIF is JPEG — lees met GD en schrijf als JPEG terug
+        $img = imagecreatefromjpeg($tmpPath);
+        if ($img === false) {
+            throw new \RuntimeException('Kon JFIF niet inlezen');
+        }
+
+        $newPath = $tmpPath . '_converted.jpg';
+        imagejpeg($img, $newPath, 95);
+        imagedestroy($img);
+
+        return $newPath;
+    }
+
+    return $tmpPath;
 }

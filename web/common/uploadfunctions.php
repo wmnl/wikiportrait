@@ -42,6 +42,12 @@ function getFilename($title, $time, $file)
     $title = strtolower(str_replace(" ", "_", $title));
     $datestamp = date_timestamp_get($time);
     $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+
+    // JFIF opslaan als jpg
+    if (strtolower($extension) === 'jfif') {
+        $extension = 'jpg';
+    }
+
     return sprintf("%s-%s.%s", $title, $datestamp, $extension);
 }
 
@@ -56,8 +62,6 @@ function contributorEmailCheck($email)
 function checkUpload()
 {
     global $session, $messages;
-    $errors = [];
-    $allowedext = ["image/png", "image/gif", "image/jpeg", "image/bmp", "image/pjpeg"];
 
     $file = $_FILES['file'];
     $title = $_POST['title'];
@@ -121,11 +125,20 @@ function checkUpload()
 
         $time = new DateTime();
         $filename = getFilename($title, $time, $file);
-
         $imagepath = IMAGE_FOLDER . "/$filename";
         $thumbpath = THUMB_FOLDER . "/$filename";
 
-        if (move_uploaded_file($file['tmp_name'], $imagepath)) {
+        $normalizedTmp = normalizeImageFormat($file['tmp_name']);
+
+        if ($normalizedTmp !== $file['tmp_name']) {
+            // Geconverteerd bestand — move_uploaded_file werkt hier niet
+            $moved = copy($normalizedTmp, $imagepath);
+            unlink($normalizedTmp);
+        } else {
+            $moved = move_uploaded_file($file['tmp_name'], $imagepath);
+        }
+
+        if ($moved) {
             $imageManager = new ImageManager(['driver' => 'gd']);
             $thumb = $imageManager->make($imagepath);
             $thumb->fit(300, 300);
