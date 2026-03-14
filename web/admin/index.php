@@ -17,7 +17,14 @@ if (isset($_POST['postback'])) {
 
     if (!hasvalidationerrors()) {
         if ($session->login($_POST['username'], $_POST['password'])) {
-            $session->redirect("/index");
+            if (!empty($_SESSION['redirect_after_login'])) {
+                $redirect = $_SESSION['redirect_after_login'];
+                unset($_SESSION['redirect_after_login']);
+                header("Location: $redirect");
+                exit;
+            } else {
+                $session->redirect("/images/overview");
+            }
         } else {
             addvalidationerror("Gebruikersnaam of wachtwoord is verkeerd");
         }

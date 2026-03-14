@@ -53,7 +53,9 @@ class Session
     public function checkLogin()
     {
         if (!$this->isLoggedIn()) {
+            $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
             $this->redirect("/admin/index");
+            exit;
         }
     }
 
@@ -74,26 +76,21 @@ class Session
     public function login($user, $pass)
     {
         $row = DB::queryFirstRow("SELECT * FROM users WHERE username = %s AND active = 1", $_POST['username']);
-
         if (!$row) {
             return false;
         }
-
-
         if (!password_verify($_POST['password'], $row['password'])) {
             return false;
         }
         if ($row['isBot'] == 1) {
             return false;
         }
-
-        $_SESSION['user'] = $row['id'];
-        $_SESSION['isSysop'] = $row['isSysop'] == 1;
+        $_SESSION['user']     = $row['id'];
+        $_SESSION['isSysop']  = $row['isSysop'] == 1;
         $_SESSION['username'] = $row['username'];
 
-        return true;
+        return true; // redirect-logica NIET hier, maar in de loginpagina zelf
     }
-
     public function logout()
     {
         session_destroy();
