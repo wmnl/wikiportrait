@@ -68,7 +68,9 @@ function checkUpload()
     $source = $_POST['source_self'] == "Yes" ? $_POST['name'] : $_POST['source'];
     $name = $_POST['name'];
     $email = $_POST['email'];
-
+    $ip = $_SERVER["REMOTE_ADDR"];
+    $date = $_POST['date'];
+    $desc = $_POST['description'];
 
     $fileresult = checkfile($_FILES['file']);
     if ($fileresult !== 'ok') {
