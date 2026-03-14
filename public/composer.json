@@ -6,8 +6,7 @@
     "xamin/handlebars.php": "^0.10.4",
     "phpmailer/phpmailer": "^6.0",
     "google/cloud-vision": "^0.22.5",
-    "guzzlehttp/psr7": "^1.4",
-    "firebase/php-jwt": "^6.11",
+    "firebase/php-jwt": "^7.0",
     "cweagans/composer-patches": "^1.7"
   },
   "config": {
