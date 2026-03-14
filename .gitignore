@@ -7,3 +7,5 @@ config/
 /web/common/config.php.live
 /web/archive/cronlog.txt
 web/db_logfile.txt
+Wikiportret.code-workspace
+.vscode/settings.json
