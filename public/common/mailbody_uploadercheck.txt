@@ -2,7 +2,11 @@ Beste {{name}},
 
 Dank u wel voor het uploaden van een foto op Wikiportret.
 
-U heeft een foto ingestuurd waar u zelf op staat. Het lijkt erop dat u deze foto niet zelf heeft gemaakt. In dat geval kunt u ook de foto niet vrijgeven voor publicatie. De rechthebbende op het auteursrecht kan dat wel. Dat is in verreweg de meeste gevallen de fotograaf. Deze rechthebbende dient ons toestemming te verlenen voor publicatie van de foto. Zonder die toestemming kunnen wij de foto niet opnemen op de Wikimedia projecten, met de licentie die daar geldt.
+U heeft een foto ingestuurd waar u zelf op staat. Dat gebeurt vaker en daarom ontvangt u dit automatische bericht. 
+
+Als de foto een echte selfie is, gemaakt door uzelf met uw eigen telefoon of fototoestel, geeft u dan svp antwoord op deze mail met "de foto is een selfie die ik heb gemaakt op (datum) met behulp van (het gebruikte apparaat)."
+
+Als de foto niet door uzelf is gemaakt, kunt u de foto niet vrijgeven voor publicatie. De rechthebbende op het auteursrecht kan dat wel. Dat is in verreweg de meeste gevallen de fotograaf. Deze rechthebbende dient ons toestemming te verlenen voor publicatie van de foto. Zonder die toestemming kunnen wij de foto niet opnemen op de Wikimedia projecten, met de licentie die daar geldt.
 
 In dit geval kunt u de fotograaf vragen om deze toestemming aan ons te mailen op wikiportret@wikimedia.org. Graag de fotograaf vragen aan ons terug te mailen vanaf een eigen e-mail adres. U kunt dus niet zijn of haar toestemming kopiëren. Hieronder de tekst die de fotograaf voor het verlenen van zijn/haar toestemming kan gebruiken:
 
