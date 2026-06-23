@@ -79,6 +79,20 @@ const generateRandomPasswordSelection = (length) => {
     return password;
 }
 const getRandomElement = arr => {
-    const rand = Math.floor(Math.random() * arr.length);
-    return arr[rand];
+    const cryptoObj = window.crypto || window.msCrypto;
+    if (!cryptoObj || !arr || arr.length === 0) {
+        return arr[0];
+    }
+
+    const uint32Max = 0x100000000; // 2^32
+    const maxUnbiased = Math.floor(uint32Max / arr.length) * arr.length;
+    const randomBuffer = new Uint32Array(1);
+    let rand;
+
+    do {
+        cryptoObj.getRandomValues(randomBuffer);
+        rand = randomBuffer[0];
+    } while (rand >= maxUnbiased);
+
+    return arr[rand % arr.length];
 }
