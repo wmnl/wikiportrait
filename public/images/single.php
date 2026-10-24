@@ -25,11 +25,11 @@ $google_vision_results = DB::queryFirstRow(
 
 $msg = false;
 if (isset($_POST['postback'])) {
-    // Handled images go to the archive; unverified images stay unverified until handled
-    if (!empty($_POST['done'])) {
-        $archived = 1;
+    // Unverified images only leave "Niet geverifieerd" when the address gets verified
+    if ($row['archived'] == 2) {
+        $archived = 2;
     } else {
-        $archived = $row['archived'] == 2 ? 2 : 0;
+        $archived = empty($_POST['done']) ? 0 : 1;
     }
 
     DB::update('images', [
@@ -267,8 +267,13 @@ function getTrueFalse(truefalse) {
                 <div class="input-container">
                     <label for="done"><i class="fa-solid fa-check fa-lg"></i>Afgehandeld</label>
                     <div class="checkbox">
+                        <?php if ($owner['archived'] == 2) : ?>
+                        <input type="checkbox" name="done" id="done" disabled>
+                        <label for="done">Nee, eerst mailadres verifiëren</label>
+                        <?php else : ?>
                         <input type="checkbox" name="done" id="done" <?= $owner['archived'] == 1 ? 'checked' : ''; ?>>
                         <label for="done">Ja</label>
+                        <?php endif ?>
                     </div>
                 </div>
 
