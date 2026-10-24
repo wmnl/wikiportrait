@@ -4,11 +4,14 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 /**
  * Maakt een PHPMailer aan. Als SMTP_HOST, SMTP_USER en SMTP_PASS in config.php gevuld zijn
- * wordt via SMTP verstuurd (bijv. Gmail), anders via sendmail.
+ * wordt via SMTP verstuurd (bijv. Gmail), anders via sendmail. Afzender is SENDER_MAIL.
  */
 function createMailer(): PHPMailer
 {
-    $mail = new PHPMailer();
+    $mail          = new PHPMailer();
+    $mail->From    = SENDER_MAIL;
+    $mail->Sender  = SENDER_MAIL;
+    $mail->CharSet = 'UTF-8';
 
     if (smtpConfigured()) {
         $mail->isSMTP();

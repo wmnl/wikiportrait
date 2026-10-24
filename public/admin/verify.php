@@ -43,9 +43,6 @@ function buildMail(
 ): void {
     $mail->clearAddresses();
     $mail->clearReplyTos();
-    $mail->From    = VRTS_MAIL;
-    $mail->Sender  = VRTS_MAIL;
-    $mail->CharSet = 'UTF-8';
     $mail->addAddress($to, $toName);
     $mail->addReplyTo($replyTo, $replyToName);
     $mail->Subject = $subject;

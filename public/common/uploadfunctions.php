@@ -181,9 +181,6 @@ function checkUpload()
             ]);
             $htmlBody = nl2br($body);
 
-            $mail->From = SENDER_MAIL;
-            $mail->CharSet = 'UTF-8';
-
             if ($validateUploader !== "valid") {
                 $mail->addAddress($email, $name);
                 $mail->addReplyTo(VRTS_MAIL, "Wikiportret VRTS queue");
@@ -195,7 +192,6 @@ function checkUpload()
             };
 
             $mail->Subject = $subject;
-            $mail->Sender = SENDER_MAIL;
             $mail->isHTML(true);
             $mail->Body = $htmlBody;
             $mail->AltBody = $body;

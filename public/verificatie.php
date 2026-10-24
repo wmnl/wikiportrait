@@ -52,9 +52,6 @@ function processVerification(string $key, string $email): string
 
         $mail->clearAddresses();
         $mail->clearReplyTos();
-        $mail->From    = VRTS_MAIL;
-        $mail->Sender  = VRTS_MAIL;
-        $mail->CharSet = 'UTF-8';
         $mail->addAddress(VRTS_MAIL, "Wikiportret VRTS queue");
         $mail->addReplyTo($email, $row['name']);
         $mail->Subject = "[Wikiportret] {$row['title']} is geüpload op Wikiportret";

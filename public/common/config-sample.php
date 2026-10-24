@@ -7,7 +7,8 @@ const DB_DB = 'wikiportret';
 const BASE_URL = 'http://domain.tld';
 const DEBUG = false;
 define('ABSPATH', str_replace("/common", "", dirname(__FILE__)));
-const VRTS_MAIL = 'wikiportret@wikimedia.org';
+const VRTS_MAIL = 'wikiportret@wikimedia.org'; // VRTS-ticketsysteem
+const SENDER_MAIL = 'noreply@domain.tld'; // afzender van de mails, bij Gmail gelijk aan SMTP_USER of een 'Verzenden als'-adres
 const V1_PATH = BASE_URL . '/old';
 const LOCALE = 'nl_NL';
 define('GOOGLE_CREDENTIALS', dirname(__FILE__) . '/your_credentials_file.json');
