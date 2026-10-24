@@ -5,7 +5,7 @@ use Handlebars\Handlebars;
 use PHPMailer\PHPMailer\PHPMailer;
 
 require_once '../common/bootstrap.php';
-$session->checkAdmin();
+$session->checkLogin();
 
 $mail             = new PHPMailer();
 $templateRenderer = new Handlebars();

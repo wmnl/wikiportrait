@@ -25,9 +25,16 @@ $google_vision_results = DB::queryFirstRow(
 
 $msg = false;
 if (isset($_POST['postback'])) {
+    // Handled images go to the archive; unverified images stay unverified until handled
+    if (!empty($_POST['done'])) {
+        $archived = 1;
+    } else {
+        $archived = $row['archived'] == 2 ? 2 : 0;
+    }
+
     DB::update('images', [
         'owner'      => $_POST['owner'],
-        'archived'   => !empty($_POST['done']),
+        'archived'   => $archived,
         'ticket'     => $_POST['ticket'],
         'categories' => json_encode(array_key_exists('categories', $_POST) ? $_POST['categories'] : ''),
     ], 'id = %d', $id);
@@ -191,7 +198,7 @@ function getTrueFalse(truefalse) {
                         <a href="/admin/verify.php?action=resend&id=<?= $row['id']; ?>&hash=<?= $row['key']; ?>"
                             class="admin-action">Stuur verificatiemail opnieuw</a>
                     </div>
-                    <?php elseif ($owner['archived'] == 1 && $verified === '0' && $session->isSysop()) : ?>
+                    <?php elseif ($owner['archived'] == 1 && $verified === '0') : ?>
                     <div class="not_verified">
                         Niet geverifieerd &nbsp;|&nbsp;
                         <a href="/admin/verify.php?action=unverify&id=<?= $row['id']; ?>&hash=<?= $row['key']; ?>"

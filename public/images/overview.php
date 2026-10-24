@@ -12,15 +12,15 @@ $bulkActions = match ((int) $archive) {
     0 => [
         ['endpoint' => 'bulk.php', 'action' => 'archive', 'icon' => 'fa-archive', 'label' => 'Archiveren'],
     ],
-    1 => $session->isSysop() ? [
+    1 => [
         ['endpoint' => '../admin/verify.php', 'action' => 'unverify', 'icon' => 'fa-undo',
             'label' => 'Terugzetten naar Niet geverifieerd'],
-    ] : [],
-    2 => $session->isSysop() ? [
+    ],
+    2 => [
         ['endpoint' => '../admin/verify.php', 'action' => 'verify', 'icon' => 'fa-check', 'label' => 'Verifieer adres'],
         ['endpoint' => '../admin/verify.php', 'action' => 'resend', 'icon' => 'fa-envelope',
             'label' => 'Stuur verificatiemail opnieuw'],
-    ] : [],
+    ],
     default => [],
 };
 
