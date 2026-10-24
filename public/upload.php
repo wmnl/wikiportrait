@@ -30,10 +30,19 @@ function comparenames() {
 $(document).ready(function() {
     $(document).on('change', 'input[name="source_self"]', function() {
         if ("No" === $(this).val()) {
+            $('#source').attr('required', 'required');
             $('#source_container').removeClass('hidden');
         } else {
             $('#source').removeAttr('required');
             $('#source_container').addClass('hidden');
+        }
+        // Without a known photographer nobody can give permission, so uploading is pointless
+        if ("Unknown" === $(this).val()) {
+            $('#source_unknown_warning').removeClass('hidden');
+            $('#upload_details').addClass('hidden');
+        } else {
+            $('#source_unknown_warning').addClass('hidden');
+            $('#upload_details').removeClass('hidden');
         }
     });
 })
@@ -87,13 +96,25 @@ $(document).ready(function() {
             </div>
         </div>
 
-        <div class="input-container hidden" id="source_container">
+        <?php $sourceUnknown = ($_POST['source_self'] ?? '') === 'Unknown'; ?>
+        <div class="box red<?= $sourceUnknown ? '' : ' hidden'; ?>" id="source_unknown_warning">
+            <strong>Deze foto kan helaas niet worden geüpload.</strong><br>
+            Alleen de maker van een foto (de fotograaf) kan toestemming geven om de foto onder een vrije licentie te
+            publiceren. Als niet bekend is wie de foto gemaakt heeft, kan niemand die toestemming geven en kunnen wij
+            de foto niet op Wikipedia plaatsen. Het heeft daarom geen zin om de rest van het formulier in te vullen.
+            Weet u wie de fotograaf is? Kies dan voor 'Nee, ik heb deze foto niet zelf gemaakt' en vul de naam van
+            de fotograaf in.
+        </div>
+
+        <div id="upload_details"<?= $sourceUnknown ? ' class="hidden"' : ''; ?>>
+
+        <div class="input-container<?= ($_POST['source_self'] ?? '') === 'No' ? '' : ' hidden'; ?>" id="source_container">
             <label for="source"><i aria-hidden="true" class="fa-solid fa-camera-retro fa-lg"></i>Wat is de naam van de
                 fotograaf?</label>
             <input type="text" name="source" id="source" 
             <?php
             echo (array_key_exists('source_self', $_POST) &&
-                                                                    $_POST['source_self'] != 'Yes') ? 'required="required"' : '';
+                                                                    $_POST['source_self'] == 'No') ? 'required="required"' : '';
             ?>
             value="<?= (!empty($_POST['source'])) ? $_POST['source'] : ''; ?>" onblur="comparenames()" />
         </div>
@@ -164,6 +185,8 @@ $(document).ready(function() {
             <input type='hidden' name='postback'></input>
             <button class="green" type='button' onclick='disableButton(this)'><i aria-hidden="true"
                     class="fa-solid fa-cloud-upload fa-lg"></i>Upload foto</button>
+        </div>
+
         </div>
 
     </form>
