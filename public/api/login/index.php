@@ -12,7 +12,7 @@ if (defined('API_DEBUG') && API_DEBUG) {
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     header('Allow: POST');
-    echo "Methode niet toegestaan";
+    echo t('api.method_not_allowed');
     return;
 }
 
@@ -23,7 +23,7 @@ if (
 ) {
     http_response_code(401);
     // Punt 9: Generieke foutmelding naar buiten
-    echo "U dient correcte inloggegevens te verstrekken";
+    echo t('api.invalid_credentials');
     return;
 }
 
@@ -46,17 +46,17 @@ function validateApi(string $user, string $pass, string $key): string
     // Punt 9: Alle 401-responses geven dezelfde melding terug
     if (!$row) {
         http_response_code(401);
-        return "U dient correcte inloggegevens te verstrekken";
+        return t('api.invalid_credentials');
     }
 
     if (!$row['isBot'] || !$row['active']) {
         http_response_code(401);
-        return "U dient correcte inloggegevens te verstrekken";
+        return t('api.invalid_credentials');
     }
 
     if (!password_verify($pass, $row['password'])) {
         http_response_code(401);
-        return "U dient correcte inloggegevens te verstrekken";
+        return t('api.invalid_credentials');
     }
 
     if (defined('API_DEBUG') && API_DEBUG) {
@@ -66,7 +66,7 @@ function validateApi(string $user, string $pass, string $key): string
     // Punt 8: hash_equals voorkomt timing attacks
     if (!hash_equals(hash('sha512', $key . SECRET_KEY, false), $row['apiKey'])) {
         http_response_code(401);
-        return "U dient correcte inloggegevens te verstrekken";
+        return t('api.invalid_credentials');
     }
 
     $hashkey = hash('sha512', $key . SECRET_KEY . date('c'), false);

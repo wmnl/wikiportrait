@@ -5,9 +5,9 @@ $session->checkAdmin();
 if (isset($_POST['postback'])) {
     $admin = isset($_POST['admin']);
 
-    isrequired('username', 'gebruikersnaam');
-    isrequired('otrsname', 'VRTS-naam');
-    isrequired('password', 'wachtwoord');
+    isrequired('username', t('field.username'));
+    isrequired('otrsname', t('field.vrts_name'));
+    isrequired('password', t('field.password'));
     checkusername($_POST['username']);
     comparepassword($_POST['password'], $_POST['password2']);
     validateEmail('email');
@@ -36,8 +36,8 @@ include 'tabs.php';
 <div id="content">
 
     <div class="page-header">
-        <h2>Gebruiker toevoegen</h2>
-        <a href="users.php" class="button red"><i class="fa-solid fa-times-circle fa-lg"></i><span>Annuleren</span></a>
+        <h2><?= t('user.add_title'); ?></h2>
+        <a href="users.php" class="button red"><i class="fa-solid fa-times-circle fa-lg"></i><span><?= t('common.cancel'); ?></span></a>
     </div>
 
     <?php
@@ -48,49 +48,49 @@ include 'tabs.php';
 
     <form method="post">
         <div class="input-container">
-            <label for="username"><i class="fa-solid fa-user fa-lg"></i>Gebruikersnaam</label>
+            <label for="username"><i class="fa-solid fa-user fa-lg"></i><?= t('user.username'); ?></label>
             <input type="text" name="username" id="username" value="<?= $_POST['username'] ?? ''; ?>" />
         </div>
 
         <div class="input-container">
-            <label for="otrsname"><i class="fa-solid fa-briefcase fa-lg"></i>VRTS-naam</label>
+            <label for="otrsname"><i class="fa-solid fa-briefcase fa-lg"></i><?= t('user.vrts_name'); ?></label>
             <input type="text" name="otrsname" id="otrsname" value="<?= $_POST['otrsname'] ?? ''; ?>" />
         </div>
 
         <div class="input-container">
-            <label for="password"><i class="fa-solid fa-key fa-lg"></i>Wachtwoord</label>
+            <label for="password"><i class="fa-solid fa-key fa-lg"></i><?= t('user.password'); ?></label>
             <input type="password" name="password" id="password" />
         </div>
 
         <div class="input-container">
-            <label for="password2"><i class="fa-solid fa-key fa-lg"></i>Wachtwoord nogmaals</label>
+            <label for="password2"><i class="fa-solid fa-key fa-lg"></i><?= t('user.password_again'); ?></label>
             <input type="password" name="password2" id="password2" />
         </div>
 
         <div class="input-container">
-            <label for="email"><i class="fa-solid fa-envelope fa-lg"></i>E-mailadres</label>
+            <label for="email"><i class="fa-solid fa-envelope fa-lg"></i><?= t('user.email'); ?></label>
             <input type="email" name="email" id="email" value="<?= $_POST['email'] ?? ''; ?>" />
         </div>
 
         <div class="input-container">
-            <label for="admin"><i class="fa-solid fa-user-md fa-lg"></i>Beheerder</label>
+            <label for="admin"><i class="fa-solid fa-user-md fa-lg"></i><?= t('user.admin'); ?></label>
             <div class="checkbox">
-                <input type="checkbox" name="admin" id="admin" /><label for="admin">Ja</label>
+                <input type="checkbox" name="admin" id="admin" /><label for="admin"><?= t('common.yes'); ?></label>
             </div>
         </div>
         <div class="input-container">
-            <label for="admin"><i class="fa-solid fa-user-md fa-lg"></i>Bot</label>
+            <label for="admin"><i class="fa-solid fa-user-md fa-lg"></i><?= t('user.bot'); ?></label>
             <div class="checkbox">
-                <input type="checkbox" name="bot" id="bot" value="1" /><label for="bot">Ja</label>
+                <input type="checkbox" name="bot" id="bot" value="1" /><label for="bot"><?= t('common.yes'); ?></label>
             </div>
         </div>
         <div class="input-container d-none">
-            <label for="key"><i class="fa-solid fa-hashtag fa-lg"></i>Api key</label>
+            <label for="key"><i class="fa-solid fa-hashtag fa-lg"></i><?= t('user.api_key'); ?></label>
             <input type="text" name="key" id="key" />
         </div>
 
         <div class="bottom right">
-            <button class="green" type="submit" name="postback"><i class="fa-solid fa-plus fa-lg"></i>Toevoegen</button>
+            <button class="green" type="submit" name="postback"><i class="fa-solid fa-plus fa-lg"></i><?= t('common.add'); ?></button>
         </div>
     </form>
 </div>

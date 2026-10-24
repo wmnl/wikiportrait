@@ -12,8 +12,8 @@ if (!empty($_GET['logout'])) {
 }
 
 if (isset($_POST['postback'])) {
-    isrequired('username', 'gebruikersnaam');
-    isrequired('password', 'wachtwoord');
+    isrequired('username', t('field.username'));
+    isrequired('password', t('field.password'));
 
     if (!hasvalidationerrors()) {
         if ($session->login($_POST['username'], $_POST['password'])) {
@@ -26,7 +26,7 @@ if (isset($_POST['postback'])) {
                 $session->redirect("/images/overview");
             }
         } else {
-            addvalidationerror("Gebruikersnaam of wachtwoord is verkeerd");
+            addvalidationerror(t('login.wrong'));
         }
     }
 }
@@ -39,8 +39,8 @@ require_once '../common/header.php';
 ?>
 
 <div id="content">
-    <h2>Inloggen</h2>
-    <p>Hier kunnen medewerkers van Wikiportret inloggen in het beheergedeelte.</p>
+    <h2><?= t('login.title'); ?></h2>
+    <p><?= t('login.intro'); ?></p>
 
     <?php
     if (hasvalidationerrors()) {
@@ -50,18 +50,18 @@ require_once '../common/header.php';
 
     <form method="post">
         <div class="input-container">
-            <label for="username"><i class="fa-solid fa-user fa-lg"></i>Gebruikersnaam</label>
+            <label for="username"><i class="fa-solid fa-user fa-lg"></i><?= t('user.username'); ?></label>
             <input type="text" name="username" id="username" autocorrect="off" />
         </div>
 
         <div class="input-container">
-            <label for="password"><i class="fa-solid fa-key fa-lg"></i>Wachtwoord</label>
+            <label for="password"><i class="fa-solid fa-key fa-lg"></i><?= t('user.password'); ?></label>
             <input type="password" name="password" id="password" />
         </div>
 
         <div class="bottom right">
             <button class="green" type="submit" name="postback"><i
-                    class="fa-solid fa-sign-in fa-lg"></i>Inloggen</button>
+                    class="fa-solid fa-sign-in fa-lg"></i><?= t('login.button'); ?></button>
         </div>
     </form>
 </div>

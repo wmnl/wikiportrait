@@ -65,7 +65,7 @@ class Session
         $this->checkLogin();
 
         if (!$this->isSysop()) {
-            exit(ADMIN_ERROR);
+            exit(t('error.admin_only'));
         }
     }
 

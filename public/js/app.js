@@ -3,7 +3,7 @@ autosize( $( 'textarea' ) );
 
 /* Delete confirmation */
 function confirmDelete( id ) {
-    if ( confirm( "Weet u zeker dat u dit bericht wilt verwijderen?" ) ) {
+    if ( confirm( i18n( 'confirm_delete_message' ) ) ) {
         location.href = "deletemessage.php?id=" + id;
     }
 }

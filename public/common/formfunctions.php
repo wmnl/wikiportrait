@@ -12,7 +12,7 @@ function getCommonsUploadLink($row)
         $description = $row['description'];
     }
     if (empty($row['ticket'])) {
-        $otrsTicket = "VUL_HIER_HET_TICKET_NUMMER_IN";
+        $otrsTicket = t('commons.ticket_placeholder');
     } else {
         $otrsTicket = $row['ticket'];
     }
@@ -35,10 +35,11 @@ function getCommonsUploadLink($row)
     if (!isset($date)) {
         $date = null;
     }
+    $language = currentLanguage();
     $description = <<<EOT
 == {{int:filedesc}} ==
 {{Information
-    |Description={{nl|1=$description}}
+    |Description={{{$language}|1=$description}}
     |Source=wikiportret.nl
     |Permission=CC-BY-SA 4.0
     |Date=$date
@@ -86,14 +87,14 @@ function getvalidationsummary()
 function isrequired($parameter, $property)
 {
     if (empty($_POST[$parameter])) {
-        addvalidationerror("Er is geen $property ingevuld!");
+        addvalidationerror(t('validation.required', ['field' => $property]));
     }
 }
 
 function agreeterms($parameter, $property)
 {
     if (empty($_POST[$parameter])) {
-        addvalidationerror("Gelieve akkoord gaan met $property.");
+        addvalidationerror(t('validation.agree', ['terms' => $property]));
     }
 }
 
@@ -101,7 +102,7 @@ function checkusername($username)
 {
     DB::query('SELECT * FROM users WHERE username = %s', $username);
     if (DB::count() != 0) {
-        addvalidationerror('Deze gebruikersnaam is reeds geregistreerd!');
+        addvalidationerror(t('validation.username_taken'));
     }
 }
 
@@ -111,7 +112,7 @@ function isDuplicateFile($file_hash)
     if ($query->num_rows > 0) {
         while ($files = $query->fetch_array(MYSQLI_NUM)) {
             if (in_array($file_hash, $files)) {
-                addvalidationerror(DUPLICATE_ERROR);
+                addvalidationerror(t('error.duplicate'));
                 return true;
             }
         }
@@ -122,7 +123,7 @@ function isDuplicateFile($file_hash)
 function comparepassword($pass1, $pass2)
 {
     if ($pass1 != $pass2) {
-        addvalidationerror('De twee ingevulde wachtwoorden komen niet overeen!');
+        addvalidationerror(t('validation.password_mismatch'));
     }
 }
 
@@ -132,11 +133,11 @@ function validateEmail($email)
     $mailarrayfull = explode("@", $mailpost);
     $mailarray = array_pop($mailarrayfull);
     if (!filter_var($mailpost, FILTER_VALIDATE_EMAIL)) {
-        addvalidationerror('Geen geldig e-mailadres ingevuld!');
-        return "Geen geldig e-mailadres ingevuld!";
+        addvalidationerror(t('validation.invalid_email'));
+        return t('validation.invalid_email');
     } elseif (!checkdnsrr($mailarray, "MX")) {
-        addvalidationerror('Geen geldig e-mailadres ingevuld!');
-        return "Geen geldig e-mailadres ingevuld!";
+        addvalidationerror(t('validation.invalid_email'));
+        return t('validation.invalid_email');
     } else {
         return "ok";
     }
@@ -152,18 +153,18 @@ function checkfile($file)
     if (!in_array($file['type'], $allowedext)) {
         array_push(
             $validationerrors,
-            "Dit bestandsformaat wordt niet ondersteund. Toegestane formaten: JPG, PNG, GIF, BMP."
+            t('validation.unsupported_format')
         );
         return "unsupported file";
     }
 
     if (!isset($file)) {
-        array_push($validationerrors, "Er is geen bestand geselecteerd.");
+        array_push($validationerrors, t('validation.no_file'));
         return "empty file";
     } elseif (!in_array($file['type'], $allowedext)) {
         array_push(
             $validationerrors,
-            "Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund."
+            t('validation.not_an_image')
         );
         return "unsupported file";
     } else {
@@ -175,7 +176,7 @@ function checkfile($file)
         } catch (\Exception $e) {
             array_push(
                 $validationerrors,
-                "Het bestand kon niet worden verwerkt. Controleer of het een geldig afbeeldingsbestand is."
+                t('validation.invalid_image')
             );
             return "invalid image";
         }

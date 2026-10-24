@@ -1,6 +1,6 @@
 <?php
 
-require_once__DIR__ . '/../common/bootstrap.php';
+require_once __DIR__ . '/../common/bootstrap.php';
 if (in_array('cron', $argv)) {
     DB::update(
         'images',

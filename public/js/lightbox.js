@@ -11,7 +11,7 @@ var activityIndicatorOn = function () {
         $('#imagelightbox-overlay').remove();
     },
     closeButtonOn = function (instance) {
-        $('<button type="button" id="imagelightbox-close" title="Close"><i class="fa-solid fa-times fa-lg"></i></button>').appendTo('body').on('click touchend', function () {
+        $('<button type="button" id="imagelightbox-close" title="' + i18n('close') + '"><i class="fa-solid fa-times fa-lg"></i></button>').appendTo('body').on('click touchend', function () {
             $(this).remove();
             instance.quitImageLightbox();
             return false;

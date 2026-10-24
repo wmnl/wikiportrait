@@ -13,7 +13,7 @@ $id  = (int) $_GET['id'];
 $row = DB::queryFirstRow("SELECT * FROM images WHERE id = %d", $id);
 
 if (!$row) {
-    die("Foto niet gevonden!");
+    die(t('single.not_found'));
 }
 
 $google_vision_results = DB::queryFirstRow(
@@ -32,7 +32,7 @@ if (isset($_POST['postback'])) {
         'categories' => json_encode(array_key_exists('categories', $_POST) ? $_POST['categories'] : ''),
     ], 'id = %d', $id);
 
-    $msg = 'Afbeelding is bijgewerkt. <a href="overview.php">Terug naar overzicht</a>';
+    $msg = t('single.updated');
 }
 
 $owner    = DB::queryFirstRow('SELECT owner, archived, ticket, categories FROM images WHERE id = %d', $id);
@@ -61,16 +61,17 @@ function renderCategory(string $category): string
 function renderGVSection(array $gv, string $imgpath, int $id): string
 {
     if (filesize($imgpath) > 10_000_000) {
-        return "Geen analyse (Bestand is groter dan 10MB)";
+        return t('gv.too_large');
     }
 
     if (!activeGVRequests() && empty($gv['description'])) {
-        return "Niet geactiveerd";
+        return t('gv.not_activated');
     }
 
+    $analyseAgain = t('gv.analyse_again');
     if (empty($gv['description'])) {
-        return "<span>Geen resultaten</span> <i class='performgv' " .
-            "onclick=\"performGVResults('{$id}')\">Nog een keer analyseren</i>";
+        return "<span>" . t('gv.no_results') . "</span> <i class='performgv' " .
+            "onclick=\"performGVResults('{$id}')\">$analyseAgain</i>";
     }
 
     $counts = [
@@ -81,22 +82,23 @@ function renderGVSection(array $gv, string $imgpath, int $id): string
     ];
 
     $html  = "<ul class='list_ml'>";
-    $html .= "<li><span>Datum analyse:</span> {$gv['date']} <i class='performgv' ";
-    $html .= "onclick=\"performGVResults('{$id}')\">Nog een keer analyseren</i></li>";
-    $html .= "<li><span>Beste categorie:</span> {$gv['labels']}</li>";
-    $html .= "<li><span>Beschrijving:</span> {$gv['description']}</li>";
+    $html .= "<li><span>" . t('gv.date') . "</span> {$gv['date']} <i class='performgv' ";
+    $html .= "onclick=\"performGVResults('{$id}')\">$analyseAgain</i></li>";
+    $html .= "<li><span>" . t('gv.best_label') . "</span> {$gv['labels']}</li>";
+    $html .= "<li><span>" . t('gv.description') . "</span> {$gv['description']}</li>";
 
     $items = [
-        'matching_pages' => 'Aantal webpaginas met dezelfde afbeelding',
-        'similar_img'    => 'Aantal vergelijkbare afbeeldingen',
-        'partial_img'    => 'Aantal gedeeltelijke afbeeldingen',
-        'matching_img'   => 'Aantal exacte afbeeldingen',
+        'matching_pages' => t('gv.matching_pages'),
+        'similar_img'    => t('gv.similar_img'),
+        'partial_img'    => t('gv.partial_img'),
+        'matching_img'   => t('gv.matching_img'),
     ];
+    $show = t('js.show');
     foreach ($items as $field => $label) {
         if ($counts[$field] > 0) {
             $values = explode(',', $gv[$field] ?? '');
             $html  .= "<li class='{$field}'><span>{$label}:</span> {$counts[$field]} "
-                . "<i class='toon' onclick='showGVResults(this)'>tonen</i>"
+                . "<i class='toon' onclick='showGVResults(this)'>$show</i>"
                 . makeGVResults($values) . "</li>";
         }
     }
@@ -155,12 +157,12 @@ function fillCatList(data) {
 }
 
 function getTrueFalse(truefalse) {
-    return truefalse ? '' : ' <span class="alert">Categorie bestaat niet</span>';
+    return truefalse ? '' : ' <span class="alert">' + <?= json_encode(t('single.category_missing'), JSON_HEX_TAG); ?> + '</span>';
 }
 </script>
 
 <div id="content">
-    <h2>Ingestuurde foto: <?= htmlspecialchars($row['title']); ?></h2>
+    <h2><?= t('single.title', ['title' => htmlspecialchars($row['title'])]); ?></h2>
 
     <?php if ($msg) : ?>
     <div class="box green"><?= $msg; ?></div>
@@ -174,49 +176,41 @@ function getTrueFalse(truefalse) {
         </div>
 
         <div class="single-box info">
-            <h3>Informatie</h3>
+            <h3><?= t('common.information'); ?></h3>
             <ul class="list">
-                <li><span>Titel:</span> <?= htmlspecialchars($row['title']); ?></li>
-                <li><span>Rechthebbende:</span> <?= htmlspecialchars($row['source']); ?></li>
-                <li><span>Geüpload door:</span> <?= htmlspecialchars($row['name']); ?></li>
+                <li><span><?= t('common.label_title'); ?></span> <?= htmlspecialchars($row['title']); ?></li>
+                <li><span><?= t('single.copyright_holder'); ?></span> <?= htmlspecialchars($row['source']); ?></li>
+                <li><span><?= t('single.uploaded_by'); ?></span> <?= htmlspecialchars($row['name']); ?></li>
                 <li>
-                    <span>E-mailadres:</span> <?= htmlspecialchars($row['email']); ?>
+                    <span><?= t('single.email'); ?></span> <?= htmlspecialchars($row['email']); ?>
                     <?php if ($row['archived'] == 2) : ?>
                     <div class="not_verified">
-                        Niet geverifieerd &nbsp;|&nbsp;
+                        <?= t('single.not_verified'); ?> &nbsp;|&nbsp;
                         <a href="/admin/verify.php?action=verify&id=<?= $row['id']; ?>&hash=<?= $row['key']; ?>"
-                            class="admin-action verify-link">Verifieer adres</a>
+                            class="admin-action verify-link"><?= t('single.verify_address'); ?></a>
                         &nbsp;|&nbsp;
                         <a href="/admin/verify.php?action=resend&id=<?= $row['id']; ?>&hash=<?= $row['key']; ?>"
-                            class="admin-action">Stuur verificatiemail opnieuw</a>
+                            class="admin-action"><?= t('single.resend_verification'); ?></a>
                     </div>
                     <?php endif ?>
                 </li>
-                <li><span>IP-adres:</span> <?= $row['ip']; ?></li>
-                <li><span>Geüpload op:</span>
-                    <?=
-                    (new IntlDateFormatter(
-                        'nl_NL',
-                        IntlDateFormatter::NONE,
-                        IntlDateFormatter::NONE,
-                        null,
-                        null,
-                        "d MMMM yyyy 'om' HH:mm:ss"
-                    ))->format($row['timestamp']);
-?>
+                <li><span><?= t('single.ip'); ?></span> <?= $row['ip']; ?></li>
+                <li><span><?= t('single.uploaded_on'); ?></span>
+                    <?= formatDate($row['timestamp'], 'date.format_time'); ?>
                 </li>
-                <li><span>Key:</span><br>
+                <li><span><?= t('single.key'); ?></span><br>
                     <input type="text" id="key" disabled value="<?= $row['key']; ?>" />
                 </li>
-                <li><span>Beschrijving:</span><br><?= htmlspecialchars($row['description']); ?></li>
+                <li><span><?= t('common.label_description'); ?></span><br><?=
+                    htmlspecialchars($row['description']); ?></li>
             </ul>
 
-            <h3>Wat doen we ermee?</h3>
+            <h3><?= t('single.what_to_do'); ?></h3>
             <ul class="list">
                 <li>
                     <a href="https://lens.google.com/uploadbyurl?url=<?= $imgurl; ?>&q=<?= urlencode($row['title']); ?>"
                         target="_blank">
-                        Zoek naar deze afbeelding bij Google
+                        <?= t('single.google_search'); ?>
                     </a>
                 </li>
                 <?php foreach ($results as $resultRow) : ?>
@@ -227,16 +221,16 @@ function getTrueFalse(truefalse) {
                 </li>
                 <?php endforeach ?>
                 <li>
-                    <a href="<?= getCommonsUploadLink($row); ?>" target="_blank">Uploaden naar Commons!</a>
+                    <a href="<?= getCommonsUploadLink($row); ?>" target="_blank"><?= t('single.upload_commons'); ?></a>
                 </li>
             </ul>
         </div>
 
         <div class="single-box options">
-            <h3>Opties</h3>
+            <h3><?= t('single.options'); ?></h3>
             <form method="post" id="owner" name="owner">
                 <div class="input-container">
-                    <label for="setowner"><i class="fa-solid fa-user-md fa-lg"></i>Eigenaar</label>
+                    <label for="setowner"><i class="fa-solid fa-user-md fa-lg"></i><?= t('single.owner'); ?></label>
                     <div class="checkbox">
                         <select class="select" name="owner" id="setowner">
                             <option value="0">----</option>
@@ -251,20 +245,20 @@ function getTrueFalse(truefalse) {
                 </div>
 
                 <div class="input-container">
-                    <label for="done"><i class="fa-solid fa-check fa-lg"></i>Afgehandeld</label>
+                    <label for="done"><i class="fa-solid fa-check fa-lg"></i><?= t('single.done'); ?></label>
                     <div class="checkbox">
                         <input type="checkbox" name="done" id="done" <?= $owner['archived'] == 1 ? 'checked' : ''; ?>>
-                        <label for="done">Ja</label>
+                        <label for="done"><?= t('common.yes'); ?></label>
                     </div>
                 </div>
 
                 <div class="input-container">
-                    <label for="ticket"><i class="fa-solid fa-ticket fa-lg"></i>VRTS-ticket:</label>
+                    <label for="ticket"><i class="fa-solid fa-ticket fa-lg"></i><?= t('single.ticket'); ?></label>
                     <input type="text" name="ticket" id="ticket" value="<?= $owner['ticket']; ?>">
                 </div>
 
                 <div class="input-container">
-                    <label>Categorieën:</label>
+                    <label><?= t('single.categories'); ?></label>
                     <div id="categoriesContainer">
                         <div class="checkbox">
                             <?php foreach ($categoriesList as $category) : ?>
@@ -280,20 +274,20 @@ function getTrueFalse(truefalse) {
                     $existingCats = str_replace('"', "'", $owner['categories'] ?? '');
                     ?>
                     <button type="button" onclick="getCategories(<?= $catJson; ?>, <?= $existingCats; ?>)">
-                        <i class="fa-solid fa-list-alt" aria-hidden="true"></i> Krijg categorieën
+                        <i class="fa-solid fa-list-alt" aria-hidden="true"></i> <?= t('single.get_categories'); ?>
                     </button>
                     <button type="button" onclick="parent.location='get.php?id=<?= $id; ?>'" name="claim">
-                        <i class="fa-solid fa-bolt fa-lg"></i>Ik neem hem
+                        <i class="fa-solid fa-bolt fa-lg"></i><?= t('single.claim'); ?>
                     </button>
                     <span class="divider">&nbsp;</span>
                     <button class="green" type="submit" name="postback">
-                        <i class="fa-solid fa-floppy-o fa-lg"></i>Opslaan
+                        <i class="fa-solid fa-floppy-o fa-lg"></i><?= t('common.save'); ?>
                     </button>
                 </div>
             </form>
 
             <div>
-                <h3>Google Vision Analysis</h3>
+                <h3><?= t('gv.title'); ?></h3>
                 <div id="ml_resp">
                     <?= renderGVSection($google_vision_results ?? [], $imgpath, $id); ?>
                 </div>
@@ -306,23 +300,31 @@ function getTrueFalse(truefalse) {
 <script src="<?= $basispad; ?>/js/lightbox.js"></script>
 <script src="<?= $basispad; ?>/js/ml.js"></script>
 <script>
+const singleMessages = <?= json_encode([
+    'busy' => t('single.busy'),
+    'verified' => t('single.verified'),
+    'resendShort' => t('single.resend_short'),
+    'verifyAddress' => t('single.verify_address'),
+    'resendVerification' => t('single.resend_verification'),
+    'error' => t('error.generic'),
+], JSON_HEX_TAG | JSON_UNESCAPED_UNICODE); ?>;
 $(document).on('click', '.admin-action', function(e) {
     e.preventDefault();
     const $link = $(this);
-    $link.text('Bezig...');
+    $link.text(singleMessages.busy);
 
     $.getJSON($link.attr('href'))
         .done(function(data) {
             if ($link.hasClass('verify-link')) {
-                $link.closest('.not_verified').replaceWith('<span>Geverifieerd</span>');
+                $link.closest('.not_verified').replaceWith($('<span>').text(singleMessages.verified));
             } else {
-                $link.text('Stuur mail opnieuw');
+                $link.text(singleMessages.resendShort);
             }
             toonMelding(data.message, 'success');
         })
         .fail(function() {
-            $link.text($link.hasClass('verify-link') ? 'Verifieer adres' : 'Stuur verificatiemail opnieuw');
-            toonMelding('Er is iets misgegaan, probeer het opnieuw.', 'error');
+            $link.text($link.hasClass('verify-link') ? singleMessages.verifyAddress : singleMessages.resendVerification);
+            toonMelding(singleMessages.error, 'error');
         });
 });
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="<?= currentLanguage(); ?>">
 
 <head>
     <meta charset="utf-8">
@@ -11,13 +11,14 @@
     <script defer src="<?= $basispad; ?>/lib/font-awesome/js/fontawesome.js"></script>
     <script src="<?= $basispad; ?>/lib/jquery/dist/jquery.min.js"></script>
 
-    <title>Wikiportret - Stel uw foto's ter beschikking</title>
-    <?php //@phpcs:disable Generic.Files.LineLength.TooLong 
-    ?>
-    <meta name="description"
-        content="Staat er op Wikipedia een artikel zonder portretfoto? En heeft u een foto die bij een artikel zou passen? Stel dan uw foto hier ter beschikking." />
-    <?php //@phpcs:enable Generic.Files.LineLength.TooLong 
-    ?>
+    <title><?= htmlspecialchars(t('header.title')); ?></title>
+    <meta name="description" content="<?= htmlspecialchars(t('header.description')); ?>" />
+    <script>
+    var i18nMessages = <?= json_encode(jsTranslations(), JSON_HEX_TAG | JSON_UNESCAPED_UNICODE); ?>;
+    function i18n(key) {
+        return i18nMessages.hasOwnProperty(key) ? i18nMessages[key] : key;
+    }
+    </script>
     <?php if (strpos($_SERVER['SERVER_NAME'], "wikiportret.nl") !== false) { ?>
     <script>
     // Set to the same value as the web property used on the site

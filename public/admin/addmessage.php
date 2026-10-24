@@ -5,8 +5,8 @@ $session->checkAdmin();
 include 'tabs.php';
 
 if (isset($_POST['postback'])) {
-    isrequired('title', 'titel');
-    isrequired('message', 'bericht');
+    isrequired('title', t('field.title'));
+    isrequired('message', t('field.message'));
 
     if (!hasvalidationerrors()) {
         DB::insert('messages', [
@@ -22,10 +22,10 @@ if (isset($_POST['postback'])) {
 
     <div class="page-header">
 
-        <h2>Bericht toevoegen</h2>
+        <h2><?= t('message.add_title'); ?></h2>
 
         <a href="messages.php" class="button red"><i
-                class="fa-solid fa-times-circle fa-lg"></i><span>Annuleren</span></a>
+                class="fa-solid fa-times-circle fa-lg"></i><span><?= t('common.cancel'); ?></span></a>
 
     </div>
 
@@ -38,7 +38,7 @@ if (isset($_POST['postback'])) {
     <form method="post">
 
         <div class="input-container">
-            <label for="title"><i class="fa-solid fa-tag fa-lg"></i>Titel</label>
+            <label for="title"><i class="fa-solid fa-tag fa-lg"></i><?= t('common.title'); ?></label>
             <input type="text" name="title" id="title" value="
         <?php
         if (isset($_POST['title'])) {
@@ -49,7 +49,7 @@ if (isset($_POST['postback'])) {
         </div>
 
         <div class="input-container">
-            <label for="message"><i class="fa-solid fa-align-left fa-lg"></i>Bericht</label>
+            <label for="message"><i class="fa-solid fa-align-left fa-lg"></i><?= t('common.message'); ?></label>
             <textarea required="required" name="message">
         <?php
         if (isset($_POST['message'])) {
@@ -60,7 +60,7 @@ if (isset($_POST['postback'])) {
         </div>
 
         <div class="bottom right">
-            <button class="green" type="submit" name="postback"><i class="fa-solid fa-plus fa-lg"></i>Toevoegen</button>
+            <button class="green" type="submit" name="postback"><i class="fa-solid fa-plus fa-lg"></i><?= t('common.add'); ?></button>
         </div>
 
     </form>

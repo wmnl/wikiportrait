@@ -5,13 +5,13 @@ require_once '../common/header.php';
 
 ?>
 <div id="content">
-    <h2>Kant-en-klaar berichtje versturen</h2>
+    <h2><?= t('canned.title'); ?></h2>
 
     <div class="input-container">
-        <label for="message"><i class="fa-solid fa-align-left fa-lg"></i>Bericht</label>
+        <label for="message"><i class="fa-solid fa-align-left fa-lg"></i><?= t('common.message'); ?></label>
         <?php
         if (!isset($_GET['image']) || !isset($_GET['message'])) {
-            echo "<div class=\"box red\">Bericht of afbeelding niet gevonden!</div>";
+            echo "<div class=\"box red\">" . t('canned.not_found') . "</div>";
         } else {
             $row = DB::queryFirstRow(
                 'SELECT * FROM messages LEFT JOIN users ON users.id = %d LEFT JOIN images '

@@ -13,10 +13,10 @@ $templateRenderer = new Handlebars();
 function getContribution(string $id, string $hash): array
 {
     if (filter_var($id, FILTER_VALIDATE_INT) === false) {
-        throw new InvalidArgumentException("Geen geldige id");
+        throw new InvalidArgumentException(t('admin_verify.invalid_id'));
     }
     if (!ctype_xdigit($hash) || strlen($hash) !== 40) {
-        throw new InvalidArgumentException("Geen geldige hash");
+        throw new InvalidArgumentException(t('admin_verify.invalid_hash'));
     }
 
     $contribution = DB::queryFirstRow(
@@ -26,7 +26,7 @@ function getContribution(string $id, string $hash): array
     );
 
     if (empty($contribution['email']) || $contribution['archived'] !== "2") {
-        throw new RuntimeException('Kan mailadres niet goedkeuren.');
+        throw new RuntimeException(t('admin_verify.cannot_approve'));
     }
 
     return $contribution;
@@ -74,10 +74,10 @@ function verify(string $id, string $hash, PHPMailer $mail, Handlebars $templateR
     );
 
     if ($validEmail == 0 || DB::count() == 0) {
-        throw new RuntimeException('Kan mailadres niet goedkeuren.');
+        throw new RuntimeException(t('admin_verify.cannot_approve'));
     }
 
-    $bodyTpl = file_get_contents(ABSPATH . "/common/mailbody.txt");
+    $bodyTpl = mailTemplate('new_upload');
 
     foreach ($rows as $row) {
         DB::update('contributors', ['verified' => 1], 'id = %d', $row['id']);
@@ -97,10 +97,10 @@ function verify(string $id, string $hash, PHPMailer $mail, Handlebars $templateR
         buildMail(
             $mail,
             VRTS_MAIL,
-            "Wikiportret VRTS queue",
+            t('mail.vrts_queue_name'),
             $contribution['email'],
             $row['name'],
-            "[Wikiportret] {$row['title']} is geüpload op Wikiportret",
+            t('mail.subject.uploaded', ['title' => $row['title']]),
             $body
         );
         $mail->send();
@@ -112,7 +112,7 @@ function verify(string $id, string $hash, PHPMailer $mail, Handlebars $templateR
 
     echo json_encode([
         'success' => true,
-        'message' => 'E-mailadres is geverifieerd en bevestigingsmail is verstuurd.',
+        'message' => t('admin_verify.verified'),
     ]);
 }
 
@@ -127,7 +127,7 @@ function resend(string $id, string $hash, PHPMailer $mail, Handlebars $templateR
         $hash
     );
 
-    $bodyTpl = file_get_contents(ABSPATH . "/common/mailbody_verificatie.txt");
+    $bodyTpl = mailTemplate('verification');
     $body    = $templateRenderer->render($bodyTpl, [
         'title'   => $row['title'],
         'name'    => $row['name'],
@@ -145,15 +145,15 @@ function resend(string $id, string $hash, PHPMailer $mail, Handlebars $templateR
         $row['name'],
         $contribution['email'],
         $row['name'],
-        "[Wikiportret] Uw email verifiëren",
+        t('mail.subject.verify'),
         $body
     );
 
     if (!$mail->send()) {
-        throw new RuntimeException('Verificatiemail kon niet worden verstuurd.');
+        throw new RuntimeException(t('admin_verify.send_failed'));
     }
 
-    echo json_encode(['success' => true, 'message' => 'Verificatiemail is opnieuw verstuurd.']);
+    echo json_encode(['success' => true, 'message' => t('admin_verify.resent')]);
 }
 
 // --- Router ---
@@ -167,11 +167,11 @@ try {
     match ($action) {
         'verify' => verify($id, $hash, $mail, $templateRenderer),
         'resend' => resend($id, $hash, $mail, $templateRenderer),
-        default  => throw new InvalidArgumentException("Ongeldig verzoek"),
+        default  => throw new InvalidArgumentException(t('error.invalid_request')),
     };
 } catch (InvalidArgumentException $e) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Ongeldig verzoek.', 'error' => $e->getMessage()]);
+    echo json_encode(['success' => false, 'message' => t('error.invalid_request'), 'error' => $e->getMessage()]);
 } catch (RuntimeException $e) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);
@@ -179,7 +179,7 @@ try {
     http_response_code(500);
     echo json_encode([
         'success' => false,
-        'message' => 'Er is iets misgegaan, probeer het opnieuw.',
+        'message' => t('error.generic'),
         'error' => $e->getMessage()
     ]);
 }

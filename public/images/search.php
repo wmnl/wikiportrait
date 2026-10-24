@@ -10,7 +10,7 @@ $results = [];
 
 if (isset($_POST['postback'])) {
     if (empty($_POST['search'])) {
-        $errors[] = "Er is geen zoekterm ingevoerd";
+        $errors[] = t('search.no_term');
     } else {
         $results = DB::query(
             "SELECT i.*, users.otrsname AS owneruser
@@ -25,17 +25,17 @@ if (isset($_POST['postback'])) {
 
 <div id="content">
     <div class="page-header">
-        <h2>Zoeken</h2>
+        <h2><?= t('search.title'); ?></h2>
     </div>
 
     <form method="post" class="search-form">
         <div class="input-container">
-            <label for="search"><i class="fa-solid fa-search"></i>Zoekterm</label>
+            <label for="search"><i class="fa-solid fa-search"></i><?= t('search.term'); ?></label>
             <input type="text" name="search" id="search" />
         </div>
         <div class="bottom right">
             <button class="green" type="submit" name="postback">
-                <i class="fa-solid fa-search"></i>Zoeken
+                <i class="fa-solid fa-search"></i><?= t('search.button'); ?>
             </button>
         </div>
     </form>
@@ -49,30 +49,22 @@ if (isset($_POST['postback'])) {
         </ul>
     </div>
     <?php elseif (isset($_POST['postback']) && empty($results)) : ?>
-    <div class="box red">Er zijn geen resultaten gevonden.</div>
+    <div class="box red"><?= t('search.no_results'); ?></div>
     <?php elseif (!empty($results)) : ?>
     <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th>Foto</th>
-                    <th>Titel</th>
-                    <th>Uploader</th>
-                    <th>Datum</th>
-                    <th>Eigenaar</th>
-                    <th class="actions-1">Acties</th>
+                    <th><?= t('images.col_photo'); ?></th>
+                    <th><?= t('common.title'); ?></th>
+                    <th><?= t('images.col_uploader'); ?></th>
+                    <th><?= t('images.col_date'); ?></th>
+                    <th><?= t('images.col_owner'); ?></th>
+                    <th class="actions-1"><?= t('common.actions'); ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $dateFormatter = new IntlDateFormatter(
-                    'nl_NL',
-                    IntlDateFormatter::NONE,
-                    IntlDateFormatter::NONE,
-                    null,
-                    null,
-                    "d MMMM yyyy"
-                );
                 foreach ($results as $row) :
                     $id       = $row['id'];
                     $filename = htmlspecialchars($row['filename']);
@@ -90,11 +82,11 @@ if (isset($_POST['postback'])) {
                         <a href="single.php?id=<?= $id; ?>"><?= $title; ?></a>
                     </td>
                     <td data-title="&#xf007;"><?= $name; ?></td>
-                    <td data-title="&#xf073;"><?= $dateFormatter->format($row['timestamp']); ?></td>
+                    <td data-title="&#xf073;"><?= formatDate($row['timestamp']); ?></td>
                     <td data-title="&#xf0f0;"><?= $owner; ?></td>
                     <td data-title="&#xf0ae;" class="center">
                         <a class="button" href="single.php?id=<?= $id; ?>">
-                            <i class="fa-solid fa-info"></i>Details
+                            <i class="fa-solid fa-info"></i><?= t('search.details'); ?>
                         </a>
                     </td>
                 </tr>

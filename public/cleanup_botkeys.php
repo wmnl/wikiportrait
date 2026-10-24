@@ -13,22 +13,22 @@ require_once '../../vendor/autoload.php';
 // Voorkom directe browseraanroep
 if (PHP_SAPI !== 'cli') {
     http_response_code(403);
-    exit("Dit script kan alleen via de command line uitgevoerd worden.");
+    exit(t('cli.only'));
 }
 
 $startTime = microtime(true);
 $date = date('Y-m-d H:i:s');
 
-echo "[{$date}] Start cleanup verlopen bot-tokens..." . PHP_EOL;
+echo "[{$date}] " . t('cleanup.start') . PHP_EOL;
 
 try {
     DB::query("DELETE FROM botkeys WHERE expires < NOW()");
     $deleted = DB::affectedRows();
 
     $elapsed = round(microtime(true) - $startTime, 4);
-    echo "[{$date}] Klaar: {$deleted} verlopen token(s) verwijderd in {$elapsed}s." . PHP_EOL;
+    echo "[{$date}] " . t('cleanup.done', ['deleted' => $deleted, 'elapsed' => $elapsed]) . PHP_EOL;
 } catch (MeekroDBException $e) {
-    echo "[{$date}] FOUT: " . $e->getMessage() . PHP_EOL;
+    echo "[{$date}] " . t('cleanup.error', ['message' => $e->getMessage()]) . PHP_EOL;
     exit(1);
 }
 

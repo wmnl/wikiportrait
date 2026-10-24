@@ -13,11 +13,11 @@ $archive = $archived ? $_GET['archived'] : 0;
 
         <?php
         if ($archived == 0) {
-            echo "<h2>Inzendingen</h2>";
+            echo "<h2>" . t('images.submissions') . "</h2>";
         }
 
         if ($archived == 1) {
-            echo "<h2>Archief</h2>";
+            echo "<h2>" . t('images.archive') . "</h2>";
         }
 
         if (isset($_GET['personal'])) {
@@ -61,16 +61,16 @@ $archive = $archived ? $_GET['archived'] : 0;
         <table>
             <thead>
                 <tr>
-                    <th class="img-container">Foto</th>
-                    <th>Titel</th>
-                    <th>Uploader</th>
-                    <th>Datum</th>
-                    <th>Eigenaar</th>
+                    <th class="img-container"><?= t('images.col_photo'); ?></th>
+                    <th><?= t('common.title'); ?></th>
+                    <th><?= t('images.col_uploader'); ?></th>
+                    <th><?= t('images.col_date'); ?></th>
+                    <th><?= t('images.col_owner'); ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                setlocale(LC_ALL, 'nl_NL');
+                setlocale(LC_ALL, currentLocale());
                 date_default_timezone_set('Europe/Amsterdam');
                 if (isset($_GET['page'])) {
                     $page   = $_GET['page'];
@@ -102,7 +102,7 @@ $archive = $archived ? $_GET['archived'] : 0;
                     $name = $row['name'];
                     $timestamp = $row['timestamp'];
                     if (empty($row['otrsname'])) {
-                        $owner = "Aan niemand toegewezen";
+                        $owner = t('images.unassigned');
                     } else {
                         $owner = $row['otrsname'];
                     }
@@ -115,17 +115,8 @@ $archive = $archived ? $_GET['archived'] : 0;
                         </td>
                         <td data-title="&#xf007;"><?= htmlentities($name); ?></td>
                         <td data-title="&#xf073;">
-                        <?=
-                        (new IntlDateFormatter(
-                            'nl_NL',
-                            IntlDateFormatter::NONE,
-                            IntlDateFormatter::NONE,
-                            null,
-                            null,
-                            "d MMMM yyyy"
-                        ))->format($timestamp);
-                        ?>
-                                                    </td>
+                        <?= formatDate($timestamp); ?>
+                        </td>
                         <td data-title="&#xf0f0;"><?= $owner; ?></td>
                     </tr>
                     <?php

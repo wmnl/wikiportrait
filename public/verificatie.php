@@ -24,16 +24,16 @@ function processVerification(string $key, string $email): string
     );
 
     if ($validEmail == 0 || DB::count() == 0) {
-        return '<div class="box red">Geen record gevonden!</div>';
+        return '<div class="box red">' . t('verify.not_found') . '</div>';
     }
 
     if ($verified == 1) {
-        return '<div class="box blue">Uw email is al geverifieerd</div>';
+        return '<div class="box blue">' . t('verify.already_verified') . '</div>';
     }
 
     $mail             = new \PHPMailer\PHPMailer\PHPMailer();
     $templateRenderer = new Handlebars();
-    $bodyTpl          = file_get_contents(ABSPATH . "/common/mailbody.txt");
+    $bodyTpl          = mailTemplate('new_upload');
 
     foreach ($rows as $row) {
         DB::update('contributors', ['verified' => 1], 'id = %d', $row['id']);
@@ -55,9 +55,9 @@ function processVerification(string $key, string $email): string
         $mail->From    = VRTS_MAIL;
         $mail->Sender  = VRTS_MAIL;
         $mail->CharSet = 'UTF-8';
-        $mail->addAddress(VRTS_MAIL, "Wikiportret VRTS queue");
+        $mail->addAddress(VRTS_MAIL, t('mail.vrts_queue_name'));
         $mail->addReplyTo($email, $row['name']);
-        $mail->Subject = "[Wikiportret] {$row['title']} is geüpload op Wikiportret";
+        $mail->Subject = t('mail.subject.uploaded', ['title' => $row['title']]);
         $mail->isHTML(true);
         $mail->Body    = nl2br($body);
         $mail->AltBody = $body;
@@ -76,11 +76,11 @@ $key   = $_GET['key']   ?? '';
 $email = $_GET['email'] ?? '';
 
 if (!$key || !$email) {
-    $result = '<div class="box red">Geen sleutel of e-mailadres opgegeven!</div>';
+    $result = '<div class="box red">' . t('verify.missing_params') . '</div>';
 } elseif (!ctype_xdigit($key) || strlen($key) !== 40) {
-    $result = '<div class="box red">Ongeldige sleutel!</div>';
+    $result = '<div class="box red">' . t('verify.invalid_key') . '</div>';
 } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $result = '<div class="box red">Ongeldig e-mailadres!</div>';
+    $result = '<div class="box red">' . t('verify.invalid_email') . '</div>';
 } else {
     $result = processVerification($key, $email);
 }
@@ -88,18 +88,16 @@ if (!$key || !$email) {
 
 <div id="content">
     <?php if ($result === 'verified') : ?>
-    <h2>Email geverifieerd, Bedankt!</h2>
+    <h2><?= t('verify.done_title'); ?></h2>
     <div class="single">
         <div class="single-box info">
-            <h3>Informatie</h3>
+            <h3><?= t('common.information'); ?></h3>
             <div class="box green">
-                De afbeelding is met succes geüpload.<br>
-                Een vrijwilliger zal de afbeelding zo snel mogelijk beoordelen en contact met u opnemen.<br>
-                Als u wilt, kunt u <a href="track.php?key=<?= htmlspecialchars($key); ?>">hier</a> uw inzending volgen.
+                <?= t('upload.success_text', ['track_url' => 'track.php?key=' . htmlspecialchars($key)]); ?>
             </div>
             <div class="bottom right">
                 <a class="button" href="upload.php">
-                    <i class="fa-solid fa-cloud-upload fa-lg"></i>Nog een afbeelding uploaden
+                    <i class="fa-solid fa-cloud-upload fa-lg"></i><?= t('common.upload_another'); ?>
                 </a>
             </div>
         </div>

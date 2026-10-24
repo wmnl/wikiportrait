@@ -8,9 +8,9 @@ $results = DB::query('SELECT * FROM users');
 ?>
 <div id="content">
     <div class="page-header">
-        <h2>Gebruikersbeheer</h2>
+        <h2><?= t('user.manage_title'); ?></h2>
         <a href="adduser.php" class="button">
-            <i class="fa-solid fa-plus fa-lg"></i><span>Nieuwe gebruiker</span>
+            <i class="fa-solid fa-plus fa-lg"></i><span><?= t('user.new'); ?></span>
         </a>
     </div>
     <div class="table-container">
@@ -18,12 +18,12 @@ $results = DB::query('SELECT * FROM users');
             <thead>
                 <tr>
                     <th class="id center">#</th>
-                    <th>Gebruikersnaam</th>
-                    <th>VRTS-naam</th>
-                    <th>E-mailadres</th>
-                    <th>Beheerder</th>
-                    <th>Acties</th>
-                    <th>Actief</th>
+                    <th><?= t('user.username'); ?></th>
+                    <th><?= t('user.vrts_name'); ?></th>
+                    <th><?= t('user.email'); ?></th>
+                    <th><?= t('user.admin'); ?></th>
+                    <th><?= t('common.actions'); ?></th>
+                    <th><?= t('user.active'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,9 +33,9 @@ $results = DB::query('SELECT * FROM users');
                     <td data-title="&#xf007;"><?= htmlspecialchars($row['username']); ?></td>
                     <td data-title="&#xf0b1;"><?= htmlspecialchars($row['otrsname']); ?></td>
                     <td data-title="&#xf0e0;"><?= htmlspecialchars($row['email']); ?></td>
-                    <td data-title="&#xf0f0;"><?= $row['isSysop'] ? 'Ja' : 'Nee'; ?></td>
+                    <td data-title="&#xf0f0;"><?= $row['isSysop'] ? t('common.yes') : t('common.no'); ?></td>
                     <td data-title="&#xf0ae;">
-                        <a href="edituser.php?id=<?= $row['id']; ?>">Bewerken</a>
+                        <a href="edituser.php?id=<?= $row['id']; ?>"><?= t('common.edit'); ?></a>
                     </td>
                     <td data-title="&#xf235;">
                         <i class="fa-solid <?= $row['active'] ? 'fa-check' : 'fa-times'; ?>"
