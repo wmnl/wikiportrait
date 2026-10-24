@@ -36,16 +36,18 @@ $(document).ready(function() {
             $('#source').removeAttr('required');
             $('#source_container').addClass('hidden');
         }
-        // Only the photographer can give permission, so uploading someone else's photo is pointless
-        var ownWork = "Yes" === $(this).val();
-        $('#source_warning').prop('hidden', ownWork);
-        $('#upload_details').prop('hidden', !ownWork);
+        $('#source_other_info').prop('hidden', "No" !== $(this).val());
+        // Without a known photographer nobody can give permission, so uploading is pointless
+        var unknown = "Unknown" === $(this).val();
+        $('#source_unknown_warning').prop('hidden', !unknown);
+        $('#upload_details').prop('hidden', unknown);
     });
 
-    // Only allow uploading own work, and only once all required fields are filled
+    // Only allow uploading with a known photographer, and only once all required fields are filled
     function updateUploadButton() {
         var form = document.querySelector('form');
-        var ok = 'Yes' === $('input[name="source_self"]:checked').val() && form.checkValidity();
+        var source = $('input[name="source_self"]:checked').val();
+        var ok = ('Yes' === source || 'No' === source) && form.checkValidity();
         $('#upload_button').prop('disabled', !ok);
     }
     $(document).on('input change', 'form :input', updateUploadButton);
@@ -101,16 +103,25 @@ $(document).ready(function() {
             </div>
         </div>
 
-        <?php $sourceNotOwn = in_array($_POST['source_self'] ?? '', ['No', 'Unknown'], true); ?>
-        <div class="box red" id="source_warning"<?= $sourceNotOwn ? '' : ' hidden'; ?>>
+        <?php $sourceUnknown = ($_POST['source_self'] ?? '') === 'Unknown'; ?>
+        <div class="box red" id="source_unknown_warning"<?= $sourceUnknown ? '' : ' hidden'; ?>>
             <strong>Deze foto kan helaas niet worden geüpload.</strong><br>
             Alleen de maker van een foto (de fotograaf) kan toestemming geven om de foto onder een vrije licentie te
-            publiceren. Via dit formulier kunt u daarom alleen foto's uploaden die u zelf gemaakt heeft. Het heeft
-            geen zin om de rest van het formulier in te vullen. Weet u wie de fotograaf is? Vraag de fotograaf dan
-            om de foto zelf te uploaden.
+            publiceren. Als niet bekend is wie de foto gemaakt heeft, kan niemand die toestemming geven en kunnen wij
+            de foto niet op Wikipedia plaatsen. Het heeft daarom geen zin om de rest van het formulier in te vullen.
+            Weet u wie de fotograaf is? Kies dan voor 'Nee, ik heb deze foto niet zelf gemaakt' en vul de naam van
+            de fotograaf in.
         </div>
 
-        <div id="upload_details"<?= $sourceNotOwn ? ' hidden' : ''; ?>>
+        <div class="box blue" id="source_other_info"<?= ($_POST['source_self'] ?? '') === 'No' ? '' : ' hidden'; ?>>
+            <strong>De fotograaf moet toestemming geven.</strong><br>
+            Vul hieronder de naam van de fotograaf in. Alleen de fotograaf kan toestemming geven om de foto onder een
+            vrije licentie te publiceren. Na het uploaden ontvangt u een e-mail met een tekst die de fotograaf kan
+            gebruiken. De fotograaf moet die toestemming vervolgens zelf, vanaf een eigen e-mailadres, naar ons
+            mailen. Zonder deze toestemming kunnen wij de foto niet op Wikipedia plaatsen.
+        </div>
+
+        <div id="upload_details"<?= $sourceUnknown ? ' hidden' : ''; ?>>
 
         <div class="input-container<?= ($_POST['source_self'] ?? '') === 'No' ? '' : ' hidden'; ?>" id="source_container">
             <label for="source"><i aria-hidden="true" class="fa-solid fa-camera-retro fa-lg"></i>Wat is de naam van de
