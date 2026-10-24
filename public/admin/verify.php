@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 require_once '../common/bootstrap.php';
 $session->checkAdmin();
 
-$mail             = new PHPMailer();
+$mail             = createMailer();
 $templateRenderer = new Handlebars();
 
 function getContribution(string $id, string $hash): array
@@ -43,9 +43,6 @@ function buildMail(
 ): void {
     $mail->clearAddresses();
     $mail->clearReplyTos();
-    $mail->From    = VRTS_MAIL;
-    $mail->Sender  = VRTS_MAIL;
-    $mail->CharSet = 'UTF-8';
     $mail->addAddress($to, $toName);
     $mail->addReplyTo($replyTo, $replyToName);
     $mail->Subject = $subject;

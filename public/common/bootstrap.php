@@ -59,6 +59,7 @@ DB::$password = DB_PASS;
 DB::$dbName = DB_DB;
 DB::$host = DB_HOST;
 require_once 'formfunctions.php';
+require_once 'mailfunctions.php';
 require_once 'uploadfunctions.php';
 require_once 'dashboardfunctions.php';
 require_once 'session.php';
