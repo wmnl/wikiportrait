@@ -25,7 +25,7 @@ $google_vision_results = DB::queryFirstRow(
 
 $msg = false;
 if (isset($_POST['postback'])) {
-    // Unverified images only leave "Niet geverifieerd" when the address gets verified
+    // Unverified images only leave "Niet geverifieerd" by verification or the archive cron
     if ($row['archived'] == 2) {
         $archived = 2;
     } else {

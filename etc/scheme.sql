@@ -72,6 +72,7 @@ CREATE TABLE `images` (
   `key` varchar(64) NOT NULL,
   `ticket` varchar(16) DEFAULT NULL,
   `categories` text DEFAULT NULL,
+  `unverified_since` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20569 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

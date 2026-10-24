@@ -166,7 +166,7 @@ function unverify(string $id, string $hash): string
         throw new RuntimeException('Mailadres is al geverifieerd of onbekend.');
     }
 
-    DB::update('images', ['archived' => 2], 'id = %i AND archived = 1', $id);
+    DB::update('images', ['archived' => 2, 'unverified_since' => time()], 'id = %i AND archived = 1', $id);
 
     return 'Afbeelding is teruggezet naar Niet geverifieerd.';
 }
