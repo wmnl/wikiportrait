@@ -100,11 +100,13 @@ include 'tabs.php';
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($diffs as $diff) : ?>
+                        <?php foreach ($diffs as $i => $diff) : ?>
                         <tr>
                             <td data-title="&#xf14a;" class="select">
                                 <?php if ($diff['sql'] !== null) : ?>
-                                <input type="checkbox" name="diffs[]" value="<?= htmlspecialchars($diff['id']); ?>">
+                                <input type="checkbox" name="diffs[]" id="diff-<?= $i; ?>"
+                                    value="<?= htmlspecialchars($diff['id']); ?>">
+                                <label for="diff-<?= $i; ?>" title="Doorvoeren"></label>
                                 <?php endif ?>
                             </td>
                             <td data-title="&#xf1c0;"><?= htmlspecialchars($diff['table']); ?></td>
