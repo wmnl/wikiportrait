@@ -7,10 +7,7 @@
 
 function schemaFile(): ?string
 {
-    $candidates = defined('SCHEMA_FILE') ? [SCHEMA_FILE] : [
-        dirname(ABSPATH) . '/etc/scheme.sql',         // repository layout
-        dirname(ABSPATH) . '/private/etc/scheme.sql', // server layout, see etc/deploy-*
-    ];
+    $candidates = defined('SCHEMA_FILE') ? [SCHEMA_FILE] : [dirname(ABSPATH) . '/etc/scheme.sql'];
 
     foreach ($candidates as $candidate) {
         if (is_readable($candidate)) {
