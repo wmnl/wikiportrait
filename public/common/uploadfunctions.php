@@ -98,7 +98,7 @@ function checkUpload()
     $validateUploader = validateUploader($source);
 
     if (!hasvalidationerrors()) {
-        $mail = new \PHPMailer\PHPMailer\PHPMailer();
+        $mail = createMailer();
         $templateRenderer = new Handlebars();
         list($email_exists, $email_verified) = contributorEmailCheck($email);
 
@@ -181,9 +181,6 @@ function checkUpload()
             ]);
             $htmlBody = nl2br($body);
 
-            $mail->From = SENDER_MAIL;
-            $mail->CharSet = 'UTF-8';
-
             if ($validateUploader !== "valid") {
                 $mail->addAddress($email, $name);
                 $mail->addReplyTo(VRTS_MAIL, "Wikiportret VRTS queue");
@@ -195,7 +192,6 @@ function checkUpload()
             };
 
             $mail->Subject = $subject;
-            $mail->Sender = SENDER_MAIL;
             $mail->isHTML(true);
             $mail->Body = $htmlBody;
             $mail->AltBody = $body;
