@@ -781,22 +781,3 @@ button::-moz-focus-inner {
     word-break: break-word;
     font-size: 0.85em;
 }
-
-.schema-upload,
-.schema-forget {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.schema-source {
-    margin-bottom: 10px;
-}
-
-.schema-forget {
-    display: inline-flex;
-    margin: 0 0 0 10px;
-    width: auto;
-}
