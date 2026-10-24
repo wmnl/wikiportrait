@@ -5,8 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
-    <link rel="stylesheet" href="<?= $basispad; ?>/style/style.css" />
-    <link rel="stylesheet" href="<?= $basispad; ?>/style/responsive.css" />
+    <link rel="stylesheet"
+        href="<?= $basispad; ?>/style/style.css?v=<?= filemtime(__DIR__ . '/../style/style.css'); ?>" />
+    <link rel="stylesheet"
+        href="<?= $basispad; ?>/style/responsive.css?v=<?= filemtime(__DIR__ . '/../style/responsive.css'); ?>" />
     <link rel="stylesheet" href="<?= $basispad; ?>/lib/font-awesome/css/all.min.css">
     <script defer src="<?= $basispad; ?>/lib/font-awesome/js/fontawesome.js"></script>
     <script src="<?= $basispad; ?>/lib/jquery/dist/jquery.min.js"></script>

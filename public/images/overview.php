@@ -31,6 +31,14 @@ $archive = $archived ? $_GET['archived'] : 0;
         }
 
         $total_pages = ceil($total_records / 25);
+        ?>
+        <form class="header-search" method="get" action="search.php">
+            <div class="header-search-row">
+                <input type="text" name="q" placeholder="Zoek op key, e-mail, uploader of titel" />
+                <button type="submit" title="Zoeken"><i class="fa-solid fa-search"></i></button>
+            </div>
+        </form>
+        <?php
 
         if ($total_pages > 1) :
             ?>

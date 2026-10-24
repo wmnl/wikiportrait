@@ -25,14 +25,18 @@ $page = pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_FILENAME);
                 ?>
                     ><a href="overview.php?archived=2"><i class="fa-solid fa-archive"></i><span>Niet
                             geverifieerd</span></a></li>
+                    <li
+                    <?php
+                    if ($page == 'search') {
+                            echo " class='active'";
+                    }
+                    ?>
+                        ><a href="search.php"><i class="fa-solid fa-search"></i><span>Zoeken</span></a></li>
                     <?php
                     // Not quite working...
                     /*
         <li<?php if (isset ($_GET['personal'])) echo " class='active'"?>><a href="overview.php?personal"><i *
                             class="fa-solid fa-tachometer"></i><span>Persoonlijk overzicht</span></a></li>
-                    <li<?php if ($page == 'search') echo " class='active'"?>><a href="search.php"><i
-                                class="fa-solid fa-search">
-                                * </i><span>Zoeken</span></a></li>
                         */
                     ?>
     </ul>

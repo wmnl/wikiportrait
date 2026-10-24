@@ -259,6 +259,34 @@ ul {
     border-left: 10px solid #fff;
 }
 
+.page-header .header-search {
+    display: table-cell;
+    vertical-align: middle;
+    width: auto;
+    padding-left: 10px;
+}
+
+.header-search-row {
+    display: flex;
+    align-items: stretch;
+}
+
+.header-search-row input[type="text"] {
+    display: block;
+    flex: 0 0 280px;
+    width: 280px;
+    border-radius: 5px 0 0 5px;
+}
+
+.header-search-row button {
+    flex: 0 0 auto;
+    border-radius: 0 5px 5px 0;
+}
+
+.header-search-row button .fa-solid {
+    margin-right: 0;
+}
+
 .navigation label,
 .navigation .simpleselect {
     width: 50%;
