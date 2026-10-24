@@ -50,6 +50,9 @@ if (!defined('IMAGE_FOLDER')) {
     define('GV_REQUESTS_LIMIT', 900);
     define('CLOSED', false); //Allow uploads (true = geen uploads)
 }
+if (!defined('MIN_IMAGE_SIZE')) {
+    define('MIN_IMAGE_SIZE', 600); // Minimale lengte van de kortste zijde in pixels
+}
 header("Access-Control-Allow-Origin: *");
 DB::$user = DB_USER;
 DB::$password = DB_PASS;

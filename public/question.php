@@ -38,6 +38,11 @@ function result($result)
         echo "<h3>Uploaden is niet gelukt</h3>";
         echo "<div class=\"box red\">" . DUPLICATE_ERROR . "<br /></div>";
         echo "<div class=\"bottom right\"><a class=\"button\" href=\"index.php\"><i class=\"fa-solid fa-home fa-lg\"></i>Terug naar de startpagina</a></div>";
+    } elseif ($result == "lowres") {
+        $email = htmlspecialchars($session->getLastUploadEmail());
+        echo "<h3>Afbeelding niet geschikt</h3>";
+        echo "<div class=\"box red\">De resolutie van deze afbeelding is te laag voor Wikipedia. De afbeelding is daarom niet in behandeling genomen.<br />Wij hebben een e-mail naar <strong>$email</strong> gestuurd met meer informatie.</div>";
+        echo "<div class=\"bottom right\"><a class=\"button\" href=\"upload.php\"><i class=\"fa-solid fa-cloud-upload fa-lg\"></i>Andere afbeelding uploaden</a></div>";
     } elseif ($result == "failupload") {
         ?>
         <h3>Uploaden is niet gelukt</h3>
