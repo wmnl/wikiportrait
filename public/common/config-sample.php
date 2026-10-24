@@ -14,3 +14,9 @@ define('GOOGLE_CREDENTIALS', dirname(__FILE__) . '/your_credentials_file.json');
 const TIMEZONE = DateTimeZone::EUROPE;
 const SECRET_KEY = 'secret_key';
 const DOMAIN = 'domain.tld';
+// SMTP (optioneel). Zolang SMTP_USER of SMTP_PASS leeg is wordt sendmail gebruikt.
+// Gmail: smtp.gmail.com, poort 587, gebruiker = volledig Gmail-adres, wachtwoord = app-wachtwoord.
+const SMTP_HOST = 'smtp.gmail.com';
+const SMTP_PORT = 587;
+const SMTP_USER = '';
+const SMTP_PASS = '';

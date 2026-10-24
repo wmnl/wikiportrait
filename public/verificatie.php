@@ -31,7 +31,7 @@ function processVerification(string $key, string $email): string
         return '<div class="box blue">Uw email is al geverifieerd</div>';
     }
 
-    $mail             = new \PHPMailer\PHPMailer\PHPMailer();
+    $mail             = createMailer();
     $templateRenderer = new Handlebars();
     $bodyTpl          = file_get_contents(ABSPATH . "/common/mailbody.txt");
 

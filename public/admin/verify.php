@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 require_once '../common/bootstrap.php';
 $session->checkAdmin();
 
-$mail             = new PHPMailer();
+$mail             = createMailer();
 $templateRenderer = new Handlebars();
 
 function getContribution(string $id, string $hash): array
