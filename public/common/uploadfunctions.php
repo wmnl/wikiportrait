@@ -181,7 +181,7 @@ function checkUpload()
             ]);
             $htmlBody = nl2br($body);
 
-            $mail->From = VRTS_MAIL;
+            $mail->From = SENDER_MAIL;
             $mail->CharSet = 'UTF-8';
 
             if ($validateUploader !== "valid") {
@@ -195,7 +195,7 @@ function checkUpload()
             };
 
             $mail->Subject = $subject;
-            $mail->Sender = VRTS_MAIL;
+            $mail->Sender = SENDER_MAIL;
             $mail->isHTML(true);
             $mail->Body = $htmlBody;
             $mail->AltBody = $body;
