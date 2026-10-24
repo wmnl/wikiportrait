@@ -396,6 +396,13 @@ button:focus {
     transition: background 0.2s linear;
 }
 
+button[disabled],
+button[disabled]:hover,
+button[disabled]:focus {
+    background: #999;
+    cursor: not-allowed;
+}
+
 input[type="radio"]:not(:last-child) {
     margin-bottom: 10px;
 }

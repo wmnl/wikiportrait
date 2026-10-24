@@ -45,6 +45,17 @@ $(document).ready(function() {
             $('#upload_details').removeClass('hidden');
         }
     });
+
+    // Only allow uploading own work, and only once all required fields are filled
+    function updateUploadButton() {
+        var form = document.querySelector('form');
+        var ok = 'Yes' === $('input[name="source_self"]:checked').val() &&
+            $('#terms').is(':checked') && $('#euvs').is(':checked') &&
+            form.checkValidity();
+        $('#upload_button').prop('disabled', !ok);
+    }
+    $(document).on('input change', 'form :input', updateUploadButton);
+    updateUploadButton();
 })
 </script>
 <div id="content">
@@ -183,7 +194,8 @@ $(document).ready(function() {
         ?>
         <div class="bottom right">
             <input type='hidden' name='postback'></input>
-            <button class="green" type='button' onclick='disableButton(this)'><i aria-hidden="true"
+            <button class="green" type='button' id="upload_button" disabled="disabled"
+                onclick='disableButton(this)'><i aria-hidden="true"
                     class="fa-solid fa-cloud-upload fa-lg"></i>Upload foto</button>
         </div>
 
