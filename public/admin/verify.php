@@ -10,7 +10,7 @@ $session->checkAdmin();
 $mail             = new PHPMailer();
 $templateRenderer = new Handlebars();
 
-function getContribution(string $id, string $hash): array
+function getContribution(string $id, string $hash, string $archived = "2"): array
 {
     if (filter_var($id, FILTER_VALIDATE_INT) === false) {
         throw new InvalidArgumentException("Geen geldige id");
@@ -25,7 +25,7 @@ function getContribution(string $id, string $hash): array
         $hash
     );
 
-    if (empty($contribution['email']) || $contribution['archived'] !== "2") {
+    if (empty($contribution['email']) || $contribution['archived'] !== $archived) {
         throw new RuntimeException('Kan mailadres niet goedkeuren.');
     }
 
@@ -54,7 +54,7 @@ function buildMail(
     $mail->AltBody = $body;
 }
 
-function verify(string $id, string $hash, PHPMailer $mail, Handlebars $templateRenderer): void
+function verify(string $id, string $hash, PHPMailer $mail, Handlebars $templateRenderer): string
 {
     $contribution = getContribution($id, $hash);
 
@@ -110,13 +110,10 @@ function verify(string $id, string $hash, PHPMailer $mail, Handlebars $templateR
         }
     }
 
-    echo json_encode([
-        'success' => true,
-        'message' => 'E-mailadres is geverifieerd en bevestigingsmail is verstuurd.',
-    ]);
+    return 'E-mailadres is geverifieerd en bevestigingsmail is verstuurd.';
 }
 
-function resend(string $id, string $hash, PHPMailer $mail, Handlebars $templateRenderer): void
+function resend(string $id, string $hash, PHPMailer $mail, Handlebars $templateRenderer): string
 {
     $contribution = getContribution($id, $hash);
 
@@ -153,22 +150,94 @@ function resend(string $id, string $hash, PHPMailer $mail, Handlebars $templateR
         throw new RuntimeException('Verificatiemail kon niet worden verstuurd.');
     }
 
-    echo json_encode(['success' => true, 'message' => 'Verificatiemail is opnieuw verstuurd.']);
+    return 'Verificatiemail is opnieuw verstuurd.';
+}
+
+function unverify(string $id, string $hash): string
+{
+    $contribution = getContribution($id, $hash, "1");
+
+    $verified = DB::queryFirstField(
+        "SELECT MIN(verified) FROM contributors WHERE email = %s",
+        $contribution['email']
+    );
+
+    if ($verified === null || (int) $verified !== 0) {
+        throw new RuntimeException('Mailadres is al geverifieerd of onbekend.');
+    }
+
+    DB::update('images', ['archived' => 2], 'id = %i AND archived = 1', $id);
+
+    return 'Afbeelding is teruggezet naar Niet geverifieerd.';
+}
+
+function runAction(string $action, string $id, string $hash, PHPMailer $mail, Handlebars $templateRenderer): string
+{
+    return match ($action) {
+        'verify'   => verify($id, $hash, $mail, $templateRenderer),
+        'resend'   => resend($id, $hash, $mail, $templateRenderer),
+        'unverify' => unverify($id, $hash),
+        default    => throw new InvalidArgumentException("Ongeldig verzoek"),
+    };
+}
+
+function bulk(string $action, array $ids, PHPMailer $mail, Handlebars $templateRenderer): array
+{
+    $images = DB::query("SELECT id, `key`, email FROM images WHERE id IN %li", array_map('intval', $ids));
+    if (empty($images)) {
+        throw new InvalidArgumentException("Geen afbeeldingen geselecteerd");
+    }
+
+    $done     = 0;
+    $failed   = [];
+    $verified = [];
+
+    foreach ($images as $image) {
+        // Verifying an address releases all images of that address at once
+        if ($action === 'verify' && in_array($image['email'], $verified, true)) {
+            $done++;
+            continue;
+        }
+
+        try {
+            runAction($action, (string) $image['id'], $image['key'], $mail, $templateRenderer);
+            $verified[] = $image['email'];
+            $done++;
+        } catch (RuntimeException | InvalidArgumentException $e) {
+            $failed[] = $image['id'];
+        }
+    }
+
+    $message = "{$done} van " . count($images) . " afbeeldingen verwerkt.";
+    if ($failed) {
+        $message .= ' Mislukt: ' . implode(', ', $failed) . '.';
+    }
+
+    return ['success' => empty($failed), 'message' => $message, 'failed' => $failed];
 }
 
 // --- Router ---
 try {
     header('Content-Type: application/json');
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $ids = $_POST['ids'] ?? [];
+        if (!is_array($ids) || empty($ids)) {
+            throw new InvalidArgumentException("Geen afbeeldingen geselecteerd");
+        }
+        if (!in_array($_POST['action'] ?? '', ['verify', 'resend', 'unverify'], true)) {
+            throw new InvalidArgumentException("Ongeldig verzoek");
+        }
+
+        echo json_encode(bulk($_POST['action'], $ids, $mail, $templateRenderer));
+        exit;
+    }
+
     $action = $_GET['action'] ?? '';
     $id     = $_GET['id']     ?? '';
     $hash   = $_GET['hash']   ?? '';
 
-    match ($action) {
-        'verify' => verify($id, $hash, $mail, $templateRenderer),
-        'resend' => resend($id, $hash, $mail, $templateRenderer),
-        default  => throw new InvalidArgumentException("Ongeldig verzoek"),
-    };
+    echo json_encode(['success' => true, 'message' => runAction($action, $id, $hash, $mail, $templateRenderer)]);
 } catch (InvalidArgumentException $e) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Ongeldig verzoek.', 'error' => $e->getMessage()]);

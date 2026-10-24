@@ -38,6 +38,7 @@ if (isset($_POST['postback'])) {
 $owner    = DB::queryFirstRow('SELECT owner, archived, ticket, categories FROM images WHERE id = %d', $id);
 $results  = DB::query('SELECT * FROM messages');
 $accounts = DB::query("SELECT otrsname, id FROM users WHERE active = 1");
+$verified = DB::queryFirstField("SELECT MIN(verified) FROM contributors WHERE email = %s", $row['email']);
 $imgurl   = urlencode(BASE_URL . "/uploads/images/" . $row['filename']);
 $imgpath  = ABSPATH . "/uploads/images/" . $row['filename'];
 
@@ -190,6 +191,12 @@ function getTrueFalse(truefalse) {
                         <a href="/admin/verify.php?action=resend&id=<?= $row['id']; ?>&hash=<?= $row['key']; ?>"
                             class="admin-action">Stuur verificatiemail opnieuw</a>
                     </div>
+                    <?php elseif ($owner['archived'] == 1 && $verified === '0' && $session->isSysop()) : ?>
+                    <div class="not_verified">
+                        Niet geverifieerd &nbsp;|&nbsp;
+                        <a href="/admin/verify.php?action=unverify&id=<?= $row['id']; ?>&hash=<?= $row['key']; ?>"
+                            class="admin-action unverify-link">Terugzetten naar Niet geverifieerd</a>
+                    </div>
                     <?php endif ?>
                 </li>
                 <li><span>IP-adres:</span> <?= $row['ip']; ?></li>
@@ -309,28 +316,25 @@ function getTrueFalse(truefalse) {
 $(document).on('click', '.admin-action', function(e) {
     e.preventDefault();
     const $link = $(this);
+    const label = $link.text();
     $link.text('Bezig...');
 
     $.getJSON($link.attr('href'))
         .done(function(data) {
             if ($link.hasClass('verify-link')) {
                 $link.closest('.not_verified').replaceWith('<span>Geverifieerd</span>');
+            } else if ($link.hasClass('unverify-link')) {
+                setTimeout(() => location.reload(), 1500);
             } else {
                 $link.text('Stuur mail opnieuw');
             }
             toonMelding(data.message, 'success');
         })
         .fail(function() {
-            $link.text($link.hasClass('verify-link') ? 'Verifieer adres' : 'Stuur verificatiemail opnieuw');
+            $link.text(label);
             toonMelding('Er is iets misgegaan, probeer het opnieuw.', 'error');
         });
 });
-
-function toonMelding(tekst, type) {
-    const $melding = $('<div>').text(tekst).addClass('melding ' + type);
-    $('body').append($melding);
-    setTimeout(() => $melding.remove(), 4000);
-}
 </script>
 
 <?php include '../common/footer.php'; ?>

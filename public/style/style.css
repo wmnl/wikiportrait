@@ -739,3 +739,46 @@ button::-moz-focus-inner {
     font-size: 0.9em;
     margin-top: 3px;
 }
+
+/* Bulk actions */
+.bulk-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.bulk-count {
+    margin-right: auto;
+}
+
+.bulk-actions button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.select-container {
+    width: 2.5em;
+}
+
+td.select {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Notifications */
+.melding {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    padding: 11px;
+    border-radius: 5px;
+    color: #fff;
+    background: #339966;
+}
+
+.melding.error {
+    background: #990000;
+}

@@ -8,6 +8,13 @@ function confirmDelete(id) {
     }
 }
 
+/* Short-lived notification */
+function toonMelding(tekst, type) {
+    const $melding = $('<div>').text(tekst).addClass('melding ' + type);
+    $('body').append($melding);
+    setTimeout(() => $melding.remove(), 4000);
+}
+
 /* Add :active to iOS */
 document.addEventListener("touchstart", function () { }, true);
 
