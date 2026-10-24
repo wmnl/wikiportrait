@@ -96,7 +96,9 @@ function isSelectable(int $archive, ?string $verified): bool
             <thead>
                 <tr>
                     <?php if ($bulkActions) : ?>
-                    <th class="select-container"><input type="checkbox" id="select-all" title="Alles selecteren"></th>
+                    <th class="select-container">
+                        <input type="checkbox" id="select-all"><label for="select-all" title="Alles selecteren"></label>
+                    </th>
                     <?php endif ?>
                     <th class="img-container">Foto</th>
                     <th>Titel</th>
@@ -152,7 +154,8 @@ function isSelectable(int $archive, ?string $verified): bool
                     <tr>
                         <?php if ($bulkActions) : ?>
                         <td data-title="&#xf14a;" class="select">
-                            <input type="checkbox" class="bulk-select" value="<?= $id; ?>" <?= $disabled; ?>>
+                            <input type="checkbox" class="bulk-select" id="select-<?= $id; ?>"
+                                value="<?= $id; ?>" <?= $disabled; ?>><label for="select-<?= $id; ?>"></label>
                         </td>
                         <?php endif ?>
                         <td data-title="&#xf03e;" class="image"><a href="single.php?id=<?php echo $id; ?>">

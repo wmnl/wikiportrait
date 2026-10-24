@@ -767,6 +767,11 @@ td.select {
     vertical-align: middle;
 }
 
+input[type=checkbox]:disabled + label {
+    opacity: 0.3;
+    cursor: default;
+}
+
 /* Notifications */
 .melding {
     position: fixed;
