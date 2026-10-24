@@ -38,20 +38,18 @@ $(document).ready(function() {
         }
         // Without a known photographer nobody can give permission, so uploading is pointless
         if ("Unknown" === $(this).val()) {
-            $('#source_unknown_warning').removeClass('hidden');
-            $('#upload_details').addClass('hidden');
+            $('#source_unknown_warning').prop('hidden', false);
+            $('#upload_details').prop('hidden', true);
         } else {
-            $('#source_unknown_warning').addClass('hidden');
-            $('#upload_details').removeClass('hidden');
+            $('#source_unknown_warning').prop('hidden', true);
+            $('#upload_details').prop('hidden', false);
         }
     });
 
     // Only allow uploading own work, and only once all required fields are filled
     function updateUploadButton() {
         var form = document.querySelector('form');
-        var ok = 'Yes' === $('input[name="source_self"]:checked').val() &&
-            $('#terms').is(':checked') && $('#euvs').is(':checked') &&
-            form.checkValidity();
+        var ok = 'Yes' === $('input[name="source_self"]:checked').val() && form.checkValidity();
         $('#upload_button').prop('disabled', !ok);
     }
     $(document).on('input change', 'form :input', updateUploadButton);
@@ -108,7 +106,7 @@ $(document).ready(function() {
         </div>
 
         <?php $sourceUnknown = ($_POST['source_self'] ?? '') === 'Unknown'; ?>
-        <div class="box red<?= $sourceUnknown ? '' : ' hidden'; ?>" id="source_unknown_warning">
+        <div class="box red" id="source_unknown_warning"<?= $sourceUnknown ? '' : ' hidden'; ?>>
             <strong>Deze foto kan helaas niet worden geüpload.</strong><br>
             Alleen de maker van een foto (de fotograaf) kan toestemming geven om de foto onder een vrije licentie te
             publiceren. Als niet bekend is wie de foto gemaakt heeft, kan niemand die toestemming geven en kunnen wij
@@ -117,7 +115,7 @@ $(document).ready(function() {
             de fotograaf in.
         </div>
 
-        <div id="upload_details"<?= $sourceUnknown ? ' class="hidden"' : ''; ?>>
+        <div id="upload_details"<?= $sourceUnknown ? ' hidden' : ''; ?>>
 
         <div class="input-container<?= ($_POST['source_self'] ?? '') === 'No' ? '' : ' hidden'; ?>" id="source_container">
             <label for="source"><i aria-hidden="true" class="fa-solid fa-camera-retro fa-lg"></i>Wat is de naam van de
@@ -178,11 +176,11 @@ $(document).ready(function() {
         <div class="input-container">
             <label for="terms"><i aria-hidden="true" class="fa-solid fa-gavel fa-lg"></i>Toestemming</label>
             <div class="checkbox">
-                <input type="checkbox" name="terms" id="terms" /><label for="terms">Ja, ik ga akkoord met de
+                <input type="checkbox" name="terms" id="terms" required="required" /><label for="terms">Ja, ik ga akkoord met de
                     bovenstaande licentievoorwaarden, de <a href="
     <?= $basispad; ?>/privacyverklaring.php" target="_blank">privacyverklaring</a> en het opslaan van mijn
                     IP-adres.</label><br />
-                <input type="checkbox" name="euvs" id="euvs" /><label for="euvs">Ja, ik geef toestemming voor het
+                <input type="checkbox" name="euvs" id="euvs" required="required" /><label for="euvs">Ja, ik geef toestemming voor het
                     opslaan van mijn gegevens op de servers van de Wikimedia Foundation in de Verenigde Staten, waarbij
                     de gegevens niet worden doorgegeven op grond van het EU-US Privacy Shield of de wettelijke
                     uitzondering die is opgenomen in artikel 77 van de Wet bescherming persoonsgegevens (Wbp). Bij

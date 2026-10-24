@@ -276,9 +276,7 @@ form {
     margin-bottom: 10px;
 }
 
-.input-container.hidden,
-.box.hidden,
-#upload_details.hidden {
+.input-container.hidden {
     display: none;
 }
 
