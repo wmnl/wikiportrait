@@ -21,7 +21,7 @@ if (isset($_POST['postback'])) {
             'otrsname' => $_POST['otrsname'],
             'email' => $_POST['email'],
             'isSysop' => $admin,
-            'isBot' =>  $_POST['bot'],
+            'isBot' =>  $_POST['bot'] ?? false,
             'apiKey' => $_POST['bot'] ? hash('sha512', $_POST['key'] . SECRET_KEY, false) : '',
             'active' => 1
         ]);
