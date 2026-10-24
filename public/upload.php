@@ -36,14 +36,10 @@ $(document).ready(function() {
             $('#source').removeAttr('required');
             $('#source_container').addClass('hidden');
         }
-        // Without a known photographer nobody can give permission, so uploading is pointless
-        if ("Unknown" === $(this).val()) {
-            $('#source_unknown_warning').prop('hidden', false);
-            $('#upload_details').prop('hidden', true);
-        } else {
-            $('#source_unknown_warning').prop('hidden', true);
-            $('#upload_details').prop('hidden', false);
-        }
+        // Only the photographer can give permission, so uploading someone else's photo is pointless
+        var ownWork = "Yes" === $(this).val();
+        $('#source_warning').prop('hidden', ownWork);
+        $('#upload_details').prop('hidden', !ownWork);
     });
 
     // Only allow uploading own work, and only once all required fields are filled
@@ -105,17 +101,16 @@ $(document).ready(function() {
             </div>
         </div>
 
-        <?php $sourceUnknown = ($_POST['source_self'] ?? '') === 'Unknown'; ?>
-        <div class="box red" id="source_unknown_warning"<?= $sourceUnknown ? '' : ' hidden'; ?>>
+        <?php $sourceNotOwn = in_array($_POST['source_self'] ?? '', ['No', 'Unknown'], true); ?>
+        <div class="box red" id="source_warning"<?= $sourceNotOwn ? '' : ' hidden'; ?>>
             <strong>Deze foto kan helaas niet worden geüpload.</strong><br>
             Alleen de maker van een foto (de fotograaf) kan toestemming geven om de foto onder een vrije licentie te
-            publiceren. Als niet bekend is wie de foto gemaakt heeft, kan niemand die toestemming geven en kunnen wij
-            de foto niet op Wikipedia plaatsen. Het heeft daarom geen zin om de rest van het formulier in te vullen.
-            Weet u wie de fotograaf is? Kies dan voor 'Nee, ik heb deze foto niet zelf gemaakt' en vul de naam van
-            de fotograaf in.
+            publiceren. Via dit formulier kunt u daarom alleen foto's uploaden die u zelf gemaakt heeft. Het heeft
+            geen zin om de rest van het formulier in te vullen. Weet u wie de fotograaf is? Vraag de fotograaf dan
+            om de foto zelf te uploaden.
         </div>
 
-        <div id="upload_details"<?= $sourceUnknown ? ' hidden' : ''; ?>>
+        <div id="upload_details"<?= $sourceNotOwn ? ' hidden' : ''; ?>>
 
         <div class="input-container<?= ($_POST['source_self'] ?? '') === 'No' ? '' : ' hidden'; ?>" id="source_container">
             <label for="source"><i aria-hidden="true" class="fa-solid fa-camera-retro fa-lg"></i>Wat is de naam van de

@@ -87,8 +87,8 @@ function checkUpload()
     }
 
     isrequired('title', 'titel');
-    if ($_POST['source_self'] == "Unknown") {
-        addvalidationerror("Een foto waarvan niet bekend is wie hem gemaakt heeft, kan niet worden geüpload.");
+    if ($_POST['source_self'] != "Yes") {
+        addvalidationerror("Alleen foto's die u zelf gemaakt heeft, kunnen worden geüpload.");
         return;
     }
     $_POST['source_self'] != "Yes" ? isrequired('source', 'auteursrechthebbende') : '';
