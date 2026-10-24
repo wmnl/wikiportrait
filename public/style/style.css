@@ -463,6 +463,35 @@ input[type="checkbox"] + label:hover {
     cursor: pointer;
 }
 
+/* Checkboxes in tables */
+.select-container {
+    width: 2.5em;
+}
+
+td.select {
+    text-align: center;
+    vertical-align: middle;
+}
+
+td.select label,
+.select-container label {
+    display: inline;
+    width: auto;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+}
+
+td.select input[type=checkbox] + label:before,
+.select-container input[type=checkbox] + label:before {
+    letter-spacing: 0;
+}
+
+input[type=checkbox]:disabled + label {
+    opacity: 0.3;
+    cursor: default;
+}
+
 /* File input */
 input[type="file"] {
     font-size: 0.8em;
