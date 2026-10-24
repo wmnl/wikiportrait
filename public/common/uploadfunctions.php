@@ -68,10 +68,8 @@ function sendLowResolutionMail($mail, $templateRenderer, $email, $name, $title, 
         'minSize' => MIN_IMAGE_SIZE,
     ]);
 
-    $mail->From = VRTS_MAIL;
-    $mail->Sender = VRTS_MAIL;
-    $mail->CharSet = 'UTF-8';
     $mail->addAddress($email, $name);
+    $mail->addReplyTo(VRTS_MAIL, "Wikiportret VRTS queue");
     $mail->Subject = "[Wikiportret] $title is niet geschikt: resolutie te laag";
     $mail->isHTML(true);
     $mail->Body = nl2br($body);
