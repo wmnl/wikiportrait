@@ -3,17 +3,12 @@ require_once '../common/bootstrap.php';
 require_once '../common/schemafunctions.php';
 $session->checkAdmin();
 
-if (empty($_SESSION['schema_token'])) {
-    $_SESSION['schema_token'] = bin2hex(random_bytes(16));
-}
-
 $file    = schemaFile();
 $wanted  = $file ? parseCreateTables(file_get_contents($file)) : [];
 $results = [];
 
 if (
     $file && isset($_POST['apply'])
-    && hash_equals($_SESSION['schema_token'], $_POST['token'] ?? '')
     && is_array($_POST['diffs'] ?? null)
 ) {
     $results = applySchemaDifferences($wanted, $_POST['diffs']);
@@ -47,7 +42,7 @@ include 'tabs.php';
         <div class="box green"><?= t('schema.in_sync'); ?></div>
         <?php else : ?>
         <form method="post" onsubmit="return confirm(i18n('schema_confirm'));">
-            <input type="hidden" name="token" value="<?= $_SESSION['schema_token']; ?>">
+            <?= csrfField(); ?>
             <div class="table-container">
                 <table class="schema">
                     <thead>

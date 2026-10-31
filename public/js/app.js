@@ -4,7 +4,11 @@ autosize( $( 'textarea' ) );
 /* Delete confirmation */
 function confirmDelete( id ) {
     if ( confirm( i18n( 'confirm_delete_message' ) ) ) {
-        location.href = "deletemessage.php?id=" + id;
+        $( '<form method="post" action="deletemessage.php">' )
+            .append( $( '<input type="hidden" name="id">' ).val( id ) )
+            .append( $( '<input type="hidden" name="csrf_token">' ).val( $( 'meta[name="csrf-token"]' ).attr( 'content' ) ) )
+            .appendTo( 'body' )
+            .submit();
     }
 }
 

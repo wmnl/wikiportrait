@@ -45,6 +45,7 @@ include 'tabs.php';
     </div>
 
     <form method="post">
+        <?= csrfField(); ?>
         <div class="input-container">
             <label for="title"><i class="fa-solid fa-tag fa-lg"></i><?= t('common.title'); ?></label>
             <input type="text" name="title" id="title"

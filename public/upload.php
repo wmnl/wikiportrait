@@ -63,6 +63,7 @@ $(document).ready(function() {
     <h2><?= t('upload.title'); ?></h2>
 
     <form method="post" enctype="multipart/form-data">
+        <?= csrfField(); ?>
 
         <div class="input-container">
             <label for="file"><i aria-hidden="true" class="fa-solid fa-file-image-o fa-lg"></i><?= t('upload.choose_file'); ?></label>

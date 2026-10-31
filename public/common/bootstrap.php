@@ -70,6 +70,11 @@ require_once 'session.php';
 DB::$logfile = ABSPATH . '/db_logfile.txt';
 $session = new Session();
 
+// Every POST from a browser must carry the session's CSRF token; the bot API authenticates with headers instead
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && !defined('CSRF_EXEMPT')) {
+    $session->checkCsrf();
+}
+
 if (!function_exists('is_countable')) {
 
     function is_countable($var)

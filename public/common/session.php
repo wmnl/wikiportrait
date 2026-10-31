@@ -42,6 +42,23 @@ class Session
         exit;
     }
 
+    public function csrfToken()
+    {
+        if (empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+        return $_SESSION['csrf_token'];
+    }
+
+    public function checkCsrf()
+    {
+        $token = $_POST['csrf_token'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
+        if (!is_string($token) || !hash_equals($this->csrfToken(), $token)) {
+            http_response_code(403);
+            exit(t('error.csrf'));
+        }
+    }
+
     public function isLoggedIn()
     {
         return !empty($_SESSION['user']);

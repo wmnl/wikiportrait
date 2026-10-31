@@ -34,6 +34,7 @@ return [
     'error.duplicate' => 'Deze afbeelding is al geüpload',
     'error.invalid_request' => 'Ongeldig verzoek.',
     'error.generic' => 'Er is iets misgegaan, probeer het opnieuw.',
+    'error.csrf' => 'Je sessie is verlopen. Ga terug, vernieuw de pagina en probeer het opnieuw.',
 
     // Header, footer and menu
     'header.title' => "Wikiportret - Stel uw foto's ter beschikking",

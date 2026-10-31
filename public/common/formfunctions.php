@@ -60,6 +60,12 @@ EOT;
     return sprintf("%s?%s", $baselink, $urlargs);
 }
 
+function csrfField()
+{
+    global $session;
+    return '<input type="hidden" name="csrf_token" value="' . $session->csrfToken() . '">';
+}
+
 function showvalidationsummary()
 {
     echo getvalidationsummary();

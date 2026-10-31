@@ -251,6 +251,7 @@ function getTrueFalse(truefalse) {
         <div class="single-box options">
             <h3><?= t('single.options'); ?></h3>
             <form method="post" id="owner" name="owner">
+                <?= csrfField(); ?>
                 <div class="input-container">
                     <label for="setowner"><i class="fa-solid fa-user-md fa-lg"></i><?= t('single.owner'); ?></label>
                     <div class="checkbox">

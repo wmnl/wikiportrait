@@ -68,6 +68,7 @@ include 'tabs.php';
 
 
     <form method="post">
+        <?= csrfField(); ?>
 
         <?php
         if ($session->isSysop()) {

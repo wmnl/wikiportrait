@@ -47,6 +47,7 @@ include 'tabs.php';
     ?>
 
     <form method="post">
+        <?= csrfField(); ?>
         <div class="input-container">
             <label for="username"><i class="fa-solid fa-user fa-lg"></i><?= t('user.username'); ?></label>
             <input type="text" name="username" id="username" value="<?= htmlspecialchars($_POST['username'] ?? ''); ?>" />
