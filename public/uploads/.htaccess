@@ -1,0 +1,11 @@
+# Uploads zijn alleen afbeeldingen: al het andere (php, phtml, svg, html, ...)
+# wordt geweigerd, zodat er nooit een geüpload script uitgevoerd kan worden.
+Order Deny,Allow
+Deny from all
+<FilesMatch "\.(?i:jpe?g|jpe|jfif|png|gif|bmp|webp|tiff?)$">
+    Allow from all
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
