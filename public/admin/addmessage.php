@@ -40,24 +40,13 @@ include 'tabs.php';
 
         <div class="input-container">
             <label for="title"><i class="fa-solid fa-tag fa-lg"></i><?= t('common.title'); ?></label>
-            <input type="text" name="title" id="title" value="
-        <?php
-        if (isset($_POST['title'])) {
-            echo $_POST['title'];
-        }
-        ?>
-        " required="required" />
+            <input type="text" name="title" id="title"
+                value="<?= htmlspecialchars($_POST['title'] ?? ''); ?>" required="required" />
         </div>
 
         <div class="input-container">
             <label for="message"><i class="fa-solid fa-align-left fa-lg"></i><?= t('common.message'); ?></label>
-            <textarea required="required" name="message">
-        <?php
-        if (isset($_POST['message'])) {
-            echo $_POST['message'];
-        }
-        ?>
-        </textarea>
+            <textarea required="required" name="message"><?= htmlspecialchars($_POST['message'] ?? ''); ?></textarea>
         </div>
 
         <div class="bottom right">

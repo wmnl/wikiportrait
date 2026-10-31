@@ -59,7 +59,7 @@ if (array_key_exists('categories', $owner)) {
 
 function renderCategory(string $category): string
 {
-    $clean = str_replace('Category:', '', $category);
+    $clean = htmlspecialchars(str_replace('Category:', '', $category));
     $slug  = strtolower(preg_replace('/\s/i', '_', $clean));
     return '<input type="checkbox" name="categories[]" value="Category:' . $clean
         . '" id="categories_' . $slug . '" checked="checked">'
@@ -90,10 +90,14 @@ function renderGVSection(array $gv, string $imgpath, int $id): string
     ];
 
     $html  = "<ul class='list_ml'>";
-    $html .= "<li><span>" . t('gv.date') . "</span> {$gv['date']} <i class='performgv' ";
+    $date        = htmlspecialchars($gv['date']);
+    $labels      = htmlspecialchars($gv['labels']);
+    $description = htmlspecialchars($gv['description']);
+
+    $html .= "<li><span>" . t('gv.date') . "</span> {$date} <i class='performgv' ";
     $html .= "onclick=\"performGVResults('{$id}')\">$analyseAgain</i></li>";
-    $html .= "<li><span>" . t('gv.best_label') . "</span> {$gv['labels']}</li>";
-    $html .= "<li><span>" . t('gv.description') . "</span> {$gv['description']}</li>";
+    $html .= "<li><span>" . t('gv.best_label') . "</span> {$labels}</li>";
+    $html .= "<li><span>" . t('gv.description') . "</span> {$description}</li>";
 
     $items = [
         'matching_pages' => t('gv.matching_pages'),
@@ -142,6 +146,10 @@ function getData(cats) {
     });
 }
 
+function escapeHtml(text) {
+    return $('<div>').text(text).html().replace(/"/g, '&quot;');
+}
+
 function fillCatList(data) {
     var existingCats = this;
     var $container = $('#categoriesContainer .checkbox');
@@ -151,8 +159,8 @@ function fillCatList(data) {
         $.each(items, function(item, truefalse) {
             var itemcat = 'Category:' + item.replace('Category:', '');
             if ($.inArray(itemcat, existingCats) === -1) {
-                var slug = item.toLowerCase().replace('category:', '').replace(/\s/g, '_');
-                var name = item.replace('Category:', '');
+                var slug = escapeHtml(item.toLowerCase().replace('category:', '').replace(/\s/g, '_'));
+                var name = escapeHtml(item.replace('Category:', ''));
                 $html += '<input type="checkbox" name="categories[]" value="Category:' + name +
                     '" id="categories_' + slug + '">\n' +
                     '<label for="categories_' + slug + '">' + name + getTrueFalse(truefalse) +
@@ -178,8 +186,8 @@ function getTrueFalse(truefalse) {
 
     <div class="single">
         <div class="single-box image">
-            <a href="../uploads/images/<?= $row['filename']; ?>" data-lightbox>
-                <img src="../uploads/thumbs/<?= $row['filename']; ?>" />
+            <a href="../uploads/images/<?= htmlspecialchars($row['filename']); ?>" data-lightbox>
+                <img src="../uploads/thumbs/<?= htmlspecialchars($row['filename']); ?>" />
             </a>
         </div>
 
@@ -208,12 +216,12 @@ function getTrueFalse(truefalse) {
                     </div>
                     <?php endif ?>
                 </li>
-                <li><span><?= t('single.ip'); ?></span> <?= $row['ip']; ?></li>
+                <li><span><?= t('single.ip'); ?></span> <?= htmlspecialchars($row['ip']); ?></li>
                 <li><span><?= t('single.uploaded_on'); ?></span>
                     <?= formatDate($row['timestamp'], 'date.format_time'); ?>
                 </li>
                 <li><span><?= t('single.key'); ?></span><br>
-                    <input type="text" id="key" disabled value="<?= $row['key']; ?>" />
+                    <input type="text" id="key" disabled value="<?= htmlspecialchars($row['key']); ?>" />
                 </li>
                 <li><span><?= t('common.label_description'); ?></span><br><?=
                     htmlspecialchars($row['description']); ?></li>
@@ -235,7 +243,7 @@ function getTrueFalse(truefalse) {
                 </li>
                 <?php endforeach ?>
                 <li>
-                    <a href="<?= getCommonsUploadLink($row); ?>" target="_blank"><?= t('single.upload_commons'); ?></a>
+                    <a href="<?= htmlspecialchars(getCommonsUploadLink($row)); ?>" target="_blank"><?= t('single.upload_commons'); ?></a>
                 </li>
             </ul>
         </div>
@@ -251,7 +259,7 @@ function getTrueFalse(truefalse) {
                             <?php foreach ($accounts as $account) : ?>
                             <option value="<?= $account['id']; ?>"
                                 <?= $account['id'] == $owner['owner'] ? 'selected' : ''; ?>>
-                                <?= $account['otrsname']; ?>
+                                <?= htmlspecialchars($account['otrsname']); ?>
                             </option>
                             <?php endforeach ?>
                         </select>
@@ -273,7 +281,7 @@ function getTrueFalse(truefalse) {
 
                 <div class="input-container">
                     <label for="ticket"><i class="fa-solid fa-ticket fa-lg"></i><?= t('single.ticket'); ?></label>
-                    <input type="text" name="ticket" id="ticket" value="<?= $owner['ticket']; ?>">
+                    <input type="text" name="ticket" id="ticket" value="<?= htmlspecialchars($owner['ticket'] ?? ''); ?>">
                 </div>
 
                 <div class="input-container">
@@ -289,8 +297,8 @@ function getTrueFalse(truefalse) {
 
                 <div class="bottom right">
                     <?php
-                    $catJson      = str_replace('"', "'", json_encode([$row['title'], $row['source']]));
-                    $existingCats = str_replace('"', "'", $owner['categories'] ?? '');
+                    $catJson      = htmlspecialchars(json_encode([$row['title'], $row['source']]));
+                    $existingCats = htmlspecialchars($owner['categories'] ?: '[]');
                     ?>
                     <button type="button" onclick="getCategories(<?= $catJson; ?>, <?= $existingCats; ?>)">
                         <i class="fa-solid fa-list-alt" aria-hidden="true"></i> <?= t('single.get_categories'); ?>

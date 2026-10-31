@@ -25,7 +25,7 @@ require_once '../common/header.php';
             $replace = [$row['name'], $row['title'], $row['otrsname']];
             $newTxt = str_replace($templates, $replace, $row['message']);
             ?>
-            <textarea name="message" onclick="this.focus();this.select()"><?php echo $newTxt; ?></textarea>
+            <textarea name="message" onclick="this.focus();this.select()"><?= htmlspecialchars($newTxt); ?></textarea>
             <?php
         }
 
