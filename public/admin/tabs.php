@@ -16,6 +16,13 @@
                 }
                 ?>
                 ><a href="messages.php"><i class="fa-solid fa-comments"></i>Berichten</a></li>
+            <li
+                <?php
+                if ($page2 == 'schema') {
+                    echo ' class="active"';
+                }
+                ?>
+                ><a href="schema.php"><i class="fa-solid fa-database"></i>Database</a></li>
         </ul>
     </div>
 <?php endif; ?>

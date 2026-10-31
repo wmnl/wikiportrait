@@ -357,7 +357,8 @@ textarea,
     border: none;
 }
 
-#categoriesContainer .alert {
+#categoriesContainer .alert,
+.schema .alert {
     color: #990000;
     font-size: 85%;
 }
@@ -495,6 +496,35 @@ input[type=checkbox]:checked + label:before {
 
 input[type="checkbox"] + label:hover {
     cursor: pointer;
+}
+
+/* Checkboxes in tables */
+.select-container {
+    width: 2.5em;
+}
+
+td.select {
+    text-align: center;
+    vertical-align: middle;
+}
+
+td.select label,
+.select-container label {
+    display: inline;
+    width: auto;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+}
+
+td.select input[type=checkbox] + label:before,
+.select-container input[type=checkbox] + label:before {
+    letter-spacing: 0;
+}
+
+input[type=checkbox]:disabled + label {
+    opacity: 0.3;
+    cursor: default;
 }
 
 /* File input */
@@ -773,4 +803,16 @@ button::-moz-focus-inner {
     white-space: nowrap;
     font-size: 0.9em;
     margin-top: 3px;
+}
+
+/* Database schema */
+.schema-table {
+    width: 10em;
+}
+
+.schema-sql {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 0.85em;
 }
