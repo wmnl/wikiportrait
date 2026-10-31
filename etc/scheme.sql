@@ -44,7 +44,8 @@ CREATE TABLE `contributors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
   `verified` tinyint(4) DEFAULT 0,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `mailverified` (`email`,`verified`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7850 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -73,7 +74,8 @@ CREATE TABLE `images` (
   `ticket` varchar(16) DEFAULT NULL,
   `categories` text DEFAULT NULL,
   `unverified_since` int(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `mailarchive` (`email`,`archived`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20569 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
