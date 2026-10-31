@@ -6,6 +6,8 @@ const DB_PASS = 'db_pass';
 const DB_DB = 'wikiportret';
 const BASE_URL = 'http://domain.tld';
 const DEBUG = false;
+// Querylog voor debuggen (bevat persoonsgegevens), bij voorkeur buiten de webroot
+// const DB_LOGFILE = '/var/log/wikiportret/db_logfile.txt';
 define('ABSPATH', str_replace("/common", "", dirname(__FILE__)));
 const VRTS_MAIL = 'wikiportret@wikimedia.org'; // VRTS-ticketsysteem
 const SENDER_MAIL = 'noreply@domain.tld'; // afzender van de mails, bij Gmail gelijk aan SMTP_USER of een 'Verzenden als'-adres

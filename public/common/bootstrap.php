@@ -15,13 +15,13 @@ if (!function_exists('convertToBytes')) {
         };
     }
 }
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     $contentLength = (int) ($_SERVER['CONTENT_LENGTH'] ?? 0);
     $postMaxBytes  = convertToBytes(ini_get('post_max_size'));
 
     if ($contentLength > $postMaxBytes) {
         ob_clean();
-        $protocol = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
+        $protocol = ($_SERVER["HTTPS"] ?? '') === "on" ? "https://" : "http://";
         $host     = $_SERVER['HTTP_HOST'];
         $path     = strtok($_SERVER['REQUEST_URI'], '?');
         header("Location: {$protocol}{$host}{$path}?upload_error=te_groot");
@@ -30,14 +30,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$protocol = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
+$protocol = ($_SERVER["HTTPS"] ?? '') === "on" ? "https://" : "http://";
 
 // Strip port (also handles bracketed IPv6 like [::1]:8080)
-$hostname = preg_replace('/:\d+$/', '', $_SERVER['HTTP_HOST']);
+$hostname = preg_replace('/:\d+$/', '', $_SERVER['HTTP_HOST'] ?? '');
 $hostname = trim($hostname, '[]');
 $isLocal  = $hostname === 'localhost' || filter_var($hostname, FILTER_VALIDATE_IP) !== false;
 
-if (substr($hostname, 0, 4) !== 'www.' && !$isLocal) {
+// Cron scripts (CLI) have no host and must never be redirected
+if (PHP_SAPI !== 'cli' && substr($hostname, 0, 4) !== 'www.' && !$isLocal) {
     header("Location: {$protocol}www.{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}");
     exit;
 }
@@ -67,7 +68,10 @@ require_once 'mailfunctions.php';
 require_once 'uploadfunctions.php';
 require_once 'dashboardfunctions.php';
 require_once 'session.php';
-DB::$logfile = ABSPATH . '/db_logfile.txt';
+// Querylog (optioneel): bevat persoonsgegevens, dus alleen aanzetten om te debuggen en buiten de webroot zetten
+if (defined('DB_LOGFILE')) {
+    DB::$logfile = DB_LOGFILE;
+}
 $session = new Session();
 
 // Every POST from a browser must carry the session's CSRF token; the bot API authenticates with headers instead

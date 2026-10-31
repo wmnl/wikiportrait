@@ -1,6 +1,13 @@
 <?php
 
 require_once __DIR__ . '/../common/bootstrap.php';
+
+// Voorkom directe browseraanroep
+if (PHP_SAPI !== 'cli') {
+    http_response_code(403);
+    exit(t('cli.only'));
+}
+
 if (in_array('cron', $argv)) {
     $limit = date('Y-m-d', strtotime('-3 months')) . ' 00:00:00';
     // Images moved back to "Niet geverifieerd" get a new 3-month period

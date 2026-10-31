@@ -3,3 +3,16 @@
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>
+
+# Niet-publieke bestanden in de webroot afschermen: logs, Composer-bestanden,
+# PHP-instellingen, documentatie en verborgen bestanden. robots.txt blijft bereikbaar.
+<FilesMatch "^\.|^(?!robots\.txt$).+\.(txt|log|json|lock|ini|md|key)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+# Composer-bibliotheken zijn nooit bedoeld om via de browser aangeroepen te worden
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule (^|/)vendor(/|$) - [F]
+</IfModule>
