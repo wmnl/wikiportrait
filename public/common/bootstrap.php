@@ -32,7 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $protocol = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
 
-if (substr($_SERVER['HTTP_HOST'], 0, 4) !== 'www.' && $_SERVER['HTTP_HOST'] !== 'localhost') {
+// Strip port (also handles bracketed IPv6 like [::1]:8080)
+$hostname = preg_replace('/:\d+$/', '', $_SERVER['HTTP_HOST']);
+$hostname = trim($hostname, '[]');
+$isLocal  = $hostname === 'localhost' || filter_var($hostname, FILTER_VALIDATE_IP) !== false;
+
+if (substr($hostname, 0, 4) !== 'www.' && !$isLocal) {
     header("Location: {$protocol}www.{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}");
     exit;
 }
