@@ -37,10 +37,6 @@ if (!isset($_GET['question'])) {
             result("duplicate");
             break;
 
-        case "lowres":
-            result("lowres");
-            break;
-
         default: // including "first":
             showquestion("Is het hoofdonderwerp van de foto mogelijk auteursrechtelijk beschermd? (Bijvoorbeeld: hoes "
                 . "van cd of dvd, logo, reclamebord)", "noupload", "ownwork", "Als u een foto maakt, heeft u zelf de "
