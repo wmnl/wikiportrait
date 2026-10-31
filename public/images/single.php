@@ -300,7 +300,7 @@ function getTrueFalse(truefalse) {
                     </button>
                     <span class="divider">&nbsp;</span>
                     <button class="green" type="submit" name="postback">
-                        <i class="fa-solid fa-floppy-o fa-lg"></i><?= t('common.save'); ?>
+                        <i class="fa-solid fa-floppy-disk fa-lg"></i><?= t('common.save'); ?>
                     </button>
                 </div>
             </form>

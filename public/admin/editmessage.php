@@ -65,7 +65,7 @@ if (isset($_POST['postback'])) {
         </div>
 
         <div class="bottom right">
-            <button class="green" name="postback"><i class="fa-solid fa-floppy-o fa-lg"></i><?= t('common.save'); ?></button>
+            <button class="green" name="postback"><i class="fa-solid fa-floppy-disk fa-lg"></i><?= t('common.save'); ?></button>
         </div>
     </form>
 </div>

@@ -9,7 +9,7 @@ $page = pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_FILENAME);
                 echo " class='active'";
         }
         ?>
-            ><a href="overview.php"><i class="fa-solid fa-picture-o"></i><span><?= t('images.submissions'); ?></span></a></li>
+            ><a href="overview.php"><i class="fa-solid fa-image"></i><span><?= t('images.submissions'); ?></span></a></li>
             <li
             <?php
             if (isset($_GET['archived']) && $_GET['archived'] == 1) {
