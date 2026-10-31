@@ -314,6 +314,7 @@ return [
     // API
     'api.method_not_allowed' => 'Methode niet toegestaan',
     'api.invalid_credentials' => 'U dient correcte inloggegevens te verstrekken',
+    'api.image_not_found' => 'Afbeelding niet gevonden.',
     'api.ticket_placeholder' => 'VUL_HIER_HET_TICKETNUMMER_IN',
 
     // Command line scripts

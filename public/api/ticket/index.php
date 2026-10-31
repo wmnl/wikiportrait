@@ -22,6 +22,11 @@ if (isset($_POST['key'])) {
         "SELECT * from images WHERE `key`=%s",
         $_POST['key']
     );
+    if (!$row) {
+        http_response_code(404);
+        echo json_encode(['error' => t('api.image_not_found')]);
+        return;
+    }
     $returnData = [];
     $returnData['description'] = $row['description'] ?: $row['title'];
     $returnData['ticket'] = $row['ticket'] ?: t('api.ticket_placeholder');
@@ -47,8 +52,5 @@ function validateToken(array $headers)
     }
     $row = DB::queryFirstRow("SELECT token, id, expires, active FROM botkeys LEFT JOIN users ON botkeys.user=users.id" .
         " WHERE token=%s AND active=1 AND expires>=NOW();", $token[1]);
-    if (count($row) == 0) {
-        return false;
-    }
-    return true;
+    return $row !== null;
 }
