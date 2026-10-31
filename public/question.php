@@ -40,6 +40,11 @@ function result($result)
         echo "<h3>" . t('wizard.upload_failed') . "</h3>";
         echo "<div class=\"box red\">" . t('error.duplicate') . "<br /></div>";
         echo "<div class=\"bottom right\"><a class=\"button\" href=\"index.php\"><i class=\"fa-solid fa-home fa-lg\"></i>" . t('common.back_home') . "</a></div>";
+    } elseif ($result == "lowres") {
+        $email = htmlspecialchars($session->getLastUploadEmail());
+        echo "<h3>" . t('wizard.low_resolution') . "</h3>";
+        echo "<div class=\"box red\">" . t('wizard.low_resolution_text', ['email' => $email]) . "</div>";
+        echo "<div class=\"bottom right\"><a class=\"button\" href=\"upload.php\"><i class=\"fa-solid fa-cloud-upload fa-lg\"></i>" . t('wizard.upload_other') . "</a></div>";
     } elseif ($result == "failupload") {
         ?>
         <h3><?= t('wizard.upload_failed'); ?></h3>

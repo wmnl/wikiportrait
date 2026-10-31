@@ -29,12 +29,28 @@ function comparenames() {
 $(document).ready(function() {
     $(document).on('change', 'input[name="source_self"]', function() {
         if ("No" === $(this).val()) {
+            $('#source').attr('required', 'required');
             $('#source_container').removeClass('hidden');
         } else {
             $('#source').removeAttr('required');
             $('#source_container').addClass('hidden');
         }
+        $('#source_other_info').prop('hidden', "No" !== $(this).val());
+        // Without a known photographer nobody can give permission, so uploading is pointless
+        var unknown = "Unknown" === $(this).val();
+        $('#source_unknown_warning').prop('hidden', !unknown);
+        $('#upload_details').prop('hidden', unknown);
     });
+
+    // Only allow uploading with a known photographer, and only once all required fields are filled
+    function updateUploadButton() {
+        var form = document.querySelector('form');
+        var source = $('input[name="source_self"]:checked').val();
+        var ok = ('Yes' === source || 'No' === source) && form.checkValidity();
+        $('#upload_button').prop('disabled', !ok);
+    }
+    $(document).on('input change', 'form :input', updateUploadButton);
+    updateUploadButton();
 })
 </script>
 <div id="content">
@@ -82,12 +98,23 @@ $(document).ready(function() {
             </div>
         </div>
 
-        <div class="input-container hidden" id="source_container">
+        <?php $sourceUnknown = ($_POST['source_self'] ?? '') === 'Unknown'; ?>
+        <div class="box red" id="source_unknown_warning"<?= $sourceUnknown ? '' : ' hidden'; ?>>
+            <?= t('upload.source_unknown_warning'); ?>
+        </div>
+
+        <div class="box blue" id="source_other_info"<?= ($_POST['source_self'] ?? '') === 'No' ? '' : ' hidden'; ?>>
+            <?= t('upload.source_other_info'); ?>
+        </div>
+
+        <div id="upload_details"<?= $sourceUnknown ? ' hidden' : ''; ?>>
+
+        <div class="input-container<?= ($_POST['source_self'] ?? '') === 'No' ? '' : ' hidden'; ?>" id="source_container">
             <label for="source"><i aria-hidden="true" class="fa-solid fa-camera-retro fa-lg"></i><?= t('upload.photographer'); ?></label>
             <input type="text" name="source" id="source" 
             <?php
             echo (array_key_exists('source_self', $_POST) &&
-                                                                    $_POST['source_self'] != 'Yes') ? 'required="required"' : '';
+                                                                    $_POST['source_self'] == 'No') ? 'required="required"' : '';
             ?>
             value="<?= (!empty($_POST['source'])) ? $_POST['source'] : ''; ?>" onblur="comparenames()" />
         </div>
@@ -126,9 +153,9 @@ $(document).ready(function() {
         <div class="input-container">
             <label for="terms"><i aria-hidden="true" class="fa-solid fa-gavel fa-lg"></i><?= t('upload.consent'); ?></label>
             <div class="checkbox">
-                <input type="checkbox" name="terms" id="terms" /><label for="terms"><?=
+                <input type="checkbox" name="terms" id="terms" required="required" /><label for="terms"><?=
                     t('upload.consent_terms', ['privacy_url' => $basispad . '/privacyverklaring.php']); ?></label><br />
-                <input type="checkbox" name="euvs" id="euvs" /><label for="euvs"><?=
+                <input type="checkbox" name="euvs" id="euvs" required="required" /><label for="euvs"><?=
                     t('upload.consent_storage'); ?></label>
             </div>
         </div>
@@ -136,8 +163,11 @@ $(document).ready(function() {
         ?>
         <div class="bottom right">
             <input type='hidden' name='postback'></input>
-            <button class="green" type='button' onclick='disableButton(this)'><i aria-hidden="true"
+            <button class="green" type='button' id="upload_button" disabled="disabled"
+                onclick='disableButton(this)'><i aria-hidden="true"
                     class="fa-solid fa-cloud-upload fa-lg"></i><?= t('upload.submit'); ?></button>
+        </div>
+
         </div>
 
     </form>

@@ -20,7 +20,6 @@ return [
     'common.save' => 'Opslaan',
     'common.edit' => 'Bewerken',
     'common.delete' => 'Verwijderen',
-    'common.close' => 'Sluiten',
     'common.actions' => 'Acties',
     'common.title' => 'Titel',
     'common.message' => 'Bericht',
@@ -56,6 +55,7 @@ return [
     'validation.not_an_image' => 'Het bestand dat geüpload is, is geen afbeelding of dit bestandsformaat wordt niet ondersteund.',
     'validation.invalid_image' => 'Het bestand kon niet worden verwerkt. Controleer of het een geldig afbeeldingsbestand is.',
     'validation.file_too_large' => 'Het bestand is te groot. Maximum uploadgrootte is {max}.',
+    'validation.source_unknown' => 'Een foto waarvan niet bekend is wie hem gemaakt heeft, kan niet worden geüpload.',
 
     // Field names, used in validation.required
     'field.title' => 'titel',
@@ -73,6 +73,7 @@ return [
     // Mail (the mail bodies are in the mail/ folder)
     'mail.subject.uploaded' => '[Wikiportret] {title} is geüpload op Wikiportret',
     'mail.subject.verify' => '[Wikiportret] Uw email verifiëren',
+    'mail.subject.low_resolution' => '[Wikiportret] {title} is niet geschikt: resolutie te laag',
     'mail.vrts_queue_name' => 'Wikiportret VRTS queue',
 
     // Commons upload
@@ -83,7 +84,6 @@ return [
     'index.intro1' => 'Staat er op Wikipedia een artikel zonder portretfoto? En heeft u een foto die bij een artikel zou passen? Stel dan uw foto hier ter beschikking en de vrijwilligers van Wikipedia doen de rest.',
     'index.intro2' => "Als u veel foto's heeft, of bijvoorbeeld foto's met andere onderwerpen dan beroemdheden overweegt u dan uw foto's onder te brengen bij Wikimedia Commons, de centrale mediadatabank van Wikipedia.",
     'index.submit_button' => 'Een portretfoto insturen',
-    'oss.text' => '<strong>Wikiportret is vrije software</strong> &mdash; net als Wikipedia is deze website gebouwd op <a href="https://www.gnu.org/licenses/gpl-2.0.html" target="_blank" rel="noopener noreferrer">open-source software (GPL-2.0)</a> die door vrijwilligers wordt ontwikkeld. Wilt u meehelpen de software te verbeteren? <a href="https://github.com/wmnl/wikiportrait" target="_blank" rel="noopener noreferrer">Bekijk de broncode op GitHub</a> of <a href="https://phabricator.wikimedia.org/tag/wikiportrait/" target="_blank" rel="noopener noreferrer">meld een idee of probleem</a>.',
 
     // Uploads closed
     'closed.text' => "Helaas is het momenteel niet mogelijk om foto's te uploaden. Het is niet bekend wanneer Wikiportret weer beschikbaar is. U kunt in de tussentijd uw foto rechtstreeks uploaden naar <a href=\"https://commons.wikimedia.org/wiki/Special:UploadWizard?uselang=nl\" target=\"_blank\" rel=\"noopener nofollow\">Wikimedia Commons</a>",
@@ -107,6 +107,9 @@ return [
     'wizard.verification_sent' => 'Wij hebben een email naar <strong>{email}</strong> gestuurd voor verificatie.<br />Na succesvolle verificatie, is uw upload voltooid.<br />',
     'wizard.upload_failed' => 'Uploaden is niet gelukt',
     'wizard.upload_failed_text' => 'Helaas, het is niet gelukt deze afbeelding te uploaden. Wellicht zijn er technische problemen. Probeer het later nog eens.',
+    'wizard.low_resolution' => 'Afbeelding niet geschikt',
+    'wizard.low_resolution_text' => 'De resolutie van deze afbeelding is te laag voor Wikipedia. De afbeelding is daarom niet in behandeling genomen.<br />Wij hebben een e-mail naar <strong>{email}</strong> gestuurd met meer informatie.',
+    'wizard.upload_other' => 'Andere afbeelding uploaden',
     'wizard.upload_license' => 'Upload de afbeelding onder de <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.nl" target="_blank">CC-BY-SA 4.0</a> licentie',
     'wizard.upload_button' => 'Uploaden',
     'upload.success_text' => 'De afbeelding is met succes geüpload.<br />Een vrijwilliger zal de afbeelding zo snel mogelijk beoordelen en contact met u opnemen.<br />Als u wilt, kunt u <a href="{track_url}">hier</a> uw inzending volgen.',
@@ -120,6 +123,8 @@ return [
     'upload.own_no' => 'Nee, ik heb deze foto niet zelf gemaakt',
     'upload.own_unknown' => 'Ik weet niet wie de foto gemaakt heeft',
     'upload.photographer' => 'Wat is de naam van de fotograaf?',
+    'upload.source_unknown_warning' => "<strong>Deze foto kan helaas niet worden geüpload.</strong><br>Alleen de maker van een foto (de fotograaf) kan toestemming geven om de foto onder een vrije licentie te publiceren. Als niet bekend is wie de foto gemaakt heeft, kan niemand die toestemming geven en kunnen wij de foto niet op Wikipedia plaatsen. Het heeft daarom geen zin om de rest van het formulier in te vullen. Weet u wie de fotograaf is? Kies dan voor 'Nee, ik heb deze foto niet zelf gemaakt' en vul de naam van de fotograaf in.",
+    'upload.source_other_info' => '<strong>De fotograaf moet toestemming geven.</strong><br>Vul hieronder de naam van de fotograaf in. Alleen de fotograaf kan toestemming geven om de foto onder een vrije licentie te publiceren. Na het uploaden ontvangt u een e-mail met een tekst die de fotograaf kan gebruiken. De fotograaf moet die toestemming vervolgens zelf, vanaf een eigen e-mailadres, naar ons mailen. Zonder deze toestemming kunnen wij de foto niet op Wikipedia plaatsen.',
     'upload.your_name' => 'Uw naam',
     'upload.your_email' => 'Uw e-mailadres',
     'upload.date' => 'Wanneer is de foto genomen?',
@@ -171,6 +176,7 @@ return [
     // Admin: tabs
     'admin.tab_users' => 'Gebruikers',
     'admin.tab_messages' => 'Berichten',
+    'admin.tab_database' => 'Database',
 
     // Admin: users
     'user.manage_title' => 'Gebruikersbeheer',
@@ -203,6 +209,28 @@ return [
     'admin_verify.verified' => 'E-mailadres is geverifieerd en bevestigingsmail is verstuurd.',
     'admin_verify.send_failed' => 'Verificatiemail kon niet worden verstuurd.',
     'admin_verify.resent' => 'Verificatiemail is opnieuw verstuurd.',
+    'admin_verify.already_verified' => 'Mailadres is al geverifieerd of onbekend.',
+    'admin_verify.unverified' => 'Afbeelding is teruggezet naar Niet geverifieerd.',
+
+    // Admin: database schema
+    'schema.file_not_found' => 'etc/scheme.sql is niet gevonden. Zet de map etc naast de webroot, of stel SCHEMA_FILE in config.php in.',
+    'schema.compared_with' => 'Vergeleken met {file}.',
+    'schema.in_sync' => 'De database komt overeen met scheme.sql.',
+    'schema.col_table' => 'Tabel',
+    'schema.col_difference' => 'Verschil',
+    'schema.apply' => 'Doorvoeren',
+    'schema.apply_selected' => 'Geselecteerde wijzigingen doorvoeren',
+    'schema.removes' => 'Verwijdert dit uit de database',
+    'schema.now' => 'Nu:',
+    'schema.applied' => 'Uitgevoerd',
+    'schema.table_missing' => 'Tabel ontbreekt',
+    'schema.table_extra' => 'Tabel staat niet in scheme.sql (wordt niet verwijderd)',
+    'schema.column_missing' => 'Kolom `{column}` ontbreekt',
+    'schema.column_differs' => 'Kolom `{column}` wijkt af',
+    'schema.column_extra' => 'Kolom `{column}` staat niet in scheme.sql',
+    'schema.key_missing' => '{key} ontbreekt',
+    'schema.key_differs' => '{key} wijkt af',
+    'schema.key_extra' => '{key} staat niet in scheme.sql',
 
     // Images: overview, search and tabs
     'images.submissions' => 'Inzendingen',
@@ -218,7 +246,21 @@ return [
     'search.button' => 'Zoeken',
     'search.no_term' => 'Er is geen zoekterm ingevoerd',
     'search.no_results' => 'Er zijn geen resultaten gevonden.',
-    'search.details' => 'Details',
+    'search.placeholder' => 'Key, e-mailadres, uploader of titel',
+    'search.header_placeholder' => 'Zoek op key, e-mail, uploader of titel',
+    'search.col_email' => 'E-mail',
+    'search.col_status' => 'Status',
+    'search.status_submission' => 'Inzending',
+    'search.status_unknown' => 'Onbekend',
+
+    // Images: bulk actions
+    'bulk.select_all' => 'Alles selecteren',
+    'bulk.archive' => 'Archiveren',
+    'bulk.archived' => '{count} afbeeldingen gearchiveerd.',
+    'bulk.address_verified' => 'Mailadres is geverifieerd',
+    'bulk.none_selected' => 'Geen afbeeldingen geselecteerd',
+    'bulk.processed' => '{done} van {total} afbeeldingen verwerkt.',
+    'bulk.failed' => 'Mislukt: {ids}.',
 
     // Images: canned message
     'canned.title' => 'Kant-en-klaar berichtje versturen',
@@ -234,6 +276,7 @@ return [
     'single.not_verified' => 'Niet geverifieerd',
     'single.verify_address' => 'Verifieer adres',
     'single.resend_verification' => 'Stuur verificatiemail opnieuw',
+    'single.unverify' => 'Terugzetten naar Niet geverifieerd',
     'single.resend_short' => 'Stuur mail opnieuw',
     'single.busy' => 'Bezig...',
     'single.verified' => 'Geverifieerd',
@@ -246,6 +289,7 @@ return [
     'single.options' => 'Opties',
     'single.owner' => 'Eigenaar',
     'single.done' => 'Afgehandeld',
+    'single.verify_first' => 'Nee, eerst mailadres verifiëren',
     'single.ticket' => 'VRTS-ticket:',
     'single.categories' => 'Categorieën:',
     'single.get_categories' => 'Krijg categorieën',
@@ -282,4 +326,8 @@ return [
     'js.show' => 'tonen',
     'js.hide' => 'verbergen',
     'js.close' => 'Sluiten',
+    'js.error_generic' => 'Er is iets misgegaan, probeer het opnieuw.',
+    'js.bulk_selected' => '{count} geselecteerd',
+    'js.bulk_confirm' => '{action} voor {count} afbeelding(en)?',
+    'js.schema_confirm' => 'Geselecteerde wijzigingen doorvoeren in de database?',
 ];

@@ -5,12 +5,12 @@ use Handlebars\Handlebars;
 use PHPMailer\PHPMailer\PHPMailer;
 
 require_once '../common/bootstrap.php';
-$session->checkAdmin();
+$session->checkLogin();
 
-$mail             = new PHPMailer();
+$mail             = createMailer();
 $templateRenderer = new Handlebars();
 
-function getContribution(string $id, string $hash): array
+function getContribution(string $id, string $hash, string $archived = "2"): array
 {
     if (filter_var($id, FILTER_VALIDATE_INT) === false) {
         throw new InvalidArgumentException(t('admin_verify.invalid_id'));
@@ -25,7 +25,7 @@ function getContribution(string $id, string $hash): array
         $hash
     );
 
-    if (empty($contribution['email']) || $contribution['archived'] !== "2") {
+    if (empty($contribution['email']) || $contribution['archived'] !== $archived) {
         throw new RuntimeException(t('admin_verify.cannot_approve'));
     }
 
@@ -43,9 +43,6 @@ function buildMail(
 ): void {
     $mail->clearAddresses();
     $mail->clearReplyTos();
-    $mail->From    = VRTS_MAIL;
-    $mail->Sender  = VRTS_MAIL;
-    $mail->CharSet = 'UTF-8';
     $mail->addAddress($to, $toName);
     $mail->addReplyTo($replyTo, $replyToName);
     $mail->Subject = $subject;
@@ -54,7 +51,7 @@ function buildMail(
     $mail->AltBody = $body;
 }
 
-function verify(string $id, string $hash, PHPMailer $mail, Handlebars $templateRenderer): void
+function verify(string $id, string $hash, PHPMailer $mail, Handlebars $templateRenderer): string
 {
     $contribution = getContribution($id, $hash);
 
@@ -110,13 +107,10 @@ function verify(string $id, string $hash, PHPMailer $mail, Handlebars $templateR
         }
     }
 
-    echo json_encode([
-        'success' => true,
-        'message' => t('admin_verify.verified'),
-    ]);
+    return t('admin_verify.verified');
 }
 
-function resend(string $id, string $hash, PHPMailer $mail, Handlebars $templateRenderer): void
+function resend(string $id, string $hash, PHPMailer $mail, Handlebars $templateRenderer): string
 {
     $contribution = getContribution($id, $hash);
 
@@ -153,22 +147,94 @@ function resend(string $id, string $hash, PHPMailer $mail, Handlebars $templateR
         throw new RuntimeException(t('admin_verify.send_failed'));
     }
 
-    echo json_encode(['success' => true, 'message' => t('admin_verify.resent')]);
+    return t('admin_verify.resent');
+}
+
+function unverify(string $id, string $hash): string
+{
+    $contribution = getContribution($id, $hash, "1");
+
+    $verified = DB::queryFirstField(
+        "SELECT MIN(verified) FROM contributors WHERE email = %s",
+        $contribution['email']
+    );
+
+    if ($verified === null || (int) $verified !== 0) {
+        throw new RuntimeException(t('admin_verify.already_verified'));
+    }
+
+    DB::update('images', ['archived' => 2, 'unverified_since' => time()], 'id = %i AND archived = 1', $id);
+
+    return t('admin_verify.unverified');
+}
+
+function runAction(string $action, string $id, string $hash, PHPMailer $mail, Handlebars $templateRenderer): string
+{
+    return match ($action) {
+        'verify'   => verify($id, $hash, $mail, $templateRenderer),
+        'resend'   => resend($id, $hash, $mail, $templateRenderer),
+        'unverify' => unverify($id, $hash),
+        default    => throw new InvalidArgumentException(t('error.invalid_request')),
+    };
+}
+
+function bulk(string $action, array $ids, PHPMailer $mail, Handlebars $templateRenderer): array
+{
+    $images = DB::query("SELECT id, `key`, email FROM images WHERE id IN %li", array_map('intval', $ids));
+    if (empty($images)) {
+        throw new InvalidArgumentException(t('bulk.none_selected'));
+    }
+
+    $done     = 0;
+    $failed   = [];
+    $verified = [];
+
+    foreach ($images as $image) {
+        // Verifying an address releases all images of that address at once
+        if ($action === 'verify' && in_array($image['email'], $verified, true)) {
+            $done++;
+            continue;
+        }
+
+        try {
+            runAction($action, (string) $image['id'], $image['key'], $mail, $templateRenderer);
+            $verified[] = $image['email'];
+            $done++;
+        } catch (RuntimeException | InvalidArgumentException $e) {
+            $failed[] = $image['id'];
+        }
+    }
+
+    $message = t('bulk.processed', ['done' => $done, 'total' => count($images)]);
+    if ($failed) {
+        $message .= ' ' . t('bulk.failed', ['ids' => implode(', ', $failed)]);
+    }
+
+    return ['success' => empty($failed), 'message' => $message, 'failed' => $failed];
 }
 
 // --- Router ---
 try {
     header('Content-Type: application/json');
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $ids = $_POST['ids'] ?? [];
+        if (!is_array($ids) || empty($ids)) {
+            throw new InvalidArgumentException(t('bulk.none_selected'));
+        }
+        if (!in_array($_POST['action'] ?? '', ['verify', 'resend', 'unverify'], true)) {
+            throw new InvalidArgumentException(t('error.invalid_request'));
+        }
+
+        echo json_encode(bulk($_POST['action'], $ids, $mail, $templateRenderer));
+        exit;
+    }
+
     $action = $_GET['action'] ?? '';
     $id     = $_GET['id']     ?? '';
     $hash   = $_GET['hash']   ?? '';
 
-    match ($action) {
-        'verify' => verify($id, $hash, $mail, $templateRenderer),
-        'resend' => resend($id, $hash, $mail, $templateRenderer),
-        default  => throw new InvalidArgumentException(t('error.invalid_request')),
-    };
+    echo json_encode(['success' => true, 'message' => runAction($action, $id, $hash, $mail, $templateRenderer)]);
 } catch (InvalidArgumentException $e) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => t('error.invalid_request'), 'error' => $e->getMessage()]);

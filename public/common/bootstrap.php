@@ -49,12 +49,16 @@ if (!defined('IMAGE_FOLDER')) {
     define('GV_REQUESTS_LIMIT', 900);
     define('CLOSED', false); //Allow uploads (true = geen uploads)
 }
+if (!defined('MIN_IMAGE_SIZE')) {
+    define('MIN_IMAGE_SIZE', 600); // Minimale lengte van de kortste zijde in pixels
+}
 header("Access-Control-Allow-Origin: *");
 DB::$user = DB_USER;
 DB::$password = DB_PASS;
 DB::$dbName = DB_DB;
 DB::$host = DB_HOST;
 require_once 'formfunctions.php';
+require_once 'mailfunctions.php';
 require_once 'uploadfunctions.php';
 require_once 'dashboardfunctions.php';
 require_once 'session.php';

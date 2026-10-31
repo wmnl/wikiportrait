@@ -31,7 +31,7 @@ function processVerification(string $key, string $email): string
         return '<div class="box blue">' . t('verify.already_verified') . '</div>';
     }
 
-    $mail             = new \PHPMailer\PHPMailer\PHPMailer();
+    $mail             = createMailer();
     $templateRenderer = new Handlebars();
     $bodyTpl          = mailTemplate('new_upload');
 
@@ -52,9 +52,6 @@ function processVerification(string $key, string $email): string
 
         $mail->clearAddresses();
         $mail->clearReplyTos();
-        $mail->From    = VRTS_MAIL;
-        $mail->Sender  = VRTS_MAIL;
-        $mail->CharSet = 'UTF-8';
         $mail->addAddress(VRTS_MAIL, t('mail.vrts_queue_name'));
         $mail->addReplyTo($email, $row['name']);
         $mail->Subject = t('mail.subject.uploaded', ['title' => $row['title']]);

@@ -1,0 +1,11 @@
+Beste {{name}},
+
+Dank u wel voor het uploaden van een foto van {{title}} op Wikiportret.
+
+Helaas is deze foto niet geschikt voor Wikipedia en Wikimedia Commons, omdat de resolutie te laag is. De foto die u heeft ingestuurd is {{width}} × {{height}} pixels, terwijl wij minimaal {{minSize}} pixels aan de kortste zijde nodig hebben. De foto is daarom niet in behandeling genomen.
+
+Heeft u dezelfde foto, of een andere geschikte foto, in een hogere resolutie? Dan kunt u die opnieuw insturen via https://www.wikiportret.nl/upload.php. Gebruik bij voorkeur het originele bestand van de camera of de fotograaf: foto's die via WhatsApp, sociale media of een website zijn verstuurd of opgeslagen, zijn vaak verkleind.
+
+Dit is een automatisch bericht.
+
+Met vriendelijke groet, de vrijwilligers van Wikiportret.

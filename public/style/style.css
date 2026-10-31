@@ -3,13 +3,28 @@
     font-size: 1em;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 300;
-    outline: 0px;
     margin: 0px;
     padding: 0px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Visible focus indicator for keyboard users */
+:focus-visible,
+input[type="checkbox"]:focus-visible + label {
+    outline: 2px solid #006699;
+    outline-offset: 2px;
+}
+
+.menu a:focus-visible,
+button:focus-visible,
+.button:focus-visible,
+input[type="button"]:focus-visible,
+input[type="submit"]:focus-visible {
+    outline-color: #fff;
+    outline-offset: -4px;
 }
 
 html {
@@ -259,6 +274,34 @@ ul {
     border-left: 10px solid #fff;
 }
 
+.page-header .header-search {
+    display: table-cell;
+    vertical-align: middle;
+    width: auto;
+    padding-left: 10px;
+}
+
+.header-search-row {
+    display: flex;
+    align-items: stretch;
+}
+
+.header-search-row input[type="text"] {
+    display: block;
+    flex: 0 0 280px;
+    width: 280px;
+    border-radius: 5px 0 0 5px;
+}
+
+.header-search-row button {
+    flex: 0 0 auto;
+    border-radius: 0 5px 5px 0;
+}
+
+.header-search-row button .fa-solid {
+    margin-right: 0;
+}
+
 .navigation label,
 .navigation .simpleselect {
     width: 50%;
@@ -329,7 +372,8 @@ textarea,
     border: none;
 }
 
-#categoriesContainer .alert {
+#categoriesContainer .alert,
+.schema .alert {
     color: #990000;
     font-size: 85%;
 }
@@ -394,6 +438,13 @@ button:focus {
     transition: background 0.2s linear;
 }
 
+button[disabled],
+button[disabled]:hover,
+button[disabled]:focus {
+    background: #999;
+    cursor: not-allowed;
+}
+
 input[type="radio"]:not(:last-child) {
     margin-bottom: 10px;
 }
@@ -437,8 +488,17 @@ select:not(.ui-datepicker-month):not(.ui-datepicker-year) {
     white-space: pre-wrap;
 }
 
+/* Visually hidden, but still focusable and usable by keyboard */
 input[type="checkbox"] {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0px;
+    border: 0px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
 }
 
 input[type=checkbox] + label:before {
@@ -460,6 +520,35 @@ input[type=checkbox]:checked + label:before {
 
 input[type="checkbox"] + label:hover {
     cursor: pointer;
+}
+
+/* Checkboxes in tables */
+.select-container {
+    width: 2.5em;
+}
+
+td.select {
+    text-align: center;
+    vertical-align: middle;
+}
+
+td.select label,
+.select-container label {
+    display: inline;
+    width: auto;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+}
+
+td.select input[type=checkbox] + label:before,
+.select-container input[type=checkbox] + label:before {
+    letter-spacing: 0;
+}
+
+input[type=checkbox]:disabled + label {
+    opacity: 0.3;
+    cursor: default;
 }
 
 /* File input */
@@ -739,51 +828,49 @@ button::-moz-focus-inner {
     font-size: 0.9em;
     margin-top: 3px;
 }
-/* ===== Open-source bijdragen banner ===== */
-.oss-banner {
+
+/* Bulk actions */
+.bulk-actions {
     display: flex;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
     gap: 10px;
-    position: relative;
-    margin-top: 20px;
-    padding: 10px 40px 10px 14px;
-    background: #eaf3fb;
-    border-left: 4px solid #3484b0;
-    border-radius: 3px;
-    color: #1a4a6b;
-    font-size: 0.9em;
-    line-height: 1.5;
+    margin-bottom: 10px;
 }
 
-.oss-banner__icon {
-    flex-shrink: 0;
-    margin-top: 2px;
-    color: #3484b0;
+.bulk-count {
+    margin-right: auto;
 }
 
-.oss-banner__text a {
-    color: #246a99;
-    text-decoration: underline;
+.bulk-actions button:disabled {
+    opacity: 0.5;
+    cursor: default;
 }
 
-.oss-banner__text a:hover {
-    color: #1a4a6b;
+/* Notifications */
+.melding {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    padding: 11px;
+    border-radius: 5px;
+    color: #fff;
+    background: #339966;
 }
 
-.oss-banner__close {
-    position: absolute;
-    top: 7px;
-    right: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    line-height: 1;
-    color: #1a4a6b;
-    opacity: 0.55;
-    padding: 0;
+.melding.error {
+    background: #990000;
 }
 
-.oss-banner__close:hover {
-    opacity: 1;
+/* Database schema */
+.schema-table {
+    width: 10em;
+}
+
+.schema-sql {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 0.85em;
 }

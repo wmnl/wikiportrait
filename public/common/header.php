@@ -5,8 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
-    <link rel="stylesheet" href="<?= $basispad; ?>/style/style.css" />
-    <link rel="stylesheet" href="<?= $basispad; ?>/style/responsive.css" />
+    <link rel="stylesheet"
+        href="<?= $basispad; ?>/style/style.css?v=<?= filemtime(__DIR__ . '/../style/style.css'); ?>" />
+    <link rel="stylesheet"
+        href="<?= $basispad; ?>/style/responsive.css?v=<?= filemtime(__DIR__ . '/../style/responsive.css'); ?>" />
     <link rel="stylesheet" href="<?= $basispad; ?>/lib/font-awesome/css/all.min.css">
     <script defer src="<?= $basispad; ?>/lib/font-awesome/js/fontawesome.js"></script>
     <script src="<?= $basispad; ?>/lib/jquery/dist/jquery.min.js"></script>
@@ -15,8 +17,12 @@
     <meta name="description" content="<?= htmlspecialchars(t('header.description')); ?>" />
     <script>
     var i18nMessages = <?= json_encode(jsTranslations(), JSON_HEX_TAG | JSON_UNESCAPED_UNICODE); ?>;
-    function i18n(key) {
-        return i18nMessages.hasOwnProperty(key) ? i18nMessages[key] : key;
+    function i18n(key, params) {
+        var text = i18nMessages.hasOwnProperty(key) ? i18nMessages[key] : key;
+        for (var name in params || {}) {
+            text = text.split('{' + name + '}').join(params[name]);
+        }
+        return text;
     }
     </script>
     <?php if (strpos($_SERVER['SERVER_NAME'], "wikiportret.nl") !== false) { ?>

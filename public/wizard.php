@@ -37,6 +37,10 @@ if (!isset($_GET['question'])) {
             result("duplicate");
             break;
 
+        case "lowres":
+            result("lowres");
+            break;
+
         default: // including "first":
             showquestion(t('wizard.q.copyright'), "noupload", "ownwork", t('wizard.q.copyright_help'));
             break;

@@ -25,9 +25,16 @@ $google_vision_results = DB::queryFirstRow(
 
 $msg = false;
 if (isset($_POST['postback'])) {
+    // Unverified images only leave "Niet geverifieerd" by verification or the archive cron
+    if ($row['archived'] == 2) {
+        $archived = 2;
+    } else {
+        $archived = empty($_POST['done']) ? 0 : 1;
+    }
+
     DB::update('images', [
         'owner'      => $_POST['owner'],
-        'archived'   => !empty($_POST['done']),
+        'archived'   => $archived,
         'ticket'     => $_POST['ticket'],
         'categories' => json_encode(array_key_exists('categories', $_POST) ? $_POST['categories'] : ''),
     ], 'id = %d', $id);
@@ -38,6 +45,7 @@ if (isset($_POST['postback'])) {
 $owner    = DB::queryFirstRow('SELECT owner, archived, ticket, categories FROM images WHERE id = %d', $id);
 $results  = DB::query('SELECT * FROM messages');
 $accounts = DB::query("SELECT otrsname, id FROM users WHERE active = 1");
+$verified = DB::queryFirstField("SELECT MIN(verified) FROM contributors WHERE email = %s", $row['email']);
 $imgurl   = urlencode(BASE_URL . "/uploads/images/" . $row['filename']);
 $imgpath  = ABSPATH . "/uploads/images/" . $row['filename'];
 
@@ -192,6 +200,12 @@ function getTrueFalse(truefalse) {
                         <a href="/admin/verify.php?action=resend&id=<?= $row['id']; ?>&hash=<?= $row['key']; ?>"
                             class="admin-action"><?= t('single.resend_verification'); ?></a>
                     </div>
+                    <?php elseif ($owner['archived'] == 1 && $verified === '0') : ?>
+                    <div class="not_verified">
+                        <?= t('single.not_verified'); ?> &nbsp;|&nbsp;
+                        <a href="/admin/verify.php?action=unverify&id=<?= $row['id']; ?>&hash=<?= $row['key']; ?>"
+                            class="admin-action unverify-link"><?= t('single.unverify'); ?></a>
+                    </div>
                     <?php endif ?>
                 </li>
                 <li><span><?= t('single.ip'); ?></span> <?= $row['ip']; ?></li>
@@ -247,8 +261,13 @@ function getTrueFalse(truefalse) {
                 <div class="input-container">
                     <label for="done"><i class="fa-solid fa-check fa-lg"></i><?= t('single.done'); ?></label>
                     <div class="checkbox">
+                        <?php if ($owner['archived'] == 2) : ?>
+                        <input type="checkbox" name="done" id="done" disabled>
+                        <label for="done"><?= t('single.verify_first'); ?></label>
+                        <?php else : ?>
                         <input type="checkbox" name="done" id="done" <?= $owner['archived'] == 1 ? 'checked' : ''; ?>>
                         <label for="done"><?= t('common.yes'); ?></label>
+                        <?php endif ?>
                     </div>
                 </div>
 
@@ -304,35 +323,30 @@ const singleMessages = <?= json_encode([
     'busy' => t('single.busy'),
     'verified' => t('single.verified'),
     'resendShort' => t('single.resend_short'),
-    'verifyAddress' => t('single.verify_address'),
-    'resendVerification' => t('single.resend_verification'),
     'error' => t('error.generic'),
 ], JSON_HEX_TAG | JSON_UNESCAPED_UNICODE); ?>;
 $(document).on('click', '.admin-action', function(e) {
     e.preventDefault();
     const $link = $(this);
+    const label = $link.text();
     $link.text(singleMessages.busy);
 
     $.getJSON($link.attr('href'))
         .done(function(data) {
             if ($link.hasClass('verify-link')) {
                 $link.closest('.not_verified').replaceWith($('<span>').text(singleMessages.verified));
+            } else if ($link.hasClass('unverify-link')) {
+                setTimeout(() => location.reload(), 1500);
             } else {
                 $link.text(singleMessages.resendShort);
             }
             toonMelding(data.message, 'success');
         })
         .fail(function() {
-            $link.text($link.hasClass('verify-link') ? singleMessages.verifyAddress : singleMessages.resendVerification);
+            $link.text(label);
             toonMelding(singleMessages.error, 'error');
         });
 });
-
-function toonMelding(tekst, type) {
-    const $melding = $('<div>').text(tekst).addClass('melding ' + type);
-    $('body').append($melding);
-    setTimeout(() => $melding.remove(), 4000);
-}
 </script>
 
 <?php include '../common/footer.php'; ?>

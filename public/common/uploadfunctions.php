@@ -58,6 +58,26 @@ function contributorEmailCheck($email)
     return $check;
 }
 
+function sendLowResolutionMail($mail, $templateRenderer, $email, $name, $title, $width, $height)
+{
+    $body = $templateRenderer->render(mailTemplate('low_resolution'), [
+        'title' => $title,
+        'name' => $name,
+        'width' => $width,
+        'height' => $height,
+        'minSize' => MIN_IMAGE_SIZE,
+    ]);
+
+    $mail->addAddress($email, $name);
+    $mail->addReplyTo(VRTS_MAIL, t('mail.vrts_queue_name'));
+    $mail->Subject = t('mail.subject.low_resolution', ['title' => $title]);
+    $mail->isHTML(true);
+    $mail->Body = nl2br($body);
+    $mail->AltBody = $body;
+
+    return $mail->send();
+}
+
 // TODO: this should really be refactored in a class...
 function checkUpload()
 {
@@ -87,6 +107,10 @@ function checkUpload()
     }
 
     isrequired('title', t('field.title'));
+    if ($_POST['source_self'] == "Unknown") {
+        addvalidationerror(t('validation.source_unknown'));
+        return;
+    }
     $_POST['source_self'] != "Yes" ? isrequired('source', t('field.source')) : '';
     isrequired('name', t('field.name'));
     $mailresult = validateEmail('email');
@@ -98,8 +122,19 @@ function checkUpload()
     $validateUploader = validateUploader($source);
 
     if (!hasvalidationerrors()) {
-        $mail = new \PHPMailer\PHPMailer\PHPMailer();
+        $mail = createMailer();
         $templateRenderer = new Handlebars();
+
+        // Te lage resolutie: automatisch afwijzen, niets opslaan en niets naar VRTS sturen
+        $dimensions = getimagesize($file['tmp_name']);
+        if ($dimensions !== false && min($dimensions[0], $dimensions[1]) < MIN_IMAGE_SIZE) {
+            sendLowResolutionMail($mail, $templateRenderer, $email, $name, $title, $dimensions[0], $dimensions[1]);
+            $session->setLastUploadEmail($email);
+            $session->redirect("/wizard", "?question=lowres");
+            return;
+        }
+
+
         list($email_exists, $email_verified) = contributorEmailCheck($email);
 
         if ($validateUploader == 'selfie') {
@@ -181,9 +216,6 @@ function checkUpload()
             ]);
             $htmlBody = nl2br($body);
 
-            $mail->From = VRTS_MAIL;
-            $mail->CharSet = 'UTF-8';
-
             if ($validateUploader !== "valid") {
                 $mail->addAddress($email, $name);
                 $mail->addReplyTo(VRTS_MAIL, t('mail.vrts_queue_name'));
@@ -195,7 +227,6 @@ function checkUpload()
             };
 
             $mail->Subject = $subject;
-            $mail->Sender = VRTS_MAIL;
             $mail->isHTML(true);
             $mail->Body = $htmlBody;
             $mail->AltBody = $body;

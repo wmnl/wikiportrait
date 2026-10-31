@@ -16,6 +16,13 @@
                 }
                 ?>
                 ><a href="messages.php"><i class="fa-solid fa-comments"></i><?= t('admin.tab_messages'); ?></a></li>
+            <li
+                <?php
+                if ($page2 == 'schema') {
+                    echo ' class="active"';
+                }
+                ?>
+                ><a href="schema.php"><i class="fa-solid fa-database"></i><?= t('admin.tab_database'); ?></a></li>
         </ul>
     </div>
 <?php endif; ?>

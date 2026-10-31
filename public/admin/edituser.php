@@ -38,7 +38,7 @@ if (DB::count() == 0) {
                 'otrsname' => $_POST['otrsname'],
                 'email' => $_POST['email'],
                 'isSysop' => $admin,
-                'isBot' => $_POST['bot'],
+                'isBot' => $_POST['bot'] ?? false,
                 'active' => $active,
             ];
             if ($_POST['bot'] && $_POST['key']) {
