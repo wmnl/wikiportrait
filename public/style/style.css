@@ -3,13 +3,28 @@
     font-size: 1em;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 300;
-    outline: 0px;
     margin: 0px;
     padding: 0px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Visible focus indicator for keyboard users */
+:focus-visible,
+input[type="checkbox"]:focus-visible + label {
+    outline: 2px solid #006699;
+    outline-offset: 2px;
+}
+
+.menu a:focus-visible,
+button:focus-visible,
+.button:focus-visible,
+input[type="button"]:focus-visible,
+input[type="submit"]:focus-visible {
+    outline-color: #fff;
+    outline-offset: -4px;
 }
 
 html {
@@ -473,8 +488,17 @@ select:not(.ui-datepicker-month):not(.ui-datepicker-year) {
     white-space: pre-wrap;
 }
 
+/* Visually hidden, but still focusable and usable by keyboard */
 input[type="checkbox"] {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0px;
+    border: 0px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
 }
 
 input[type=checkbox] + label:before {
