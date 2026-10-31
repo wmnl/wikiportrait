@@ -39,6 +39,7 @@ class Session
             $location .= $args;
         }
         header($location);
+        exit;
     }
 
     public function isLoggedIn()

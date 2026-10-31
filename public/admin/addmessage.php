@@ -1,8 +1,6 @@
 <?php
 require_once '../common/bootstrap.php';
-require_once '../common/header.php';
 $session->checkAdmin();
-include 'tabs.php';
 
 if (isset($_POST['postback'])) {
     isrequired('title', t('field.title'));
@@ -17,6 +15,9 @@ if (isset($_POST['postback'])) {
         $session->redirect("/admin/messages");
     }
 }
+
+require_once '../common/header.php';
+include 'tabs.php';
 ?>
 <div id="content">
 

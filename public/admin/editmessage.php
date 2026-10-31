@@ -1,8 +1,6 @@
 <?php
 require_once '../common/bootstrap.php';
-require_once '../common/header.php';
 $session->checkAdmin();
-include 'tabs.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -10,10 +8,9 @@ if (isset($_GET['id'])) {
     $session->redirect("/admin/users");
 }
 
-$row = DB::query('SELECT * FROM messages WHERE id = %d', $id);
-$row = $row[0];
+$row = DB::queryFirstRow('SELECT * FROM messages WHERE id = %d', $id);
 
-if (DB::count() == 0) {
+if (!$row) {
     $session->redirect("/admin/messages");
 }
 
@@ -30,6 +27,9 @@ if (isset($_POST['postback'])) {
         $session->redirect("/admin/messages");
     }
 }
+
+require_once '../common/header.php';
+include 'tabs.php';
 ?>
 <div id="content">
     <?php

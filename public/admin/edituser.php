@@ -49,7 +49,7 @@ if (DB::count() == 0) {
             }
             DB::update('users', $data, 'id = %d', $_GET['id']);
 
-            header("Location: users.php");
+            $session->redirect($session->isSysop() ? "/admin/users" : "/images/overview");
         }
 
         if (hasvalidationerrors()) {

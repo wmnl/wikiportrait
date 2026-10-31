@@ -295,7 +295,7 @@ function getTrueFalse(truefalse) {
                     <button type="button" onclick="getCategories(<?= $catJson; ?>, <?= $existingCats; ?>)">
                         <i class="fa-solid fa-list-alt" aria-hidden="true"></i> <?= t('single.get_categories'); ?>
                     </button>
-                    <button type="button" onclick="parent.location='get.php?id=<?= $id; ?>'" name="claim">
+                    <button type="submit" formaction="get.php?id=<?= $id; ?>" name="claim">
                         <i class="fa-solid fa-bolt fa-lg"></i><?= t('single.claim'); ?>
                     </button>
                     <span class="divider">&nbsp;</span>

@@ -1,22 +1,16 @@
 <?php
 
 require_once '../common/bootstrap.php';
+$session->checkLogin();
 
-if (!isset($_GET['id'])) {
+$id = (int) ($_GET['id'] ?? 0);
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !DB::queryFirstRow('SELECT id FROM images WHERE id = %d', $id)) {
     $session->redirect("/images/overview");
-} else {
-    $id = $_GET['id'];
-    DB::query('SELECT * FROM images WHERE id = %d', $id);
-
-    if (DB::count() == 0) {
-        $session->redirect("/images/overview");
-    } else {
-        DB::update('images', [
-            'owner' => $_SESSION['user']
-        ], 'id = %d', $id);
-
-        $session->redirect("/images/single", "?id=$id");
-    }
 }
 
-require_once '../common/header.php';
+DB::update('images', [
+    'owner' => $_SESSION['user']
+], 'id = %d', $id);
+
+$session->redirect("/images/single", "?id=$id");

@@ -5,6 +5,7 @@ require_once '../common/bootstrap.php';
 if (!empty($_GET['id']) && !empty($_GET['secret']) && defined('V1_PATH')) {
     $url = sprintf(V1_PATH . '/admin/?id=%s&secret=%s', $_GET['id'], $_GET['secret']);
     header("Location:$url");
+    exit;
 }
 
 if (!empty($_GET['logout'])) {
