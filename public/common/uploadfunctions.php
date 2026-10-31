@@ -6,7 +6,7 @@ use Handlebars\Handlebars;
 use Intervention\Image\ImageManager;
 
 require_once ABSPATH . "/ml/web_entities.php";
-require_once ABSPATH . "/vendor/autoload.php";
+require_once VENDOR_DIR . "/autoload.php";
 
 function removeAccentedCharacters($str)
 {

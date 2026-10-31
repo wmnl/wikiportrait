@@ -46,7 +46,17 @@ if (PHP_SAPI !== 'cli' && substr($hostname, 0, 4) !== 'www.' && !$isLocal) {
 // Loads config and necessary stuff
 require_once 'config.php';
 $basispad = BASE_URL;
-require_once ABSPATH . '/vendor/autoload.php';
+// Map naast de webroot voor alles wat niet via de browser bereikbaar mag zijn (bibliotheken, logs, sleutels)
+if (!defined('PRIVATE_DIR')) {
+    define('PRIVATE_DIR', dirname(ABSPATH) . '/private');
+}
+if (!defined('VENDOR_DIR')) {
+    define('VENDOR_DIR', PRIVATE_DIR . '/vendor');
+}
+if (!defined('CRON_LOGFILE')) {
+    define('CRON_LOGFILE', PRIVATE_DIR . '/cronlog.txt');
+}
+require_once VENDOR_DIR . '/autoload.php';
 require_once 'i18n.php';
 if (!defined('IMAGE_FOLDER')) {
     define('IMAGE_FOLDER', ABSPATH . "/uploads/images");

@@ -2,7 +2,7 @@
 
 // Bots authenticate with headers, not a browser session
 define('CSRF_EXEMPT', true);
-require_once '../../vendor/autoload.php';
+require_once __DIR__ . '/../../common/bootstrap.php';
 $headers = apache_request_headers();
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(403);

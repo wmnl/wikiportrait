@@ -11,3 +11,4 @@ Wikiportret.code-workspace
 .vscode/settings.json
 /public/common/wikiportret_dkim.key
 /public/api/login/remko.txt
+/private/

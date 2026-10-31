@@ -20,6 +20,8 @@ if (in_array('cron', $argv)) {
         $limit
     );
 }
-$logfile = fopen(__DIR__ . '/cronlog.txt', 'a+');
-fwrite($logfile, 'Cron' . (in_array('cron', $argv) ? '' : ' not') . ' run ' . date('Y-m-d H:i:s') . PHP_EOL);
-fclose($logfile);
+file_put_contents(
+    CRON_LOGFILE,
+    'Cron' . (in_array('cron', $argv) ? '' : ' not') . ' run ' . date('Y-m-d H:i:s') . PHP_EOL,
+    FILE_APPEND
+);
