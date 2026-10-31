@@ -3,12 +3,25 @@
 //@phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 class Session
 {
+    private const COOKIE_LIFETIME = 30 * 24 * 60 * 60;
+
     public function __construct()
     {
+        if (session_status() != PHP_SESSION_ACTIVE) {
+            $cookieOptions = [
+                'path'     => ini_get('session.cookie_path') ?: '/',
+                'secure'   => ($_SERVER['HTTPS'] ?? '') === 'on',
+                'httponly' => true,
+                'samesite' => 'Lax',
+            ];
+            session_set_cookie_params(['lifetime' => self::COOKIE_LIFETIME] + $cookieOptions);
+            session_start();
 
-        session_status() != PHP_SESSION_ACTIVE ? session_start() : '';
-        $cookieLifetime = 365 * 24 * 60 * 60;
-        setcookie(session_name(), session_id(), time() + $cookieLifetime);
+            // PHP only sends the cookie for new sessions; renew the expiry for returning users
+            if (isset($_COOKIE[session_name()])) {
+                setcookie(session_name(), session_id(), ['expires' => time() + self::COOKIE_LIFETIME] + $cookieOptions);
+            }
+        }
     }
 
     public function getLastUploadKey()
@@ -94,16 +107,18 @@ class Session
 
     public function login($user, $pass)
     {
-        $row = DB::queryFirstRow("SELECT * FROM users WHERE username = %s AND active = 1", $_POST['username']);
+        $row = DB::queryFirstRow("SELECT * FROM users WHERE username = %s AND active = 1", $user);
         if (!$row) {
             return false;
         }
-        if (!password_verify($_POST['password'], $row['password'])) {
+        if (!password_verify($pass, $row['password'])) {
             return false;
         }
         if ($row['isBot'] == 1) {
             return false;
         }
+        // New session id after login, against session fixation
+        session_regenerate_id(true);
         $_SESSION['user']     = $row['id'];
         $_SESSION['isSysop']  = $row['isSysop'] == 1;
         $_SESSION['username'] = $row['username'];
