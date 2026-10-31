@@ -1,6 +1,6 @@
 <?php
 
-require_once__DIR__ . '/../common/bootstrap.php';
+require_once __DIR__ . '/../common/bootstrap.php';
 if (in_array('cron', $argv)) {
     $limit = date('Y-m-d', strtotime('-3 months')) . ' 00:00:00';
     // Images moved back to "Niet geverifieerd" get a new 3-month period

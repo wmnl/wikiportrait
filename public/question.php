@@ -2,6 +2,8 @@
 //@phpcs:disable Generic.Files.LineLength.TooLong
 function showquestion($text, $yes, $no, $exp = null)
 {
+    $yesLabel = t('common.yes');
+    $noLabel = t('common.no');
     echo "<p>$text</p>";
     if (!empty($exp)) {
         echo "<div class=\"box grey\">$exp</div>";
@@ -9,10 +11,10 @@ function showquestion($text, $yes, $no, $exp = null)
     $rnd_num = intval(time() * (mt_rand() / mt_rand()));
     switch ($rnd_num % 2) {
         case 0:
-            echo "<div class=\"bottom center\"><a class=\"button\" href=\"wizard.php?question=$no\">Nee</a><span class=\"divider\">&nbsp;</span><a class=\"button\" href=\"wizard.php?question=$yes\">Ja</a></div>";
+            echo "<div class=\"bottom center\"><a class=\"button\" href=\"wizard.php?question=$no\">$noLabel</a><span class=\"divider\">&nbsp;</span><a class=\"button\" href=\"wizard.php?question=$yes\">$yesLabel</a></div>";
             break;
         case 1:
-            echo "<div class=\"bottom center\"><a class=\"button\" href=\"wizard.php?question=$yes\">Ja</a><span class=\"divider\">&nbsp;</span><a class=\"button\" href=\"wizard.php?question=$no\">Nee</a></div>";
+            echo "<div class=\"bottom center\"><a class=\"button\" href=\"wizard.php?question=$yes\">$yesLabel</a><span class=\"divider\">&nbsp;</span><a class=\"button\" href=\"wizard.php?question=$no\">$noLabel</a></div>";
             break;
     }
 }
@@ -22,32 +24,36 @@ function result($result)
     global $session;
 
     if ($result == "noupload") {
-        echo "<h3>Het advies van de uploadwizard is:</h3>";
-        echo "<div class=\"box red\">Niet uploaden</div>";
-        echo "<div class=\"bottom right\"><a class=\"button\" href=\"index.php\"><i class=\"fa-solid fa-home fa-lg\"></i>Terug naar de startpagina</a></div>";
+        echo "<h3>" . t('wizard.advice') . "</h3>";
+        echo "<div class=\"box red\">" . t('wizard.no_upload') . "</div>";
+        echo "<div class=\"bottom right\"><a class=\"button\" href=\"index.php\"><i class=\"fa-solid fa-home fa-lg\"></i>" . t('common.back_home') . "</a></div>";
     } elseif ($result == "success") {
         $key = $session->getLastUploadKey();
-        echo "<h3>Uploaden voltooid</h3>";
-        echo "<div class=\"box green\">De afbeelding is met succes geüpload.<br />Een vrijwilliger zal de afbeelding zo snel mogelijk beoordelen en contact met u opnemen.<br />Als u wilt, kunt u <a href=\"track.php?key=$key\">hier</a> uw inzending volgen.</div>";
-        echo "<div class=\"bottom right\"><a class=\"button\" href=\"upload.php\"><i class=\"fa-solid fa-cloud-upload fa-lg\"></i>Nog een afbeelding uploaden</a></div>";
+        echo "<h3>" . t('wizard.upload_done') . "</h3>";
+        echo "<div class=\"box green\">" . t('upload.success_text', ['track_url' => "track.php?key=$key"]) . "</div>";
+        echo "<div class=\"bottom right\"><a class=\"button\" href=\"upload.php\"><i class=\"fa-solid fa-cloud-upload fa-lg\"></i>" . t('common.upload_another') . "</a></div>";
     } elseif ($result == "verificatie") {
         $email = $session->getLastUploadEmail();
-        echo "<h3>Email verificatie vereist</h3>";
-        echo "<div class=\"box blue\">Wij hebben een email naar <strong>$email</strong> gestuurd voor verificatie.<br />Na succesvolle verificatie, is uw upload voltooid.<br /></div>";
+        echo "<h3>" . t('wizard.verification_required') . "</h3>";
+        echo "<div class=\"box blue\">" . t('wizard.verification_sent', ['email' => $email]) . "</div>";
     } elseif ($result == "duplicate") {
-        echo "<h3>Uploaden is niet gelukt</h3>";
-        echo "<div class=\"box red\">" . DUPLICATE_ERROR . "<br /></div>";
-        echo "<div class=\"bottom right\"><a class=\"button\" href=\"index.php\"><i class=\"fa-solid fa-home fa-lg\"></i>Terug naar de startpagina</a></div>";
+        echo "<h3>" . t('wizard.upload_failed') . "</h3>";
+        echo "<div class=\"box red\">" . t('error.duplicate') . "<br /></div>";
+        echo "<div class=\"bottom right\"><a class=\"button\" href=\"index.php\"><i class=\"fa-solid fa-home fa-lg\"></i>" . t('common.back_home') . "</a></div>";
+    } elseif ($result == "lowres") {
+        $email = htmlspecialchars($session->getLastUploadEmail());
+        echo "<h3>" . t('wizard.low_resolution') . "</h3>";
+        echo "<div class=\"box red\">" . t('wizard.low_resolution_text', ['email' => $email]) . "</div>";
+        echo "<div class=\"bottom right\"><a class=\"button\" href=\"upload.php\"><i class=\"fa-solid fa-cloud-upload fa-lg\"></i>" . t('wizard.upload_other') . "</a></div>";
     } elseif ($result == "failupload") {
         ?>
-        <h3>Uploaden is niet gelukt</h3>
-        <div class="box red">Helaas, het is niet gelukt deze afbeelding te uploaden. Wellicht zijn er technische problemen.
-            Probeer het later nog eens.</div>
+        <h3><?= t('wizard.upload_failed'); ?></h3>
+        <div class="box red"><?= t('wizard.upload_failed_text'); ?></div>
         <?php
     } else {
-        echo "<h3>Het advies van de uploadwizard is:</h3>";
-        echo "<div class=\"box green\">Upload de afbeelding onder de <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.nl\" target=\"_blank\">CC-BY-SA 4.0</a> licentie</div>";
-        echo "<div class=\"bottom right\"><a class=\"button\" href=\"upload.php\"><i class=\"fa-solid fa-cloud-upload fa-lg\"></i>Uploaden</a></div>";
+        echo "<h3>" . t('wizard.advice') . "</h3>";
+        echo "<div class=\"box green\">" . t('wizard.upload_license') . "</div>";
+        echo "<div class=\"bottom right\"><a class=\"button\" href=\"upload.php\"><i class=\"fa-solid fa-cloud-upload fa-lg\"></i>" . t('wizard.upload_button') . "</a></div>";
     }
 }
 ?>

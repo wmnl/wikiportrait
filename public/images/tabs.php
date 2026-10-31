@@ -9,29 +9,29 @@ $page = pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_FILENAME);
                 echo " class='active'";
         }
         ?>
-            ><a href="overview.php"><i class="fa-solid fa-picture-o"></i><span>Inzendingen</span></a></li>
+            ><a href="overview.php"><i class="fa-solid fa-picture-o"></i><span><?= t('images.submissions'); ?></span></a></li>
             <li
             <?php
             if (isset($_GET['archived']) && $_GET['archived'] == 1) {
                     echo " class='active'";
             }
             ?>
-                ><a href="overview.php?archived=1"><i class="fa-solid fa-archive"></i><span>Archief</span></a></li>
+                ><a href="overview.php?archived=1"><i class="fa-solid fa-archive"></i><span><?= t('images.archive'); ?></span></a></li>
                 <li
                 <?php
                 if (isset($_GET['archived']) && $_GET['archived'] == 2) {
                         echo " class='active'";
                 }
                 ?>
-                    ><a href="overview.php?archived=2"><i class="fa-solid fa-archive"></i><span>Niet
-                            geverifieerd</span></a></li>
+                    ><a href="overview.php?archived=2"><i class="fa-solid fa-archive"></i><span><?=
+                            t('images.unverified'); ?></span></a></li>
                     <li
                     <?php
                     if ($page == 'search') {
                             echo " class='active'";
                     }
                     ?>
-                        ><a href="search.php"><i class="fa-solid fa-search"></i><span>Zoeken</span></a></li>
+                        ><a href="search.php"><i class="fa-solid fa-search"></i><span><?= t('search.title'); ?></span></a></li>
                     <?php
                     // Not quite working...
                     /*

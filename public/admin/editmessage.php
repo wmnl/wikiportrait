@@ -18,8 +18,8 @@ if (DB::count() == 0) {
 }
 
 if (isset($_POST['postback'])) {
-    isrequired('title', 'titel');
-    isrequired('message', 'bericht');
+    isrequired('title', t('field.title'));
+    isrequired('message', t('field.message'));
 
     if (!hasvalidationerrors()) {
         DB::update('messages', [
@@ -39,14 +39,14 @@ if (isset($_POST['postback'])) {
     ?>
 
     <div class="page-header">
-        <h2>Bericht bewerken</h2>
+        <h2><?= t('message.edit_title'); ?></h2>
         <a href="messages.php" class="button red"><i
-                class="fa-solid fa-times-circle fa-lg"></i><span>Annuleren</span></a>
+                class="fa-solid fa-times-circle fa-lg"></i><span><?= t('common.cancel'); ?></span></a>
     </div>
 
     <form method="post">
         <div class="input-container">
-            <label for="title"><i class="fa-solid fa-tag fa-lg"></i>Titel</label>
+            <label for="title"><i class="fa-solid fa-tag fa-lg"></i><?= t('common.title'); ?></label>
             <input type="text" name="title" id="title" value="
             <?=
             htmlspecialchars($row['title']);
@@ -56,7 +56,7 @@ if (isset($_POST['postback'])) {
         </div>
 
         <div class="input-container">
-            <label for="message"><i class="fa-solid fa-align-left fa-lg"></i>Bericht</label>
+            <label for="message"><i class="fa-solid fa-align-left fa-lg"></i><?= t('common.message'); ?></label>
             <textarea required="required" name="message">
             <?=
             htmlspecialchars($row['message']);
@@ -65,7 +65,7 @@ if (isset($_POST['postback'])) {
         </div>
 
         <div class="bottom right">
-            <button class="green" name="postback"><i class="fa-solid fa-floppy-o fa-lg"></i>Opslaan</button>
+            <button class="green" name="postback"><i class="fa-solid fa-floppy-o fa-lg"></i><?= t('common.save'); ?></button>
         </div>
     </form>
 </div>

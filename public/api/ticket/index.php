@@ -4,15 +4,15 @@ require_once '../../vendor/autoload.php';
 $headers = apache_request_headers();
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(403);
-    echo "Ongeldig verzoek";
+    echo t('error.invalid_request');
     return;
 } elseif (!array_key_exists('User', $headers) || !array_key_exists('Authentication', $headers)) {
     http_response_code(401);
-    echo "U dient correcte inloggegevens te verstrekken";
+    echo t('api.invalid_credentials');
     return;
 } elseif (!validateToken($headers)) {
     http_response_code(401);
-    echo "U dient correcte inloggegevens te verstrekken";
+    echo t('api.invalid_credentials');
     return;
 }
 if (isset($_POST['key'])) {
@@ -22,7 +22,7 @@ if (isset($_POST['key'])) {
     );
     $returnData = [];
     $returnData['description'] = $row['description'] ?: $row['title'];
-    $returnData['ticket'] = $row['ticket'] ?: 'VUL_HIER_HET_TICKETNUMMER_IN';
+    $returnData['ticket'] = $row['ticket'] ?: t('api.ticket_placeholder');
     $returnData['image'] = BASE_URL . "/uploads/images/" . $row['filename'];
     $returnData['date'] =    $row['date'] ?: null;
     $returnData['author'] = $row['source'];

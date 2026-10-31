@@ -115,7 +115,7 @@ function schemaDifferences(array $wanted, array $current): array
 
     foreach ($wanted as $table => $definition) {
         if (!isset($current[$table])) {
-            $add("table:{$table}", $table, 'Tabel ontbreekt', $definition['sql']);
+            $add("table:{$table}", $table, t('schema.table_missing'), $definition['sql']);
         }
     }
 
@@ -133,7 +133,7 @@ function schemaDifferences(array $wanted, array $current): array
                 $add(
                     "column:{$table}.{$column}",
                     $table,
-                    "Kolom `{$column}` ontbreekt",
+                    t('schema.column_missing', ['column' => $column]),
                     "ALTER TABLE `{$table}` ADD COLUMN {$line} {$position}"
                 );
             }
@@ -141,12 +141,12 @@ function schemaDifferences(array $wanted, array $current): array
 
         foreach ($definition['keys'] as $key => $line) {
             if (!isset($live['keys'][$key])) {
-                $add("key:{$table}.{$key}", $table, "{$key} ontbreekt", "ALTER TABLE `{$table}` ADD {$line}");
+                $add("key:{$table}.{$key}", $table, t('schema.key_missing', ['key' => $key]), "ALTER TABLE `{$table}` ADD {$line}");
             } elseif (!sameDefinition($line, $live['keys'][$key])) {
                 $add(
                     "key:{$table}.{$key}",
                     $table,
-                    "{$key} wijkt af",
+                    t('schema.key_differs', ['key' => $key]),
                     "ALTER TABLE `{$table}` " . dropKeyClause($live['keys'][$key]) . ", ADD {$line}",
                     false,
                     $live['keys'][$key]
@@ -159,7 +159,7 @@ function schemaDifferences(array $wanted, array $current): array
                 $add(
                     "column:{$table}.{$column}",
                     $table,
-                    "Kolom `{$column}` wijkt af",
+                    t('schema.column_differs', ['column' => $column]),
                     "ALTER TABLE `{$table}` MODIFY COLUMN {$line}",
                     false,
                     $live['columns'][$column]
@@ -172,7 +172,7 @@ function schemaDifferences(array $wanted, array $current): array
                 $add(
                     "key:{$table}.{$key}",
                     $table,
-                    "{$key} staat niet in scheme.sql",
+                    t('schema.key_extra', ['key' => $key]),
                     "ALTER TABLE `{$table}` " . dropKeyClause($line),
                     true,
                     $line
@@ -185,7 +185,7 @@ function schemaDifferences(array $wanted, array $current): array
                 $add(
                     "column:{$table}.{$column}",
                     $table,
-                    "Kolom `{$column}` staat niet in scheme.sql",
+                    t('schema.column_extra', ['column' => $column]),
                     "ALTER TABLE `{$table}` DROP COLUMN `{$column}`",
                     true,
                     $line
@@ -195,7 +195,7 @@ function schemaDifferences(array $wanted, array $current): array
     }
 
     foreach (array_diff_key($current, $wanted) as $table => $definition) {
-        $add("table:{$table}", $table, 'Tabel staat niet in scheme.sql (wordt niet verwijderd)', null);
+        $add("table:{$table}", $table, t('schema.table_extra'), null);
     }
 
     return $diffs;
@@ -226,7 +226,7 @@ function applySchemaDifferences(array $wanted, array $ids): array
 
         try {
             DB::query($diff['sql']);
-            $results[] = ['success' => true, 'sql' => $diff['sql'], 'message' => 'Uitgevoerd'];
+            $results[] = ['success' => true, 'sql' => $diff['sql'], 'message' => t('schema.applied')];
         } catch (Exception $e) {
             $results[] = ['success' => false, 'sql' => $diff['sql'], 'message' => $e->getMessage()];
         }

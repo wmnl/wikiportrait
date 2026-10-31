@@ -6,13 +6,13 @@ function showGVResults(e)
     if (element.style.display == "") {
         all.forEach(function (a) {
             a.parentElement.childNodes[3].style.display = "";
-            a.innerText = "tonen";
+            a.innerText = i18n("show");
         });
         element.style.display = "block";
-        e.innerText = "verbergen";
+        e.innerText = i18n("hide");
     } else {
         element.style.display = "";
-        e.innerText = "tonen";
+        e.innerText = i18n("show");
     }
 }
 

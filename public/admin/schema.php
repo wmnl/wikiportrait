@@ -26,12 +26,12 @@ include 'tabs.php';
 ?>
 <div id="content">
     <div class="page-header">
-        <h2>Database</h2>
+        <h2><?= t('admin.tab_database'); ?></h2>
     </div>
 
     <?php if (!$file) : ?>
     <div class="box red">
-        etc/scheme.sql is niet gevonden. Zet de map etc naast de webroot, of stel SCHEMA_FILE in config.php in.
+        <?= t('schema.file_not_found'); ?>
     </div>
     <?php else : ?>
         <?php foreach ($results as $result) : ?>
@@ -41,20 +41,20 @@ include 'tabs.php';
         </div>
         <?php endforeach ?>
 
-        <p>Vergeleken met <code><?= htmlspecialchars($file); ?></code>.</p>
+        <p><?= t('schema.compared_with', ['file' => '<code>' . htmlspecialchars($file) . '</code>']); ?></p>
 
         <?php if (!$diffs) : ?>
-        <div class="box green">De database komt overeen met scheme.sql.</div>
+        <div class="box green"><?= t('schema.in_sync'); ?></div>
         <?php else : ?>
-        <form method="post" onsubmit="return confirm('Geselecteerde wijzigingen doorvoeren in de database?');">
+        <form method="post" onsubmit="return confirm(i18n('schema_confirm'));">
             <input type="hidden" name="token" value="<?= $_SESSION['schema_token']; ?>">
             <div class="table-container">
                 <table class="schema">
                     <thead>
                         <tr>
                             <th class="select-container"></th>
-                            <th class="schema-table">Tabel</th>
-                            <th>Verschil</th>
+                            <th class="schema-table"><?= t('schema.col_table'); ?></th>
+                            <th><?= t('schema.col_difference'); ?></th>
                             <th>SQL</th>
                         </tr>
                     </thead>
@@ -65,17 +65,17 @@ include 'tabs.php';
                                 <?php if ($diff['sql'] !== null) : ?>
                                 <input type="checkbox" name="diffs[]" id="diff-<?= $i; ?>"
                                     value="<?= htmlspecialchars($diff['id']); ?>">
-                                <label for="diff-<?= $i; ?>" title="Doorvoeren"></label>
+                                <label for="diff-<?= $i; ?>" title="<?= t('schema.apply'); ?>"></label>
                                 <?php endif ?>
                             </td>
                             <td data-title="&#xf1c0;"><?= htmlspecialchars($diff['table']); ?></td>
                             <td data-title="&#xf05a;">
                                 <?= htmlspecialchars($diff['description']); ?>
                                 <?php if ($diff['removes']) : ?>
-                                <br><span class="alert">Verwijdert dit uit de database</span>
+                                <br><span class="alert"><?= t('schema.removes'); ?></span>
                                 <?php endif ?>
                                 <?php if ($diff['now'] !== null) : ?>
-                                <br>Nu: <code><?= htmlspecialchars($diff['now']); ?></code>
+                                <br><?= t('schema.now'); ?> <code><?= htmlspecialchars($diff['now']); ?></code>
                                 <?php endif ?>
                             </td>
                             <td data-title="&#xf121;">
@@ -90,7 +90,7 @@ include 'tabs.php';
             </div>
             <div class="bottom right">
                 <button class="green" type="submit" name="apply">
-                    <i class="fa-solid fa-database fa-lg"></i>Geselecteerde wijzigingen doorvoeren
+                    <i class="fa-solid fa-database fa-lg"></i><?= t('schema.apply_selected'); ?>
                 </button>
             </div>
         </form>

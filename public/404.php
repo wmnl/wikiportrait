@@ -6,12 +6,10 @@ require_once 'common/header.php';
 ?>
 <div id="content">
 
-    <h2>Oh nee, deze pagina bestaat niet!</h2>
+    <h2><?= t('notfound.title'); ?></h2>
 
-    <p>Helaas, u bent terecht gekomen op een deel van Wikiportret dat eigenlijk niet bestaat. Het kan ook zijn dat de
-        pagina wel bestaat, maar op dit moment niet beschikbaar is.</p>
-    <p>Controleer of u een correcte URL in uw adresbalk heeft staan of keer terug naar de vorige pagina. Pak anders een
-        stroopwafel en probeer het later opnieuw.</p>
+    <p><?= t('notfound.text1'); ?></p>
+    <p><?= t('notfound.text2'); ?></p>
 
 </div>
 <?php

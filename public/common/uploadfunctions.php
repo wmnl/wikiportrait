@@ -60,7 +60,7 @@ function contributorEmailCheck($email)
 
 function sendLowResolutionMail($mail, $templateRenderer, $email, $name, $title, $width, $height)
 {
-    $body = $templateRenderer->render(file_get_contents(ABSPATH . "/common/mailbody_lowres.txt"), [
+    $body = $templateRenderer->render(mailTemplate('low_resolution'), [
         'title' => $title,
         'name' => $name,
         'width' => $width,
@@ -69,8 +69,8 @@ function sendLowResolutionMail($mail, $templateRenderer, $email, $name, $title, 
     ]);
 
     $mail->addAddress($email, $name);
-    $mail->addReplyTo(VRTS_MAIL, "Wikiportret VRTS queue");
-    $mail->Subject = "[Wikiportret] $title is niet geschikt: resolutie te laag";
+    $mail->addReplyTo(VRTS_MAIL, t('mail.vrts_queue_name'));
+    $mail->Subject = t('mail.subject.low_resolution', ['title' => $title]);
     $mail->isHTML(true);
     $mail->Body = nl2br($body);
     $mail->AltBody = $body;
@@ -106,19 +106,19 @@ function checkUpload()
         $session->redirect("/wizard", "?question=duplicate");
     }
 
-    isrequired('title', 'titel');
+    isrequired('title', t('field.title'));
     if ($_POST['source_self'] == "Unknown") {
-        addvalidationerror("Een foto waarvan niet bekend is wie hem gemaakt heeft, kan niet worden geüpload.");
+        addvalidationerror(t('validation.source_unknown'));
         return;
     }
-    $_POST['source_self'] != "Yes" ? isrequired('source', 'auteursrechthebbende') : '';
-    isrequired('name', 'naam');
+    $_POST['source_self'] != "Yes" ? isrequired('source', t('field.source')) : '';
+    isrequired('name', t('field.name'));
     $mailresult = validateEmail('email');
     if ($mailresult !== 'ok') {
         $session->redirect("/wizard", "?question=failupload");
     }
-    agreeterms('terms', 'de licentievoorwaarden, de privacyverklaring en het opslaan van uw IP-adres');
-    agreeterms('euvs', 'de toestemming voor het opslaan van uw gegevens');
+    agreeterms('terms', t('terms.license'));
+    agreeterms('euvs', t('terms.storage'));
     $validateUploader = validateUploader($source);
 
     if (!hasvalidationerrors()) {
@@ -139,24 +139,24 @@ function checkUpload()
 
         if ($validateUploader == 'selfie') {
             $archived = 1;
-            $subject = "[Wikiportret] $title is geüpload op Wikiportret";
-            $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_uploadercheck.txt");
+            $subject = t('mail.subject.uploaded', ['title' => $title]);
+            $bodyTxt = mailTemplate('uploader_selfie');
             $redirect = "success";
         } elseif ($validateUploader == 'invalid') {
             $archived = 1;
-            $subject = "[Wikiportret] $title is geüpload op Wikiportret";
-            $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_uploadermismatch.txt");
+            $subject = t('mail.subject.uploaded', ['title' => $title]);
+            $bodyTxt = mailTemplate('uploader_mismatch');
             $redirect = "success";
         } else {
             if ($email_verified) {
                 $archived = 0;
-                $subject = "[Wikiportret] $title is geüpload op Wikiportret";
-                $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody.txt");
+                $subject = t('mail.subject.uploaded', ['title' => $title]);
+                $bodyTxt = mailTemplate('new_upload');
                 $redirect = "success";
             } else {
                 $archived = 2;
-                $subject = "[Wikiportret] Uw email verifiëren";
-                $bodyTxt = file_get_contents(ABSPATH . "/common/mailbody_verificatie.txt");
+                $subject = t('mail.subject.verify');
+                $bodyTxt = mailTemplate('verification');
                 $redirect = "verificatie";
             }
         }
@@ -218,12 +218,12 @@ function checkUpload()
 
             if ($validateUploader !== "valid") {
                 $mail->addAddress($email, $name);
-                $mail->addReplyTo(VRTS_MAIL, "Wikiportret VRTS queue");
+                $mail->addReplyTo(VRTS_MAIL, t('mail.vrts_queue_name'));
             } else {
-                $email_verified ? $mail->addAddress(VRTS_MAIL, "Wikiportret VRTS queue") :
-                    $mail->addAddress($email, "Wikiportret VRTS queue");
+                $email_verified ? $mail->addAddress(VRTS_MAIL, t('mail.vrts_queue_name')) :
+                    $mail->addAddress($email, t('mail.vrts_queue_name'));
                 $email_verified ? $mail->addReplyTo($email, $name) :
-                    $mail->addReplyTo(VRTS_MAIL, "Wikiportret VRTS queue");
+                    $mail->addReplyTo(VRTS_MAIL, t('mail.vrts_queue_name'));
             };
 
             $mail->Subject = $subject;

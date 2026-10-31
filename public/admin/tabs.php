@@ -8,21 +8,21 @@
                     echo ' class="active"';
                 }
                 ?>
-                ><a href="users.php"><i class="fa-solid fa-users"></i>Gebruikers</a></li>
+                ><a href="users.php"><i class="fa-solid fa-users"></i><?= t('admin.tab_users'); ?></a></li>
             <li
                 <?php
                 if ($page2 == 'messages') {
                     echo ' class="active"';
                 }
                 ?>
-                ><a href="messages.php"><i class="fa-solid fa-comments"></i>Berichten</a></li>
+                ><a href="messages.php"><i class="fa-solid fa-comments"></i><?= t('admin.tab_messages'); ?></a></li>
             <li
                 <?php
                 if ($page2 == 'schema') {
                     echo ' class="active"';
                 }
                 ?>
-                ><a href="schema.php"><i class="fa-solid fa-database"></i>Database</a></li>
+                ><a href="schema.php"><i class="fa-solid fa-database"></i><?= t('admin.tab_database'); ?></a></li>
         </ul>
     </div>
 <?php endif; ?>

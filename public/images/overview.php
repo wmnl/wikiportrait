@@ -10,16 +10,16 @@ $archive = $archived ? $_GET['archived'] : 0;
 
 $bulkActions = match ((int) $archive) {
     0 => [
-        ['endpoint' => 'bulk.php', 'action' => 'archive', 'icon' => 'fa-archive', 'label' => 'Archiveren'],
+        ['endpoint' => 'bulk.php', 'action' => 'archive', 'icon' => 'fa-archive', 'label' => t('bulk.archive')],
     ],
     1 => [
         ['endpoint' => '../admin/verify.php', 'action' => 'unverify', 'icon' => 'fa-undo',
-            'label' => 'Terugzetten naar Niet geverifieerd'],
+            'label' => t('single.unverify')],
     ],
     2 => [
-        ['endpoint' => '../admin/verify.php', 'action' => 'verify', 'icon' => 'fa-check', 'label' => 'Verifieer adres'],
+        ['endpoint' => '../admin/verify.php', 'action' => 'verify', 'icon' => 'fa-check', 'label' => t('single.verify_address')],
         ['endpoint' => '../admin/verify.php', 'action' => 'resend', 'icon' => 'fa-envelope',
-            'label' => 'Stuur verificatiemail opnieuw'],
+            'label' => t('single.resend_verification')],
     ],
     default => [],
 };
@@ -35,11 +35,11 @@ function isSelectable(int $archive, ?string $verified): bool
 
         <?php
         if ($archived == 0) {
-            echo "<h2>Inzendingen</h2>";
+            echo "<h2>" . t('images.submissions') . "</h2>";
         }
 
         if ($archived == 1) {
-            echo "<h2>Archief</h2>";
+            echo "<h2>" . t('images.archive') . "</h2>";
         }
 
         if (isset($_GET['personal'])) {
@@ -56,8 +56,8 @@ function isSelectable(int $archive, ?string $verified): bool
         ?>
         <form class="header-search" method="get" action="search.php">
             <div class="header-search-row">
-                <input type="text" name="q" placeholder="Zoek op key, e-mail, uploader of titel" />
-                <button type="submit" title="Zoeken"><i class="fa-solid fa-search"></i></button>
+                <input type="text" name="q" placeholder="<?= t('search.header_placeholder'); ?>" />
+                <button type="submit" title="<?= t('search.button'); ?>"><i class="fa-solid fa-search"></i></button>
             </div>
         </form>
         <?php
@@ -89,7 +89,7 @@ function isSelectable(int $archive, ?string $verified): bool
 
     <?php if ($bulkActions) : ?>
     <div class="bulk-actions">
-        <span class="bulk-count">0 geselecteerd</span>
+        <span class="bulk-count"><?= t('js.bulk_selected', ['count' => 0]); ?></span>
         <?php foreach ($bulkActions as $bulkAction) : ?>
         <button type="button" class="bulk-action" disabled
             data-endpoint="<?= $bulkAction['endpoint']; ?>" data-action="<?= $bulkAction['action']; ?>">
@@ -105,19 +105,20 @@ function isSelectable(int $archive, ?string $verified): bool
                 <tr>
                     <?php if ($bulkActions) : ?>
                     <th class="select-container">
-                        <input type="checkbox" id="select-all"><label for="select-all" title="Alles selecteren"></label>
+                        <input type="checkbox" id="select-all"><label for="select-all" title="<?=
+                            t('bulk.select_all'); ?>"></label>
                     </th>
                     <?php endif ?>
-                    <th class="img-container">Foto</th>
-                    <th>Titel</th>
-                    <th>Uploader</th>
-                    <th>Datum</th>
-                    <th>Eigenaar</th>
+                    <th class="img-container"><?= t('images.col_photo'); ?></th>
+                    <th><?= t('common.title'); ?></th>
+                    <th><?= t('images.col_uploader'); ?></th>
+                    <th><?= t('images.col_date'); ?></th>
+                    <th><?= t('images.col_owner'); ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                setlocale(LC_ALL, 'nl_NL');
+                setlocale(LC_ALL, currentLocale());
                 date_default_timezone_set('Europe/Amsterdam');
                 if (isset($_GET['page'])) {
                     $page   = $_GET['page'];
@@ -152,12 +153,12 @@ function isSelectable(int $archive, ?string $verified): bool
                     $name = $row['name'];
                     $timestamp = $row['timestamp'];
                     if (empty($row['otrsname'])) {
-                        $owner = "Aan niemand toegewezen";
+                        $owner = t('images.unassigned');
                     } else {
                         $owner = $row['otrsname'];
                     }
                     $disabled = isSelectable((int) $archive, $row['verified'])
-                        ? '' : 'disabled title="Mailadres is geverifieerd"';
+                        ? '' : 'disabled title="' . t('bulk.address_verified') . '"';
                     ?>
                     <tr>
                         <?php if ($bulkActions) : ?>
@@ -173,17 +174,8 @@ function isSelectable(int $archive, ?string $verified): bool
                         </td>
                         <td data-title="&#xf007;"><?= htmlentities($name); ?></td>
                         <td data-title="&#xf073;">
-                        <?=
-                        (new IntlDateFormatter(
-                            'nl_NL',
-                            IntlDateFormatter::NONE,
-                            IntlDateFormatter::NONE,
-                            null,
-                            null,
-                            "d MMMM yyyy"
-                        ))->format($timestamp);
-                        ?>
-                                                    </td>
+                        <?= formatDate($timestamp); ?>
+                        </td>
                         <td data-title="&#xf0f0;"><?= $owner; ?></td>
                     </tr>
                     <?php
@@ -223,7 +215,7 @@ function isSelectable(int $archive, ?string $verified): bool
     function updateBulkActions() {
         const count = $('.bulk-select:checked').length;
         const $selectable = $('.bulk-select:enabled');
-        $('.bulk-count').text(count + ' geselecteerd');
+        $('.bulk-count').text(i18n('bulk_selected', { count: count }));
         $('.bulk-action').prop('disabled', count === 0);
         $('#select-all').prop('checked', count > 0 && count === $selectable.length);
     }
@@ -239,7 +231,7 @@ function isSelectable(int $archive, ?string $verified): bool
         const $button = $(this);
         const ids = $('.bulk-select:checked').map((i, el) => el.value).get();
 
-        if (!confirm($button.text().trim() + ' voor ' + ids.length + ' afbeelding(en)?')) {
+        if (!confirm(i18n('bulk_confirm', { action: $button.text().trim(), count: ids.length }))) {
             return;
         }
 
@@ -250,7 +242,7 @@ function isSelectable(int $archive, ?string $verified): bool
                 setTimeout(() => location.reload(), 1500);
             })
             .fail(function(xhr) {
-                toonMelding(xhr.responseJSON?.message || 'Er is iets misgegaan, probeer het opnieuw.', 'error');
+                toonMelding(xhr.responseJSON?.message || i18n('error_generic'), 'error');
                 updateBulkActions();
             });
     });
