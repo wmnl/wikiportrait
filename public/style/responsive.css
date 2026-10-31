@@ -115,7 +115,8 @@
     }
 
     .table-container td:before {
-        font-family:FontAwesome;
+        font-family:"Font Awesome 7 Free";
+        font-weight:900;
         content:attr(data-title);
     }
 

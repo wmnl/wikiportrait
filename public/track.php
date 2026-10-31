@@ -42,9 +42,9 @@ require_once 'common/header.php';
                     if ($row['archived'] == 1) {
                         echo "<div class=\"box green\"><i class=\"fa-solid fa-check fa-lg\"></i>" . t('track.status_done') . "</div>";
                     } elseif ($row['archived'] == 0 && $row['owner'] != 0) {
-                        echo "<div class=\"box grey\"><i class=\"fa-solid fa-clock-o fa-lg\"></i>" . t('track.status_in_progress') . "</div>";
+                        echo "<div class=\"box grey\"><i class=\"fa-solid fa-clock fa-lg\"></i>" . t('track.status_in_progress') . "</div>";
                     } elseif ($row['archived'] == 0 && $row['owner'] == 0) {
-                        echo "<div class=\"box grey\"><i class=\"fa-solid fa-clock-o fa-lg\"></i>" . t('track.status_queue') . "</div>";
+                        echo "<div class=\"box grey\"><i class=\"fa-solid fa-clock fa-lg\"></i>" . t('track.status_queue') . "</div>";
                     } else {
                         echo "<div class=\"box red\"><i class=\"fa-solid fa-exclamation-triangle fa-lg\"></i>" . t('track.status_unknown') . "</div>";
                     }

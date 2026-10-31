@@ -66,7 +66,7 @@ $(document).ready(function() {
         <?= csrfField(); ?>
 
         <div class="input-container">
-            <label for="file"><i aria-hidden="true" class="fa-solid fa-file-image-o fa-lg"></i><?= t('upload.choose_file'); ?></label>
+            <label for="file"><i aria-hidden="true" class="fa-solid fa-file-image fa-lg"></i><?= t('upload.choose_file'); ?></label>
             <div class="file">
                 <input type="file" name="file" id="file" required="required" accept="image/*" />
             </div>
