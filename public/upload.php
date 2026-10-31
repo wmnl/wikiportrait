@@ -30,12 +30,28 @@ function comparenames() {
 $(document).ready(function() {
     $(document).on('change', 'input[name="source_self"]', function() {
         if ("No" === $(this).val()) {
+            $('#source').attr('required', 'required');
             $('#source_container').removeClass('hidden');
         } else {
             $('#source').removeAttr('required');
             $('#source_container').addClass('hidden');
         }
+        $('#source_other_info').prop('hidden', "No" !== $(this).val());
+        // Without a known photographer nobody can give permission, so uploading is pointless
+        var unknown = "Unknown" === $(this).val();
+        $('#source_unknown_warning').prop('hidden', !unknown);
+        $('#upload_details').prop('hidden', unknown);
     });
+
+    // Only allow uploading with a known photographer, and only once all required fields are filled
+    function updateUploadButton() {
+        var form = document.querySelector('form');
+        var source = $('input[name="source_self"]:checked').val();
+        var ok = ('Yes' === source || 'No' === source) && form.checkValidity();
+        $('#upload_button').prop('disabled', !ok);
+    }
+    $(document).on('input change', 'form :input', updateUploadButton);
+    updateUploadButton();
 })
 </script>
 <div id="content">
@@ -87,13 +103,33 @@ $(document).ready(function() {
             </div>
         </div>
 
-        <div class="input-container hidden" id="source_container">
+        <?php $sourceUnknown = ($_POST['source_self'] ?? '') === 'Unknown'; ?>
+        <div class="box red" id="source_unknown_warning"<?= $sourceUnknown ? '' : ' hidden'; ?>>
+            <strong>Deze foto kan helaas niet worden geüpload.</strong><br>
+            Alleen de maker van een foto (de fotograaf) kan toestemming geven om de foto onder een vrije licentie te
+            publiceren. Als niet bekend is wie de foto gemaakt heeft, kan niemand die toestemming geven en kunnen wij
+            de foto niet op Wikipedia plaatsen. Het heeft daarom geen zin om de rest van het formulier in te vullen.
+            Weet u wie de fotograaf is? Kies dan voor 'Nee, ik heb deze foto niet zelf gemaakt' en vul de naam van
+            de fotograaf in.
+        </div>
+
+        <div class="box blue" id="source_other_info"<?= ($_POST['source_self'] ?? '') === 'No' ? '' : ' hidden'; ?>>
+            <strong>De fotograaf moet toestemming geven.</strong><br>
+            Vul hieronder de naam van de fotograaf in. Alleen de fotograaf kan toestemming geven om de foto onder een
+            vrije licentie te publiceren. Na het uploaden ontvangt u een e-mail met een tekst die de fotograaf kan
+            gebruiken. De fotograaf moet die toestemming vervolgens zelf, vanaf een eigen e-mailadres, naar ons
+            mailen. Zonder deze toestemming kunnen wij de foto niet op Wikipedia plaatsen.
+        </div>
+
+        <div id="upload_details"<?= $sourceUnknown ? ' hidden' : ''; ?>>
+
+        <div class="input-container<?= ($_POST['source_self'] ?? '') === 'No' ? '' : ' hidden'; ?>" id="source_container">
             <label for="source"><i aria-hidden="true" class="fa-solid fa-camera-retro fa-lg"></i>Wat is de naam van de
                 fotograaf?</label>
             <input type="text" name="source" id="source" 
             <?php
             echo (array_key_exists('source_self', $_POST) &&
-                                                                    $_POST['source_self'] != 'Yes') ? 'required="required"' : '';
+                                                                    $_POST['source_self'] == 'No') ? 'required="required"' : '';
             ?>
             value="<?= (!empty($_POST['source'])) ? $_POST['source'] : ''; ?>" onblur="comparenames()" />
         </div>
@@ -146,11 +182,11 @@ $(document).ready(function() {
         <div class="input-container">
             <label for="terms"><i aria-hidden="true" class="fa-solid fa-gavel fa-lg"></i>Toestemming</label>
             <div class="checkbox">
-                <input type="checkbox" name="terms" id="terms" /><label for="terms">Ja, ik ga akkoord met de
+                <input type="checkbox" name="terms" id="terms" required="required" /><label for="terms">Ja, ik ga akkoord met de
                     bovenstaande licentievoorwaarden, de <a href="
     <?= $basispad; ?>/privacyverklaring.php" target="_blank">privacyverklaring</a> en het opslaan van mijn
                     IP-adres.</label><br />
-                <input type="checkbox" name="euvs" id="euvs" /><label for="euvs">Ja, ik geef toestemming voor het
+                <input type="checkbox" name="euvs" id="euvs" required="required" /><label for="euvs">Ja, ik geef toestemming voor het
                     opslaan van mijn gegevens op de servers van de Wikimedia Foundation in de Verenigde Staten, waarbij
                     de gegevens niet worden doorgegeven op grond van het EU-US Privacy Shield of de wettelijke
                     uitzondering die is opgenomen in artikel 77 van de Wet bescherming persoonsgegevens (Wbp). Bij
@@ -162,8 +198,11 @@ $(document).ready(function() {
         ?>
         <div class="bottom right">
             <input type='hidden' name='postback'></input>
-            <button class="green" type='button' onclick='disableButton(this)'><i aria-hidden="true"
+            <button class="green" type='button' id="upload_button" disabled="disabled"
+                onclick='disableButton(this)'><i aria-hidden="true"
                     class="fa-solid fa-cloud-upload fa-lg"></i>Upload foto</button>
+        </div>
+
         </div>
 
     </form>

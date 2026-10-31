@@ -107,6 +107,10 @@ function checkUpload()
     }
 
     isrequired('title', 'titel');
+    if ($_POST['source_self'] == "Unknown") {
+        addvalidationerror("Een foto waarvan niet bekend is wie hem gemaakt heeft, kan niet worden geüpload.");
+        return;
+    }
     $_POST['source_self'] != "Yes" ? isrequired('source', 'auteursrechthebbende') : '';
     isrequired('name', 'naam');
     $mailresult = validateEmail('email');
