@@ -805,6 +805,40 @@ button::-moz-focus-inner {
     margin-top: 3px;
 }
 
+/* Bulk actions */
+.bulk-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.bulk-count {
+    margin-right: auto;
+}
+
+.bulk-actions button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* Notifications */
+.melding {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    padding: 11px;
+    border-radius: 5px;
+    color: #fff;
+    background: #339966;
+}
+
+.melding.error {
+    background: #990000;
+}
+
 /* Database schema */
 .schema-table {
     width: 10em;
