@@ -58,6 +58,26 @@ function contributorEmailCheck($email)
     return $check;
 }
 
+function sendLowResolutionMail($mail, $templateRenderer, $email, $name, $title, $width, $height)
+{
+    $body = $templateRenderer->render(file_get_contents(ABSPATH . "/common/mailbody_lowres.txt"), [
+        'title' => $title,
+        'name' => $name,
+        'width' => $width,
+        'height' => $height,
+        'minSize' => MIN_IMAGE_SIZE,
+    ]);
+
+    $mail->addAddress($email, $name);
+    $mail->addReplyTo(VRTS_MAIL, "Wikiportret VRTS queue");
+    $mail->Subject = "[Wikiportret] $title is niet geschikt: resolutie te laag";
+    $mail->isHTML(true);
+    $mail->Body = nl2br($body);
+    $mail->AltBody = $body;
+
+    return $mail->send();
+}
+
 // TODO: this should really be refactored in a class...
 function checkUpload()
 {
@@ -100,6 +120,17 @@ function checkUpload()
     if (!hasvalidationerrors()) {
         $mail = createMailer();
         $templateRenderer = new Handlebars();
+
+        // Te lage resolutie: automatisch afwijzen, niets opslaan en niets naar VRTS sturen
+        $dimensions = getimagesize($file['tmp_name']);
+        if ($dimensions !== false && min($dimensions[0], $dimensions[1]) < MIN_IMAGE_SIZE) {
+            sendLowResolutionMail($mail, $templateRenderer, $email, $name, $title, $dimensions[0], $dimensions[1]);
+            $session->setLastUploadEmail($email);
+            $session->redirect("/wizard", "?question=lowres");
+            return;
+        }
+
+
         list($email_exists, $email_verified) = contributorEmailCheck($email);
 
         if ($validateUploader == 'selfie') {
