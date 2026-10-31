@@ -35,5 +35,6 @@ function performGVResults(foto_id)
 
     req.open('POST', '../ml/gvRequest.php', true);
     req.setRequestHeader("Content-Type", 'application/json; charset=UTF-8');
+    req.setRequestHeader('X-CSRF-Token', document.querySelector('meta[name="csrf-token"]').content);
     req.send(JSON.stringify(data));
 }

@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="<?= $basispad; ?>/lib/font-awesome/css/all.min.css">
     <script defer src="<?= $basispad; ?>/lib/font-awesome/js/fontawesome.js"></script>
     <script src="<?= $basispad; ?>/lib/jquery/dist/jquery.min.js"></script>
+    <meta name="csrf-token" content="<?= $session->csrfToken(); ?>">
+    <script>
+    $.ajaxSetup({ headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') } });
+    </script>
 
     <title><?= htmlspecialchars(t('header.title')); ?></title>
     <meta name="description" content="<?= htmlspecialchars(t('header.description')); ?>" />

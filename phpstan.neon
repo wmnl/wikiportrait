@@ -3,4 +3,4 @@ parameters:
        - identifier: missingType.iterableValue
     reportUnmatchedIgnoredErrors: false
     excludePaths:
-       - web/vendor/*
+       - private/vendor/*

@@ -34,6 +34,7 @@ return [
     'error.duplicate' => 'Deze afbeelding is al geüpload',
     'error.invalid_request' => 'Ongeldig verzoek.',
     'error.generic' => 'Er is iets misgegaan, probeer het opnieuw.',
+    'error.csrf' => 'Je sessie is verlopen. Ga terug, vernieuw de pagina en probeer het opnieuw.',
 
     // Header, footer and menu
     'header.title' => "Wikiportret - Stel uw foto's ter beschikking",
@@ -313,6 +314,7 @@ return [
     // API
     'api.method_not_allowed' => 'Methode niet toegestaan',
     'api.invalid_credentials' => 'U dient correcte inloggegevens te verstrekken',
+    'api.image_not_found' => 'Afbeelding niet gevonden.',
     'api.ticket_placeholder' => 'VUL_HIER_HET_TICKETNUMMER_IN',
 
     // Command line scripts

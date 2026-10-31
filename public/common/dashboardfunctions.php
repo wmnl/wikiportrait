@@ -4,7 +4,10 @@ function makeGVResults($results_array)
 {
     $list = "<ul class='gv_results' id='matching_pages'>";
     foreach ($results_array as $key => $page) {
-        $list .= "<li><a href='$page' target='_blank'>" . substr($page, 0, 50) . "..." . "</a></li>";
+        // Only link to http(s) URLs, never javascript: and the like
+        $href  = preg_match('#^https?://#i', $page) ? htmlspecialchars($page, ENT_QUOTES) : '#';
+        $list .= "<li><a href='$href' target='_blank' rel='noopener noreferrer'>"
+            . htmlspecialchars(mb_substr($page, 0, 50)) . "..." . "</a></li>";
     }
     $list .= "</ul>";
 

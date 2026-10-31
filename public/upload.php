@@ -63,6 +63,7 @@ $(document).ready(function() {
     <h2><?= t('upload.title'); ?></h2>
 
     <form method="post" enctype="multipart/form-data">
+        <?= csrfField(); ?>
 
         <div class="input-container">
             <label for="file"><i aria-hidden="true" class="fa-solid fa-file-image-o fa-lg"></i><?= t('upload.choose_file'); ?></label>
@@ -74,7 +75,7 @@ $(document).ready(function() {
         <div class="input-container">
             <label for="title"><i aria-hidden="true" class="fa-solid fa-eye fa-lg"></i><?= t('upload.depicted'); ?></label>
             <input type="text" name="title" id="title" required="required"
-                value="<?= (!empty($_POST['title'])) ? $_POST['title'] : ''; ?>" onblur="comparenames()" />
+                value="<?= htmlspecialchars($_POST['title'] ?? ''); ?>" onblur="comparenames()" />
         </div>
 
         <div class="input-container">
@@ -116,32 +117,32 @@ $(document).ready(function() {
             echo (array_key_exists('source_self', $_POST) &&
                                                                     $_POST['source_self'] == 'No') ? 'required="required"' : '';
             ?>
-            value="<?= (!empty($_POST['source'])) ? $_POST['source'] : ''; ?>" onblur="comparenames()" />
+            value="<?= htmlspecialchars($_POST['source'] ?? ''); ?>" onblur="comparenames()" />
         </div>
 
         <div class="input-container">
             <label for="name"><i aria-hidden="true" class="fa-solid fa-user fa-lg"></i><?= t('upload.your_name'); ?></label>
             <input type="text" name="name" id="name" required="required"
-                value="<?= (!empty($_POST['name'])) ? $_POST['name'] : ''; ?>" />
+                value="<?= htmlspecialchars($_POST['name'] ?? ''); ?>" />
         </div>
 
         <div class="input-container">
             <label for="email"><i aria-hidden="true" class="fa-solid fa-envelope fa-lg"></i><?= t('upload.your_email'); ?></label>
             <input type="email" id="email" name="email" required="required"
-                value="<?= (!empty($_POST['email'])) ? $_POST['email'] : ''; ?>" />
+                value="<?= htmlspecialchars($_POST['email'] ?? ''); ?>" />
         </div>
 
         <div class="input-container">
             <label for="date"><i aria-hidden="true" class="fa-solid fa-calendar fa-lg"></i><?= t('upload.date'); ?>
                 <span class="optional"><?= t('upload.optional'); ?></span></label>
-            <input type="text" name="date" id="date" value="<?= (!empty($_POST['date'])) ? $_POST['date'] : ''; ?>" />
+            <input type="text" name="date" id="date" value="<?= htmlspecialchars($_POST['date'] ?? ''); ?>" />
         </div>
 
         <div class="input-container">
             <label for="description"><i aria-hidden="true" class="fa-solid fa-comment fa-lg"></i><?= t('upload.description'); ?> <span
                     class="optional"><?= t('upload.optional'); ?></span></label>
             <textarea name="description"
-                id="description"><?= (!empty($_POST['description'])) ? $_POST['description'] : ''; ?></textarea>
+                id="description"><?= htmlspecialchars($_POST['description'] ?? ''); ?></textarea>
         </div>
 
         <div class="input-container">

@@ -11,17 +11,12 @@
     "cweagans/composer-patches": "^1.7"
   },
   "config": {
-    "vendor-dir": "vendor",
+    "vendor-dir": "../private/vendor",
     "allow-plugins": {
       "cweagans/composer-patches": true
     }
   },
   "require-dev": {
     "phpstan/phpstan": "^2.1"
-  },
-  "autoload": {
-    "files": [
-      "common/bootstrap.php"
-    ]
   }
 }

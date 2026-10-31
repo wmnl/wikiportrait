@@ -1,6 +1,13 @@
 <?php
 
 require_once __DIR__ . '/../common/bootstrap.php';
+
+// Voorkom directe browseraanroep
+if (PHP_SAPI !== 'cli') {
+    http_response_code(403);
+    exit(t('cli.only'));
+}
+
 if (in_array('cron', $argv)) {
     $limit = date('Y-m-d', strtotime('-3 months')) . ' 00:00:00';
     // Images moved back to "Niet geverifieerd" get a new 3-month period
@@ -13,6 +20,8 @@ if (in_array('cron', $argv)) {
         $limit
     );
 }
-$logfile = fopen(__DIR__ . '/cronlog.txt', 'a+');
-fwrite($logfile, 'Cron' . (in_array('cron', $argv) ? '' : ' not') . ' run ' . date('Y-m-d H:i:s') . PHP_EOL);
-fclose($logfile);
+file_put_contents(
+    CRON_LOGFILE,
+    'Cron' . (in_array('cron', $argv) ? '' : ' not') . ' run ' . date('Y-m-d H:i:s') . PHP_EOL,
+    FILE_APPEND
+);

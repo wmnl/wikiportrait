@@ -168,7 +168,7 @@ function isSelectable(int $archive, ?string $verified): bool
                         </td>
                         <?php endif ?>
                         <td data-title="&#xf03e;" class="image"><a href="single.php?id=<?php echo $id; ?>">
-                                <img src="../uploads/thumbs/<?php echo $filename; ?>" /></a></td>
+                                <img src="../uploads/thumbs/<?= htmlspecialchars($filename); ?>" /></a></td>
                         <td data-title="&#xf02b;"><a
                                 href="single.php?id=<?php echo $id; ?>"><?= htmlentities($title); ?></a>
                         </td>
@@ -176,7 +176,7 @@ function isSelectable(int $archive, ?string $verified): bool
                         <td data-title="&#xf073;">
                         <?= formatDate($timestamp); ?>
                         </td>
-                        <td data-title="&#xf0f0;"><?= $owner; ?></td>
+                        <td data-title="&#xf0f0;"><?= htmlspecialchars($owner); ?></td>
                     </tr>
                     <?php
                 endforeach;

@@ -6,7 +6,7 @@ use Handlebars\Handlebars;
 use Intervention\Image\ImageManager;
 
 require_once ABSPATH . "/ml/web_entities.php";
-require_once ABSPATH . "/vendor/autoload.php";
+require_once VENDOR_DIR . "/autoload.php";
 
 function removeAccentedCharacters($str)
 {
@@ -41,12 +41,8 @@ function getFilename($title, $time, $file)
     $title = preg_replace("/[^A-Za-z0-9 ]/", '', $title);
     $title = strtolower(str_replace(" ", "_", $title));
     $datestamp = date_timestamp_get($time);
-    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-
-    // JFIF opslaan als jpg
-    if (strtolower($extension) === 'jfif') {
-        $extension = 'jpg';
-    }
+    // Extensie op basis van de inhoud, nooit van de bestandsnaam van de uploader
+    $extension = imageExtension($file['tmp_name']);
 
     return sprintf("%s-%s.%s", $title, $datestamp, $extension);
 }
@@ -94,7 +90,7 @@ function checkUpload()
 
     $fileresult = checkfile($_FILES['file']);
     if ($fileresult !== 'ok') {
-        if ($fileresult === 'unsupported file') {
+        if ($fileresult === 'unsupported file' || $fileresult === 'empty file') {
             return; // validatiefout is al gezet, toon formulier opnieuw met foutmelding
         }
         $session->redirect("/wizard", "?question=failupload");

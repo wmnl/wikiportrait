@@ -5,6 +5,7 @@ require_once '../common/bootstrap.php';
 if (!empty($_GET['id']) && !empty($_GET['secret']) && defined('V1_PATH')) {
     $url = sprintf(V1_PATH . '/admin/?id=%s&secret=%s', $_GET['id'], $_GET['secret']);
     header("Location:$url");
+    exit;
 }
 
 if (!empty($_GET['logout'])) {
@@ -49,6 +50,7 @@ require_once '../common/header.php';
     ?>
 
     <form method="post">
+        <?= csrfField(); ?>
         <div class="input-container">
             <label for="username"><i class="fa-solid fa-user fa-lg"></i><?= t('user.username'); ?></label>
             <input type="text" name="username" id="username" autocorrect="off" />

@@ -47,14 +47,15 @@ include 'tabs.php';
     ?>
 
     <form method="post">
+        <?= csrfField(); ?>
         <div class="input-container">
             <label for="username"><i class="fa-solid fa-user fa-lg"></i><?= t('user.username'); ?></label>
-            <input type="text" name="username" id="username" value="<?= $_POST['username'] ?? ''; ?>" />
+            <input type="text" name="username" id="username" value="<?= htmlspecialchars($_POST['username'] ?? ''); ?>" />
         </div>
 
         <div class="input-container">
             <label for="otrsname"><i class="fa-solid fa-briefcase fa-lg"></i><?= t('user.vrts_name'); ?></label>
-            <input type="text" name="otrsname" id="otrsname" value="<?= $_POST['otrsname'] ?? ''; ?>" />
+            <input type="text" name="otrsname" id="otrsname" value="<?= htmlspecialchars($_POST['otrsname'] ?? ''); ?>" />
         </div>
 
         <div class="input-container">
@@ -69,7 +70,7 @@ include 'tabs.php';
 
         <div class="input-container">
             <label for="email"><i class="fa-solid fa-envelope fa-lg"></i><?= t('user.email'); ?></label>
-            <input type="email" name="email" id="email" value="<?= $_POST['email'] ?? ''; ?>" />
+            <input type="email" name="email" id="email" value="<?= htmlspecialchars($_POST['email'] ?? ''); ?>" />
         </div>
 
         <div class="input-container">

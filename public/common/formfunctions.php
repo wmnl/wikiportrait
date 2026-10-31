@@ -60,6 +60,12 @@ EOT;
     return sprintf("%s?%s", $baselink, $urlargs);
 }
 
+function csrfField()
+{
+    global $session;
+    return '<input type="hidden" name="csrf_token" value="' . $session->csrfToken() . '">';
+}
+
 function showvalidationsummary()
 {
     echo getvalidationsummary();
@@ -149,22 +155,14 @@ function checkfile($file)
     if (!isset($validationerrors)) {
         $validationerrors = [];
     }
-    $allowedext = ["image/png", "image/gif", "image/jpeg", "image/bmp", "image/pjpeg", "image/jfif"];
-    if (!in_array($file['type'], $allowedext)) {
+    if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK || !is_uploaded_file($file['tmp_name'])) {
+        array_push($validationerrors, t('validation.no_file'));
+        return "empty file";
+    } elseif (imageExtension($file['tmp_name']) === null) {
+        // Never trust $file['type'] or the client file name: inspect the contents
         array_push(
             $validationerrors,
             t('validation.unsupported_format')
-        );
-        return "unsupported file";
-    }
-
-    if (!isset($file)) {
-        array_push($validationerrors, t('validation.no_file'));
-        return "empty file";
-    } elseif (!in_array($file['type'], $allowedext)) {
-        array_push(
-            $validationerrors,
-            t('validation.not_an_image')
         );
         return "unsupported file";
     } else {
@@ -172,6 +170,9 @@ function checkfile($file)
             $filePath = normalizeImageFormat($file['tmp_name']);
             $imageManager = new ImageManager(['driver' => 'gd']);
             $imageManager->make($filePath);
+            if ($filePath !== $file['tmp_name']) {
+                unlink($filePath);
+            }
             return "ok";
         } catch (\Exception $e) {
             array_push(
@@ -181,6 +182,23 @@ function checkfile($file)
             return "invalid image";
         }
     }
+}
+
+/**
+ * Determines the file extension from the actual image contents.
+ * Returns null for anything that isn't a supported image type.
+ */
+function imageExtension(string $path): ?string
+{
+    $extensions = [
+        IMAGETYPE_JPEG => 'jpg',
+        IMAGETYPE_PNG  => 'png',
+        IMAGETYPE_GIF  => 'gif',
+        IMAGETYPE_BMP  => 'bmp',
+    ];
+    $info = getimagesize($path);
+
+    return $info === false ? null : ($extensions[$info[2]] ?? null);
 }
 
 function addvalidationerror($message)

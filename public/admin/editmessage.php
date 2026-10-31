@@ -1,8 +1,6 @@
 <?php
 require_once '../common/bootstrap.php';
-require_once '../common/header.php';
 $session->checkAdmin();
-include 'tabs.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -10,10 +8,9 @@ if (isset($_GET['id'])) {
     $session->redirect("/admin/users");
 }
 
-$row = DB::query('SELECT * FROM messages WHERE id = %d', $id);
-$row = $row[0];
+$row = DB::queryFirstRow('SELECT * FROM messages WHERE id = %d', $id);
 
-if (DB::count() == 0) {
+if (!$row) {
     $session->redirect("/admin/messages");
 }
 
@@ -30,6 +27,9 @@ if (isset($_POST['postback'])) {
         $session->redirect("/admin/messages");
     }
 }
+
+require_once '../common/header.php';
+include 'tabs.php';
 ?>
 <div id="content">
     <?php
@@ -45,23 +45,16 @@ if (isset($_POST['postback'])) {
     </div>
 
     <form method="post">
+        <?= csrfField(); ?>
         <div class="input-container">
             <label for="title"><i class="fa-solid fa-tag fa-lg"></i><?= t('common.title'); ?></label>
-            <input type="text" name="title" id="title" value="
-            <?=
-            htmlspecialchars($row['title']);
-            ?>
-            "
-                required="required" />
+            <input type="text" name="title" id="title"
+                value="<?= htmlspecialchars($row['title']); ?>" required="required" />
         </div>
 
         <div class="input-container">
             <label for="message"><i class="fa-solid fa-align-left fa-lg"></i><?= t('common.message'); ?></label>
-            <textarea required="required" name="message">
-            <?=
-            htmlspecialchars($row['message']);
-            ?>
-            </textarea>
+            <textarea required="required" name="message"><?= htmlspecialchars($row['message']); ?></textarea>
         </div>
 
         <div class="bottom right">

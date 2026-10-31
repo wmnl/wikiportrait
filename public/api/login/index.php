@@ -1,6 +1,8 @@
 <?php
 
-require_once '../../vendor/autoload.php';
+// Bots authenticate with headers, not a browser session
+define('CSRF_EXEMPT', true);
+require_once __DIR__ . '/../../common/bootstrap.php';
 
 $headers = apache_request_headers();
 

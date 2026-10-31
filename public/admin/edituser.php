@@ -49,7 +49,7 @@ if (DB::count() == 0) {
             }
             DB::update('users', $data, 'id = %d', $_GET['id']);
 
-            header("Location: users.php");
+            $session->redirect($session->isSysop() ? "/admin/users" : "/images/overview");
         }
 
         if (hasvalidationerrors()) {
@@ -68,6 +68,7 @@ include 'tabs.php';
 
 
     <form method="post">
+        <?= csrfField(); ?>
 
         <?php
         if ($session->isSysop()) {
@@ -103,7 +104,7 @@ include 'tabs.php';
 
         <div class="input-container">
             <label for="email"><i class="fa-solid fa-envelope fa-lg"></i><?= t('user.email'); ?></label>
-            <input type="email" name="email" id="email" value="<?php echo $row['email']; ?>" />
+            <input type="email" name="email" id="email" value="<?= htmlspecialchars($row['email']); ?>" />
         </div>
 
         <div class="input-container" <?= $inputClass; ?>>
